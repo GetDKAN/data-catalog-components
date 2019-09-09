@@ -1,0 +1,42 @@
+{    
+    "config1": {
+        "issued": {
+            "label": "Release Data"
+        },
+        "identifier": {
+            "label": "Unique Identifier"
+        },
+        "modified": {
+            "label": "Last Update"
+        }
+    },
+    "data1": {
+        "issued": "1/12/2015",
+        "identifier": "1234567",
+        "modified": "2/3/2019"
+    },
+    "config2": {
+        "rows": {
+            "label": "1"
+        }
+    },
+    "data2": {
+        "rows": "35"
+    },
+    "config3": {
+        "a": {
+            "label": "County"
+        },
+        "b": {
+            "label": "State"
+        },
+        "c": {
+            "label": "Population"
+        }
+    },
+    "data3": {
+        "a": "String",
+        "b": "String",
+        "c": "Number"
+    }
+}

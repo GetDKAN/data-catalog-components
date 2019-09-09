@@ -1,0 +1,104 @@
+{
+  "items": [
+      {
+          "identifier": 1234,
+          "title": "Varicella (Chickenpox) Incidence and Mortality, Before and After the Vaccine",
+          "description": "Centers for Disease Control and Prevention data regarding varicella (chickenpox) virus incidence and mortality rates.",
+          "modified": "1/12/2018",
+          "publisher": "Publish Inc.",
+          "format": [
+              {
+                "identifier": 1,
+                "format": "csv"
+              },
+              { "identifier":2,
+                "format": "json"
+              },
+              { "identifier":3,
+                "format": "pdf"
+              },
+              { "identifier":4,
+                "format": "rdf"
+              },
+              { "identifier":5,
+                "format": "xml"
+              },
+              { "identifier":6,
+                "format": "data"
+              }
+          ],
+          "ref": "dataset/wow",
+          "theme": [
+              {
+                  "identifier": 1,
+                  "title": "Healthcare",
+                  "icon": "physician",
+                  "link": "url"
+              }
+          ]
+      },
+      {
+          "identifier": 5678,
+          "title": "U.S. Tobacco Usage Statistics",
+          "description": "Statistics on U.S. smoking rates and tobacco taxation rates for all fifty states. *Source:* Centers for Disease Control and Prevention, 2015 https://www.cdc.gov/tobacco/data_statistics/state_data/ [1] ",
+          "modified": "2/12/2018",
+          "publisher": "Publish Inc.",
+          "format": [
+              {
+                "identifier": 1,
+                "format": "csv"
+              },
+              { "identifier":2,
+                "format": "json"
+              },
+              { "identifier":3,
+                "format": "pdf"
+              },
+              { "identifier":4,
+                "format": "rdf"
+              },
+              { "identifier":5,
+                "format": "xml"
+              },
+              { "identifier":6,
+                "format": "data"
+              }
+          ],
+          "ref": "dataset/how",
+          "theme": [
+              {
+                  "identifier": 1,
+                  "title": "Healthcare",
+                  "icon": "physician",
+                  "link": "url"
+              }
+          ]
+      }
+  ],
+  "facets": {
+      "keyword": {
+          "label": "Tags",
+          "field": "keyword.title"
+      },
+      "theme": {
+          "label": "Category",
+          "field": "theme.title"
+      },
+      "org": {
+          "label": "Organization",
+          "field": "publisher.name"
+      },
+      "format": {
+          "label": "Format",
+          "field": "dataset.distribution.format"
+      }
+  },
+  "selectedFacets": [["theme", "Water"]],
+  "facetsResults": {
+      "keyword": [["economy", 3],["budget", 5]],
+      "theme": [["Health Care", 20],["Water", 5]],
+      "org": [["Group 1", 5],["Group 4", 2]],
+      "format": [["csv", 20],["zip", 2]]
+  },
+  "query": "statistics"
+}

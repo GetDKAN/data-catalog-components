@@ -1,0 +1,66 @@
+{
+    "accessLevel": "public",
+    "landingPage": "https://data.example.gov/d/23ew-n7w9",
+    "bureauCode": [
+        "009:38"
+    ],
+    "issued": "2018-10-17",
+    "modified": "2019-01-26T20:16:07",
+    "keyword": [
+        {
+            "data": "Open Data",
+            "identifier": "opendata"
+        },
+        {
+            "data": "Transparency",
+            "identifier": "transparency"
+        },
+        {
+            "data": "Collaboration",
+            "identifier": "collaboration"
+        },
+        {
+            "data": "Case Study",
+            "identifier": "casestudy"
+        }
+    ],
+    "contactPoint": {
+        "fn": "Serena Sabo",
+        "hasEmail": "mailto:serena.sabo@example.gov"
+    },
+    "publisher": {
+        "name": "Example Publisher",
+        "description": "This is information about the organization.",
+        "identifier": "org",
+        "created": "2019-01-26T20:16:07",
+        "modified": "2019-01-26T20:16:07"
+    },
+    "identifier": "23ew-n7w9",
+    "description": "A list of healthcare providers in the United States.",
+    "title": "Healthcare Providers - Listing by Facility",
+    "programCode": [
+        "009:000"
+    ],
+    "distribution": [
+        {
+            "identifier": "23ew-n7w9-csv",
+            "downloadURL": "https://data.example.gov/fake/file.csv",
+            "mediaType": "text/csv",
+            "title": "csv",
+            "format": "csv"
+        },
+        {
+            "identifier": "23ew-n7w9-pdf",
+            "downloadURL": "https://data.example.gov/fake/file.pdf",
+            "title": "Special Report",
+            "format": "pdf"
+        }
+    ],
+    "theme": [
+        {
+            "title": "Health",
+            "identifier": "health"
+        }
+    ],
+    "created": "2019-01-26T20:16:07"
+}

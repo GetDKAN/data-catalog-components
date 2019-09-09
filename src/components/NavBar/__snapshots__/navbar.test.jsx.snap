@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar renders correctly 1`] = `
+<div
+  className=" container-fluid main-navigation base-styles sc-bdVaJa jDHIWM"
+>
+  <nav
+    className="navbar navbar-expand-md navbar-dark"
+  >
+    <button
+      className="navbar-toggler"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      style={Object {}}
+    >
+      <ul
+        className="mr-auto nav"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            href="https://google.com"
+          >
+            Google
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            href="https://civicactions.com/"
+          >
+            CivicActions
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            href="https://github.com/"
+          >
+            Github
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+`;
