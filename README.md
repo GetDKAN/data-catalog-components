@@ -18,7 +18,7 @@ To see the available components:
 
 1) Review exports in index.js
 2) Increase version in package.json
-3) run `npm run lib`
+3) run `npm login`
 4) run `npm publish --access public`
 
 ## Publish to Github Pages
