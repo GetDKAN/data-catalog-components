@@ -31,3 +31,4 @@ export { default as Title } from './components/Title';
 export { default as ToggleBlock } from './components/ToggleBlock';
 export { default as withSearch } from './components/Search/withSearch';
 export { default as withResource } from "./components/Resources/withResource";
+export { default as Resource } from "./components/Resources/components/Resource";
