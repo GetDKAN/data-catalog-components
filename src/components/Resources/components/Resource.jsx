@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Loader from "react-loader-advanced";
 import LoadingSpin from "react-loading-spin";
 import FileDownload from '../../FileDownload';
-import withResource from './';
+import withResource from '../withResource';
 import DataTable from './DataTable';
 import ResourceInfoTable from './ResourceInfoTable';
 
