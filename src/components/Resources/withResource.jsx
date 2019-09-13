@@ -20,7 +20,7 @@ export default function withResource(
           currentPage: 0,
           filters: [],
           sort: [],
-          columns: []
+          columns: this.columns
         },
         dataInfo: {},
         dataFunctions: {
@@ -60,7 +60,8 @@ export default function withResource(
       if(data.identifier !== undefined) {
         await axios.get(`http://dkan/api/v1/datastore/${data.identifier}?values=both`)
         .then((response) => {
-          columns = response.data.columns ? response.data.columns : store.getColumns();
+          this.columns = response.data.columns ? response.data.columns : [];
+          columns = this.columns;
           this.setState({dataInfo: response.data})
         })
         .catch(function (error) {
@@ -68,9 +69,10 @@ export default function withResource(
         })
       } 
       let store = await this.getStore();
-      if (columns === null) {
+      if (columns ===  null) {
         columns = await store.getColumns();
       }
+      
       // dataPreview.columns = this.activeColumns(this.prepareColumns(columns));
       dataPreview.columns = this.prepareColumns(columns);
       await this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage, true);
@@ -137,6 +139,7 @@ export default function withResource(
     }
 
     prepareColumns(columns) {
+      
       return columns.map((column) => {
         return {
           Header: column,
@@ -173,5 +176,4 @@ export default function withResource(
     }
   }
 
-  
 }
