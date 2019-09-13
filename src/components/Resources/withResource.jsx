@@ -3,18 +3,13 @@ import axios from 'axios';
 import datastore from './services/datastore';
 
 export default function withResource(
-  OriginalComponent,
-  resourceDefaults
+  OriginalComponent
 ) {
   return class extends React.Component {
     constructor(props) {
       super(props);
-      // const { pageContext: {dataset} } = props;
-      // ${props.location.origin}
-      // this.url = `http://dkan/api/v1/dataset/${dataset.identifier}?values=both`;
-      // this.distribution = dataset.distribution;
-      // this.identifier = dataset.identifier;
       this.store = null;
+      this.storeType = null;
       this.columns = [];
 
       this.state = {
@@ -60,22 +55,20 @@ export default function withResource(
     async fetchData() {
       const { dataPreview, dataInfo } = this.state;
       const { data } = this.props;
-      let columns;
-      
-      let store = await this.getStore();
-
+      let columns = null;
 
       if(data.identifier !== undefined) {
         await axios.get(`http://dkan/api/v1/datastore/${data.identifier}?values=both`)
         .then((response) => {
-          console.log('datastore', response)
           columns = response.data.columns ? response.data.columns : store.getColumns();
           this.setState({dataInfo: response.data})
         })
         .catch(function (error) {
           console.log(error)
         })
-      } else {
+      } 
+      let store = await this.getStore();
+      if (columns === null) {
         columns = await store.getColumns();
       }
       // dataPreview.columns = this.activeColumns(this.prepareColumns(columns));
@@ -91,19 +84,21 @@ export default function withResource(
         if (this.store !== null) {
           resolve(this.store);
         } else {
-          if(data.identifier) {
+          if(this.columns.length > 0) {
             let store = new datastore['dkan'](data.identifier, this.columns);
             store.query(null, null, null, 0, null, null, true)
             .then((data) => {
               this.store = store;
+              this.storeType = 'dkan'
               resolve(store);
               })
             } else {
-              let store = new datastore['file'](data.downloadURL);
-              store.query(null, null, null, null, null, null, true)
+              let store = new datastore['file'](data.data.downloadURL);
+              store.query(null, null, null, 0, null, null, true)
               .then((data) => {
-                if(data.length !== undefined && data.length !== 0) {
+                if(data) {
                   this.store = store;
+                  this.storeType = 'file'
                   this.setState({store: store})
                   resolve(store);
                 }
@@ -123,11 +118,9 @@ export default function withResource(
       if(count) {
         await this.store.query(query, fields, facets, range, page, sort, count).then((data) => {
           dataPreview.rowsTotal = data;
-          console.log('rows', data)
         })
         await this.store.query(query, fields, facets, range, page, sort).then((data) => {
           dataPreview.values = data;
-          console.log('values', data)
         })
       } else {
         await this.store.query(query, fields, facets, range, page, sort).then((data) => {

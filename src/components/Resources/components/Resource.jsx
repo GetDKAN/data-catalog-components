@@ -25,7 +25,7 @@ const Resource = ({
   const dataKey = dataInfo.indentifier;
   const pageSize = 'pageSize' in dataPreview ? dataPreview.pageSize : 20;
   const pages = Math.ceil(dataPreview.rowsTotal / pageSize);
-  const statistics = 'datastore_statistics' in dataInfo ? dataInfo.datastore_statistics : {};
+  const statistics = 'datastore_statistics' in dataInfo ? dataInfo.datastore_statistics : {rows: dataPreview.rowsTotal, columns: columns.length};
   return(
     <div>
       <Loader backgroundStyle={{backgroundColor: "#f9fafb"}} foregroundStyle={{backgroundColor: "#f9fafb"}} show={show} message={<LoadingSpin width={"3px"} primaryColor={"#007BBC"}/>}>
