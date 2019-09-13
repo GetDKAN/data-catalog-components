@@ -1,4 +1,5 @@
 /* eslint-disable */
+/* Deprecated: use Text component */
 import React from 'react';
 
 function String(props) {
