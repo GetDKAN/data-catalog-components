@@ -142,7 +142,7 @@ export class file extends Datastore {
                 return -Infinity;
               }
               return typeof row[srt.id] === "string"
-                  ? row[srt.id].toLowerCase()
+                  ? row[srt.id]//.toLowerCase()
                   : row[srt.id];
             };
           }),
