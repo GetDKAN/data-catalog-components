@@ -33,7 +33,6 @@ export default styled.div`
     -webkit-touch-callout: none;
     user-select: none;
     cursor: pointer;
-    outline: 0;
     font-weight: 500;
     color: ${(props) => props.theme.navBarLink};
     transition: all 0.2s linear;
@@ -44,14 +43,13 @@ export default styled.div`
       background-color: ${(props) => props.theme.navBarLinkHoverBack};
     }
     &.active {
-      background-color: none !important;
+      background-color: none;
       box-shadow: inset 0 -4px 0 ${(props) => props.theme.navBarLinkActiveHoverBack};
       text-decoration: none;
       color: ${(props) => props.theme.navBarLink};
     }
-    &:hover.active,
-    &:focus.active {
-      background-color: none !important;
+    &:hover.active {
+      background-color: none;
       box-shadow: inset 0 -4px 0 ${(props) => props.theme.navBarLinkActiveHoverBack};
       color: ${(props) => props.theme.navBarLink};
     }
