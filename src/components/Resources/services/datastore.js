@@ -1,30 +1,27 @@
 import Papa from 'papaparse';
-import _ from "lodash";
+import _ from 'lodash';
 import axios from 'axios';
 
 class Datastore {
 
-  async query(query = null, fields = null, facets = null, range = null, page = null, sort = null) {}
+  // async query(query = null, fields = null, facets = null, range = null, page = null, sort = null) {}
 
-  async update() {}
+  // async update() {}
 
-  async remove() {}
+  // async remove() {}
 }
 
 export class file extends Datastore {
-
-  columns = null
-
   constructor(uri) {
-    super()
+    super();
     this.uri = uri;
+    this.columns = null;
   }
 
   async getColumns() {
     return new Promise((resolve, reject) => {
-
       if (this.columns !== null) {
-        resolve(this.columns)
+        resolve(this.columns);
       }
 
       Papa.parse(this.uri, {
@@ -34,7 +31,7 @@ export class file extends Datastore {
         },
         download: true,
         preview: 1,
-        header: true
+        header: true,
       });
     });
   }
@@ -47,29 +44,27 @@ export class file extends Datastore {
    * to search through.
    */
   async query(query = null, fields = null, facets = null, range = null, page = null, sort = null, count = false) {
-
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve) => {
       this._fetch().then(
         (data) => {
-          data = this._query(data, query)
-
+          data = this._query(data, query);
           if (count) {
-            let count = data.length
+            let count = data.length;
             if (count < 100) {
               // we get an empty record at the end, if less than a hundred.
-              count = count - 1
+              count -= - 1;
             }
-            resolve(count)
+            resolve(count);
           }
 
-          data = this._sort(data, sort)
+          data = this.sort(data, sort);
 
-          data = this._page(data, page, range)
+          data = this.page(data, page, range);
 
-          resolve(data)
-        }
-      )
-    })
+          resolve(data);
+        },
+      );
+    });
   }
 
   async update() {}
@@ -80,7 +75,7 @@ export class file extends Datastore {
     return new Promise((resolve, reject) => {
 
       if (typeof this.data !== 'undefined') {
-        resolve(this.data)
+        resolve(this.data);
       }
 
       Papa.parse(this.uri, {
@@ -90,13 +85,13 @@ export class file extends Datastore {
         },
         download: true,
         preview: 100,
-        header: true
+        header: true,
       });
     });
   }
 
   _query(data, query) {
-    let queried = data
+    let queried = data;
     if (query) {
       // Searches across fields.
       if (Array.isArray(query)) {
@@ -105,12 +100,10 @@ export class file extends Datastore {
             return (row[nextFilter.id] + "").includes(nextFilter.value);
           });
         }, queried);
-      }
-      // Searches across all data.
-      else {
+      } else { // Searches across all data.
         queried = queried.reduce((acc, doc) => {
           const haystack = JSON.stringify(doc);
-          const needleRegExp = new RegExp(query.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), "i");
+          const needleRegExp = new RegExp(query.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), 'i');
           const result = needleRegExp.test(haystack);
           if (result) {
             acc.push(doc);
@@ -119,133 +112,123 @@ export class file extends Datastore {
         }, []);
       }
     }
-    return queried
+    return queried;
   }
 
-  _page(data, page, range) {
+  page(data, page, range) {
     let paged = data;
     if (page !== null && range !== null) {
       paged = paged.slice(range * page, range * page + range);
     }
-    return paged
+    return paged;
   }
 
-  _sort(data, sort) {
+  sort(data, sort) {
     let sorted = data;
     if (sort) {
       sorted = _.orderBy(
-          sorted,
-          sort.map(srt => {
-            return row => {
-              if (row[srt.id] === null || row[srt.id] === undefined) {
-                return -Infinity;
-              }
-              return typeof row[srt.id] === "string"
-                  ? row[srt.id]//.toLowerCase()
-                  : row[srt.id];
-            };
-          }),
-          sort.map(d => (d.desc ? "desc" : "asc"))
+        sorted,
+        sort.map((srt) => {
+          return row => {
+            if (row[srt.id] === null || row[srt.id] === undefined) {
+              return -Infinity;
+            }
+            return typeof row[srt.id] === 'string'
+              ? row[srt.id]// .toLowerCase()
+              : row[srt.id];
+          };
+        }),
+        sort.map((d) => (d.desc ? 'desc' : 'asc')),
       );
     }
-    return sorted
+    return sorted;
   }
 }
 
-
 export class dkan extends Datastore {
-
-  id = null
-  columns = null
-
-  constructor (id, columns) {
-    super()
-    this.id = id
-    this.columns = columns
+  constructor(id, columns) {
+    super();
+    this.id = id;
+    this.columns = columns;
   }
 
   async getColumns() {
-    return new Promise((resolve, reject) => {
-      resolve(this.columns)
-    })
+    return new Promise((resolve) => {
+      resolve(this.columns);
+    });
   }
 
   async query(q = null, fields = null, facets = null, range = 0, page = null, sort = null, count = false) {
-
     if (sort === null) {
-      sort = []
+      sort = [];
     }
 
-    let new_q = []
+    let newQ = [];
     if (q !== null) {
-      new_q = JSON.parse(JSON.stringify(q));
+      newQ = JSON.parse(JSON.stringify(q));
     }
 
-    new_q.map((v) => {
-      v.value = "%25" + v.value + "%25"
-      return v
-    })
+    newQ.map((v) => {
+      v.value = `%25${v.value}%25`;
+      return v;
+    });
 
-    return this._fetch(range, page * range, new_q, sort[0], count)
+    return this.fetch(range, page * range, newQ, sort[0], count);
   }
 
-  async update() {}
+  // async update() {}
 
-  async remove() {}
+  // async remove() {}
 
-  async _fetch(limit, offset, where, sort, count) {
-    let query  = ""
+  async fetch(limit, offset, where, sort, count) {
+    let query = '';
 
-    let where_string = ''
+    let whereString = '';
 
     if (where.length !== 0) {
-      let where_clauses = [];
+      const whereClauses = [];
 
       where.forEach((v, i) => {
-        where_clauses[i] = v.id + " = '" + v.value + "'"
+        whereClauses[i] = `${v.id} = '${v.value}'`;
       });
 
-      where_string = "[WHERE " + where_clauses.join(" AND ") + "]";
+      whereString = `[WHERE ${whereClauses.join(' AND ')}]`;
     }
 
-    let sort_string = ""
+    let sortString = '';
 
-    if (typeof(sort) === 'object') {
-      sort_string = "[ORDER BY " + sort.id;
+    if (typeof (sort) === 'object') {
+      sortString = `[ORDER BY ${sort.id}`;
       if (sort.desc === false) {
-        sort_string += " ASC]"
-      }
-      else {
-        sort_string += " DESC]"
+        sortString += ' ASC]';
+      } else {
+        sortString += ' DESC]';
       }
     }
-    let fields = ""
-    let limit_string = ""
+    let fields = '';
+    let limitString = '';
 
     if (count) {
-      fields = 'COUNT(*)'
+      fields = 'COUNT(*)';
+    } else {
+      fields = '*';
+      limitString = `[LIMIT ${limit} OFFSET ${offset}]`;
     }
-    else {
-      fields = '*'
-      limit_string = '[LIMIT '+ limit +' OFFSET '+ offset +']'
-    }
-
-    query = '/sql/[SELECT ' + fields + ' FROM ' + this.id +']' + where_string + sort_string + limit_string + ';'
-    return new Promise((resolve, reject) => {
+    query = `/sql/[SELECT ${fields} FROM ${this.id}] ${whereString} ${sortString} ${limitString};`;
+    return new Promise((resolve) => {
       axios.get(`http://dkan/api/v1${query}`).then(
-          (response) => {
-            if (count && response.data[0]) {
-              resolve(response.data[0].expression)
-            }
-            else {
-              this.data = response.data
-              resolve(this.data);
-            }
-          },
-          (error) => {
-            this.data = []
-            resolve(error);
+        (response) => {
+          if (count && response.data[0]) {
+            resolve(response.data[0].expression);
+          } else {
+            this.data = response.data;
+            resolve(this.data);
           }
+        },
+        (error) => {
+          this.data = [];
+          resolve(error);
+        },
       );
     });
   }

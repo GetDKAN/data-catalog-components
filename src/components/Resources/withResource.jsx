@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import datastore from './services/datastore';
+import datastore from './datastore';
 
 export default function withResource(
   OriginalComponent
@@ -15,28 +15,38 @@ export default function withResource(
       this.state = {
         dataPreview: {
           values: [],
-          pageSize: 5,
+          pageSize: 20,
           rowsTotal: 0,
           currentPage: 0,
           filters: [],
           sort: [],
-          columns: this.columns
+          columns: this.columns,
+          density: "density-3",
+          columnOrder: [],
+          excludedColumns: {}
         },
         dataInfo: {},
         dataFunctions: {
           pageChange: (page) => this.pageChange(page),
           sortChange: (sort) => this.sortChange(sort),
-          filterChange: (filters) => this.filterChange(filters)
+          filterChange: (filters) => this.filterChange(filters),
+          densityChange: (value) => this.densityChange(value),
+          pageSizeChange: (event) => this.pageSizeChange(event),
+          reorderColumns: (columns) => this.reorderColumns(columns),
+          toggleColumns: (columns) => this.toggleColumns(columns),
+          activeColumns: (columns) => this.activeColumns(columns)
         }
       }
 
-      // this.fetchData = this.fetchData.bind(this);
-      // this.getStore = this.getStore.bind(this);
       this.activeColumns = this.activeColumns.bind(this);
       this.prepareColumns = this.prepareColumns.bind(this);
       this.pageChange = this.pageChange.bind(this);
       this.filterChange = this.filterChange.bind(this);
       this.sortChange = this.sortChange.bind(this);
+      this.densityChange = this.densityChange.bind(this);
+      this.pageSizeChange = this.pageSizeChange.bind(this);
+      this.reorderColumns = this.reorderColumns.bind(this);
+      this.toggleColumns = this.toggleColumns.bind(this);
     }
 
     componentDidMount() {
@@ -48,12 +58,11 @@ export default function withResource(
         <OriginalComponent
           {...this.props}
           {...this.state}
-          ident={this.identifier}
         />);
     }
 
     async fetchData() {
-      const { dataPreview, dataInfo } = this.state;
+      const { dataPreview } = this.state;
       const { data } = this.props;
       let columns = null;
 
@@ -74,14 +83,14 @@ export default function withResource(
       }
       
       // dataPreview.columns = this.activeColumns(this.prepareColumns(columns));
-      dataPreview.columns = this.prepareColumns(columns);
+      dataPreview.columns = await this.activeColumns(this.prepareColumns(columns));
+      console.log(dataPreview)
       await this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage, true);
       this.setState({dataPreview})
     }
 
     async getStore() {
       const { data } = this.props;
-      const { dataPreview } = this.state;
       return new Promise((resolve, reject) => {
         if (this.store !== null) {
           resolve(this.store);
@@ -129,13 +138,7 @@ export default function withResource(
           dataPreview.values = data;
         })
       }
-
-
       this.setState({dataPreview})
-    }
-
-    async activeColumns() {
-
     }
 
     prepareColumns(columns) {
@@ -152,15 +155,12 @@ export default function withResource(
     async pageChange(page) {
       const { dataPreview } = this.state;
       dataPreview.currentPage = page;
-
       this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage)
-      
     }
 
     async filterChange(filters) {
       const { dataPreview } = this.state;
       dataPreview.filters = filters;
-  
       // When filtering the pages gets reset.
       dataPreview.currentPage = 0;
       this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage, true);
@@ -169,11 +169,59 @@ export default function withResource(
     async sortChange(sort) {
       const { dataPreview } = this.state;
       dataPreview.sort = sort
-  
       // When sorting the pages gets reset.
       dataPreview.currentPage = 0
       this.getData( null, null, dataPreview.pageSize, dataPreview.currentPage);
     }
-  }
 
+    //TABLE HEADER FUNCTIONS
+    async densityChange(value) {
+      const { dataPreview } = this.state;
+      dataPreview.density = `density-${value + 1}`;
+      this.setState({ dataPreview });
+    }
+
+    async pageSizeChange(event) {
+      const { dataPreview } = this.state;
+      dataPreview.pageSize = event.target.value
+      dataPreview.currentPage = 0;
+      this.getData( null, null, dataPreview.pageSize, dataPreview.currentPage);
+    }
+
+    //ADVANCED OPTIONS
+    async reorderColumns(columns) {
+      const { dataPreview } = this.state;
+      dataPreview.columnOrder = columns;
+      this.setState({ dataPreview })
+      
+    }
+
+    async toggleColumns(columnsData) {
+      const { dataPreview } = this.state;
+      dataPreview.excludedColumns = columnsData;      
+      this.setState({ dataPreview })
+    }
+
+    activeColumns(items, newExcluded = null) {
+      const { excludedColumns, columnOrder } = this.state.dataPreview;
+      const excludedColumnsData = newExcluded ? newExcluded : excludedColumns;
+      let excludedArray = [];
+      let newItems = items;
+      if (columnOrder.length ) {
+        newItems = columnOrder;
+      }
+      Object.keys(excludedColumnsData)
+        .forEach(function eachKey(key) {
+          if(!excludedColumnsData[key]) {
+            excludedArray.push(key);
+          }
+        });
+      return newItems.reduce((columns, item) => {
+        if (!excludedArray.includes(item.accessor)) {
+          columns.push(item);
+        }
+        return columns;
+      }, []);
+    }
+  }
 }

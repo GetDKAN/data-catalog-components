@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Loader from "react-loader-advanced";
 import LoadingSpin from "react-loading-spin";
-import FileDownload from '../../FileDownload';
-import withResource from '../withResource';
+import { FileDownload } from '@civicactions/data-catalog-components';
+import withResource from './';
 import DataTable from './DataTable';
+import DataTableHeader from './DataTable/DataTableHeader';
 import ResourceInfoTable from './ResourceInfoTable';
 
 const Resource = ({
@@ -11,14 +12,16 @@ const Resource = ({
   dataInfo,
   dataFunctions,
   includeInfoTable,
-  infoTableTitle
+  infoTableTitle,
+  hideHeader,
+  headerOptions
 }) => {
   const [show, toggleShow] = useState(true);
   useEffect(() => {
     if(dataPreview.values.length > 0) {
       toggleShow(false)
     }
-  })
+  }, [dataPreview.values.length])
 
   const values = 'values' in dataPreview ? dataPreview.values : [];
   const columns = 'columns' in dataPreview ? dataPreview.columns : [];
@@ -32,7 +35,18 @@ const Resource = ({
         {dataInfo.data &&
           <FileDownload resource={dataInfo.data} key={dataKey} />
         }
-        <strong>Rows:</strong> {dataPreview.rowsTotal}
+        {!hideHeader &&
+          <DataTableHeader
+            dataPreview={dataPreview}
+            options={headerOptions}
+            dataFunctions={dataFunctions}
+          />
+        }
+        {hideHeader &&
+          <>
+            <strong>Rows:</strong> {dataPreview.rowsTotal}
+          </>
+        }
         <DataTable
           index={1}
           key={dataKey}
@@ -40,7 +54,8 @@ const Resource = ({
           pageSize={pageSize}
           pages={pages}
           data={values}
-          columns={columns}
+          columns={dataFunctions.activeColumns(dataPreview.columns)}
+          density={dataPreview.density}
           sortedChange={dataFunctions.sortChange}
           filterChange={dataFunctions.filterChange}
           pageChange={dataFunctions.pageChange}
