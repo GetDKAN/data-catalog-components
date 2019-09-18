@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import datastore from './datastore';
+import datastore from './services/datastore';
 
 export default function withResource(
   OriginalComponent
