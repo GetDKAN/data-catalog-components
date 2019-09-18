@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Loader from "react-loader-advanced";
 import LoadingSpin from "react-loading-spin";
 import { FileDownload } from '@civicactions/data-catalog-components';
-import withResource from './';
+import withResource from '../withResource';
 import DataTable from './DataTable';
 import DataTableHeader from './DataTable/DataTableHeader';
 import ResourceInfoTable from './ResourceInfoTable';
