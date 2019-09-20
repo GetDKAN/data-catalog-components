@@ -27,5 +27,5 @@ export { default as Table } from "./components/Table";
 export { default as Text } from "./components/Text";
 export { default as Title } from "./components/Title";
 export { default as Tags } from "./components/Tags";
-export { default as FacetBlock } from "./components/Search/components/SearchFacets/FacetBlock";
+export { default as ToggleBlock } from "./components/ToggleBlock";
 

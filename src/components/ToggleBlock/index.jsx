@@ -9,7 +9,7 @@ export default function ToggleBlock({
   allowToggle,
 }) {
   const [showFacets, toggleShowFacets] = useState(true);
-  let facetBlockHeading = <h2 className={headingClasses}>{title}</h2>
+  let facetBlockHeading = <h2 className={headingClasses}>{title}</h2>;
   if (allowToggle) {
     facetBlockHeading = (
       <h2 className={headingClasses}>
