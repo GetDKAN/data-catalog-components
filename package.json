@@ -16,7 +16,8 @@
     "storybook": "NODE_PATH=src start-storybook -p 6006",
     "deploy-storybook": "storybook-to-ghpages",
     "lint": "eslint ./src",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "test:watch": "npm run test -- --watch"
   },
   "keywords": [
     "react",
