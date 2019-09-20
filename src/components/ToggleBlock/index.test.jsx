@@ -1,25 +1,25 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FacetBlock } from './index';
+import ToggleBlock from './index';
 
-describe('<FacetBlock />', () => {
+describe('<ToggleBlock />', () => {
   const defaultWrapper = shallow(
-    <FacetBlock
+    <ToggleBlock
       title="My Title"
     >
       <p>Child Element</p>
-    </FacetBlock>,
+    </ToggleBlock>,
   );
 
   const customWrapper = shallow(
-    <FacetBlock
+    <ToggleBlock
       title="My Custom Title"
       headingClasses="custom-heading-class"
       innerClasses="custom-inner-class"
       allowToggle={false}
     >
       <p>Child Element</p>
-    </FacetBlock>,
+    </ToggleBlock>,
   );
 
   it('renders as default h2 with button title', () => {

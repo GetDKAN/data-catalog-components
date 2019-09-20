@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function FacetBlock({
+export default function ToggleBlock({
   title,
   children,
   headingClasses,
@@ -32,13 +32,13 @@ export default function FacetBlock({
   );
 }
 
-FacetBlock.defaultProps = {
+ToggleBlock.defaultProps = {
   allowToggle: true,
   headingClasses: 'dkan-facet-block-title',
   innerClasses: 'dkan-facet-block-inner',
 };
 
-FacetBlock.propTypes = {
+ToggleBlock.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   headingClasses: PropTypes.string,
