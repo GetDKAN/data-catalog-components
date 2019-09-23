@@ -36,7 +36,6 @@ storiesOf('General', module)
       classes={text("Classes", "")}
     />
   ))
-  .add('Button', () => <StyledButton color="primary">primary</StyledButton>)
   .add('ToggleBlock', () => (
     <ToggleBlock
       title={text('Title', 'Block Title')}
@@ -62,6 +61,7 @@ storiesOf('General', module)
       />
     );
   })
+  .add('Button', () => <StyledButton color="primary">primary</StyledButton>)
   .add('Preview Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="chart-bar" fill="#ffffff"/> Preview</StyledButton>)
   .add('Download Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="download" fill="#ffffff"/> Download</StyledButton>)
   .add('Hero Button', () => <StyledButton className="btn-hero">Learn More</StyledButton>)
