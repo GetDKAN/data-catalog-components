@@ -2,7 +2,7 @@
 
 exports[`NavBar renders correctly 1`] = `
 <div
-  className=" container-fluid main-navigation base-styles sc-bdVaJa jDHIWM"
+  className=" container-fluid main-navigation base-styles sc-bdVaJa hsLsXo"
 >
   <nav
     className="navbar navbar-expand-md navbar-dark"
