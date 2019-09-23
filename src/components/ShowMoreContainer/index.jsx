@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function ShowMoreContainer({
   container, items, limit, btnOpenText, btnClosedText
