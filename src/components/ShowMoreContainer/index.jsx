@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function ShowMoreContainer({
-  container, items, limit, btnOpenText, btnClosedText
+  container,
+  items,
+  limit,
+  btnOpenText,
+  btnClosedText,
+  containerClasses,
+  wrapperClasses,
 }) {
   const [showMore, toggleShowMore] = useState(false);
-  
+
   let showMoreButton = (
-    <button 
+    <button
+      type="button"
       className="showmore-button"
       onClick={() => toggleShowMore(!showMore)}
     >
-      {btnOpenText}
+      {btnOpenText || 'Show less'}
     </button>
   );
   const totalItems = items.length;
@@ -21,10 +29,11 @@ export default function ShowMoreContainer({
     }
     return item;
   });
-  const btnText = btnClosedText ? btnClosedText : `Show ${totalItems - visibleItems.length} more`;
+  const btnText = btnClosedText || `Show ${totalItems - visibleItems.length} more`;
   if (!showMore) {
     showMoreButton = (
       <button
+        type="button"
         className="showmore-button"
         onClick={() => toggleShowMore(!showMore)}
       >
@@ -37,33 +46,53 @@ export default function ShowMoreContainer({
     showMoreButton = null;
   }
 
-  if (container === 'ol') {
-    return (
-      <ol>
-        {visibleItems}
-        {showMoreButton}
-      </ol>
-    );
+  switch (container) {
+    case 'ol':
+      return (
+        <div className={wrapperClasses}>
+          <ol className={containerClasses}>
+            {visibleItems}
+          </ol>
+          {showMoreButton}
+        </div>
+      );
+    case 'ul':
+      return (
+        <div className={wrapperClasses}>
+          <ul className={containerClasses}>
+            {visibleItems}
+          </ul>
+          {showMoreButton}
+        </div>
+      );
+    case 'div':
+    default:
+      return (
+        <div className={wrapperClasses}>
+          <div className={containerClasses}>
+            {visibleItems}
+          </div>
+          {showMoreButton}
+        </div>
+      );
   }
-
-  if (container === 'ul') {
-    return (
-      <ul>
-        {visibleItems}
-        {showMoreButton}
-      </ul>
-    );
-  }
-
-  return (
-    <div>
-      {visibleItems}
-      {showMoreButton}
-    </div>
-  );
 }
 
 ShowMoreContainer.defaultProps = {
-  btnOpenText: 'Show less',
+  btnOpenText: '',
   btnClosedText: '',
+  limit: 10,
+  container: 'div',
+  containerClasses: 'show-more-container',
+  wrapperClasses: 'show-more-wrapper',
+};
+
+ShowMoreContainer.propTypes = {
+  container: PropTypes.oneOf(['div', 'ol', 'ul']),
+  items: PropTypes.arrayOf(PropTypes.node).isRequired,
+  limit: PropTypes.number,
+  btnOpenText: PropTypes.string,
+  btnClosedText: PropTypes.string,
+  containerClasses: PropTypes.string,
+  wrapperClasses: PropTypes.string,
 };

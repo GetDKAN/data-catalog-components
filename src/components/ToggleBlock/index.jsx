@@ -34,8 +34,8 @@ export default function ToggleBlock({
 
 ToggleBlock.defaultProps = {
   allowToggle: true,
-  headingClasses: 'dkan-facet-block-title',
-  innerClasses: 'dkan-facet-block-inner',
+  headingClasses: 'facet-block-title',
+  innerClasses: 'facet-block-inner',
 };
 
 ToggleBlock.propTypes = {

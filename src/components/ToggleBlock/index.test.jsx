@@ -27,8 +27,8 @@ describe('<ToggleBlock />', () => {
   });
 
   it('renders with default classes', () => {
-    expect(defaultWrapper.exists('h2.dkan-facet-block-title')).toBe(true);
-    expect(defaultWrapper.exists('div.dkan-facet-block-inner')).toBe(true);
+    expect(defaultWrapper.exists('h2.facet-block-title')).toBe(true);
+    expect(defaultWrapper.exists('div.facet-block-inner')).toBe(true);
   });
 
   it('renders without button title', () => {
@@ -38,18 +38,18 @@ describe('<ToggleBlock />', () => {
 
   it('renders with custom headingClasses', () => {
     expect(customWrapper.exists('h2.custom-heading-class')).toBe(true);
-    expect(customWrapper.find('h2.dkan-facet-block-title').exists()).toBe(false);
+    expect(customWrapper.find('h2.facet-block-title').exists()).toBe(false);
   });
 
   it('renders with custom innerClasses', () => {
     expect(customWrapper.exists('div.custom-inner-class')).toBe(true);
-    expect(customWrapper.find('div.dkan-facet-block-inner').exists()).toBe(false);
+    expect(customWrapper.find('div.facet-block-inner').exists()).toBe(false);
   });
 
   it('toggles render of children', () => {
     defaultWrapper.find('h2 button').simulate('click');
-    expect(defaultWrapper.find('div.dkan-facet-block-inner').exists()).toBe(false);
+    expect(defaultWrapper.find('div.facet-block-inner').exists()).toBe(false);
     defaultWrapper.find('h2 button').simulate('click');
-    expect(defaultWrapper.exists('div.dkan-facet-block-inner'));
+    expect(defaultWrapper.exists('div.facet-block-inner'));
   });
 });

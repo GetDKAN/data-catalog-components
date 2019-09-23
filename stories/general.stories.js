@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, select, boolean, array, number } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 
 import Header from '../src/components/Header';
@@ -14,12 +14,13 @@ import FontAwesomeIcon from '../src/components/FontAwesomeIcon';
 import Footer from '../src/components/Footer';
 import ApiDocs from '../src/components/ApiDocs';
 import ToggleBlock from '../src/components/ToggleBlock';
+import ShowMoreContainer from '../src/components/ShowMoreContainer';
 
 import links from './data/menu.json';
 
 storiesOf('General', module)
   .addDecorator(withKnobs)
-  .addDecorator(withA11y) 
+  .addDecorator(withA11y)
   .add('Logo', () => <Logo />)
   .add('Header', () => <Header site="Open Data Catalog" slogan="Place your tag line here." navItems={links.main.map((item) => (<a href={item.url}>{item.label}</a>))} />)
   .add('NavBar', () => <NavBar navItems={links.main.map((item) => (<a href={item.url}>{item.label}</a>))}/>)
@@ -49,6 +50,18 @@ storiesOf('General', module)
       </ul>
     </ToggleBlock>
   ))
+  .add('Show More Container', () => {
+    const itemsArray = ['open', 'data', 'dkan', 'test', 'React', 'Drupal', 'foo', 'bar', 'JavaScript', 'PHP', 'source'];
+    return (
+      <ShowMoreContainer
+        container={select('Container Type', { ul: 'ul', ol: 'ol', div: 'div' }, 'ol')}
+        items={array('Show More Items', itemsArray).map((item) => (<li key={item}>{item}</li>))}
+        limit={number('Limit', 10)}
+        btnOpenText={text('Label when open', '')}
+        btnClosedText={text('Label when closed', '')}
+      />
+    );
+  })
   .add('Preview Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="chart-bar" fill="#ffffff"/> Preview</StyledButton>)
   .add('Download Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="download" fill="#ffffff"/> Download</StyledButton>)
   .add('Hero Button', () => <StyledButton className="btn-hero">Learn More</StyledButton>)
