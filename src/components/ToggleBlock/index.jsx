@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function ToggleBlock({
+  className,
   title,
   children,
   headingClasses,
@@ -20,7 +21,7 @@ export default function ToggleBlock({
     );
   }
   return (
-    <section>
+    <div className={className}>
       {facetBlockHeading}
       {showFacets
         && (
@@ -28,7 +29,7 @@ export default function ToggleBlock({
             {children}
           </div>
         )}
-    </section>
+    </div>
   );
 }
 
@@ -36,6 +37,7 @@ ToggleBlock.defaultProps = {
   allowToggle: true,
   headingClasses: 'facet-block-title',
   innerClasses: 'facet-block-inner',
+  className: '',
 };
 
 ToggleBlock.propTypes = {
@@ -44,4 +46,5 @@ ToggleBlock.propTypes = {
   headingClasses: PropTypes.string,
   innerClasses: PropTypes.string,
   allowToggle: PropTypes.bool,
+  className: PropTypes.string,
 };
