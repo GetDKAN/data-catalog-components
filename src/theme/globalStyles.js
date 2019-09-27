@@ -1,11 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createGlobalStyle } from 'styled-components';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import defaultTheme from './default';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { fas } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, fas)
+library.add(fab, fas);
 
 const GlobalStyles = createGlobalStyle`
   @import url('http://fonts.googleapis.com/css?family=Rubik:300,500,700&amp;subset=latin');

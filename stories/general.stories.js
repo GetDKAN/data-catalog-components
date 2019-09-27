@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select, boolean, array, number } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
