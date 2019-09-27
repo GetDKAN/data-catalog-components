@@ -9,6 +9,7 @@ library.add(fab, fas);
 
 const GlobalStyles = createGlobalStyle`
   @import url('http://fonts.googleapis.com/css?family=Rubik:300,500,700&amp;subset=latin');
+  @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
   html {
     /*Convert font size to base 10 for easier calculations (1rem = 10px)*/

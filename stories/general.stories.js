@@ -9,7 +9,8 @@ import Logo from '../src/components/Logo';
 import PageHeader from '../src/components/PageHeader';
 import Title from '../src/components/Title';
 import StyledButton from '../src/components/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import DataIcon from '../src/components/DataIcon';
 import Footer from '../src/components/Footer';
 import ApiDocs from '../src/components/ApiDocs';
 import ToggleBlock from '../src/components/ToggleBlock';
@@ -65,6 +66,23 @@ storiesOf('General', module)
   .add('Download Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="download" fill="#ffffff"/> Download</StyledButton>)
   .add('Hero Button', () => <StyledButton className="btn-hero">Learn More</StyledButton>)
   .add('Close Button', () => <StyledButton className="close"><span aria-hidden="true"><FontAwesomeIcon icon="times" fill="#666666"/></span></StyledButton>)
+  .add(
+    "Data Icon",
+    () => (
+      <DataIcon
+        icon={select(
+          "Icon",
+          ["density-1", "density-2", "density-3"],
+          "density-1"
+        )}
+        color={text('Color', "#41b0d3")}
+        height={text("Height", "50")}
+        width={text("Width", "50")}
+      >
+      </DataIcon>
+    ),
+    { knobs: { escapeHTML: false } }
+  )
   .add("FontAwesome Icon", () => (
     <FontAwesomeIcon
       icon={text("Icon", "chevron-right")}
