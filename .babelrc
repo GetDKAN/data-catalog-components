@@ -1,7 +1,9 @@
 {
   "presets": [
     "@babel/react",
-    "@babel/env"
+    "@babel/env",
+    "es2015",
+    "stage-0"
   ],
   "plugins": [
     "@babel/plugin-syntax-dynamic-import",
