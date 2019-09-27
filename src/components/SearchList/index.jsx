@@ -1,29 +1,38 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import ResultsList from './ResultsList';
 
-import SearchListItem from '../SearchListItem';
-
-const SearchList = ({items, message}) => {
-
-    return (
-      <React.Fragment>
-        <div className="results-message">{ message }</div>
-        <ResultsList items={items} className="search-list" component={SearchListItem} />
-      </React.Fragment>
-    );
-
-}
+const SearchList = ({
+  children,
+  message,
+  className,
+  listClassName,
+  resultsClassName,
+}) => (
+  <div className={className}>
+    {message && (
+      <div className={resultsClassName}>
+        {message}
+      </div>
+    )}
+    <ol className={listClassName}>
+      {children}
+    </ol>
+  </div>
+);
 
 SearchList.defaultProps = {
-  message: "",
-  items: [],
+  message: '',
+  listClassName: 'search-list',
+  className: '',
+  resultsClassName: 'results-message',
 };
 
 SearchList.propTypes = {
+  children: PropTypes.node.isRequired,
   message: PropTypes.string,
-  items: PropTypes.any,
+  listClassName: PropTypes.string,
+  className: PropTypes.string,
+  resultsClassName: PropTypes.string,
 };
 
 export default SearchList;
