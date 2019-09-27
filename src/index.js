@@ -10,7 +10,6 @@ export { default as IconListItem } from "./components/IconListItem";
 export { default as InputLarge } from "./components/InputLarge";
 export { default as FacetList } from "./components/FacetList";
 export { default as FileDownload } from "./components/FileDownload";
-export { default as FontAwesomeIcon } from "./components/FontAwesomeIcon";
 export { default as Footer } from "./components/Footer";
 export { default as FormatIcon } from "./components/FormatIcon";
 export { default as Logo } from "./components/Logo";
@@ -19,14 +18,15 @@ export { default as NavBar } from "./components/NavBar";
 export { default as Organization } from "./components/Organization";
 export { default as PageHeader } from "./components/PageHeader";
 export { default as SearchList } from "./components/SearchList";
+export { default as ShowMoreContainer } from "./components/ShowMoreContainer";
 export { default as StatBlock } from "./components/Blocks/StatBlock";
 export { default as StepsBlock } from "./components/Blocks/StepsBlock";
 export { default as String } from "./components/String";
 export { default as StyledButton } from "./components/Button";
 export { default as Table } from "./components/Table";
+export { default as Tags } from "./components/Tags";
 export { default as Text } from "./components/Text";
 export { default as Title } from "./components/Title";
-export { default as Tags } from "./components/Tags";
 export { default as ToggleBlock } from "./components/ToggleBlock";
-export { default as ShowMoreContainer } from "./components/ShowMoreContainer";
+
 
