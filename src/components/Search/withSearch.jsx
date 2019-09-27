@@ -304,11 +304,9 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
     filteredFacets(facetKey) {
       const { totalFacets, selectedFacets, facetsResults } = this.state;
       const returnedFacets = totalFacets[facetKey].filter((facet) => {
-        const hasResults = facetsResults[facetKey].find((activeFacet) => (
-          (activeFacet[1] === facet[0]) && (activeFacet[0] === facetKey)
-        ));
+        const hasResults = facetsResults[facetKey].find((activeFacet) => (activeFacet[0] === facet[0]));
         const selected = selectedFacets.find((selectedFacet) => (
-          (selectedFacet[1] === facet[0]) && (selectedFacet[0] === facetKey)
+          (selectedFacet[0] === facet[0]) && (selectedFacet[0] === facetKey)
         ));
 
         if (selected || hasResults) {
