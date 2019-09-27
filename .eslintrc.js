@@ -5,6 +5,7 @@ module.exports = {
         "react/jsx-curly-spacing": [2, "never", { "allowMultiline": true }],
     },
     "env": {
-        "jest": true
+        "jest": true,
+        "browser": true,
     }
 };
