@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select, boolean, array, number } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
@@ -10,7 +9,7 @@ import Logo from '../src/components/Logo';
 import PageHeader from '../src/components/PageHeader';
 import Title from '../src/components/Title';
 import StyledButton from '../src/components/Button';
-import FontAwesomeIcon from '../src/components/FontAwesomeIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Footer from '../src/components/Footer';
 import ApiDocs from '../src/components/ApiDocs';
 import ToggleBlock from '../src/components/ToggleBlock';
@@ -59,13 +58,18 @@ storiesOf('General', module)
         btnOpenText={text('Label when open', '')}
         btnClosedText={text('Label when closed', '')}
       />
-    );
-  })
-  .add('Button', () => <StyledButton color="primary">primary</StyledButton>)
-  .add('Preview Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="chart-bar" fill="#ffffff"/> Preview</StyledButton>)
-  .add('Download Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="download" fill="#ffffff"/> Download</StyledButton>)
-  .add('Hero Button', () => <StyledButton className="btn-hero">Learn More</StyledButton>)
-  .add('Close Button', () => <StyledButton className="close"><span aria-hidden="true"><FontAwesomeIcon icon="times" fill="#666666"/></span></StyledButton>)
-  .add('FontAwesome Icons', () => <div><FontAwesomeIcon/><FontAwesomeIcon icon="facebook" fill="#617aad"/><FontAwesomeIcon icon="twitter" fill="#41b0d3"/><FontAwesomeIcon icon="chevron-right" fill="red"/></div>)
-  .add('Footer', () => <Footer links={links} />)
-  .add('API Documentation', () => <ApiDocs endpoint="https://petstore.swagger.io/v2/swagger.json" />);
+    ))
+    .add('Button', () => <StyledButton color="primary">primary</StyledButton>)
+    .add('Preview Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="chart-bar" fill="#ffffff"/> Preview</StyledButton>)
+    .add('Download Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="download" fill="#ffffff"/> Download</StyledButton>)
+    .add('Hero Button', () => <StyledButton className="btn-hero">Learn More</StyledButton>)
+    .add('Close Button', () => <StyledButton className="close"><span aria-hidden="true"><FontAwesomeIcon icon="times" fill="#666666"/></span></StyledButton>)
+    .add("FontAwesome Icon", () => (
+      <FontAwesomeIcon
+        icon={text("Icon", "chevron-right")}
+        color={text("Color", "#41b0d3")}
+        size={text("Size", "lg")}
+      />
+    ))
+    .add('Footer', () => <Footer links={links} />)
+    .add('API Documentation', () => <ApiDocs endpoint="https://petstore.swagger.io/v2/swagger.json" />)
