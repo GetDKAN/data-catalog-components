@@ -6,16 +6,14 @@ import TopicImage from './TopicImage'
 class IconListItem extends React.PureComponent {
 
   render() {
-    const { item } = this.props;
-    const color =  "#0A77BD";
     let content = '';;
 
-    if (item.icon) {
+    if (this.props.image) {
       // Image provided as a url.
       content = (
-        <StyledLink href={item.ref}>
-          <img src={item.icon} alt={item.alt} />
-          <div>{item.title}</div>
+        <StyledLink href={this.props.link}>
+          <img src={this.props.image} alt={this.props.title} />
+          <div>{this.props.title}</div>
         </StyledLink>
       )
     }
@@ -23,14 +21,18 @@ class IconListItem extends React.PureComponent {
       // Image provided by custom component.
       content = ( 
         <StyledLink href={item.ref}>
-          <TopicImage title={item.title} width="80" height="80" alt={item.title} />
-          <div>{item.title}</div>
+          <TopicImage 
+            title={this.props.title} 
+            size={this.props.size} 
+            fill={this.props.color}
+          />
+          <div>{this.props.title}</div>
         </StyledLink>
       )
     };
 
     return (
-      <li key={item.identifier}>{content}</li>
+      <li key={this.props.index}>{content}</li>
     )
   }
 }
