@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import Wrapper from './Wrapper';
@@ -7,23 +5,22 @@ import FormatIcon from '../FormatIcon';
 
 function FileDownload(props) {
 
-  const { label, resource } = props;
-  let format = resource.format.toUpperCase();
+  const { label, format, downloadURL, title } = props;
 
   const item =
     <div className="resource">
       <FormatIcon format={format} />
-      <a href={resource.downloadURL} title={resource.format}>
+      <a href={downloadURL} title={format}>
         <span
           data-toggle='tooltip'
           data-placement='top'
-          data-original-title={resource.format}
-          data-format={resource.format}
+          data-original-title={format}
+          data-format={format}
           className='format-label'
           >
-            {resource.format}
+            {format}
           </span>
-          {resource.title}
+          {title}
       </a>
     </div>
     
@@ -35,8 +32,9 @@ function FileDownload(props) {
 }
 
 FileDownload.propTypes = {
-  item: PropTypes.any,
-  field: PropTypes.any,
+  title: PropTypes.string,
+  format: PropTypes.string,
+  downloadURL: PropTypes.string
 };
 
 export default FileDownload;

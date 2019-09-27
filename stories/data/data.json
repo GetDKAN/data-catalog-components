@@ -46,7 +46,7 @@
             "identifier": "23ew-n7w9-csv",
             "downloadURL": "https://data.example.gov/fake/file.csv",
             "mediaType": "text/csv",
-            "title": "csv",
+            "title": "file.csv",
             "format": "csv"
         },
         {

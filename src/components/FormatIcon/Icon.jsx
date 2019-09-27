@@ -8,6 +8,7 @@ class Icon extends React.PureComponent {
 
     switch(this.props.format) {
       case 'CSV':
+      case 'csv':
         if (!this.props.fill) { color = defaultTheme.csvIcon; } 
         return (
           <svg xmlns="http://www.w3.org/2000/svg" className="dkan-icon" title="CSV" width={this.props.width} height={this.props.height} viewBox="0 0 126 126">
@@ -18,6 +19,7 @@ class Icon extends React.PureComponent {
         )
         break;
       case 'JSON':
+      case 'json':
         if (!this.props.fill) { color = defaultTheme.jsonIcon; }
         return (
           <svg xmlns="http://www.w3.org/2000/svg" className="dkan-icon" title="JSON" width={this.props.width} height={this.props.height} viewBox="0 0 126 126">
@@ -26,6 +28,7 @@ class Icon extends React.PureComponent {
         )
         break;
       case 'PDF':
+      case 'pdf':
         if (!this.props.fill) { color = defaultTheme.pdfIcon; }
         return (
           <svg xmlns="http://www.w3.org/2000/svg"  className="dkan-icon" title="PDF" width={this.props.width} height={this.props.height} viewBox="0 0 126 126">
@@ -36,6 +39,7 @@ class Icon extends React.PureComponent {
         )
         break;
         case 'RDF':
+        case 'rdf':
         if (!this.props.fill) { color = defaultTheme.rdfIcon; }
         return (
           <svg xmlns="http://www.w3.org/2000/svg" className="dkan-icon" title="RDF" width={this.props.width} height={this.props.height} viewBox="0 0 126 126">
@@ -44,6 +48,7 @@ class Icon extends React.PureComponent {
         )
         break;
       case 'XML':
+      case 'xml':
         if (!this.props.fill) { color = defaultTheme.xmlIcon; }
         return (
           <svg xmlns="http://www.w3.org/2000/svg" className="dkan-icon" title="XML" width={this.props.width} height={this.props.height} viewBox="0 0 126 126">
@@ -52,6 +57,15 @@ class Icon extends React.PureComponent {
           </svg>
         )
         break;
+      case 'ZIP':
+      case 'zip':
+        if (!this.props.fill) { color = defaultTheme.zipIcon; }
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" className="dkan-icon" title="ZIP" width={this.props.width} height={this.props.height} viewBox="0 0 126 126">
+            <path fill={color} d="M99.98 36.443a1.977 1.977 0 0 0-.475-1.295L79.838 12.684c-.004-.006-.01-.008-.016-.014a2 2 0 0 0-.527-.412 2.129 2.129 0 0 0-.395-.165c-.037-.011-.07-.026-.107-.036a1.962 1.962 0 0 0-.459-.057H30c-2.205 0-4 1.795-4 4v94c0 2.206 1.795 4 4 4h66c2.207 0 4-1.794 4-4V36.667c0-.075-.012-.149-.02-.224zm-42.869 72.501H38.25v-2.952l11.555-16.629v-.145H39.33v-4.535h17.602v3.168l-11.303 16.414v.143h11.482v4.536zm8.967 0H60.57v-24.26h5.508v24.26zM86.02 97.822c-1.871 1.764-4.643 2.555-7.883 2.555-.721 0-1.367-.035-1.871-.107v8.675H70.83V85.008c1.691-.289 4.066-.504 7.414-.504 3.385 0 5.795.647 7.416 1.943 1.547 1.224 2.592 3.239 2.592 5.615 0 2.376-.793 4.392-2.232 5.76zM30 79.917V16h23.92v-.629h6.066V16h16.348v20.466a2 2 0 0 0 2 2H96l.002 41.451H30z"/>
+            <path fill={color} d="M78.533 88.643c-1.117 0-1.873.108-2.268.217v7.162c.467.108 1.043.145 1.836.145 2.914 0 4.715-1.477 4.715-3.959 0-2.233-1.548-3.565-4.283-3.565zM59.986 19.392h6.066v2.503h-6.066zM53.92 16h6.066v1.875H53.92zM53.92 23.138h6.066v2.503H53.92zM59.986 27.236h6.066v2.503h-6.066zM59.986 35.145h6.066v2.503h-6.066zM53.92 31.125h6.066v2.503H53.92zM59.986 39.692c-4.295 0-6.338 3.48-6.338 7.776L52.21 60.495a7.774 7.774 0 1 0 15.548 0l-1.434-13.027c.002-4.295-2.043-7.776-6.338-7.776zm2.577 25.165h-5.148V53.982h5.148v10.875z"/>
+          </svg>
+        )
       default:
         if (!this.props.fill) { color = defaultTheme.dataIcon; }
         return (
@@ -67,3 +81,5 @@ class Icon extends React.PureComponent {
 }
 
 export default Icon
+
+// Icons made by Freepik https://www.flaticon.com/authors/freepik
