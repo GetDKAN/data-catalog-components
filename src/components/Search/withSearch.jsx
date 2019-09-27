@@ -360,7 +360,6 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
         searchParams,
         selectedFacets,
         searchLink,
-        sortOptions,
       } = this.state;
       return (
         <OriginalComponent
@@ -374,7 +373,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
           selectedFacets={selectedFacets}
           searchLink={searchLink}
           options={{
-            sort: sortOptions,
+            sort: this.sortOptions,
           }}
           searchFunctions={{
             sort: this.handleSortChange,
