@@ -58,18 +58,38 @@ storiesOf('General', module)
         btnOpenText={text('Label when open', '')}
         btnClosedText={text('Label when closed', '')}
       />
-    ))
-    .add('Button', () => <StyledButton color="primary">primary</StyledButton>)
-    .add('Preview Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="chart-bar" fill="#ffffff"/> Preview</StyledButton>)
-    .add('Download Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="download" fill="#ffffff"/> Download</StyledButton>)
-    .add('Hero Button', () => <StyledButton className="btn-hero">Learn More</StyledButton>)
-    .add('Close Button', () => <StyledButton className="close"><span aria-hidden="true"><FontAwesomeIcon icon="times" fill="#666666"/></span></StyledButton>)
-    .add("FontAwesome Icon", () => (
+    )
+  })
+  .add('Button', () => <StyledButton color="primary">primary</StyledButton>)
+  .add('Preview Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="chart-bar" fill="#ffffff"/> Preview</StyledButton>)
+  .add('Download Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="download" fill="#ffffff"/> Download</StyledButton>)
+  .add('Hero Button', () => <StyledButton className="btn-hero">Learn More</StyledButton>)
+  .add('Close Button', () => <StyledButton className="close"><span aria-hidden="true"><FontAwesomeIcon icon="times" fill="#666666"/></span></StyledButton>)
+  .add("FontAwesome Icon", () => (
+    <FontAwesomeIcon
+      icon={text("Icon", "chevron-right")}
+      color={text("Color", "#41b0d3")}
+      size={text("Size", "lg")}
+    />
+  ))
+  .add("FontAwesome Brand Icon", () => (
+    <span>
       <FontAwesomeIcon
-        icon={text("Icon", "chevron-right")}
-        color={text("Color", "#41b0d3")}
-        size={text("Size", "lg")}
+        icon={['fab', 'facebook']}
+        color="blue"
+        size="4x"
       />
-    ))
-    .add('Footer', () => <Footer links={links} />)
-    .add('API Documentation', () => <ApiDocs endpoint="https://petstore.swagger.io/v2/swagger.json" />)
+      <FontAwesomeIcon
+        icon={['fab', 'twitter']}
+        color="aqua"
+        size="4x"
+      />
+      <FontAwesomeIcon
+        icon={['fab', 'github']}
+        color="purple"
+        size="4x"
+      />
+    </span>
+  ))
+  .add('Footer', () => <Footer links={links} />)
+  .add('API Documentation', () => <ApiDocs endpoint="https://petstore.swagger.io/v2/swagger.json" />)
