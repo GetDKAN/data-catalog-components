@@ -1,8 +1,7 @@
-/* eslint-disable */
 import React from 'react';
 import { Redirect } from "react-router-dom";
 import { Button, FormGroup, Label, Input  } from 'reactstrap';
-import FontAwesomeIcon from '../FontAwesomeIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Form from './Form';
 
 
@@ -54,7 +53,7 @@ class SearchInput extends React.Component {
     
     let reset = this.state.textEntered 
       ? <Button type="reset" id="reset" onClick={ this.handleReset }>
-          <FontAwesomeIcon icon="times" fill="#666666"/>
+          <FontAwesomeIcon icon="times" color="#666666" size="2x"/>
         </Button> 
       : false;
 
