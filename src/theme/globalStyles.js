@@ -1,10 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createGlobalStyle } from 'styled-components';
 import defaultTheme from './default';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fab, fas)
 
 const GlobalStyles = createGlobalStyle`
   @import url('http://fonts.googleapis.com/css?family=Rubik:300,500,700&amp;subset=latin');
-  @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
   html {
     /*Convert font size to base 10 for easier calculations (1rem = 10px)*/
