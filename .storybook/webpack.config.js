@@ -1,25 +1,20 @@
-const path = require("path");
+const path = require('path');
 
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
-        include: path.resolve(__dirname, '../'),
-      },
-			{
-      test: /\.(woff|woff2|eot|ttf|svg|png)$/,
-      include: path.resolve(__dirname, "../src"),
-      use: [
-        {
-          loader: 'url-loader',
-        },
-        {
-          loader: 'file-loader',
-        },
-      ],
-    }
-    ],
-  },
+// Export a function. Accept the base config as the only param.
+module.exports = async ({ config, mode }) => {
+  // `mode` has a value of 'DEVELOPMENT' or 'PRODUCTION'
+  // You can change the configuration based on that.
+  // 'PRODUCTION' is used when building the static version of storybook.
+
+  // Make whatever fine-grained changes you need
+  config.module.rules.push({
+    // test: /.scss$/,
+    // loader: ExtractTextPlugin.extract(
+    //   'style-loader', 'css-loader!postcss-loader', 'sass-loader'
+    // )
+    //include: path.resolve(__dirname, '../'),
+  });
+
+  // Return the altered config
+  return config;
 };
