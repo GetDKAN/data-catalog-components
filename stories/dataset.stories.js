@@ -34,8 +34,8 @@ storiesOf('Dataset', module)
     ),
     { knobs: { escapeHTML: false } }
   )
-  .add('File Download', () => <FileDownload label="Label" resource={data.distribution[0]} />)
-  .add('File Download - No label', () => <FileDownload resource={data.distribution[0]} />)
+  .add('File Download', () => <FileDownload label="Label" title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
+  .add('File Download - No label', () => <FileDownload title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
   .add('Organization', () => <Organization name={data.publisher.name} description={data.publisher.description} identifier={data.publisher.identifier} />)
   .add(
     "Text",

@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import Wrapper from './Wrapper';
@@ -17,7 +15,7 @@ function IconList(props) {
           <ComponentToRender key={i} 
             title={item.title} 
             image={item.image}
-            link={item.link}
+            ref={item.link}
             color={item.color}
             size={item.size}
             index={i}

@@ -1,5 +1,5 @@
-/* eslint-disable */
 import React from 'react'
+import PropTypes from 'prop-types';
 import StyledLink from './StyledLink'
 import TopicImage from './TopicImage'
 
@@ -11,7 +11,7 @@ class IconListItem extends React.PureComponent {
     if (this.props.image) {
       // Image provided as a url.
       content = (
-        <StyledLink href={this.props.link}>
+        <StyledLink href={this.props.ref}>
           <img src={this.props.image} alt={this.props.title} />
           <div>{this.props.title}</div>
         </StyledLink>
@@ -20,7 +20,7 @@ class IconListItem extends React.PureComponent {
     else {
       // Image provided by custom component.
       content = ( 
-        <StyledLink href={item.ref}>
+        <StyledLink href={this.props.ref}>
           <TopicImage 
             title={this.props.title} 
             size={this.props.size} 
@@ -32,9 +32,18 @@ class IconListItem extends React.PureComponent {
     };
 
     return (
-      <li key={this.props.index}>{content}</li>
+      <li key={this.props.identifier}>{content}</li>
     )
   }
 }
+
+IconListItem.propTypes = {
+  title: PropTypes.string,
+  ref: PropTypes.string,
+  image: PropTypes.string,
+  size: PropTypes.string,
+  color: PropTypes.string,
+  identifier: PropTypes.string
+};
 
 export default IconListItem

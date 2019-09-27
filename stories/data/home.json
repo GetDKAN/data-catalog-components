@@ -2,30 +2,26 @@
     "topics": [
         {
             "title": "Baobab",
-            "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Camping_Bag_Flat_Icon_Vector.svg/1200px-Camping_Bag_Flat_Icon_Vector.svg.png",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Camping_Bag_Flat_Icon_Vector.svg/1200px-Camping_Bag_Flat_Icon_Vector.svg.png",
             "identifier": "here",
-            "alt": "Baobab",
             "ref": "/"
         },
         {
             "title": "Sequoia",
-            "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Antu_view-statistics.svg/1024px-Antu_view-statistics.svg.png",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Antu_view-statistics.svg/1024px-Antu_view-statistics.svg.png",
             "identifier": "there",
-            "alt": "Sequoia",
             "ref": "/"
         },
         {
             "title": "Wollemi",
-            "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Toicon-icon-fandom-shred.svg/1920px-Toicon-icon-fandom-shred.svg.png",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Toicon-icon-fandom-shred.svg/1920px-Toicon-icon-fandom-shred.svg.png",
             "identifier": "everywhere",
-            "alt": "Wollemion",
             "ref": "/"
         },
         {
             "title": "Eucalyptus",
-            "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Emojione_1F33B.svg/1200px-Emojione_1F33B.svg.png",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Emojione_1F33B.svg/1200px-Emojione_1F33B.svg.png",
             "identifier": "nowhere",
-            "alt": "Eucalyptus",
             "ref": "/"
         }
     ],
@@ -34,37 +30,43 @@
             "identifier": "1",
             "title": "City Planning",
             "color": "#0A77BD",
-            "ref": "search?theme=City%20Planning"
+            "ref": "search?theme=City%20Planning",
+            "size": "80"
         },
         {
             "identifier": "2",
             "title": "Economy",
             "color": "#0A77BD",
-            "ref": "search?theme=Economy"
+            "ref": "search?theme=Economy",
+            "size": "80"
         },
         {
             "identifier": "3",
             "title": "Health Care",
             "color": "#0A77BD",
-            "ref": "search?theme=Health%20Care"
+            "ref": "search?theme=Health%20Care",
+            "size": "80"
         },
         {
             "identifier": "4",
             "title": "Transportation",
             "color": "#0A77BD",
-            "ref": "search?theme=Transportation"
+            "ref": "search?theme=Transportation",
+            "size": "80"
         },
         {
             "identifier": "5",
             "title": "Public Safety",
             "color": "#0A77BD",
-            "ref": "search?theme=Public%20Safety"
+            "ref": "search?theme=Public%20Safety",
+            "size": "80"
         },
         {
             "identifier": "6",
             "title": "Education",
             "color": "#0A77BD",
-            "ref": "search?theme=Education"
+            "ref": "search?theme=Education",
+            "size": "80"
         }
     ],
     "stats": [

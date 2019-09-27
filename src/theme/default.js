@@ -39,12 +39,12 @@ const defaultTheme = {
   danger: '#DB3545',
   success: '#28A645',
   // Format
-  csvIcon: '#dfb100',
+  csvIcon: '#a64300',
   rdfIcon: '#0b4498',
-  jsonIcon: '#ef7100',
+  jsonIcon: '#005051',
   pdfIcon: '#e0051e',
   xmlIcon: '#5e962c',
-  zipIcon: '1700b2',
+  zipIcon: '#3B0053',
   dataIcon: '#666666',
 };
 
