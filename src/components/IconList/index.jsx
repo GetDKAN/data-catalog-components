@@ -8,14 +8,14 @@ function IconList(props) {
   let styles = {
     textAlign: props.titleAlign
   };
-
+  
   // If we have items, render them
   if (props.items) {
       content = props.items.map((item, i) => (
           <ComponentToRender key={i} 
             title={item.title} 
             image={item.image}
-            ref={item.link}
+            link={item.ref}
             color={item.color}
             size={item.size}
             index={i}
