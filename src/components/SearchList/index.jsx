@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ResultsList from './ResultsList';
 
 const SearchList = ({
   children,
@@ -14,9 +15,9 @@ const SearchList = ({
         {message}
       </div>
     )}
-    <ol className={listClassName}>
+    <ResultsList className={listClassName}>
       {children}
-    </ol>
+    </ResultsList>
   </div>
 );
 
