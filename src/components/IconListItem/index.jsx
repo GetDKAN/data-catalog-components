@@ -6,12 +6,12 @@ import TopicImage from './TopicImage'
 class IconListItem extends React.PureComponent {
 
   render() {
-    let content = '';;
+    let content = '';
 
     if (this.props.image) {
       // Image provided as a url.
       content = (
-        <StyledLink href={this.props.ref}>
+        <StyledLink to={this.props.link}>
           <img src={this.props.image} alt={this.props.title} />
           <div>{this.props.title}</div>
         </StyledLink>
@@ -20,7 +20,7 @@ class IconListItem extends React.PureComponent {
     else {
       // Image provided by custom component.
       content = ( 
-        <StyledLink href={this.props.ref}>
+        <StyledLink to={this.props.link}>
           <TopicImage 
             title={this.props.title} 
             size={this.props.size} 
@@ -39,7 +39,7 @@ class IconListItem extends React.PureComponent {
 
 IconListItem.propTypes = {
   title: PropTypes.string,
-  ref: PropTypes.string,
+  link: PropTypes.string,
   image: PropTypes.string,
   size: PropTypes.string,
   color: PropTypes.string,

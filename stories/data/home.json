@@ -4,25 +4,25 @@
             "title": "Baobab",
             "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Camping_Bag_Flat_Icon_Vector.svg/1200px-Camping_Bag_Flat_Icon_Vector.svg.png",
             "identifier": "here",
-            "ref": "/"
+            "ref": "/trees/Baobab"
         },
         {
             "title": "Sequoia",
             "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Antu_view-statistics.svg/1024px-Antu_view-statistics.svg.png",
             "identifier": "there",
-            "ref": "/"
+            "ref": "/trees/Sequoia"
         },
         {
             "title": "Wollemi",
             "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Toicon-icon-fandom-shred.svg/1920px-Toicon-icon-fandom-shred.svg.png",
             "identifier": "everywhere",
-            "ref": "/"
+            "ref": "/trees/Wollemi"
         },
         {
             "title": "Eucalyptus",
             "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Emojione_1F33B.svg/1200px-Emojione_1F33B.svg.png",
             "identifier": "nowhere",
-            "ref": "/"
+            "ref": "/trees/Eucalyptus"
         }
     ],
     "topics2": [
