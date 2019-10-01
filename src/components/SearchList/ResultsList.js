@@ -1,9 +1,10 @@
 /* eslint-disable */
 import styled from 'styled-components';
-import List from '../List';
+import Ol from '../List/Ol';
 
-const ResultsList = styled(List)`
+const ResultsList = styled(Ol)`
   margin: 1em 0;
+  list-style: none;
 `;
 
 export default ResultsList;

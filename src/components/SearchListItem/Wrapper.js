@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   border: 1px solid ${props => props.theme.borderColor};
   border-radius: 4px;
   padding: 16px 48px;
+  list-style: none;
   a {
     color: ${props => props.theme.headingColor};
     text-decoration: none;
