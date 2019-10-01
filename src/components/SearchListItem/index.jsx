@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import ListItem from '../ListItem';
 import Wrapper from './Wrapper';
 import excerpts from 'excerpts';
-import TopicImage from '../IconListItem/TopicImage'
+import TopicImage from '../IconListItem/TopicImage';
+import DataIcon from '../DataIcon';
+import Text from '../Text';
 
 class SearchListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
   formats(distribution) {
     if (!distribution) {
       return null;
@@ -41,7 +42,7 @@ class SearchListItem extends React.PureComponent { // eslint-disable-line react/
         // }
         // else {
           return <div key={`dist-${topic.identifier}-${i}`}>
-            <TopicImage title={topic.title} height="16" width="16" fill="#A7AAAC"/>
+            <TopicImage title={topic.title} height="16" width="16"/>
             {topic.title}
           </div>
           
@@ -54,28 +55,37 @@ class SearchListItem extends React.PureComponent { // eslint-disable-line react/
   render() {
 
     const item = this.props.item;
-    const description = excerpts(item.description, {words: 35});
-    const formats = this.formats(item.format);
-    const themes = this.themes(item.theme);
-
+    const description = item.description ? 
+      <Text className="item-description">
+        {excerpts(item.description, {words: 35})}
+      </Text> 
+      : '';
+    const publisher = item.publisher ? 
+      <div className="item-publisher">
+        <DataIcon icon="group" height="20" width="20" color="#A7AAAC"/>
+        <Text tag="i" value={item.publisher.name} />
+      </div>
+      : '';
+    const formats = item.format ?
+      <div className="format-types">
+        {this.formats(item.format)}
+      </div>
+      : '';
+    const themes = item.theme ?
+      <div className="item-theme">
+        {this.themes(item.theme)}
+      </div>
+      : '';
     // Put together the content of the repository
     const content = (
       <Wrapper key={`wrapper-${item.identifier}`} className="search-list-item">
         <a href={item.ref}>
           <h2>{ item.title }</h2>
         </a>
-        <div className="item-theme">
-          {themes}
-        </div>
-        <div className="item-description">
-          {description}
-        </div>
-        <div className="item-org">
-          <strong>organization:</strong> {item.publisher}
-        </div>
-        <div className="format-types">
-          {formats}
-        </div>
+        {publisher}
+        {themes}
+        {description}
+        {formats}
       </Wrapper>
     );
 

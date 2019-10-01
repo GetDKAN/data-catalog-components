@@ -17,25 +17,38 @@ const Wrapper = styled.div`
   h2 {
     margin: 8px 0;
   }
+  .item-description {
+    padding-top: 1rem;
+  }
+  .item-publisher {
+    color: ${props => props.theme.grayMedium};
+    font-size: 1.4rem;
+    font-style: italic;
+    //font-weight: 400;
+    margin: .5em 0;
+    svg {
+      margin-right: 1rem;
+      fill: ${props => props.theme.grayMedium};
+    }
+  }
   .item-theme {
-    border-bottom: 1px solid ${props => props.theme.grayLight};
     color: ${props => props.theme.grayMedium};
     font-size: 1.4rem;
     font-style: normal;
-    font-weight: 400;
-    text-transform: uppercase;
+    //font-weight: 400;
     letter-spacing: .25px;
-    margin: 1em 0;
+    margin: .5em 0;
     padding-bottom: .75em;
     div {
       display: inline-block;
       position: relative;
-      padding: 0 20px 0 25px;
+      padding: 0 20px 0 30px;
     }
     img, svg {
       position: absolute;
       top:0;
       left:0;
+      fill: ${props => props.theme.grayMedium};
     }
   }
   .format-types {
