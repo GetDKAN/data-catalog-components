@@ -25,7 +25,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
         if (Object.prototype.hasOwnProperty.call(x, 'publisher') && Object.prototype.hasOwnProperty.call(x, 'name')) {
           item.publisher = x.publisher.name;
         } else {
-          item.publisher = ' ';
+          item.publisher = '';
         }
         return item;
       });
