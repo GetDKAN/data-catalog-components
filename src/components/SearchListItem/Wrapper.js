@@ -24,7 +24,6 @@ const Wrapper = styled.div`
     color: ${props => props.theme.grayMedium};
     font-size: 1.4rem;
     font-style: italic;
-    //font-weight: 400;
     margin: .5em 0;
     svg {
       margin-right: 1rem;
@@ -35,11 +34,10 @@ const Wrapper = styled.div`
     color: ${props => props.theme.grayMedium};
     font-size: 1.4rem;
     font-style: normal;
-    //font-weight: 400;
     letter-spacing: .25px;
     margin: .5em 0;
     padding-bottom: .75em;
-    div {
+    a {
       display: inline-block;
       position: relative;
       padding: 0 20px 0 30px;

@@ -7,6 +7,7 @@ import excerpts from 'excerpts';
 import TopicImage from '../IconListItem/TopicImage';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
+import { Link } from "gatsby";
 
 class SearchListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   formats(distribution) {
@@ -41,10 +42,10 @@ class SearchListItem extends React.PureComponent { // eslint-disable-line react/
         //   </div>
         // }
         // else {
-          return <div key={`dist-${topic.identifier}-${i}`}>
+          return <Link key={`dist-${topic.identifier}-${i}`} to={`search?theme=${topic.title}`}>
             <TopicImage title={topic.title} height="16" width="16"/>
             {topic.title}
-          </div>
+          </Link>
           
         //}
         
