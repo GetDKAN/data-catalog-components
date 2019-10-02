@@ -242,6 +242,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
     async handlePageSizeChange(event) {
       const { searchParams } = this.state;
       const pageSize = parseInt(event.target.value, 10);
+      searchParams.page = 1;
       searchParams.pageSize = parseInt(pageSize, 10);
       await this.fetchData();
     }
@@ -281,6 +282,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       } else {
         updatedFacets = selectedFacets.filter((facet) => (facet[1] !== facetValue));
       }
+      searchParams.page = 1;
       searchParams.facets = updatedFacets;
       await this.setState({
         searchParams,
@@ -304,7 +306,9 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
     filteredFacets(facetKey) {
       const { totalFacets, selectedFacets, facetsResults } = this.state;
       const returnedFacets = totalFacets[facetKey].filter((facet) => {
-        const hasResults = facetsResults[facetKey].find((activeFacet) => (activeFacet[0] === facet[0]));
+        const hasResults = facetsResults[facetKey].find((activeFacet) => (
+          activeFacet[0] === facet[0]
+        ));
         const selected = selectedFacets.find((selectedFacet) => (
           (selectedFacet[0] === facet[0]) && (selectedFacet[0] === facetKey)
         ));
