@@ -52,7 +52,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       this.state = {
         searchEngine: false,
         searchParams: props.defaultParams,
-        selectedFacets: [],
+        selectedFacets: props.selectedFacets || [],
         totalFacets: {},
         facetsResults: {},
         searchLink: '',
@@ -310,7 +310,8 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
           activeFacet[0] === facet[0]
         ));
         const selected = selectedFacets.find((selectedFacet) => (
-          (selectedFacet[1].toLowerCase() === facet[0].toLowerCase()) && (selectedFacet[0].toLowerCase() === facetKey.toLowerCase())
+          (selectedFacet[1].toLowerCase() === facet[0].toLowerCase())
+          && (selectedFacet[0].toLowerCase() === facetKey.toLowerCase())
         ));
         if (selected || hasResults) {
           return facet;
