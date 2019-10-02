@@ -310,9 +310,8 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
           activeFacet[0] === facet[0]
         ));
         const selected = selectedFacets.find((selectedFacet) => (
-          (selectedFacet[0] === facet[0]) && (selectedFacet[0] === facetKey)
+          (selectedFacet[1].toLowerCase() === facet[0].toLowerCase()) && (selectedFacet[0].toLowerCase() === facetKey.toLowerCase())
         ));
-
         if (selected || hasResults) {
           return facet;
         }
