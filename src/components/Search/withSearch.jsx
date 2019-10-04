@@ -52,7 +52,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       this.state = {
         searchEngine: false,
         searchParams: props.defaultParams,
-        selectedFacets: [],
+        selectedFacets: props.selectedFacets || [],
         totalFacets: {},
         facetsResults: {},
         searchLink: '',
@@ -242,6 +242,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
     async handlePageSizeChange(event) {
       const { searchParams } = this.state;
       const pageSize = parseInt(event.target.value, 10);
+      searchParams.page = 1;
       searchParams.pageSize = parseInt(pageSize, 10);
       await this.fetchData();
     }
@@ -281,6 +282,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       } else {
         updatedFacets = selectedFacets.filter((facet) => (facet[1] !== facetValue));
       }
+      searchParams.page = 1;
       searchParams.facets = updatedFacets;
       await this.setState({
         searchParams,
@@ -304,11 +306,13 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
     filteredFacets(facetKey) {
       const { totalFacets, selectedFacets, facetsResults } = this.state;
       const returnedFacets = totalFacets[facetKey].filter((facet) => {
-        const hasResults = facetsResults[facetKey].find((activeFacet) => (activeFacet[0] === facet[0]));
-        const selected = selectedFacets.find((selectedFacet) => (
-          (selectedFacet[0] === facet[0]) && (selectedFacet[0] === facetKey)
+        const hasResults = facetsResults[facetKey].find((activeFacet) => (
+          activeFacet[0] === facet[0]
         ));
-
+        const selected = selectedFacets.find((selectedFacet) => (
+          (selectedFacet[1].toLowerCase() === facet[0].toLowerCase())
+          && (selectedFacet[0].toLowerCase() === facetKey.toLowerCase())
+        ));
         if (selected || hasResults) {
           return facet;
         }
