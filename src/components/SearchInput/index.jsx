@@ -6,6 +6,7 @@ import {
 
 const SearchInput = ({
   className,
+  labelContent,
   onChangeFunction,
   onResetFunction,
   placeholder,
@@ -42,7 +43,7 @@ const SearchInput = ({
 
   return (
     <FormGroup className={className}>
-      <Label for="inputSearch" className={`${labelClass} ${labelClassName}`}>Search</Label>
+      <Label for="inputSearch" className={`${labelClass} ${labelClassName}`}>{labelContent}</Label>
       <Input
         type="text"
         name="inputSearch"
@@ -61,6 +62,7 @@ const SearchInput = ({
 
 SearchInput.defaultProps = {
   placeholder: 'Search the Data',
+  labelContent: 'Search',
   value: '',
   bsSize: 'lg',
   labelClassName: '',
@@ -68,7 +70,6 @@ SearchInput.defaultProps = {
   className: '',
   resetContent: null,
   onResetFunction: null,
-  onChangeFunction: null,
   submitContent: 'Submit',
   showSubmit: true,
 };
@@ -83,8 +84,9 @@ SearchInput.propTypes = {
   resetContent: PropTypes.node,
   submitContent: PropTypes.node,
   onResetFunction: PropTypes.func,
-  onChangeFunction: PropTypes.func,
+  onChangeFunction: PropTypes.func.isRequired,
   showSubmit: PropTypes.bool,
+  labelContent: PropTypes.string,
 };
 
 export default SearchInput;
