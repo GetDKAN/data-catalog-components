@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Button, FormGroup, Label, Input,
 } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Form from './Form';
 
 const SearchInput = ({
   className,
   onChangeFunction,
   onResetFunction,
-  onSubmitFunction,
   placeholder,
   value,
   bsSize,
   labelClassName,
   srOnly,
   resetContent,
+  submitContent,
+  showSubmit,
 }) => {
-  const [showReset, toggleShowReset] = useState(false);
-  const inputValue = value;
-  if (inputValue) {
-    toggleShowReset(true);
-  } else {
-    toggleShowReset(false);
-  }
-  let Reset = (
+  let reset = (
     <Button
       type="reset"
       id="inputReset"
@@ -35,7 +27,7 @@ const SearchInput = ({
     </Button>
   );
   if (resetContent) {
-    Reset = (
+    reset = (
       <Button
         type="reset"
         id="inputReset"
@@ -45,7 +37,6 @@ const SearchInput = ({
       </Button>
     );
   }
-
 
   const labelClass = srOnly ? 'sr-only' : '';
 
@@ -57,12 +48,13 @@ const SearchInput = ({
         name="inputSearch"
         id="inputSearch"
         placeholder={placeholder}
-        value={inputValue}
+        value={value}
         onChange={onChangeFunction}
         bsSize={bsSize}
       />
-      {showReset && <Reset />}
-      <Button type="submit" id="submit">GO</Button>
+      {value.length ? reset : null}
+      {showSubmit
+        && <Button type="submit" id="inputSubmit">{submitContent}</Button>}
     </FormGroup>
   );
 };
@@ -77,6 +69,8 @@ SearchInput.defaultProps = {
   resetContent: null,
   onResetFunction: null,
   onChangeFunction: null,
+  submitContent: 'Submit',
+  showSubmit: true,
 };
 
 SearchInput.propTypes = {
@@ -87,67 +81,10 @@ SearchInput.propTypes = {
   srOnly: PropTypes.bool,
   className: PropTypes.string,
   resetContent: PropTypes.node,
+  submitContent: PropTypes.node,
   onResetFunction: PropTypes.func,
   onChangeFunction: PropTypes.func,
+  showSubmit: PropTypes.bool,
 };
 
-// class SearchInput extends React.Component {
-
-//   constructor(props, context) {
-//     super(props, context);
-//     this.handleClick = this.handleClick.bind(this);
-//     this.handleString = this.handleString.bind(this);
-//     this.handleReset = this.handleReset.bind(this);
-
-//     this.state = {
-//       navigate: false,
-//       query: null,
-//       textEntered: false,
-//       value: ''
-//     };
-//   }
-
-  
-
-//   handleClick(e) {
-//     e.preventDefault();
-//     this.setState({ navigate: true })
-//   }
-//   handleString(e) {
-//     e.preventDefault();
-//     this.setState({ 
-//       textEntered: e.target.value ? true : false,
-//       value: e.target.value,
-//       query: e.target.value
-//     });
-//   }
-//   handleReset(e) {
-//     e.preventDefault();
-//     this.setState({ 
-//       query: null,
-//       textEntered: false,
-//       value: ''
-//     });
-//   }
-
-//   render() {
-
-//     const {query} = this.state;
-//     const placeholder = this.props.placeholder ? this.props.placeholder : "Search the Data";
-//     const className = this.props.className ? this.props.className : "";
-//     const search = this.props.component ? this.props.component : null;
-    
-//     let reset = this.state.textEntered 
-//       ? <Button type="reset" id="reset" onClick={ this.handleReset }>
-//           <FontAwesomeIcon icon="times" color="#666666" size="2x"/>
-//         </Button> 
-//       : false;
-
-//     if (this.state.navigate === true) {
-//       return <Redirect to={`/search?q=${query}`} component={search} />
-//     }
-
-//     );
-//   }
-// }
 export default SearchInput;
