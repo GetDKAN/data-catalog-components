@@ -67,6 +67,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       this.staticFacets = this.staticFacets.bind(this);
       this.filteredFacets = this.filteredFacets.bind(this);
       this.resetFacets = this.resetFacets.bind(this);
+      this.paginationResults = this.paginationResults.bind(this);
     }
 
     componentDidMount() {
@@ -353,6 +354,21 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       await this.fetchData();
     }
 
+    async paginationResults() {
+      const { total, searchParams } = this.state;
+      const startingNumber = total > 0 ? 1 : 0;
+      const currentLowestResult = startingNumber
+        + ((searchParams.pageSize * searchParams.page) - searchParams.pageSize);
+      let currentHighestResult = (searchParams.pageSize * searchParams.page);
+      if (currentHighestResult > total) {
+        currentHighestResult = total;
+      }
+      return {
+        currentHighestResult,
+        currentLowestResult,
+      };
+    }
+
     render() {
       const {
         items,
@@ -386,6 +402,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
             filteredFacets: this.filteredFacets,
             staticFacets: this.staticFacets,
             resetFacets: this.resetFacets,
+            paginationResults: this.paginationResults,
           }}
         />
       );
