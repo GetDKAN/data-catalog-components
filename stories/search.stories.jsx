@@ -77,6 +77,8 @@ storiesOf('Search', module)
       searchTerm={text('Search Term', '')}
       total={number('Total Results', 10)}
       facetLimit={number('Facet Limit', 3)}
+      facetDelimiter={text('Facet Delimiter', ' or ')}
+      facetSeparator={text('Facet Separator', ' | ')}
       selectedFacets={select(
         'Seleced Facets',
         { '2 Keywords': selectedFacetOptions1, '3 Keywords': selectedFacetOptions2 },

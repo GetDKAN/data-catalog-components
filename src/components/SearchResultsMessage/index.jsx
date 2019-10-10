@@ -12,11 +12,23 @@ const SearchResultsMessage = ({
   className,
   facetTitleClass,
   facetListClass,
+  searchQueryClass,
+  facetDelimiter,
+  facetSeparator,
 }) => {
   let queryText = null;
   const facetsText = [];
   if (showQuery && searchTerm) {
-    queryText = ` for "${searchTerm}"`;
+    queryText = (
+      <>
+        {' '}
+        for &quot;
+        <span className={searchQueryClass}>
+          {searchTerm}
+        </span>
+        &quot;
+      </>
+    );
   }
 
   if (showFacets && selectedFacets.length > 0) {
@@ -31,10 +43,12 @@ const SearchResultsMessage = ({
         const facetTitle = <span className={facetTitleClass}>{keys[i]}</span>;
         if (facetObj[keys[i]].length) {
           if (facetsText.length >= 2) {
-            facetsText.push(' | ');
+            facetsText.push(facetSeparator);
           }
           const facetArray = facetObj[keys[i]].map((item) => item[1]);
-          let facetsList = <span className={facetListClass}>{facetArray.join(' or ')}</span>;
+          let facetsList = (
+            <span className={facetListClass}>{facetArray.join(facetDelimiter)}</span>
+          );
           if (facetArray.length >= facetLimit) {
             facetsList = (
               <span className={`${facetListClass} combined-facets`}>
@@ -81,6 +95,9 @@ SearchResultsMessage.defaultProps = {
   className: 'search-results-message',
   facetTitleClass: 'search-results-facet-title',
   facetListClass: 'search-results-facet-list',
+  searchQueryClass: 'search-results-query',
+  facetDelimiter: ' or ',
+  facetSeparator: ' | ',
 };
 SearchResultsMessage.propTypes = {
   className: PropTypes.string,
@@ -89,10 +106,13 @@ SearchResultsMessage.propTypes = {
   facetLimit: PropTypes.number,
   facetTitleClass: PropTypes.string,
   facetListClass: PropTypes.string,
+  searchQueryClass: PropTypes.string,
   selectedFacets: PropTypes.arrayOf(PropTypes.array).isRequired,
   facetTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
   total: PropTypes.number.isRequired,
   searchTerm: PropTypes.string.isRequired,
+  facetDelimiter: PropTypes.string,
+  facetSeparator: PropTypes.string,
 };
 
 export default SearchResultsMessage;

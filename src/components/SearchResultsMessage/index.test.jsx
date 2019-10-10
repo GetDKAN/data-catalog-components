@@ -58,7 +58,22 @@ describe('<SearchResultMessage />', () => {
       total={1}
     />,
   );
+  const delimiterWrapper = shallow(
+    <SearchResultsMessage
+      searchTerm="foobar"
+      selectedFacets={[
+        ['Themes', 'Foo'],
+        ['Keywords', 'Bar'],
+        ['Keywords', 'Run'],
+      ]}
+      facetTypes={['Themes', 'Keywords']}
+      total={10}
+      facetDelimiter=", "
+      facetSeparator=" &amp; "
+    />,
+  );
   const completeMessage = '10 datasets found for "foobar" in Themes: Foo | Keywords: Bar or Run';
+  const customDelimiterMessage = '10 datasets found for "foobar" in Themes: Foo & Keywords: Bar, Run';
   const condensedMessage = '10 datasets found for "foobar" in Themes: Foo | Keywords: 3 selected Keywords';
   it('renders with default message', () => {
     expect(defaultWrapper.find('div p').text()).toBe('10 datasets found');
@@ -69,10 +84,13 @@ describe('<SearchResultMessage />', () => {
   it('renders complete message', () => {
     expect(customWrapper.find('div p').text()).toBe(completeMessage);
   });
-  it('renders complete message', () => {
+  it('renders a condensed facets message', () => {
     expect(condensedWrapper.find('div p').text()).toBe(condensedMessage);
   });
-  it('renders complete message', () => {
+  it('renders a message with no query or facets', () => {
     expect(noShowWrapper.find('div p').text()).toBe('10 datasets found');
+  });
+  it('renders facets with correct delimiter', () => {
+    expect(delimiterWrapper.find('div p').text()).toBe(customDelimiterMessage);
   });
 });
