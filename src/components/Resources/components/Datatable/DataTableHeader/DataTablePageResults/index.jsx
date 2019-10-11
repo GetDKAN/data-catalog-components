@@ -1,35 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DataTablePageResults = ({total, pageSize, currentPage, wrapperClass, message}) => {
+const DataTablePageResults = ({
+  total,
+  pageSize,
+  currentPage,
+  className,
+}) => {
   // Add one to offset the 0 array index.
   const page = currentPage + 1;
   const currentLowestResult = 1 + ((pageSize * page) - pageSize);
   let currentHighestResult = (pageSize * page);
-  if(currentHighestResult > total) {
+  if (currentHighestResult > total) {
     currentHighestResult = total;
   }
   return (
-    <div className={wrapperClass}>
-      {message.length ?
-        message
-        :
-        `${currentLowestResult}-${currentHighestResult} of ${total} datasets`
-      }
+    <div className={className}>
+      <p>
+        <span className="low-result">{currentLowestResult}</span>
+        {' '}
+        -
+        {' '}
+        <span className="high-result">{currentHighestResult}</span>
+        {' '}
+        of
+        {' '}
+        <span className="total">{total}</span>
+        {' '}
+        datasets
+      </p>
     </div>
   );
-}
+};
 
 DataTablePageResults.defaultProps = {
-  wrapperClass: 'dkan-data-table-results',
-  message: ''
+  className: 'data-table-results',
 };
+
 DataTablePageResults.propTypes = {
-  wrapperClass: PropTypes.string,
-  message: PropTypes.string,
+  className: PropTypes.string,
   total: PropTypes.number.isRequired,
   pageSize: PropTypes.number.isRequired,
-  currentPage: PropTypes.number.isRequired
-}
+  currentPage: PropTypes.number.isRequired,
+};
 
 export default DataTablePageResults;

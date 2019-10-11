@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text, select } from "@storybook/addon-knobs";
+import { withKnobs, text, select, number } from "@storybook/addon-knobs";
 import { withA11y } from '@storybook/addon-a11y';
 
 import FormatIcon from '../src/components/FormatIcon';
@@ -10,6 +10,7 @@ import Organization from '../src/components/Organization';
 import Text from '../src/components/Text';
 import Table from '../src/components/Table';
 import Tags from '../src/components/Tags';
+import DataTablePageResults from '../src/components/Resources/components/Datatable/DataTableHeader/DataTablePageResults'
 
 import data from './data/data.json';
 import tables from './data/tables.json';
@@ -54,3 +55,10 @@ storiesOf('Dataset', module)
   .add('Table 2', () => <Table configuration={tables.config2} data={tables.data2} title="What's in this Dataset?" th1="Rows" th2="Columns" tableclass="table-two" />)
   .add('Table 3', () => <Table configuration={tables.config3} data={tables.data3} title="Columns in this Dataset" th1="Column Name" th2="Type" tableclass="table-three" />)
   .add('Tags', () => <Tags label={"Tags"} tags={data.keyword} path="../search?keyword=" />)
+  .add('Datatable Results Message', () => (
+    <DataTablePageResults 
+      total={number('Total', 100)}
+      pageSize={number('Page Size', 10)}
+      currentPage={number('Current Page', 0)}
+    />
+  ));
