@@ -1,19 +1,19 @@
 import React from 'react';
 import Table from '../../Table';
 
-const ResourceInfoTable = ({statistics, title}) => {
-  const numRows = 'rows' in statistics ? statistics.rows : "";
-  const numColumns = 'columns' in statistics ? statistics.columns : "";
+const ResourceInfoTable = ({ statistics, title }) => {
+  const numRows = 'rows' in statistics ? statistics.rows : '';
+  const numColumns = 'columns' in statistics ? statistics.columns : '';
   const labelsT1 = {
     rows: {
-      label: numRows.toString()
-    }
-  }
+      label: numRows.toString(),
+    },
+  };
   const valuesT1 = {
-    rows: numColumns.toString()
-  }
+    rows: numColumns.toString(),
+  };
 
-  return(
+  return (
     <Table
       configuration={labelsT1}
       data={valuesT1}
@@ -23,6 +23,6 @@ const ResourceInfoTable = ({statistics, title}) => {
       tableclass="table-one"
     />
   );
-}
+};
 
 export default ResourceInfoTable;

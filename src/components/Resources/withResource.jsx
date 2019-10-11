@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import datastore from './services/datastore';
+import datastore from '../../services/datastore';
 
 export default function withResource(
-  OriginalComponent
+  OriginalComponent,
 ) {
   return class extends React.Component {
     constructor(props) {
@@ -21,9 +21,9 @@ export default function withResource(
           filters: [],
           sort: [],
           columns: this.columns,
-          density: "density-3",
+          density: 'density-3',
           columnOrder: [],
-          excludedColumns: {}
+          excludedColumns: {},
         },
         dataInfo: {},
         dataFunctions: {
@@ -35,8 +35,8 @@ export default function withResource(
           reorderColumns: (columns) => this.reorderColumns(columns),
           toggleColumns: (columns) => this.toggleColumns(columns),
           activeColumns: (columns) => this.activeColumns(columns)
-        }
-      }
+        },
+      };
 
       this.activeColumns = this.activeColumns.bind(this);
       this.prepareColumns = this.prepareColumns.bind(this);
@@ -58,7 +58,8 @@ export default function withResource(
         <OriginalComponent
           {...this.props}
           {...this.state}
-        />);
+        />
+      );
     }
 
     async fetchData() {
@@ -81,7 +82,6 @@ export default function withResource(
       if (columns ===  null) {
         columns = await store.getColumns();
       }
-      
       // dataPreview.columns = this.activeColumns(this.prepareColumns(columns));
       dataPreview.columns = await this.activeColumns(this.prepareColumns(columns));
       console.log(dataPreview)
@@ -95,7 +95,7 @@ export default function withResource(
         if (this.store !== null) {
           resolve(this.store);
         } else {
-          if(this.columns.length > 0) {
+          if (this.columns.length > 0) {
             let store = new datastore['dkan'](data.identifier, this.columns);
             store.query(null, null, null, 0, null, null, true)
             .then((data) => {
@@ -119,30 +119,29 @@ export default function withResource(
               })
             }
         }
-      })
+      });
     }
 
     async getData(fields = null, facets = null, range = null, page = null, count = false) {
       const { dataPreview } = this.state;
+      const { sort } = dataPreview;
       const query = dataPreview.filters.length ? dataPreview.filters : null;
-      const sort = dataPreview.sort
-      if(count) {
+      if (count) {
         await this.store.query(query, fields, facets, range, page, sort, count).then((data) => {
           dataPreview.rowsTotal = data;
-        })
+        });
         await this.store.query(query, fields, facets, range, page, sort).then((data) => {
           dataPreview.values = data;
-        })
+        });
       } else {
         await this.store.query(query, fields, facets, range, page, sort).then((data) => {
           dataPreview.values = data;
-        })
+        });
       }
-      this.setState({dataPreview})
+      this.setState({ dataPreview });
     }
 
     prepareColumns(columns) {
-      
       return columns.map((column) => {
         return {
           Header: column,
@@ -151,7 +150,7 @@ export default function withResource(
       })
     }
 
-    //TABLE FUNCTIONS
+    // TABLE FUNCTIONS
     async pageChange(page) {
       const { dataPreview } = this.state;
       dataPreview.currentPage = page;
@@ -168,13 +167,13 @@ export default function withResource(
 
     async sortChange(sort) {
       const { dataPreview } = this.state;
-      dataPreview.sort = sort
+      dataPreview.sort = sort;
       // When sorting the pages gets reset.
-      dataPreview.currentPage = 0
-      this.getData( null, null, dataPreview.pageSize, dataPreview.currentPage);
+      dataPreview.currentPage = 0;
+      this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage);
     }
 
-    //TABLE HEADER FUNCTIONS
+    // TABLE HEADER FUNCTIONS
     async densityChange(value) {
       const { dataPreview } = this.state;
       dataPreview.density = `density-${value + 1}`;
@@ -183,31 +182,30 @@ export default function withResource(
 
     async pageSizeChange(event) {
       const { dataPreview } = this.state;
-      dataPreview.pageSize = event.target.value
+      dataPreview.pageSize = event.target.value;
       dataPreview.currentPage = 0;
-      this.getData( null, null, dataPreview.pageSize, dataPreview.currentPage);
+      this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage);
     }
 
-    //ADVANCED OPTIONS
+    // ADVANCED OPTIONS
     async reorderColumns(columns) {
       const { dataPreview } = this.state;
       dataPreview.columnOrder = columns;
-      this.setState({ dataPreview })
-      
+      this.setState({ dataPreview });
     }
 
     async toggleColumns(columnsData) {
       const { dataPreview } = this.state;
-      dataPreview.excludedColumns = columnsData;      
-      this.setState({ dataPreview })
+      dataPreview.excludedColumns = columnsData;
+      this.setState({ dataPreview });
     }
 
     activeColumns(items, newExcluded = null) {
       const { excludedColumns, columnOrder } = this.state.dataPreview;
-      const excludedColumnsData = newExcluded ? newExcluded : excludedColumns;
-      let excludedArray = [];
+      const excludedColumnsData = newExcluded || excludedColumns;
+      const excludedArray = [];
       let newItems = items;
-      if (columnOrder.length ) {
+      if (columnOrder.length) {
         newItems = columnOrder;
       }
       Object.keys(excludedColumnsData)
@@ -223,5 +221,5 @@ export default function withResource(
         return columns;
       }, []);
     }
-  }
+  };
 }
