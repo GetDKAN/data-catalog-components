@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import DataTablePageResults from '.';
 
-describe('<ToggleBlock />', () => {
+describe('<DataTablePageResults />', () => {
   const defaultWrapper = shallow(
     <DataTablePageResults
       total={100}
