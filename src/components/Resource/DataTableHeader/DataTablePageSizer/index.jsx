@@ -11,7 +11,7 @@ const DataTablePageSizer = ({
 }) => (
   <div className={className}>
     <label htmlFor={`table-${id}`} className="page-size-label">
-      {label}
+      <span className="page-size-label-text">{label}</span>
       {' '}
       <select id={`table-${id}`} className="page-size-select" value={currentOption} onChange={pageSizeChange}>
         {options.map((option) => (
