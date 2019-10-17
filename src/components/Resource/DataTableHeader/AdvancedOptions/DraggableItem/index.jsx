@@ -9,7 +9,7 @@ const ItemControl = styled.span`
   top: 0;
   &:after {
     content: "\\f0dc";
-    color: ${props => props.theme.textColor};
+    color: ${(props) => props.theme.textColor};
     font-family: "FontAwesome";
     position: absolute;
     top: 0;
@@ -23,127 +23,141 @@ class DraggableItem extends Component {
     this.myRef = React.createRef();
     this.state = {
       onHover: false,
-    }
+    };
   }
 
   componentDidMount() {
-    this.props.connectDragPreview(this.myRef.current)
+    const { connectDragPreview } = this.props;
+    connectDragPreview(this.myRef.current);
   }
 
   componentDidUpdate(prevProps) {
-    if (!prevProps.isOver && this.props.isOver) {
+    const { isOver } = this.props;
+    if (!prevProps.isOver && isOver) {
       // You can use this as enter handler
-      this.setState({
-        onHover: true
-      })
+      this.setOnHover(true);
     }
 
-    if (prevProps.isOver && !this.props.isOver) {
+    if (prevProps.isOver && !isOver) {
       // You can use this as leave handler
-      this.setState({
-        onHover: false
-      })
+      this.setOnHover(false);
     }
   }
 
+  setOnHover(hoverState) {
+    this.setState({
+      onHover: hoverState,
+    });
+  }
+
   render() {
-    const { item, onchange, isVisible, onHoverBGColor, onHoverBoxShadow } = this.props;
-    return(
-      this.props.connectDropTarget(
-        this.props.connectDragSource(
+    const { onHover } = this.state;
+    const {
+      item,
+      onchange,
+      isVisible,
+      onHoverBGColor,
+      onHoverBoxShadow,
+      isDragging,
+      connectDropTarget,
+      connectDragSource,
+    } = this.props;
+    return (
+      connectDropTarget(
+        connectDragSource(
           <div style={{
-            borderBottom: "1px solid #ccc",
-            boxShadow: this.props.isDragging === true ? onHoverBoxShadow : "none",
+            borderBottom: '1px solid #ccc',
+            boxShadow: isDragging === true ? onHoverBoxShadow : 'none',
             position: 'relative',
-            cursor: this.props.isDragging === true ? "grabbing" : "grab",
-            background: this.state.onHover ?  onHoverBGColor : 'transparent',
+            cursor: isDragging === true ? 'grabbing' : 'grab',
+            background: onHover ? onHoverBGColor : 'transparent',
             display: 'block',
             height: '100%',
-            padding: '8px 24px'
-          }} >
-          <span style={{
-            position: 'absolute',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            right: '10px',
-            width: '20px',
-            height: '20px',
-            display: 'block',
-            zIndex: '5'
-          }}>
-            <ItemControl />
-          </span>
-          <label>
-            <input
-              defaultChecked={isVisible}
-              type='checkbox'
-              value={item.accessor}
-              onChange={onchange}
-            />
-            <span ref={this.myRef}>{item.Header}</span>
-          </label>
-        </div>
-    )));
+            padding: '8px 24px',
+          }}
+          >
+            <span style={{
+              position: 'absolute',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              right: '10px',
+              width: '20px',
+              height: '20px',
+              display: 'block',
+              zIndex: '5',
+            }}
+            >
+              <ItemControl />
+            </span>
+            <label htmlFor={item.accessor}>
+              <input
+                id={item.accessor}
+                defaultChecked={isVisible}
+                type="checkbox"
+                value={item.accessor}
+                onChange={onchange}
+              />
+              <span ref={this.myRef}>{item.Header}</span>
+            </label>
+          </div>,
+        ),
+      ));
   }
 }
 
 DraggableItem.defaultProps = {
   onHoverBGColor: 'rgba(0,0,0,0.3)',
-  onHoverBoxShadow: '2px 2px 2px rgba(0,0,0,.5)'
-}
+  onHoverBoxShadow: '2px 2px 2px rgba(0,0,0,.5)',
+};
 
 DraggableItem.propTypes = {
   onHoverBGColor: PropTypes.string,
   onHoverBoxShadow: PropTypes.string,
   onchange: PropTypes.func.isRequired,
-  onDrop: PropTypes.func.isRequired,
-  moveCard: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
+  connectDropTarget: PropTypes.func.isRequired,
+  connectDragSource: PropTypes.func.isRequired,
+  item: PropTypes.shape({
+    Header: PropTypes.string,
+    accessor: PropTypes.string,
+  }).isRequired,
   isVisible: PropTypes.bool.isRequired,
   isOver: PropTypes.bool.isRequired,
   isDragging: PropTypes.bool.isRequired,
-  index: PropTypes.number.isRequired,
-  connectDragPreview: PropTypes.func,
-  connectDragSource: PropTypes.func,
-  connectDragTarget: PropTypes.func,
-}
+  connectDragPreview: PropTypes.func.isRequired,
+};
 
 export default DropTarget(
-  'ITEM', 
+  'ITEM',
   {
-    drop(props, monitor, component){
-        const item = monitor.getItem()
-        const newIndex = props.index;
-        const oldIndex = item.index;
-        props.moveCard(oldIndex, newIndex)
-        return item;
+    drop(props, monitor) {
+      const item = monitor.getItem();
+      const newIndex = props.index;
+      const oldIndex = item.index;
+      props.moveCard(oldIndex, newIndex);
+      return item;
     },
-    
   },
-  (connect, monitor)=>{
-  return {
+  (connect, monitor) => (
+    {
       connectDropTarget: connect.dropTarget(),
-      isOver: monitor.isOver()
-    };
-  }
-  )(
-    DragSource(
-      'ITEM',
-      {
-        beginDrag(props, monitor, collect){
-          const item = {
-            ...props
-          }
-          return item;
-        }
+      isOver: monitor.isOver(),
+    }
+  ),
+)(
+  DragSource(
+    'ITEM',
+    {
+      beginDrag(props) {
+        const item = { ...props };
+        return item;
       },
-      (connect, monitor) => {
-        return {
-          connectDragSource: connect.dragSource(),
-          connectDragPreview: connect.dragPreview(),
-          isDragging: monitor.isDragging(),
-        };
+    },
+    (connect, monitor) => (
+      {
+        connectDragSource: connect.dragSource(),
+        connectDragPreview: connect.dragPreview(),
+        isDragging: monitor.isDragging(),
       }
-    )(DraggableItem)
-  )
-  
+    ),
+  )(DraggableItem),
+);
