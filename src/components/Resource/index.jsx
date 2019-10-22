@@ -27,7 +27,7 @@ const Resource = ({
   const dataKey = dataInfo.indentifier;
   const pageSize = 'pageSize' in dataPreview ? dataPreview.pageSize : 20;
   const pages = Math.ceil(dataPreview.rowsTotal / pageSize);
-  const statistics = 'datastore_statistics' in dataInfo ? dataInfo.datastore_statistics : {rows: dataPreview.rowsTotal, columns: columns.length};
+  const statistics = 'datastore_statistics' in dataInfo ? dataInfo.datastore_statistics : { rows: dataPreview.rowsTotal, columns: columns.length };
   return (
     <div>
       <Loader backgroundStyle={{ backgroundColor: '#f9fafb' }} foregroundStyle={{ backgroundColor: '#f9fafb' }} show={show} message={<LoadingSpin width="3px" primaryColor="#007BBC" />}>
@@ -36,7 +36,9 @@ const Resource = ({
         {headerOptions.hideHeader
           ? (
             <>
-              <strong>Rows:</strong> {dataPreview.rowsTotal}
+              <strong>Rows:</strong>
+              {' '}
+              {dataPreview.rowsTotal}
             </>
           )
           : (
@@ -79,6 +81,7 @@ Resource.defaultProps = {
     hideTable: false,
     title: 'What\'s in this Dataset?',
   },
+  dataInfo: {},
 };
 
 Resource.propTypes = {
@@ -89,6 +92,24 @@ Resource.propTypes = {
   infoTableOptions: PropTypes.shape({
     hideTable: PropTypes.bool,
     title: PropTypes.string,
+  }),
+  dataPreview: PropTypes.shape({
+    columnOrder: PropTypes.array,
+    columns: PropTypes.array,
+    currentPage: PropTypes.number,
+    density: PropTypes.string,
+    excludedColumns: PropTypes.object,
+    filters: PropTypes.array,
+    pageSize: PropTypes.number,
+    rowsTotal: PropTypes.string,
+    sort: PropTypes.array,
+    values: PropTypes.array,
+  }).isRequired,
+  dataInfo: PropTypes.shape({
+    columns: PropTypes.array,
+    data: PropTypes.object,
+    datastore_statistics: PropTypes.object,
+    indentifier: PropTypes.string,
   }),
 };
 

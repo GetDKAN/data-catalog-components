@@ -9,48 +9,42 @@ const DraggableArea = ({
   excludedColumns,
   connectDropTarget,
   moveCard,
-  onDrop
 }) => (
   connectDropTarget(
     <fieldset className="target">
-      {items.map((item, index) => {
-        return (
-          <DraggableItem
-            moveCard={moveCard}
-            onDrop={onDrop}
-            key={item.accessor}
-            index={index}
-            item={item}
-            onchange={onchange}
-            isVisible={!!excludedColumns[item.accessor]}
-          />
-        )
-      })}
-    </fieldset>
+      {items.map((item, index) => (
+        <DraggableItem
+          moveCard={moveCard}
+          key={item.accessor}
+          index={index}
+          item={item}
+          onchange={onchange}
+          isVisible={!!excludedColumns[item.accessor]}
+        />
+      ))}
+    </fieldset>,
   )
-  
 );
 
 const spec = {
-  drop(props, monitor, component){
-    const item = monitor.getItem()
-    props.onDrop(item)
+  drop(props, monitor) {
+    const item = monitor.getItem();
+    props.onDrop(item);
     return item;
+  },
+};
+const collect = (connect) => (
+  {
+    connectDropTarget: connect.dropTarget(),
   }
-}
-const collect = (connect, monitor) => {
-  return {
-    connectDropTarget: connect.dropTarget()
-  };
-}
+);
 
 DraggableArea.propTypes = {
   onchange: PropTypes.func.isRequired,
   moveCard: PropTypes.func.isRequired,
-  onDrop: PropTypes.func.isRequired,
-  excludedColumns: PropTypes.object.isRequired,
-  items: PropTypes.array.isRequired,
-  connectDropTarget: PropTypes.func.isRequired
-}
+  excludedColumns: PropTypes.objectOf(PropTypes.bool).isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  connectDropTarget: PropTypes.func.isRequired,
+};
 
 export default DropTarget('form-elements', spec, collect)(DraggableArea);

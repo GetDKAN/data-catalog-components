@@ -18,57 +18,57 @@ const AdvancedOptions = ({
   closeModalClasses,
   ariaTitleText,
   appNode,
-  formOptions
 }) => {
   const [modalOpen, toggleModal] = useState(false);
-  return(
+  return (
     <Wrapper className={wrapperClass}>
-      {!modalOpen &&
-        <button onClick={() => toggleModal(!modalOpen)}>{modalOpenBtnText}</button>
-      }
-      {modalOpen &&
-        <AriaModal
-          onExit={() => toggleModal(!modalOpen)}
-          getApplicationNode={() => document.getElementById(appNode)}
-          alert={true}
-          focusDialog={true}
-          titleText={ariaTitleText}
-          underlayClickExits={false}
-          verticallyCenter={true}
-        >
-          <ModalWrapper className={modalClass}>
-            <button
-              className={closeModalClasses}
-              onClick={() => toggleModal(!modalOpen)}
-            >
-              {closeModalBtnText}
-            </button>
-            <div style={{ outline: 0 }}>
-              <AdvancedOptionsForm
-                columns={columns}
-                excludedColumns={excludedColumns}
-                columnOrder={columnOrder}
-                toggleColumns={toggleColumns}
-                reorderColumns={reorderColumns}
-                {...formOptions}
-              />
-            </div>
-          </ModalWrapper>
-        </AriaModal>
-      }
+      {!modalOpen
+        && <button type="button" onClick={() => toggleModal(!modalOpen)}>{modalOpenBtnText}</button>}
+      {modalOpen
+        && (
+          <AriaModal
+            onExit={() => toggleModal(!modalOpen)}
+            getApplicationNode={() => document.getElementById(appNode)}
+            alert
+            focusDialog
+            titleText={ariaTitleText}
+            underlayClickExits={false}
+            verticallyCenter
+          >
+            <ModalWrapper className={modalClass}>
+              <button
+                type="button"
+                className={closeModalClasses}
+                onClick={() => toggleModal(!modalOpen)}
+              >
+                {closeModalBtnText}
+              </button>
+              <div style={{ outline: 0 }}>
+                <AdvancedOptionsForm
+                  columns={columns}
+                  excludedColumns={excludedColumns}
+                  columnOrder={columnOrder}
+                  toggleColumns={toggleColumns}
+                  reorderColumns={reorderColumns}
+                />
+              </div>
+            </ModalWrapper>
+          </AriaModal>
+        )}
     </Wrapper>
   );
-}
+};
 
 AdvancedOptions.defaultProps = {
   modalOpenBtnText: 'Manage Columns',
-  wrapperClass: 'dkan-data-table-adv-options',
-  modalClass: 'dkan-data-table-adv-modal',
+  wrapperClass: 'data-table-adv-options',
+  modalClass: 'data-table-adv-modal',
   closeModalBtnText: 'Close',
   closeModalClasses: 'advanced-options-modal-close',
   ariaTitleText: 'Manage Columns',
-  appNode: '___gatsby'
+  appNode: '___gatsby',
 };
+
 AdvancedOptions.propTypes = {
   modalOpenBtnText: PropTypes.string,
   wrapperClass: PropTypes.string,
@@ -76,14 +76,12 @@ AdvancedOptions.propTypes = {
   closeModalClasses: PropTypes.string,
   ariaTitleText: PropTypes.string,
   appNode: PropTypes.string,
-  excludedColumns: PropTypes.object.isRequired,
-  columnOrder: PropTypes.array.isRequired,
-  columns: PropTypes.array.isRequired,
+  excludedColumns: PropTypes.objectOf(PropTypes.bool).isRequired,
+  columnOrder: PropTypes.arrayOf(PropTypes.object).isRequired,
+  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
   reorderColumns: PropTypes.func.isRequired,
   toggleColumns: PropTypes.func.isRequired,
-  formOptions: PropTypes.object
+  modalClass: PropTypes.string,
 };
-
-
 
 export default AdvancedOptions;

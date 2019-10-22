@@ -9,27 +9,33 @@ import Wrapper from './Wrapper';
 const DataTableHeader = ({
   dataPreview,
   dataFunctions,
-  headerClasses,
-  options,
+  className,
+  hideDisplayDensity,
+  hidePageResults,
+  hidePageSizer,
+  hideAdvancedOptions,
+  pageResultsOptions,
+  pageSizerOptions,
+  displayDensity
 }) => {
-  const {
-    displayDensity, pageResults, pageSizer, advancedOptions,
-  } = options;
-  const hideDisplayDensity = !(displayDensity && displayDensity.hide);
-  const hidePageResults = !(pageResults && pageResults.hide);
-  const hidePageSizer = !(pageSizer && pageSizer.hide);
-  const hideAdvancedOptions = !(advancedOptions && advancedOptions.hide);
+  // const {
+  //   displayDensity, pageResults, pageSizer, advancedOptions,
+  // } = options;
+  // const hideDisplayDensity = !(displayDensity && displayDensity.hide);
+  // const hidePageResults = !(pageResults && pageResults.hide);
+  // const hidePageSizer = !(pageSizer && pageSizer.hide);
+  // const hideAdvancedOptions = !(advancedOptions && advancedOptions.hide);
 
   return (
     <Wrapper>
-      <div className={headerClasses}>
+      <div className={className}>
         { hidePageResults
           && (
             <DataTablePageResults
               total={parseInt(dataPreview.rowsTotal, 10)}
               pageSize={dataPreview.pageSize}
               currentPage={dataPreview.currentPage}
-              {...pageResults}
+              className={pageResultsOptions.className}
             />
           )}
         { hidePageSizer
@@ -37,14 +43,20 @@ const DataTableHeader = ({
             <DataTablePageSizer
               pageSizeChange={dataFunctions.pageSizeChange}
               currentOption={dataPreview.pageSize}
-              {...pageSizer}
+              label={pageSizerOptions.label}
+              options={pageSizerOptions.options}
+              className={pageSizerOptions.className}
+              id={pageSizerOptions.id}
             />
           )}
         { hideDisplayDensity
         && (
           <DataTableDensity
             densityChange={dataFunctions.densityChange}
-            {...displayDensity}
+            items={displayDensity.items}
+            className={displayDensity.className}
+            screenReaderClass={displayDensity.screenReaderClass}
+            title={displayDensity.title}
           />
         )}
         { hideAdvancedOptions
@@ -55,7 +67,6 @@ const DataTableHeader = ({
             columnOrder={dataPreview.columnOrder}
             toggleColumns={dataFunctions.toggleColumns}
             reorderColumns={dataFunctions.reorderColumns}
-            {...advancedOptions}
           />
         )}
       </div>
@@ -64,19 +75,32 @@ const DataTableHeader = ({
 };
 
 DataTableHeader.defaultProps = {
-  headerClasses: 'dkan-data-table-header',
+  className: 'data-table-header',
+  hidePageResults: false,
 };
 
 DataTableHeader.propTypes = {
-  headerClasses: PropTypes.string,
-  dataPreview: PropTypes.object.isRequired,
-  dataFunctions: PropTypes.object.isRequired,
-  options: PropTypes.shape({
-    displayDensity: PropTypes.object,
-    pageResults: PropTypes.object,
-    pageSizer: PropTypes.object,
-    advancedOptions: PropTypes.object
-  })
+  hidePageResults: PropTypes.string,
+  className: PropTypes.string,
+  dataPreview: PropTypes.shape({
+    columnOrder: PropTypes.array,
+    columns: PropTypes.array,
+    currentPage: PropTypes.number,
+    density: PropTypes.string,
+    excludedColumns: PropTypes.arrayOf(PropTypes.object),
+    filters: PropTypes.array,
+    pageSize: PropTypes.number,
+    rowsTotal: PropTypes.string,
+    sort: PropTypes.array,
+    values: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+  // dataFunctions: PropTypes.object.isRequired,
+  // options: PropTypes.shape({
+  //   displayDensity: PropTypes.object,
+  //   pageResults: PropTypes.object,
+  //   pageSizer: PropTypes.object,
+  //   advancedOptions: PropTypes.object
+  // })
 };
 
 export default DataTableHeader;

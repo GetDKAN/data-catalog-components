@@ -1,29 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DragDropContext } from 'react-dnd';
+import { DndProvider } from 'react-dnd';
 import MultiBackend from 'react-dnd-multi-backend';
 import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch';
 import DraggableArea from '../DraggableArea';
 
-const Draggable = ({onchange, excludedColumns, children, movecard, ondrop}) => (
-  <div>
+const Draggable = ({ onchange, excludedColumns, columns }) => (
+  <DndProvider backend={MultiBackend} options={HTML5toTouch}>
     <DraggableArea
       onchange={onchange}
       excludedColumns={excludedColumns}
-      items={children}
-      moveCard={movecard}
-      onDrop={ondrop}
+      items={columns}
     />
-  </div>
+  </DndProvider>
 );
 
 Draggable.propTypes = {
   onchange: PropTypes.func.isRequired,
-  movecard: PropTypes.func.isRequired,
-  ondrop: PropTypes.func.isRequired,
-  excludedColumns: PropTypes.object.isRequired,
-  children: PropTypes.node.isRequired
-}
+  excludedColumns: PropTypes.objectOf(PropTypes.bool).isRequired,
+  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 
-export default DragDropContext(MultiBackend(HTML5toTouch))(Draggable);
+export default Draggable;

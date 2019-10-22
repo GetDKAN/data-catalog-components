@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 const DataTableDensity = ({
   items,
   densityChange,
-  wrapperClass,
+  className,
   screenReaderClass,
   title,
 }) => (
-  <div className={wrapperClass}>
+  <div className={className}>
     <span className="density-buttons-title">{title}</span>
     <div className="density-buttons">
       {items.map((item, index) => {
@@ -38,7 +38,7 @@ DataTableDensity.defaultProps = {
     { icon: null, text: 'normal' },
     { icon: null, text: 'tight' },
   ],
-  wrapperClass: 'data-table-density',
+  className: 'data-table-density',
   screenReaderClass: 'sr-only sr-only-focusable',
   title: 'Display Density',
 };
@@ -46,7 +46,7 @@ DataTableDensity.defaultProps = {
 DataTableDensity.propTypes = {
   densityChange: PropTypes.func.isRequired,
   screenReaderClass: PropTypes.string,
-  wrapperClass: PropTypes.string,
+  className: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.shape({
     icon: PropTypes.node,
     text: PropTypes.string,
