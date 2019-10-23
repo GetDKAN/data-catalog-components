@@ -159,10 +159,11 @@ export class dkan extends Datastore {
   id = null
   columns = null
 
-  constructor (id, columns) {
-    super()
-    this.id = id
-    this.columns = columns
+  constructor (id, columns, rootUrl) {
+    super();
+    this.id = id;
+    this.columns = columns;
+    this.rootUrl = rootUrl;
   }
 
   async getColumns() {
@@ -230,10 +231,9 @@ export class dkan extends Datastore {
       fields = '*'
       limit_string = '[LIMIT '+ limit +' OFFSET '+ offset +']'
     }
-
-    query = '/sql/[SELECT ' + fields + ' FROM ' + this.id +']' + where_string + sort_string + limit_string + ';'
+    query = '/datastore/sql?query=[SELECT ' + fields + ' FROM ' + this.id +']' + where_string + sort_string + limit_string + ';'
     return new Promise((resolve, reject) => {
-      axios.get(`http://dkan/api/v1${query}`).then(
+      axios.get(this.rootUrl + query).then(
           (response) => {
             if (count && response.data[0]) {
               resolve(response.data[0].expression)

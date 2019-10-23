@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import DataTable from '.';
 
 describe('<DataTable />', () => {
@@ -21,7 +21,7 @@ describe('<DataTable />', () => {
     { Header: 'column3', accessor: 'column3' },
   ];
 
-  const defaultWrapper = shallow(
+  const defaultWrapper = mount(
     <DataTable
       data={data}
       loading={false}
@@ -37,5 +37,14 @@ describe('<DataTable />', () => {
 
   it('renders correctly', () => {
     expect(defaultWrapper.exists('div')).toBe(true);
+  });
+
+  it('renders with stripe and highlight classes', () => {
+    expect(defaultWrapper.exists('div.ReactTable.-striped.-highlight')).toBe(true);
+  });
+
+  it('renders with density classes', () => {
+    defaultWrapper.setProps({ density: 'density-3' });
+    expect(defaultWrapper.exists('div.ReactTable.density-3')).toBe(true);
   });
 });

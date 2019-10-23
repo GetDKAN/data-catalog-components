@@ -5,6 +5,7 @@ import datastore from '../../services/datastore';
 
 export default function withResource(
   OriginalComponent,
+  apiEndPoint,
 ) {
   return class extends React.Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export default function withResource(
         dataPreview: {
           values: [],
           pageSize: 20,
-          rowsTotal: 0,
+          rowsTotal: '0',
           currentPage: 0,
           filters: [],
           sort: [],
@@ -97,7 +98,7 @@ export default function withResource(
           resolve(this.store);
         } else {
           if (this.columns.length > 0) {
-            let store = new datastore['dkan'](data.identifier, this.columns);
+            let store = new datastore['dkan'](data.identifier, this.columns, apiEndPoint);
             store.query(null, null, null, 0, null, null, true)
             .then((data) => {
               this.store = store;

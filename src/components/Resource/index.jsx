@@ -14,38 +14,49 @@ const Resource = ({
   dataFunctions,
   infoTableOptions,
   headerOptions,
+  datasetId,
 }) => {
   const [show, toggleShow] = useState(true);
   useEffect(() => {
+    console.log(dataPreview.values)
     if (dataPreview.values.length > 0) {
       toggleShow(false);
     }
   }, [dataPreview.values.length]);
   const { hideTable } = infoTableOptions;
+  const { hideHeader } = headerOptions;
   const values = 'values' in dataPreview ? dataPreview.values : [];
   const columns = 'columns' in dataPreview ? dataPreview.columns : [];
   const dataKey = dataInfo.indentifier;
   const pageSize = 'pageSize' in dataPreview ? dataPreview.pageSize : 20;
-  const pages = Math.ceil(dataPreview.rowsTotal / pageSize);
-  const statistics = 'datastore_statistics' in dataInfo ? dataInfo.datastore_statistics : { rows: dataPreview.rowsTotal, columns: columns.length };
+  const pages = Math.ceil(parseInt(dataPreview.rowsTotal, 10) / pageSize);
+  const statistics = 'datastore_statistics' in dataInfo ? dataInfo.datastore_statistics : { rows: parseInt(dataPreview.rowsTotal, 10), columns: columns.length };
   return (
-    <div>
+    <div className="resource-container">
       <Loader backgroundStyle={{ backgroundColor: '#f9fafb' }} foregroundStyle={{ backgroundColor: '#f9fafb' }} show={show} message={<LoadingSpin width="3px" primaryColor="#007BBC" />}>
         {dataInfo.data
-          && <FileDownload resource={dataInfo.data} key={dataKey} /> }
-        {headerOptions.hideHeader
+          && (
+          <FileDownload
+            format={dataInfo.data.format}
+            downloadURL={dataInfo.data.downloadURL}
+            title={dataInfo.data.title}
+            key={`${dataKey}-file-download`}
+          />
+          ) }
+        {hideHeader
           ? (
-            <>
+            <div className="row-results">
               <strong>Rows:</strong>
               {' '}
               {dataPreview.rowsTotal}
-            </>
+            </div>
           )
           : (
             <DataTableHeader
               dataPreview={dataPreview}
               options={headerOptions}
               dataFunctions={dataFunctions}
+              id={datasetId}
             />
           )}
         <DataTable
@@ -120,6 +131,7 @@ Resource.propTypes = {
     datastore_statistics: PropTypes.object,
     indentifier: PropTypes.string,
   }),
+  datasetId: PropTypes.string.isRequired,
 };
 
 export default withResource(Resource);
