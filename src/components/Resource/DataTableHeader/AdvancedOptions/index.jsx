@@ -12,7 +12,7 @@ const AdvancedOptions = ({
   reorderColumns,
   toggleColumns,
   modalOpenBtnText,
-  wrapperClass,
+  className,
   modalClass,
   closeModalBtnText,
   closeModalClasses,
@@ -21,7 +21,7 @@ const AdvancedOptions = ({
 }) => {
   const [modalOpen, toggleModal] = useState(false);
   return (
-    <Wrapper className={wrapperClass}>
+    <Wrapper className={className}>
       {!modalOpen
         && <button type="button" onClick={() => toggleModal(!modalOpen)}>{modalOpenBtnText}</button>}
       {modalOpen
@@ -61,7 +61,7 @@ const AdvancedOptions = ({
 
 AdvancedOptions.defaultProps = {
   modalOpenBtnText: 'Manage Columns',
-  wrapperClass: 'data-table-adv-options',
+  className: 'data-table-adv-options',
   modalClass: 'data-table-adv-modal',
   closeModalBtnText: 'Close',
   closeModalClasses: 'advanced-options-modal-close',
@@ -71,7 +71,7 @@ AdvancedOptions.defaultProps = {
 
 AdvancedOptions.propTypes = {
   modalOpenBtnText: PropTypes.string,
-  wrapperClass: PropTypes.string,
+  className: PropTypes.string,
   closeModalBtnText: PropTypes.string,
   closeModalClasses: PropTypes.string,
   ariaTitleText: PropTypes.string,
