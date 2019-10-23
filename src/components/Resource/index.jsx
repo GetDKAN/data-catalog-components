@@ -21,7 +21,7 @@ const Resource = ({
       toggleShow(false);
     }
   }, [dataPreview.values.length]);
-
+  const { hideTable } = infoTableOptions;
   const values = 'values' in dataPreview ? dataPreview.values : [];
   const columns = 'columns' in dataPreview ? dataPreview.columns : [];
   const dataKey = dataInfo.indentifier;
@@ -61,11 +61,14 @@ const Resource = ({
           filterChange={dataFunctions.filterChange}
           pageChange={dataFunctions.pageChange}
         />
-        {infoTableOptions.hideTable
+        {!hideTable
           && (
             <ResourceInfoTable
               statistics={statistics}
               title={infoTableOptions.title}
+              th1={infoTableOptions.th1}
+              th2={infoTableOptions.th2}
+              tableclass={infoTableOptions.tableclass}
             />
           )}
       </Loader>
@@ -80,6 +83,9 @@ Resource.defaultProps = {
   infoTableOptions: {
     hideTable: false,
     title: 'What\'s in this Dataset?',
+    th1: 'Rows',
+    th2: 'Columns',
+    tableclass: 'table-one',
   },
   dataInfo: {},
 };
@@ -92,6 +98,9 @@ Resource.propTypes = {
   infoTableOptions: PropTypes.shape({
     hideTable: PropTypes.bool,
     title: PropTypes.string,
+    th1: PropTypes.string,
+    th2: PropTypes.string,
+    tableclass: PropTypes.string,
   }),
   dataPreview: PropTypes.shape({
     columnOrder: PropTypes.array,
