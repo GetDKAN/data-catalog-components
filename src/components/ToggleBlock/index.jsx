@@ -8,22 +8,23 @@ export default function ToggleBlock({
   headingClasses,
   innerClasses,
   allowToggle,
+  defaultClosed,
 }) {
-  const [showFacets, toggleShowFacets] = useState(true);
-  let facetBlockHeading = <h2 className={headingClasses}>{title}</h2>;
+  const [show, toggleShow] = useState(!defaultClosed);
+  let toggleBlockHeading = <h2 className={headingClasses}>{title}</h2>;
   if (allowToggle) {
-    facetBlockHeading = (
+    toggleBlockHeading = (
       <h2 className={headingClasses}>
-        <button type="button" onClick={() => toggleShowFacets(!showFacets)}>
+        <button type="button" onClick={() => toggleShow(!show)}>
           {title}
         </button>
       </h2>
     );
   }
   return (
-    <div className={className}>
-      {facetBlockHeading}
-      {showFacets
+    <div className={`${className} ${show ? 'open' : 'closed'}`}>
+      {toggleBlockHeading}
+      {show
         && (
           <div className={innerClasses}>
             {children}
@@ -35,16 +36,18 @@ export default function ToggleBlock({
 
 ToggleBlock.defaultProps = {
   allowToggle: true,
-  headingClasses: 'facet-block-title',
-  innerClasses: 'facet-block-inner',
-  className: '',
+  headingClasses: 'toggle-block-title',
+  innerClasses: 'toggle-block-inner',
+  className: 'toggle-block',
+  defaultClosed: false,
 };
 
 ToggleBlock.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
   headingClasses: PropTypes.string,
   innerClasses: PropTypes.string,
   allowToggle: PropTypes.bool,
   className: PropTypes.string,
+  defaultClosed: PropTypes.bool,
 };
