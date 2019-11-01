@@ -75,7 +75,7 @@ export default function withResource(
           columns = this.columns;
           this.setState({dataInfo: {
             columns: columns,
-            data: data,
+            data: data.data,
             datastore_statistics: {
               rows: response.data.numOfRows,
               columns: response.data.columns
