@@ -4,8 +4,7 @@ import axios from 'axios';
 import datastore from '../../services/datastore';
 
 export default function withResource(
-  OriginalComponent,
-  apiEndPoint,
+  OriginalComponent
 ) {
   return class extends React.Component {
     constructor(props) {
@@ -52,7 +51,7 @@ export default function withResource(
     }
 
     componentDidMount() {
-      this.fetchData()
+      this.fetchData();
     }
 
     render() {
@@ -66,15 +65,23 @@ export default function withResource(
 
     async fetchData() {
       const { dataPreview } = this.state;
-      const { data } = this.props;
+      const { data, rootUrl } = this.props;
       let columns = null;
 
       if(data.identifier !== undefined) {
-        await axios.get(`http://dkan/api/v1/datastore/${data.identifier}?values=both`)
+        await axios.get(`${rootUrl}/datastore/imports/${data.identifier}`)
         .then((response) => {
           this.columns = response.data.columns ? response.data.columns : [];
           columns = this.columns;
-          this.setState({dataInfo: response.data})
+          this.setState({dataInfo: {
+            columns: columns,
+            data: data,
+            datastore_statistics: {
+              rows: response.data.numOfRows,
+              columns: response.data.columns
+            },
+            indentifier: data.identifier,
+          }})
         })
         .catch(function (error) {
           console.log(error)
@@ -86,19 +93,18 @@ export default function withResource(
       }
       // dataPreview.columns = this.activeColumns(this.prepareColumns(columns));
       dataPreview.columns = await this.activeColumns(this.prepareColumns(columns));
-      console.log(dataPreview)
       await this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage, true);
       this.setState({dataPreview})
     }
 
     async getStore() {
-      const { data } = this.props;
+      const { data, rootUrl } = this.props;
       return new Promise((resolve, reject) => {
         if (this.store !== null) {
           resolve(this.store);
         } else {
           if (this.columns.length > 0) {
-            let store = new datastore['dkan'](data.identifier, this.columns, apiEndPoint);
+            let store = new datastore['dkan'](data.identifier, this.columns, rootUrl);
             store.query(null, null, null, 0, null, null, true)
             .then((data) => {
               this.store = store;
@@ -106,7 +112,7 @@ export default function withResource(
               resolve(store);
               })
             } else {
-              let store = new datastore['file'](data.data.downloadURL);
+              let store = new datastore['file'](data.distribution.downloadURL);
               store.query(null, null, null, 0, null, null, true)
               .then((data) => {
                 if(data) {

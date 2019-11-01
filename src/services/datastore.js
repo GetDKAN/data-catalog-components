@@ -173,7 +173,6 @@ export class dkan extends Datastore {
   }
 
   async query(q = null, fields = null, facets = null, range = 0, page = null, sort = null, count = false) {
-
     if (sort === null) {
       sort = []
     }

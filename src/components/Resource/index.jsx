@@ -15,10 +15,10 @@ const Resource = ({
   infoTableOptions,
   headerOptions,
   datasetId,
+  rootUrl
 }) => {
   const [show, toggleShow] = useState(true);
   useEffect(() => {
-    console.log(dataPreview.values)
     if (dataPreview.values.length > 0) {
       toggleShow(false);
     }
