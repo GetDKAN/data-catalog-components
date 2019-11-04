@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function ToggleBlock({
+  customId,
   className,
   title,
   children,
@@ -22,7 +23,7 @@ export default function ToggleBlock({
     );
   }
   return (
-    <div className={`${className} ${show ? 'open' : 'closed'}`}>
+    <div id={customId} className={`${className} ${show ? 'open' : 'closed'}`}>
       {toggleBlockHeading}
       {show
         && (
@@ -35,6 +36,7 @@ export default function ToggleBlock({
 }
 
 ToggleBlock.defaultProps = {
+  customId: undefined,
   allowToggle: true,
   headingClasses: 'toggle-block-title',
   innerClasses: 'toggle-block-inner',
@@ -43,6 +45,7 @@ ToggleBlock.defaultProps = {
 };
 
 ToggleBlock.propTypes = {
+  customId: PropTypes.string,
   title: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
   headingClasses: PropTypes.string,
