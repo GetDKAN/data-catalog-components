@@ -17,6 +17,7 @@ export { default as Organization } from './components/Organization';
 export { default as PageHeader } from './components/PageHeader';
 export { default as SearchInput } from './components/SearchInput';
 export { default as SearchList } from './components/SearchList';
+export { default as SearchListItem } from './components/SearchListItem';
 export { default as SearchResultsMessage } from './components/SearchResultsMessage';
 export { default as ShowMoreContainer } from './components/ShowMoreContainer';
 export { default as StatBlock } from './components/Blocks/StatBlock';
