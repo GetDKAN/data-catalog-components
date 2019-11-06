@@ -69,7 +69,7 @@ export default function withResource(
               resolve(store);
               })
           } else {
-            let store = new datastore['file'](data.downloadURL);
+            let store = new datastore['file'](data.data.downloadURL);
             store.query(null, null, null, 0, null, null, true)
               .then((data) => {
                 if (data) {
