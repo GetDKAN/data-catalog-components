@@ -4,7 +4,7 @@ import axios from 'axios';
 import datastore from '../../services/datastore';
 
 export default function withResource(
-  OriginalComponent
+  OriginalComponent,
 ) {
   return class extends React.Component {
     constructor(props) {
@@ -54,49 +54,6 @@ export default function withResource(
       this.fetchData();
     }
 
-    render() {
-      return (
-        <OriginalComponent
-          {...this.props}
-          {...this.state}
-        />
-      );
-    }
-
-    async fetchData() {
-      const { dataPreview } = this.state;
-      const { data, rootUrl } = this.props;
-      let columns = null;
-
-      if(data.identifier !== undefined) {
-        await axios.get(`${rootUrl}/datastore/imports/${data.identifier}`)
-        .then((response) => {
-          this.columns = response.data.columns ? response.data.columns : [];
-          columns = this.columns;
-          this.setState({dataInfo: {
-            columns: columns,
-            data: data.data,
-            datastore_statistics: {
-              rows: response.data.numOfRows,
-              columns: response.data.columns
-            },
-            indentifier: data.identifier,
-          }})
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-      } 
-      let store = await this.getStore();
-      if (columns ===  null) {
-        columns = await store.getColumns();
-      }
-      // dataPreview.columns = this.activeColumns(this.prepareColumns(columns));
-      dataPreview.columns = await this.activeColumns(this.prepareColumns(columns));
-      await this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage, true);
-      this.setState({dataPreview})
-    }
-
     async getStore() {
       const { data, rootUrl } = this.props;
       return new Promise((resolve, reject) => {
@@ -106,26 +63,25 @@ export default function withResource(
           if (this.columns.length > 0) {
             let store = new datastore['dkan'](data.identifier, this.columns, rootUrl);
             store.query(null, null, null, 0, null, null, true)
-            .then((data) => {
+              .then((data) => {
               this.store = store;
               this.storeType = 'dkan'
               resolve(store);
               })
-            } else {
-              let store = new datastore['file'](data.distribution.downloadURL);
-              store.query(null, null, null, 0, null, null, true)
+          } else {
+            let store = new datastore['file'](data.downloadURL);
+            store.query(null, null, null, 0, null, null, true)
               .then((data) => {
-                if(data) {
+                if (data) {
                   this.store = store;
                   this.storeType = 'file'
                   this.setState({store: store})
                   resolve(store);
-                }
-                else {
+                } else {
                   reject("No datastore available.")
                 }
               })
-            }
+          }
         }
       });
     }
@@ -149,13 +105,49 @@ export default function withResource(
       this.setState({ dataPreview });
     }
 
+    async fetchData() {
+      const { dataPreview } = this.state;
+      const { data, rootUrl } = this.props;
+      let columns = null;
+
+      if (data.identifier !== undefined) {
+        await axios.get(`${rootUrl}/datastore/imports/${data.identifier}`)
+          .then((response) => {
+            this.columns = response.data.columns ? response.data.columns : [];
+            columns = this.columns;
+            this.setState({
+              dataInfo: {
+                columns,
+                data: data.data,
+                datastore_statistics: {
+                  rows: response.data.numOfRows,
+                  columns: response.data.numOfColumns,
+                },
+                indentifier: data.identifier,
+              },
+            });
+          })
+          .catch((error) => (
+            console.log(error)
+          ));
+      }
+      let store = await this.getStore();
+      if (columns === null) {
+        columns = await store.getColumns();
+      }
+      // dataPreview.columns = this.activeColumns(this.prepareColumns(columns));
+      dataPreview.columns = await this.activeColumns(this.prepareColumns(columns));
+      await this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage, true);
+      this.setState({ dataPreview });
+    }
+
     prepareColumns(columns) {
       return columns.map((column) => {
         return {
           Header: column,
           accessor: column
         }
-      })
+      });
     }
 
     // TABLE FUNCTIONS
@@ -228,6 +220,17 @@ export default function withResource(
         }
         return columns;
       }, []);
+    }
+
+    render() {
+      return (
+        <OriginalComponent
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...this.props}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...this.state}
+        />
+      );
     }
   };
 }
