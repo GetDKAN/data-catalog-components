@@ -10,7 +10,7 @@ import Organization from '../src/components/Organization';
 import Text from '../src/components/Text';
 import Table from '../src/components/Table';
 import Tags from '../src/components/Tags';
-import DataTablePageResults from '../src/components/Resources/components/Datatable/DataTableHeader/DataTablePageResults';
+import DataTablePageResults from '../src/components/Resource/DataTableHeader/DataTablePageResults';
 import data from './data/data.json';
 import tables from './data/tables.json';
 
