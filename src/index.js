@@ -1,6 +1,11 @@
+export { default as AdvancedOptions } from './components/Resource/DataTableHeader/AdvancedOptions';
 export { default as Blocks } from './components/Blocks';
 export { default as BasicBlock } from './components/Blocks/BasicBlock';
 export { default as Copyright } from './components/Copyright';
+export { default as DataTableHeader } from './components/Resource/DataTableHeader';
+export { default as DataTableDensity } from './components/Resource/DataTableHeader/DataTableDensity';
+export { default as DataTablePageResults } from './components/Resource/DataTableHeader/DataTablePageResults';
+export { default as DataTablePageSizer } from './components/Resource/DataTableHeader/DataTablePageSizer';
 export { default as Header } from './components/Header';
 export { default as Hero } from './components/Hero';
 export { default as IconList } from './components/IconList';

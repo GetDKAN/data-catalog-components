@@ -13,9 +13,9 @@ const Resource = ({
   dataInfo,
   dataFunctions,
   infoTableOptions,
-  headerOptions,
+  dataTableHeader,
   datasetId,
-  rootUrl
+  showFileDownload,
 }) => {
   const [show, toggleShow] = useState(true);
   useEffect(() => {
@@ -34,7 +34,8 @@ const Resource = ({
   return (
     <div className="resource-container">
       <Loader backgroundStyle={{ backgroundColor: '#f9fafb' }} foregroundStyle={{ backgroundColor: '#f9fafb' }} show={show} message={<LoadingSpin width="3px" primaryColor="#007BBC" />}>
-        {dataInfo.data
+        {/* TODO: OPTION TO HIDE FILE DOWNLOAD */}
+        {(dataInfo.data && showFileDownload)
           && (
           <FileDownload
             format={dataInfo.data.format}
@@ -52,9 +53,10 @@ const Resource = ({
             </div>
           )
           : (
+            // TODO: ACTUALLY PASS OPTIONS FOR EACH HEADPART.
             <DataTableHeader
               dataPreview={dataPreview}
-              options={headerOptions}
+              dataTableHeader
               dataFunctions={dataFunctions}
               id={datasetId}
             />
@@ -99,6 +101,7 @@ Resource.defaultProps = {
     tableclass: 'table-one',
   },
   dataInfo: {},
+  showFileDownload: true,
 };
 
 Resource.propTypes = {
@@ -132,6 +135,7 @@ Resource.propTypes = {
     indentifier: PropTypes.string,
   }),
   datasetId: PropTypes.string.isRequired,
+  showFileDownload: PropTypes.bool,
 };
 
 export default withResource(Resource);
