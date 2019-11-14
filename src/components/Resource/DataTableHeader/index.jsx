@@ -5,48 +5,97 @@ import DataTableDensity from './DataTableDensity';
 import DataTablePageSizer from './DataTablePageSizer';
 import AdvancedOptions from './AdvancedOptions';
 import Wrapper from './Wrapper';
+import FullScreenResource from './FullScreenResource';
 
 const DataTableHeader = ({
   dataPreview,
   id,
   dataFunctions,
   className,
-  hideDisplayDensity,
-  hidePageResults,
-  hidePageSizer,
-  hideAdvancedOptions,
-  pageResultsOptions,
-  pageSizerOptions,
-  displayDensityOptions,
+  options,
+  FullScreenComponent,
+  fullScreenMode,
 }) => {
-  const { className: pageResultsClass } = pageResultsOptions;
-  const { label, options, className: pageSizerClass } = pageSizerOptions;
   const {
-    items, className: densityClass, screenReaderClass, title,
-  } = displayDensityOptions;
+    pageSizer,
+    pageResults,
+    advancedOptions,
+    tableDensity,
+    fullScreen,
+  } = options;
+  const {
+    className: pageResultsClass,
+    hidePageResults,
+  } = pageResults;
+  const {
+    label,
+    selectOptions,
+    className: pageSizerClass,
+    hidePageSizer,
+    selectClassName,
+  } = pageSizer;
+  const {
+    items,
+    className: densityClass,
+    screenReaderClass,
+    title,
+    hideDisplayDensity,
+  } = tableDensity;
+  const {
+    titleText,
+    actionsClassNames,
+    actionText,
+    showAction,
+    appNode,
+    closeModalBtnText,
+    modalOpenBtnText,
+    actionButtonClassNames,
+    hideAdvancedOptions,
+    underlayClass,
+    includeDefaultStyles,
+    dialogClass,
+    modalClass,
+    itemClasses,
+    headerClass,
+    closeModalClasses,
+  } = advancedOptions;
+  const {
+    modalOpenBtnText: fsModalOpenBtnText,
+    dialogClass: fsDialogClass,
+    headerClass: fsHeaderClass,
+    modalClass: fsModalClass,
+    closeModalBtnText: fsCloseModalBtnText,
+    closeModalClasses: fsCloseModalClasses,
+    titleText: fsTitleText,
+    appNode: fsAppNode,
+    includeDefaultStyles: fsIncludeDefaultStyles,
+    underlayClass: fsUnderlayClass,
+    hideFullScreen,
+  } = fullScreen;
   return (
     <Wrapper>
       <div className={className}>
         { !hidePageResults
-          && (
-            <DataTablePageResults
-              total={parseInt(dataPreview.rowsTotal, 10)}
-              pageSize={dataPreview.pageSize}
-              currentPage={dataPreview.currentPage}
-              className={pageResultsClass}
-            />
-          )}
+        && (
+          <DataTablePageResults
+            total={parseInt(dataPreview.rowsTotal, 10)}
+            pageSize={dataPreview.pageSize}
+            currentPage={dataPreview.currentPage}
+            className={pageResultsClass}
+          />
+        )}
         { !hidePageSizer
-          && (
-            <DataTablePageSizer
-              pageSizeChange={dataFunctions.pageSizeChange}
-              currentOption={dataPreview.pageSize.toString()}
-              label={label}
-              options={options}
-              className={pageSizerClass}
-              id={id}
-            />
-          )}
+        && (
+          <DataTablePageSizer
+            pageSizeChange={dataFunctions.pageSizeChange}
+            currentOption={dataPreview.pageSize.toString()}
+            label={label}
+            options={selectOptions}
+            selectClassName={selectClassName}
+            className={pageSizerClass}
+            id={id}
+          />
+        )}
         { !hideDisplayDensity
         && (
           <DataTableDensity
@@ -65,7 +114,39 @@ const DataTableHeader = ({
             columnOrder={dataPreview.columnOrder}
             toggleColumns={dataFunctions.toggleColumns}
             reorderColumns={dataFunctions.reorderColumns}
+            modalClass={modalClass}
+            className={dialogClass}
+            titleText={titleText}
+            itemClasses={itemClasses}
+            headerClass={headerClass}
+            closeModalClasses={closeModalClasses}
+            includeDefaultStyles={includeDefaultStyles}
+            underlayClass={underlayClass}
+            actionButtonClassNames={actionButtonClassNames}
+            modalOpenBtnText={modalOpenBtnText}
+            closeModalBtnText={closeModalBtnText}
+            appNode={appNode}
+            showAction={showAction}
+            actionText={actionText}
+            actionsClassNames={actionsClassNames}
           />
+        )}
+        {(!hideFullScreen && !fullScreenMode || !fullScreenMode)
+        && (
+          <FullScreenResource
+            modalOpenBtnText={fsModalOpenBtnText}
+            className={fsDialogClass}
+            headerClass={fsHeaderClass}
+            modalClass={fsModalClass}
+            closeModalBtnText={fsCloseModalBtnText}
+            closeModalClasses={fsCloseModalClasses}
+            titleText={fsTitleText}
+            appNode={fsAppNode}
+            includeDefaultStyles={fsIncludeDefaultStyles}
+            underlayClass={fsUnderlayClass}
+          >
+            <FullScreenComponent />
+          </FullScreenResource>
         )}
       </div>
     </Wrapper>
@@ -74,39 +155,44 @@ const DataTableHeader = ({
 
 DataTableHeader.defaultProps = {
   className: 'data-table-header',
-  hidePageResults: false,
-  hidePageSizer: false,
-  hideDisplayDensity: false,
-  hideAdvancedOptions: false,
-  pageResultsOptions: {
-    className: 'data-table-results',
+  options: {
+    pageResults: {
+      hidePageResults: false,
+      className: 'data-table-results',
+    },
+    pageSizer: {
+      hidePageSizer: false,
+      label: 'Rows per page',
+      selectOptions: [
+        { defaultChecked: true, label: '20', value: '20' },
+        { label: '50', value: '50' },
+        { label: '100', value: '100' },
+      ],
+      className: 'page-size-options',
+    },
+    tableDensity: {
+      hideDisplayDensity: false,
+      items: [
+        { icon: null, text: 'expanded' },
+        { icon: null, text: 'normal' },
+        { icon: null, text: 'tight' },
+      ],
+      className: 'data-table-density',
+      screenReaderClass: 'sr-only sr-only-focusable',
+      title: 'Display Density',
+    },
+    advancedOptions: {
+      hideAdvancedOptions: false,
+    },
+    fullscreen: {
+      hideFullScreen: false,
+    },
   },
-  pageSizerOptions: {
-    label: 'Rows per page',
-    options: [
-      { defaultChecked: true, label: '20', value: '20' },
-      { label: '50', value: '50' },
-      { label: '100', value: '100' },
-    ],
-    className: 'page-size-options',
-  },
-  displayDensityOptions: {
-    items: [
-      { icon: null, text: 'expanded' },
-      { icon: null, text: 'normal' },
-      { icon: null, text: 'tight' },
-    ],
-    className: 'data-table-density',
-    screenReaderClass: 'sr-only sr-only-focusable',
-    title: 'Display Density',
-  },
+  FullScreenComponent: null,
+  fullScreenMode: false,
 };
 
 DataTableHeader.propTypes = {
-  hidePageResults: PropTypes.bool,
-  hidePageSizer: PropTypes.bool,
-  hideDisplayDensity: PropTypes.bool,
-  hideAdvancedOptions: PropTypes.bool,
   className: PropTypes.string,
   dataPreview: PropTypes.shape({
     columnOrder: PropTypes.array,
@@ -120,25 +206,29 @@ DataTableHeader.propTypes = {
     sort: PropTypes.array,
     values: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
-  pageResultsOptions: PropTypes.shape({
-    className: PropTypes.string,
-  }),
-  pageSizerOptions: PropTypes.shape({
-    label: PropTypes.string,
-    options: PropTypes.arrayOf(PropTypes.object),
-    className: PropTypes.string,
+  options: PropTypes.shape({
+    pageResultsOptions: PropTypes.shape({
+      className: PropTypes.string,
+    }),
+    pageSizerOptions: PropTypes.shape({
+      label: PropTypes.string,
+      options: PropTypes.arrayOf(PropTypes.object),
+      className: PropTypes.string,
+    }),
+    displayDensityOptions: PropTypes.shape({
+      screenReaderClass: PropTypes.string,
+      className: PropTypes.string,
+      items: PropTypes.arrayOf(PropTypes.shape({
+        icon: PropTypes.node,
+        text: PropTypes.string,
+      })),
+      title: PropTypes.string,
+    }),
   }),
   id: PropTypes.string.isRequired,
   dataFunctions: PropTypes.objectOf(PropTypes.func).isRequired,
-  displayDensityOptions: PropTypes.shape({
-    screenReaderClass: PropTypes.string,
-    className: PropTypes.string,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      icon: PropTypes.node,
-      text: PropTypes.string,
-    })),
-    title: PropTypes.string,
-  }),
+  FullScreenComponent: PropTypes.node,
+  fullScreenMode: PropTypes.bool,
 };
 
 export default DataTableHeader;

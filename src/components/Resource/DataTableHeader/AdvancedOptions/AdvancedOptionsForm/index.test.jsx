@@ -21,6 +21,7 @@ describe('<AdvancedOptionsForm />', () => {
       excludedColumns={{}}
       reorderColumns={identity}
       toggleColumns={identity}
+      itemClasses={{ label: 'dkan', input: 'foobar' }}
     />,
   );
 
@@ -31,6 +32,7 @@ describe('<AdvancedOptionsForm />', () => {
       excludedColumns={excludedColumns}
       reorderColumns={identity}
       toggleColumns={identity}
+      itemClasses={{ label: 'dkan', input: 'foobar' }}
     />,
   );
 

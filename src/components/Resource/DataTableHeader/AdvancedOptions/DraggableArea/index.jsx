@@ -9,6 +9,7 @@ const DraggableArea = ({
   excludedColumns,
   connectDropTarget,
   moveCard,
+  itemClasses,
 }) => (
   connectDropTarget(
     <fieldset className="target">
@@ -20,6 +21,8 @@ const DraggableArea = ({
           item={item}
           onchange={onchange}
           isVisible={!!excludedColumns[item.accessor]}
+          labelClass={itemClasses.label}
+          inputClass={itemClasses.input}
         />
       ))}
     </fieldset>,
@@ -45,6 +48,10 @@ DraggableArea.propTypes = {
   excludedColumns: PropTypes.objectOf(PropTypes.bool).isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   connectDropTarget: PropTypes.func.isRequired,
+  itemClasses: PropTypes.shape({
+    input: PropTypes.string,
+    label: PropTypes.string,
+  }).isRequired,
 };
 
 export default DropTarget('form-elements', spec, collect)(DraggableArea);

@@ -27,7 +27,7 @@ const DataTablePageResults = ({
         {' '}
         <span className="total">{total}</span>
         {' '}
-        datasets
+        rows
       </p>
     </div>
   );

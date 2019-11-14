@@ -25,31 +25,6 @@ const ModalWrapper = styled.div`
     padding: 16px 24px;
   }
 
-  .column-labels {
-    background: #eeeeee;
-    font-weight: 700;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .ds-c-dialog__actions {
-    margin: 0;
-    padding: 8px 24px;
-    display: flex;
-    justify-content: flex-end;
-    button {
-      color: white;
-      border-radius: 25px;
-      font-size: 14px;
-    }
-  }
-
-  fieldset.target {
-    input:checked + label::before {
-      background-color: none;
-      border-color: blue;
-    }
-  }
 `;
 
 export default ModalWrapper;
