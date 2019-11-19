@@ -15,7 +15,7 @@ const Resource = ({
   infoTableOptions,
   headerOptions,
   datasetId,
-  rootUrl
+  showFileDownload,
 }) => {
   const [show, toggleShow] = useState(true);
   useEffect(() => {
@@ -31,10 +31,35 @@ const Resource = ({
   const pageSize = 'pageSize' in dataPreview ? dataPreview.pageSize : 20;
   const pages = Math.ceil(parseInt(dataPreview.rowsTotal, 10) / pageSize);
   const statistics = 'datastore_statistics' in dataInfo ? dataInfo.datastore_statistics : { rows: parseInt(dataPreview.rowsTotal, 10), columns: columns.length };
+  const FullScreenModal = () => (
+    <>
+      <DataTableHeader
+        dataPreview={dataPreview}
+        options={headerOptions}
+        dataFunctions={dataFunctions}
+        id={datasetId}
+        fullScreenMode
+      />
+      <DataTable
+        index={1}
+        key={dataKey}
+        loading={show}
+        pageSize={pageSize}
+        pages={pages}
+        data={values}
+        filtered={dataPreview.filters}
+        columns={dataFunctions.activeColumns(dataPreview.columns)}
+        density={dataPreview.density}
+        sortedChange={dataFunctions.sortChange}
+        filterChange={dataFunctions.filterChange}
+        pageChange={dataFunctions.pageChange}
+      />
+    </>
+  );
   return (
     <div className="resource-container">
       <Loader backgroundStyle={{ backgroundColor: '#f9fafb' }} foregroundStyle={{ backgroundColor: '#f9fafb' }} show={show} message={<LoadingSpin width="3px" primaryColor="#007BBC" />}>
-        {dataInfo.data
+        {(dataInfo.data && showFileDownload)
           && (
           <FileDownload
             format={dataInfo.data.format}
@@ -57,6 +82,7 @@ const Resource = ({
               options={headerOptions}
               dataFunctions={dataFunctions}
               id={datasetId}
+              FullScreenComponent={FullScreenModal}
             />
           )}
         <DataTable
@@ -66,6 +92,7 @@ const Resource = ({
           pageSize={pageSize}
           pages={pages}
           data={values}
+          filtered={dataPreview.filters}
           columns={dataFunctions.activeColumns(dataPreview.columns)}
           density={dataPreview.density}
           sortedChange={dataFunctions.sortChange}
@@ -90,6 +117,11 @@ const Resource = ({
 Resource.defaultProps = {
   headerOptions: {
     hideHeader: false,
+    pageSizer: {},
+    pageResults: {},
+    advancedOptions: {},
+    tableDensity: {},
+    fullScreen: {},
   },
   infoTableOptions: {
     hideTable: false,
@@ -99,11 +131,13 @@ Resource.defaultProps = {
     tableclass: 'table-one',
   },
   dataInfo: {},
+  showFileDownload: true,
 };
 
 Resource.propTypes = {
   headerOptions: PropTypes.shape({
     hideHeader: PropTypes.bool,
+    options: PropTypes.objectOf(PropTypes.object),
   }),
   dataFunctions: PropTypes.objectOf(PropTypes.func).isRequired,
   infoTableOptions: PropTypes.shape({
@@ -132,6 +166,7 @@ Resource.propTypes = {
     indentifier: PropTypes.string,
   }),
   datasetId: PropTypes.string.isRequired,
+  showFileDownload: PropTypes.bool,
 };
 
 export default withResource(Resource);

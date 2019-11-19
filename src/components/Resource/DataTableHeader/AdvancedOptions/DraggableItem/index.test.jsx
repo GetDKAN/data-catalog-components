@@ -15,6 +15,8 @@ describe('<DraggableItem />', () => {
       connectDragPreview={() => () => true}
       connectDragSource={identity}
       connectDropTarget={identity}
+      labelClass="label"
+      inputClass="input"
     />,
   );
 

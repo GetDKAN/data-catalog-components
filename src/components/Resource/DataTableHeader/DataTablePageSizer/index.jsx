@@ -7,13 +7,14 @@ const DataTablePageSizer = ({
   currentOption,
   options,
   className,
+  selectClassName,
   id,
 }) => (
   <div className={className}>
     <label htmlFor={`table-${id}`} className="page-size-label">
       <span className="page-size-label-text">{label}</span>
       {' '}
-      <select id={`table-${id}`} className="page-size-select" value={currentOption} onChange={pageSizeChange}>
+      <select id={`table-${id}`} className={selectClassName} value={currentOption} onChange={pageSizeChange}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -33,11 +34,13 @@ DataTablePageSizer.defaultProps = {
     { label: '50', value: '50' },
     { label: '100', value: '100' },
   ],
+  selectClassName: 'page-size-select'
 };
 
 DataTablePageSizer.propTypes = {
   label: PropTypes.string,
   className: PropTypes.string,
+  selectClassName: PropTypes.string,
   pageSizeChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
     defaultChecked: PropTypes.bool,

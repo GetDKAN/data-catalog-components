@@ -20,10 +20,10 @@ describe('<DataTablePageResults />', () => {
   );
 
   it('renders correct initial results', () => {
-    expect(defaultWrapper.find('p').text()).toBe('1 - 10 of 100 datasets');
+    expect(defaultWrapper.find('p').text()).toBe('1 - 10 of 100 rows');
   });
 
   it('renders correct results on subsequent pages', () => {
-    expect(customWrapper.find('p').text()).toBe('41 - 50 of 100 datasets');
+    expect(customWrapper.find('p').text()).toBe('41 - 50 of 100 rows');
   });
 });

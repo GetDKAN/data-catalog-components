@@ -24,6 +24,7 @@ describe('<DraggableArea />', () => {
       connectDropTarget={identity}
       moveCard={identity}
       onDrop={identity}
+      itemClasses={{ label: 'dkan', input: 'foobar' }}
     />,
   );
 

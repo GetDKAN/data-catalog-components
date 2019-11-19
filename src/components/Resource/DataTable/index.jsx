@@ -15,6 +15,7 @@ const DataTable = ({
   filterChange,
   index,
   density,
+  filtered,
 }) => {
   const style = density ? `${density} -striped -highlight` : '-striped -highlight';
   return (
@@ -27,6 +28,7 @@ const DataTable = ({
         pages={pages}
         pageSize={pageSize}
         manual
+        defaultFiltered={filtered}
         showPageJump={false}
         showPageSizeOptions={false}
         onPageChange={pageChange}

@@ -61,6 +61,8 @@ class DraggableItem extends Component {
       isDragging,
       connectDropTarget,
       connectDragSource,
+      inputClass,
+      labelClass,
     } = this.props;
     return (
       connectDropTarget(
@@ -89,14 +91,15 @@ class DraggableItem extends Component {
             >
               <ItemControl />
             </span>
-            <label htmlFor={item.accessor}>
-              <input
-                id={item.accessor}
-                defaultChecked={isVisible}
-                type="checkbox"
-                value={item.accessor}
-                onChange={onchange}
-              />
+            <input
+              className={inputClass}
+              id={item.accessor}
+              defaultChecked={isVisible}
+              type="checkbox"
+              value={item.accessor}
+              onChange={onchange}
+            />
+            <label htmlFor={item.accessor} className={labelClass}>
               <span ref={this.myRef}>{item.Header}</span>
             </label>
           </div>,
@@ -111,6 +114,8 @@ DraggableItem.defaultProps = {
 };
 
 DraggableItem.propTypes = {
+  labelClass: PropTypes.string.isRequired,
+  inputClass: PropTypes.string.isRequired,
   onHoverBGColor: PropTypes.string,
   onHoverBoxShadow: PropTypes.string,
   onchange: PropTypes.func.isRequired,

@@ -23,6 +23,7 @@ describe('<Draggable />', () => {
       moveCard={identity}
       onDrop={identity}
       columns={items}
+      itemClasses={{ label: 'dkan', input: 'foobar' }}
     />,
   );
 

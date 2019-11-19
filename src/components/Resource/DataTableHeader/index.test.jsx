@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import DataTableHeader from '.';
 
 const dataPreview = {
@@ -27,24 +27,44 @@ describe('<DataTableHeader />', () => {
       id="foo"
       dataPreview={dataPreview}
       dataFunctions={dataFunctions}
+      options={{
+        pageSizer: {},
+        pageResults: {},
+        advancedOptions: {},
+        tableDensity: {},
+        fullScreen: {},
+      }}
     />,
   );
 
   const customWrapper = mount(
     <DataTableHeader
+      options={{
+        pageSizer: {
+          hidePageSizer: true,
+        },
+        pageResults: {
+          hidePageResults: true,
+        },
+        advancedOptions: {
+          hideAdvancedOptions: true,
+        },
+        tableDensity: {
+          hideDisplayDensity: true,
+        },
+        fullScreen: {
+          hideFullScreen: true,
+        },
+      }}
       id="foo"
       dataPreview={dataPreview}
       dataFunctions={dataFunctions}
-      hideDisplayDensity
-      hidePageResults
-      hidePageSizer
-      hideAdvancedOptions
     />,
   );
 
   it('renders correctly with default settings', () => {
     expect(defaultWrapper.exists('div.data-table-header')).toBe(true);
-    expect(defaultWrapper.find('div.data-table-results').text()).toBe('1 - 20 of 100 datasets');
+    expect(defaultWrapper.find('div.data-table-results').text()).toBe('1 - 20 of 100 rows');
     expect(defaultWrapper.exists('div.data-table-density')).toBe(true);
     expect(defaultWrapper.exists('div.page-size-options')).toBe(true);
     expect(defaultWrapper.exists('div.data-table-adv-options')).toBe(true);

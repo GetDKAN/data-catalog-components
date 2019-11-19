@@ -59,18 +59,17 @@ class AdvancedOptionsForm extends React.Component {
     const { target } = event;
     const { value } = target;
     const { toggleColumns } = this.props;
-    const { excludedColumns } = this.state;
     this.setState((prevState) => ({
       excludedColumns: {
         ...prevState.excludedColumns,
         [value]: !prevState.excludedColumns[value],
       },
-    }), () => toggleColumns(excludedColumns));
+    }), () => toggleColumns(this.state.excludedColumns));
   }
 
   render() {
     const { excludedColumns, columnOrder } = this.state;
-    const { columns } = this.props;
+    const { columns, itemClasses } = this.props;
     return (
       <div className="advanced_table_setting_modal">
         {columns.length
@@ -81,6 +80,7 @@ class AdvancedOptionsForm extends React.Component {
             onchange={this.handleColumnChange}
             excludedColumns={excludedColumns}
             columns={columnOrder}
+            itemClasses={itemClasses}
           />
         </form>
         )}
@@ -88,7 +88,6 @@ class AdvancedOptionsForm extends React.Component {
     );
   }
 }
-
 AdvancedOptionsForm.defaultProps = {
   columnOrder: [],
   excludedColumns: {},
@@ -100,6 +99,10 @@ AdvancedOptionsForm.propTypes = {
   excludedColumns: PropTypes.objectOf(PropTypes.bool),
   toggleColumns: PropTypes.func.isRequired,
   reorderColumns: PropTypes.func.isRequired,
+  itemClasses: PropTypes.shape({
+    input: PropTypes.string,
+    label: PropTypes.string,
+  }).isRequired,
 };
 
 export default AdvancedOptionsForm;
