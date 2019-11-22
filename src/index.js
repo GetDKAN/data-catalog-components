@@ -1,4 +1,5 @@
 export { default as AdvancedOptions } from './components/Resource/DataTableHeader/AdvancedOptions';
+export { default as ApiDocs } from './components/ApiDocs';
 export { default as Blocks } from './components/Blocks';
 export { default as BasicBlock } from './components/Blocks/BasicBlock';
 export { default as Copyright } from './components/Copyright';
