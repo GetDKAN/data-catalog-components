@@ -25,7 +25,7 @@ const InputSearchParent = () => {
   }
   return (
     <SearchInput
-      className={text('className', 'front-page-search')}
+      className={text('className', 'catalog-search-input')}
       placeholder={text('Placeholder', 'Search the data')}
       value={inputValue}
       resetContent={text('Reset Content', 'Reset')}

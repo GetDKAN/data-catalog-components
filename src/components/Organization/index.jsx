@@ -31,7 +31,7 @@ function Organization(props) {
   const { name, description, identifier, imageUrl } = props;
   const image = <img alt={name || "Organization Image"} src={imageUrl} />;
 
-  const link = `/organization/${identifier}`;
+  const link = `search?publisher=${identifier}`;
 
   return (
     <Wrapper>
@@ -39,7 +39,7 @@ function Organization(props) {
         {image}
       </div>
       <h3 className="org-name">
-        <a href={link}>{name}</a>
+        {name}
       </h3>
       {description}
     </Wrapper>

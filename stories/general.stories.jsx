@@ -72,7 +72,7 @@ storiesOf('General', module)
       <DataIcon
         icon={select(
           "Icon",
-          ["density-1", "density-2", "density-3"],
+          ["density-1", "density-2", "density-3", "group"],
           "density-1"
         )}
         color={text('Color', "#41b0d3")}

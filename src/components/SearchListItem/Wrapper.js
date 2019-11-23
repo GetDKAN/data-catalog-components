@@ -7,6 +7,7 @@ const Wrapper = styled.li`
   border-radius: 4px;
   padding: 16px 48px;
   list-style: none;
+  margin-bottom: 2rem;
   a {
     color: ${props => props.theme.headingColor};
     text-decoration: none;
@@ -22,22 +23,22 @@ const Wrapper = styled.li`
   }
   .item-publisher {
     color: ${props => props.theme.grayMedium};
-    font-size: 1.4rem;
     font-style: italic;
     margin: .5em 0;
     svg {
       margin-right: 1rem;
-      fill: ${props => props.theme.grayMedium};
+      path {
+        fill: ${props => props.theme.grayMedium};
+      }
     }
   }
   .item-theme {
-    color: ${props => props.theme.grayMedium};
-    font-size: 1.4rem;
     font-style: normal;
     letter-spacing: .25px;
     margin: .5em 0;
     padding-bottom: .75em;
     a {
+      color: ${props => props.theme.grayMedium};
       display: inline-block;
       position: relative;
       padding: 0 20px 0 30px;
