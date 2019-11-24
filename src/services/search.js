@@ -103,7 +103,7 @@ class Search {
         }
       }
 
-      if (doc[current] !== undefined) {
+      if (doc[current] !== undefined && doc[current] !== null) {
         // This is the property no need to recurse further.
         if (pieces.length === 0) {
           if (doc == null) {

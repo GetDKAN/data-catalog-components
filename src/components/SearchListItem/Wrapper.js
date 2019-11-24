@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Wrapper = styled.li`
   background: #fff;
   border: 1px solid ${props => props.theme.borderColor};
   border-radius: 4px;

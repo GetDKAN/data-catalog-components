@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import ListItem from '../ListItem';
 import Wrapper from './Wrapper';
 import excerpts from 'excerpts';
 import TopicImage from '../IconListItem/TopicImage';
@@ -9,105 +8,103 @@ import DataIcon from '../DataIcon';
 import Text from '../Text';
 import { Link } from "gatsby";
 
-class SearchListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  formats(distribution) {
+const SearchListItem = ({
+  className,
+  item,
+}) => {
+  const { ref, title, description, publisher, format, theme, identifier } = item;
+
+  function formats(distribution) {
     if (!distribution) {
       return null;
     }
-    else {
-      let i = 0;
+    if(typeof distribution === 'object') {
+      distribution = Object.entries(distribution);
       return distribution.map((dist) => {
-        i++
-        const format = dist.format === undefined ? '' : dist.format.toLowerCase();
-        return <div title={`format: ${dist.format}`}
-          key={`dist-id-${dist.identifier}-${i}`}
-          className="label"
-          data-format={format}>{format}</div>
+        const format = (dist[1] === undefined) ? '' : dist[1].format.toLowerCase();
+        return (
+          <div title={`format: ${dist.format}`}
+            key={`dist-id-${identifier}-${Math.random() * 10}`}
+            className="label"
+            data-format={format}>{format}
+          </div>
+        );
       })
+    }
+
+    if(Array.isArray(distribution)) {
+      return distribution.map((dist) => {
+        const format = (dist.format === undefined) ? '' : dist.format.toLowerCase();
+        return (
+          <div title={`format: ${dist.format}`}
+            key={`dist-id-${identifier}-${Math.random() * 10}`}
+            className="label"
+            data-format={format}>{format}
+          </div>
+        );
+      });
     }
   }
 
-  themes(theme) {
+  function themes(theme) {
     if (!theme) {
       return null;
-    }
-    else {
-      let i = 0;
-      return theme.map(function(topic) {
-        i++
-        // if (topic.icon) {
-        //   return <div key={`dist-${topic.identifier}-${i}`}>
-        //     <img src={topic.icon} height="16px" width="16px" alt={topic.alt} /> 
-        //     {topic.title}
-        //   </div>
-        // }
-        // else {
-          return <Link key={`dist-${topic.identifier}-${i}`} to={`search?theme=${topic.title}`}>
+    } else {
+      return theme.map((topic) => {
+        return(
+          <Link
+            key={`dist-${topic.identifier}-${Math.random() * 10}`}
+            to={"search?topics=" + topic.title}
+          >
             <TopicImage title={topic.title} height="16" width="16"/>
             {topic.title}
           </Link>
-          
-        //}
-        
+        );
       })
     }
   }
 
-  render() {
+  return(
+    <Wrapper className={className}>
+      <h2><Link to={ref}>{title}</Link></h2>
+      
+      {(publisher && publisher.name !== undefined) &&
+        <div className="item-publisher">
+          <DataIcon icon="group" height="20" width="20" color="#A7AAAC"/>
+          <Text tag="i" value={publisher.name} />
+        </div>
 
-    const item = this.props.item;
-    const description = item.description ? 
-      <Text className="item-description">
-        {excerpts(item.description, {words: 35})}
-      </Text> 
-      : '';
-    const publisher = item.publisher ? 
-      <div className="item-publisher">
-        <DataIcon icon="group" height="20" width="20" color="#A7AAAC"/>
-        <Text tag="i" value={item.publisher.name} />
-      </div>
-      : '';
-    const formats = item.format ?
-      <div className="format-types">
-        {this.formats(item.format)}
-      </div>
-      : '';
-    const themes = item.theme ?
-      <div className="item-theme">
-        {this.themes(item.theme)}
-      </div>
-      : '';
-    // Put together the content of the repository
-    const content = (
-      <Wrapper key={`wrapper-${item.identifier}`} className="search-list-item">
-        <a href={item.ref}>
-          <h2>{ item.title }</h2>
-        </a>
-        {publisher}
-        {themes}
-        {description}
-        {formats}
-      </Wrapper>
-    );
+      }
 
-    return (
-      <ListItem key={`repo-list-item-${item.identifier}`} item={content} />
-    );
-  }
+      {theme &&
+        <div className="item-theme">
+          {themes(theme)}
+        </div>
+      }
+
+      {description &&
+        <Text className="item-description">
+          {excerpts(description, {words: 35})}
+        </Text>
+      }
+
+      {format &&
+        <div className="format-types">
+          {formats(format)}
+        </div>
+      }
+
+    </Wrapper>
+  );
 }
 
 SearchListItem.defaultProps = {
-  item: {
-    "identifier": 1234,
-    "title": "This is a title",
-    "description": "I am an item",
-    "modified": "1/12/2018",
-    "publisher": "Publish Inc."
-  },
+  className: 'search-list-item',
 };
 
 SearchListItem.propTypes = {
-  item: PropTypes.object,
+  className: PropTypes.string,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default SearchListItem;
