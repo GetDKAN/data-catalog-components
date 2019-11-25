@@ -22,10 +22,15 @@ export { default as NavBar } from './components/NavBar';
 export { default as Organization } from './components/Organization';
 export { default as PageHeader } from './components/PageHeader';
 export { default as Resource } from './components/Resource';
+export { default as SearchFacetBlocks } from './components/SearchFacetBlocks';
+export { default as SearchFacetList } from './components/SearchFacetList';
 export { default as SearchInput } from './components/SearchInput';
 export { default as SearchList } from './components/SearchList';
 export { default as SearchListItem } from './components/SearchListItem';
+export { default as SearchPageSizer } from './components/SearchPageSizer';
+export { default as SearchPaginationResults } from './components/SearchPaginationResults';
 export { default as SearchResultsMessage } from './components/SearchResultsMessage';
+export { default as SearchSort } from './components/SearchSort';
 export { default as ShowMoreContainer } from './components/ShowMoreContainer';
 export { default as StatBlock } from './components/Blocks/StatBlock';
 export { default as StepsBlock } from './components/Blocks/StepsBlock';
@@ -38,3 +43,11 @@ export { default as Title } from './components/Title';
 export { default as ToggleBlock } from './components/ToggleBlock';
 export { default as withSearch } from './components/Search/withSearch';
 export { default as withResource } from './components/Resource/withResource';
+
+export {
+  useSearchData,
+  useLunrSearch,
+  useFacetTypes,
+  useUrlParams,
+  useFilteredFacets,
+} from './services/hooks/searchHooks';
