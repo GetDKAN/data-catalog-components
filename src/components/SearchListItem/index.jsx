@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Wrapper from './Wrapper';
 import excerpts from 'excerpts';
-import TopicImage from '../IconListItem/TopicImage';
+import TopicImage from '../TopicImage';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
 import { Link } from "gatsby";
@@ -70,7 +70,7 @@ const SearchListItem = ({
       
       {(publisher && publisher.name !== undefined) &&
         <div className="item-publisher">
-          <DataIcon icon="group" height="20" width="20" color="#A7AAAC"/>
+          <DataIcon icon="group" height="20" width="20"/>
           <Text tag="i" value={publisher.name} />
         </div>
 

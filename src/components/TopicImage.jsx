@@ -5,6 +5,7 @@ import React from 'react'
 class TopicImage extends React.PureComponent {
   render() {
     switch(this.props.title) {
+      case 'Health':
       case 'Health Care':
       case 'Healthcare':
         return (
@@ -21,6 +22,7 @@ class TopicImage extends React.PureComponent {
         )
 
       case 'Economy':
+      case 'Finance':
       case 'Finance and Budgeting':
         return (
           <svg xmlns="http://www.w3.org/2000/svg" width={this.props.size} height={this.props.size} viewBox="0 0 100 100">

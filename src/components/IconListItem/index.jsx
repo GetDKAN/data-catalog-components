@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import StyledLink from './StyledLink'
-import TopicImage from './TopicImage'
+import TopicImage from '../TopicImage'
 
 class IconListItem extends React.PureComponent {
 

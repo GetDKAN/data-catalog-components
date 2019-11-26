@@ -36,6 +36,11 @@ const Resource = ({
   const pageSize = 'pageSize' in dataPreview ? dataPreview.pageSize : 20;
   const pages = Math.ceil(parseInt(dataPreview.rowsTotal, 10) / pageSize);
   const statistics = 'datastore_statistics' in dataInfo ? dataInfo.datastore_statistics : { rows: parseInt(dataPreview.rowsTotal, 10), columns: columns.length };
+  
+  const type = data.data && data.data.mediaType ? data.data.mediaType.split("/") : '';
+  const backup = type ? type[1] : '';
+  const format = data.data && data.data.format ? data.data.format : backup;
+
   const FullScreenModal = () => {
     if (dataKey) {
       return (
@@ -75,7 +80,7 @@ const Resource = ({
             {(dataInfo.data && showFileDownload)
               && (
               <FileDownload
-                format={dataInfo.data.format}
+                format={format}
                 downloadURL={datasetURL}
                 title={dataInfo.data.title}
                 key={`${dataKey}-file-download`}
@@ -129,7 +134,7 @@ const Resource = ({
             {data.data
               && (
                 <FileDownload
-                  format={data.data.format}
+                  format={format}
                   downloadURL={datasetURL}
                   title={data.data.title}
                   key={`${data.indentifier}-file-download`}

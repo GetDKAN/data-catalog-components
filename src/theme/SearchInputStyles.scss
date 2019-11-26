@@ -1,11 +1,7 @@
-/* eslint-disable */
-import styled from "styled-components";
+.catalog-search-input.form-group {
+  padding-right: 125px;
+  position: relative;
 
-export default styled.form`
-  .form-group {
-    padding-right: 125px;
-    position: relative;
-  }
   input[type="text"] {
     padding: 1rem 1.5rem;
     font-size: 1.8rem;
@@ -15,7 +11,7 @@ export default styled.form`
   button {
     position: absolute;
   }
-  button[type="reset"] {
+  #inputReset {
     color: #333333;
     top: 10px;
     right: 140px;
@@ -28,14 +24,15 @@ export default styled.form`
       box-shadow: none;
     }
   }
-  button[type="submit"] {
+  #inputSubmit {
     top: 0;
     right: 0;
     background-color: ${props => props.theme.secondary};;
     border-radius: 24px;
     border-style: none;
-    font-size: 2.1rem;
+    font-size: 1.8rem;
     font-weight: bold;
+    text-transform: uppercase;
     display: inline-block;
     height: 48px;
     margin: 0;
@@ -53,8 +50,10 @@ export default styled.form`
       background-color: ${props => props.theme.secondaryDark};
     }
   }
+}
 
-  @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  .catalog-search-input.form-group {
     position: relative;
     top: auto;
     right: auto;
@@ -65,4 +64,5 @@ export default styled.form`
       width: 100%;
     }
   }
-`;
+}
+
