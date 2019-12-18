@@ -1,18 +1,18 @@
 import { createContext } from 'react';
 import axios from 'axios';
+import queryString from 'query-string';
 import search from './search';
 
 export const SearchDispatch = createContext(null);
 
 export const defaultSearchState = {
   page: 1,
-  pageSize: 20,
+  pageSize: 10,
   query: '',
   sort: 'date',
   facets: [],
   loading: false,
   searchEngine: null,
-  items: [],
   selectedFacets: [],
   totalItems: 0,
   facetsResults: {},
@@ -42,6 +42,10 @@ export function searchReducer(state, action) {
         facetsResults: action.data.facetsResults,
       };
     case 'SET_SEARCH_PARAMETERS':
+      return {
+        ...state,
+        searchURL: action.data.url,
+      };
     case 'UPDATE_SORT':
       return {
         ...state,
@@ -136,7 +140,7 @@ export function setSelectedFacets(eventTarget, selectedFacets) {
   if (active === true) {
     newFacetList = [...updatedFacets, [facetType, facetValue]];
   } else {
-    newFacetList = selectedFacets.filter((facet) => (facet[1] !== facetValue))
+    newFacetList = selectedFacets.filter((facet) => (facet[1] !== facetValue));
   }
   return {
     type: 'UPDATE_FACETS',
@@ -165,6 +169,63 @@ export function resetSelectedFacets(selectedFacets, facetKey = null) {
     type: 'RESET_FACETS',
     data: {
       selectedFacets: updatedFacets,
+    },
+  };
+}
+
+export function buildInitialFacets(queryParams, defaultFacets) {
+  const facetKeys = Object.keys(defaultFacets);
+  const paramFacetArray = Object.entries(queryParams).filter((obj) => {
+    for (let i = 0; i < facetKeys.length; i += 1) {
+      if (facetKeys[i] === obj[0]) {
+        const capitalKey = obj[0].charAt(0).toUpperCase() + obj[0].slice(1);
+        const newFacetArray = obj[1].split(',').map((param) => [capitalKey, param]);
+        return newFacetArray;
+      }
+    }
+    return false;
+  });
+  return {
+    type: 'UPDATE_FACETS',
+    data: {
+      selectedFacets: paramFacetArray,
+    },
+  };
+}
+
+export function setSearchURLParams(rootURL, defaultFacets, searchState) {
+  const facetKeys = Object.keys(defaultFacets);
+  const params = {
+    sort: searchState.sort,
+    page: searchState.page,
+    pageSize: searchState.pageSize,
+    q: searchState.query,
+  };
+
+  facetKeys.map((key) => {
+    let paramString = '';
+    const facetItems = searchState.selectedFacets.filter((param) => {
+      if (param[0] === key) {
+        return param[1];
+      }
+      return false;
+    });
+
+    facetItems.map((item) => {
+      paramString += `${item[1]},`;
+      return paramString;
+    });
+
+    paramString = paramString.slice(0, -1);
+    if (paramString) {
+      params[key] = paramString;
+    }
+    return paramString;
+  });
+  return {
+    type: 'SET_SEARCH_PARAMETERS',
+    data: {
+      searchURL: `${rootURL}?${queryString.stringify(params)}`,
     },
   };
 }

@@ -47,9 +47,13 @@ export { default as withResource } from './components/Resource/withResource';
 export {
   SearchDispatch,
   defaultSearchState,
+  searchReducer,
+  fetchSearchData,
   getLunrSearch,
   setSelectedFacets,
   resetSelectedFacets,
+  setSearchURLParams,
+  buildInitialFacets,
 } from './services/search/search_tools';
 
 export {

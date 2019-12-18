@@ -1,7 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import axios from 'axios';
-import datastore from '../../services/datastore';
+import datastore from '../../services/resource/datastore';
 
 export default function withResource(
   OriginalComponent,

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import queryString from 'query-string';
-import search from '../search';
+import search from '../search/search';
 
 export function useLunrSearch(url, defaultFacets) {
   const [searchEngine, setSearchEngine] = React.useState();
