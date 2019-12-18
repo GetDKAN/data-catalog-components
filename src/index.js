@@ -45,6 +45,26 @@ export { default as withSearch } from './components/Search/withSearch';
 export { default as withResource } from './components/Resource/withResource';
 
 export {
+  SearchDispatch,
+  defaultSearchState,
+  getLunrSearch,
+  setSelectedFacets,
+  resetSelectedFacets,
+} from './services/search/search_tools';
+
+export {
+  ResourceDispatch,
+  defaultResourceState,
+  resourceReducer,
+  prepareColumns,
+  queryResourceData,
+  queryAllResourceData,
+  getFileDatastore,
+  getDKANDatastore,
+  useAdvancedOptions,
+} from './services/resource/resource_tools';
+
+export {
   useSearchData,
   useLunrSearch,
   useFacetTypes,
