@@ -54,6 +54,7 @@ export {
   resetSelectedFacets,
   setSearchURLParams,
   buildInitialFacets,
+  filterFacets,
 } from './services/search/search_tools';
 
 export {

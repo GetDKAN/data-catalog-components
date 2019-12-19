@@ -229,3 +229,42 @@ export function setSearchURLParams(rootURL, defaultFacets, searchState) {
     },
   };
 }
+
+export function filterFacets(
+  facetKey, selectedFacets, facetsResults, totalFacets, isStatic = false,
+) {
+  let filteredFacets;
+  if (isStatic) {
+    filteredFacets = totalFacets[facetKey].map((facet) => {
+      const hasResults = facetsResults[facetKey].find((element) => element[0] === facet[0]);
+      if (!hasResults) {
+        return [facet[0], 0];
+      }
+      return [facet[0], hasResults[1]];
+    });
+  } else {
+    filteredFacets = totalFacets[facetKey].filter((facet) => {
+      const hasResults = facetsResults[facetKey].find((activeFacet) => (
+        activeFacet[0] === facet[0]
+      ));
+      const selected = selectedFacets.find((selFacet) => (
+        (selFacet[1].toLowerCase() === facet[0].toLowerCase())
+          && (selFacet[0].toLowerCase() === facetKey.toLowerCase())
+      ));
+      if (selected || hasResults) {
+        return facet;
+      }
+      return false;
+    }).map((facet) => {
+      const hasResults = facetsResults[facetKey].find((activeFacet) => (
+        activeFacet[0] === facet[0]
+      ));
+
+      if (hasResults) {
+        return [facet[0], hasResults[1]];
+      }
+      return [facet[0], 0];
+    });
+  }
+  return filteredFacets;
+}
