@@ -88,6 +88,7 @@ export function searchReducer(state, action) {
       return {
         ...state,
         query: '',
+        selectedFacets: [],
       };
     default:
       return 'Not a valid action type.';
