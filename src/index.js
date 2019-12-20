@@ -66,7 +66,7 @@ export {
   queryAllResourceData,
   getFileDatastore,
   getDKANDatastore,
-  useAdvancedOptions,
+  advancedColumns,
 } from './services/resource/resource_tools';
 
 export {

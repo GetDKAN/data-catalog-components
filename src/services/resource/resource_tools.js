@@ -5,20 +5,20 @@ import datastore from './datastore';
 export const ResourceDispatch = createContext(null);
 
 export const defaultResourceState = {
+  columnOrder: [],
+  columns: [],
+  count: 0,
+  currentPage: 0,
+  density: 'density-3',
+  excludedColumns: {},
+  filters: [],
   loading: false,
+  pageSize: 20,
   queryAll: false,
   rowsTotal: 0,
-  columns: [],
-  store: null,
   sort: [],
-  density: 'density-3',
-  currentPage: 0,
-  pageSize: 20,
+  store: null,
   values: [],
-  count: 0,
-  filters: [],
-  excludedColumns: {},
-  columnOrder: [],
 };
 
 export function resourceReducer(state, action) {
@@ -27,6 +27,11 @@ export function resourceReducer(state, action) {
       return {
         ...state,
         loading: true,
+      };
+    case 'NO_DATASTORE':
+      return {
+        ...state,
+        storeType: null,
       };
     case 'USE_STORE':
       return {
@@ -69,7 +74,15 @@ export function resourceReducer(state, action) {
         sort: action.data.sort,
       };
     case 'REORDER_COLUMNS':
-    case 'EXCLUDE_COLUMNS':
+      return {
+        ...state,
+        columnOrder: action.data.columnOrder,
+      };
+    case 'TOGGLE_COLUMNS':
+      return {
+        ...state,
+        excludedColumns: action.data.excludedColumns,
+      };
     case 'UPDATE_DENSITY':
       return {
         ...state,
@@ -80,6 +93,7 @@ export function resourceReducer(state, action) {
   }
 }
 
+// Build columns in correct structure for Datatable component.
 export function prepareColumns(columns) {
   return columns.map((column) => ({
     Header: column,
@@ -87,6 +101,7 @@ export function prepareColumns(columns) {
   }));
 }
 
+// Get new rows of data from the datastore.
 export async function queryResourceData(resourceData, includeCount = false) {
   const {
     filters, pageSize, currentPage, sort, store,
@@ -102,6 +117,7 @@ export async function queryResourceData(resourceData, includeCount = false) {
   };
 }
 
+// Return all rows from the datastore.
 export async function queryAllResourceData(store) {
   const items = await store.query(null, null, null, 0, null, null)
     .then((data) => data);
@@ -114,26 +130,31 @@ export async function queryAllResourceData(store) {
   };
 }
 
-
+// Create a new datastore using a CSV file.
 export async function getFileDatastore(downloadURL) {
   // eslint-disable-next-line
   const store = await new datastore['file'](downloadURL);
-  const initCount = await store.query(null, null, null, 0, null, null, true)
-    .then((data) => data);
-  const columns = prepareColumns(await store.getColumns());
+  if (store) {
+    const initCount = await store.query(null, null, null, 0, null, null, true)
+      .then((data) => data);
+    const columns = prepareColumns(await store.getColumns());
+    return {
+      type: 'USE_STORE',
+      data: {
+        store,
+        rowsTotal: initCount,
+        columns,
+        storeType: 'FILE',
+      },
+    };
+  }
   return {
-    type: 'USE_STORE',
-    data: {
-      store,
-      rowsTotal: initCount,
-      columns,
-      storeType: 'FILE',
-    },
+    type: 'NO_DATASTORE',
   };
 }
 
-// eslint-disable-next-line
-export async function getDKANDatastore(rootURL, resource, resourceData) {
+// Create a new datastore using the DKAN datastore.
+export async function getDKANDatastore(rootURL, resource) {
   const { identifier } = resource;
   const checkForDatastore = await axios.get(`${rootURL}datastore/imports/${identifier}`)
     .then((res) => res.data)
@@ -156,29 +177,31 @@ export async function getDKANDatastore(rootURL, resource, resourceData) {
       },
     };
   }
+  return {
+    type: 'NO_DATASTORE',
+  };
 }
 
-export function useAdvancedOptions(columns, updatedColumns = [], excludedColumns = {}) {
-  const [advancedColumns, setAdvancedColumns] = useState([]);
-  useEffect(() => {
-    const excludedArray = [];
-    let newItems = columns;
-    if (updatedColumns.length) {
-      newItems = updatedColumns;
-    }
-    Object.keys(excludedColumns)
-      .forEach((key) => {
-        if (!excludedColumns[key]) {
-          excludedArray.push(key);
-        }
-      });
-    const columnOrder = newItems.reduce((newColumns, item) => {
-      if (!excludedArray.includes(item.accessor)) {
-        newColumns.push(item);
+// Filter and reorder columns based on the toggled and reordered state.
+// Use this to keep base columns in order so changes can be reset without
+// extra queries to rebuild the data.
+export function advancedColumns(columns = [], updatedColumns = [], excludedColumns = {}) {
+  const excludedArray = [];
+  let newItems = columns;
+  if (updatedColumns.length) {
+    newItems = updatedColumns;
+  }
+  Object.keys(excludedColumns)
+    .forEach((key) => {
+      if (!excludedColumns[key]) {
+        excludedArray.push(key);
       }
-      return newColumns;
-    }, []);
-    setAdvancedColumns(columnOrder);
-  }, [columns, updatedColumns, excludedColumns]);
-  return [advancedColumns];
+    });
+  const columnOrder = newItems.reduce((reordered, item) => {
+    if (!excludedArray.includes(item.accessor)) {
+      reordered.push(item);
+    }
+    return reordered;
+  }, []);
+  return columnOrder;
 }

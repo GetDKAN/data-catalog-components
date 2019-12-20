@@ -6,16 +6,16 @@ import search from './search';
 export const SearchDispatch = createContext(null);
 
 export const defaultSearchState = {
+  facets: [],
+  facetsResults: {},
+  loading: false,
   page: 1,
   pageSize: 10,
   query: '',
-  sort: 'date',
-  facets: [],
-  loading: false,
   searchEngine: null,
   selectedFacets: [],
+  sort: 'date',
   totalItems: 0,
-  facetsResults: {},
 };
 
 export function searchReducer(state, action) {
@@ -95,11 +95,11 @@ export function searchReducer(state, action) {
   }
 }
 
+// Query the search engine for new items.
 export async function fetchSearchData(searchState, customNormalize = null) {
   const {
     page, pageSize, query, sort, selectedFacets, searchEngine,
   } = searchState;
-
   const data = await searchEngine.query(
     query, selectedFacets, pageSize, page, sort,
   );
@@ -117,6 +117,7 @@ export async function fetchSearchData(searchState, customNormalize = null) {
   };
 }
 
+// Create new Lunr search engine.
 export async function getLunrSearch(searchUrl, defaultFacets) {
   // eslint-disable-next-line dot-notation
   const newSearchEngine = new search['Lunr']();
@@ -132,6 +133,8 @@ export async function getLunrSearch(searchUrl, defaultFacets) {
   };
 }
 
+// Add or remove facets from the array of selected facets.
+// All facets regardless of type are kept in one array.
 export function setSelectedFacets(eventTarget, selectedFacets) {
   const facetType = eventTarget.name;
   const facetValue = eventTarget.value;
@@ -151,6 +154,9 @@ export function setSelectedFacets(eventTarget, selectedFacets) {
   };
 }
 
+// Since all facets are kept in one array, this function serves two purposes:
+// Without a facetKey it will just return an empty array for all facets.
+// With a facetKey it will just return all facets not matching the facetKey.
 export function resetSelectedFacets(selectedFacets, facetKey = null) {
   let updatedFacets = [];
   if (selectedFacets !== undefined && selectedFacets.length > 0) {
@@ -174,6 +180,8 @@ export function resetSelectedFacets(selectedFacets, facetKey = null) {
   };
 }
 
+// Parse intitial facets based on query parameters from a url.
+// Requires the facets be in an object of {facetKey: facetValue}.
 export function buildInitialFacets(queryParams, defaultFacets) {
   const facetKeys = Object.keys(defaultFacets);
   const paramFacetArray = Object.entries(queryParams).filter((obj) => {
@@ -194,6 +202,8 @@ export function buildInitialFacets(queryParams, defaultFacets) {
   };
 }
 
+// Using the queryString library,
+// turn an object of searchEngine query key/values into a url with search parameters.
 export function setSearchURLParams(rootURL, defaultFacets, searchState) {
   const facetKeys = Object.keys(defaultFacets);
   const params = {
@@ -231,6 +241,10 @@ export function setSearchURLParams(rootURL, defaultFacets, searchState) {
   };
 }
 
+// This function will help if facets should be maintained after new search queries.
+// Without this function, when searching facets will be removed from the search page if
+// no datasets match the search. But if you want to maintain a list of facets that were selected
+// even if there are 0 results, this will help but requires a complete list of facets to work. 
 export function filterFacets(
   facetKey, selectedFacets, facetsResults, totalFacets, isStatic = false,
 ) {
