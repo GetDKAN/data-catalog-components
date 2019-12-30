@@ -10,6 +10,7 @@ const DataTable = ({
   columns,
   pageSize,
   pages,
+  currentPage,
   sortedChange,
   pageChange,
   filterChange,
@@ -25,6 +26,7 @@ const DataTable = ({
         index={index}
         data={data}
         filterable
+        page={currentPage}
         pages={pages}
         pageSize={pageSize}
         manual

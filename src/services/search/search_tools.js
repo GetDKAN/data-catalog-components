@@ -44,7 +44,7 @@ export function searchReducer(state, action) {
     case 'SET_SEARCH_PARAMETERS':
       return {
         ...state,
-        searchURL: action.data.url,
+        searchURL: action.data.searchURL,
       };
     case 'UPDATE_SORT':
       return {

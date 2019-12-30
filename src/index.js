@@ -1,8 +1,10 @@
 export { default as AdvancedOptions } from './components/Resource/DataTableHeader/AdvancedOptions';
+export { default as AdvancedOptionsForm } from './components/Resource/DataTableHeader/AdvancedOptions/AdvancedOptionsForm';
 export { default as ApiDocs } from './components/ApiDocs';
 export { default as Blocks } from './components/Blocks';
 export { default as BasicBlock } from './components/Blocks/BasicBlock';
 export { default as Copyright } from './components/Copyright';
+export { default as DataTable } from './components/Resource/DataTable';
 export { default as DataTableHeader } from './components/Resource/DataTableHeader';
 export { default as DataTableDensity } from './components/Resource/DataTableHeader/DataTableDensity';
 export { default as DataTablePageResults } from './components/Resource/DataTableHeader/DataTablePageResults';

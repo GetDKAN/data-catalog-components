@@ -9,7 +9,7 @@ const DataTablePageResults = ({
 }) => {
   // Add one to offset the 0 array index.
   const page = currentPage + 1;
-  const currentLowestResult = 1 + ((pageSize * page) - pageSize);
+  const currentLowestResult = total !== 0 ? 1 + ((pageSize * page) - pageSize) : 0;
   let currentHighestResult = (pageSize * page);
   if (currentHighestResult > total) {
     currentHighestResult = total;

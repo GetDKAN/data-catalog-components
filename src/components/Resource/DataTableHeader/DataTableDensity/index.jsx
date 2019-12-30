@@ -11,13 +11,13 @@ const DataTableDensity = ({
   <div className={className}>
     <span className="density-buttons-title">{title}</span>
     <div className="density-buttons">
-      {items.map((item, index) => {
+      {items.map((item) => {
         let srClass = screenReaderClass;
         if (!item.icon) {
           srClass = '';
         }
         return (
-          <button type="button" key={item.text} onClick={() => densityChange(index)}>
+          <button type="button" key={item.text} onClick={() => densityChange(item.value)}>
             {item.icon
               && (
                 <>
@@ -34,9 +34,9 @@ const DataTableDensity = ({
 
 DataTableDensity.defaultProps = {
   items: [
-    { icon: null, text: 'expanded' },
-    { icon: null, text: 'normal' },
-    { icon: null, text: 'tight' },
+    { icon: null, text: 'expanded', value: 'density-1' },
+    { icon: null, text: 'normal', value: 'density-2' },
+    { icon: null, text: 'tight', value: 'density-3' },
   ],
   className: 'data-table-density',
   screenReaderClass: 'sr-only sr-only-focusable',
