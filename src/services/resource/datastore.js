@@ -61,10 +61,10 @@ export class file extends Datastore {
           //   resolve(count)
           // }
           let count = data.length
-          if (count < 100) {
-            // we get an empty record at the end, if less than a hundred.
-            count = count - 1
-          }
+          // if (count < 100) {
+          //   // we get an empty record at the end, if less than a hundred.
+          //   count = count - 1
+          // }
 
           data = this._sort(data, sort)
 

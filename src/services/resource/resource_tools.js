@@ -142,7 +142,7 @@ export async function getFileDatastore(downloadURL) {
       type: 'USE_STORE',
       data: {
         store,
-        rowsTotal: initCount,
+        rowsTotal: initCount.count,
         columns,
         storeType: 'FILE',
       },
