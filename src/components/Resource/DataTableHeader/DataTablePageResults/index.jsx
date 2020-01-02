@@ -9,10 +9,14 @@ const DataTablePageResults = ({
 }) => {
   // Add one to offset the 0 array index.
   const page = currentPage + 1;
-  const currentLowestResult = 1 + ((pageSize * page) - pageSize);
+  let displayTotal = total;
+  const currentLowestResult = total <= 0 ? 0 : 1 + ((pageSize * page) - pageSize);
   let currentHighestResult = (pageSize * page);
+  if (total < 0) {
+    displayTotal = 0;
+  }
   if (currentHighestResult > total) {
-    currentHighestResult = total;
+    currentHighestResult = displayTotal;
   }
   return (
     <div className={className}>
@@ -25,7 +29,7 @@ const DataTablePageResults = ({
         {' '}
         of
         {' '}
-        <span className="total">{total}</span>
+        <span className="total">{displayTotal}</span>
         {' '}
         rows
       </p>

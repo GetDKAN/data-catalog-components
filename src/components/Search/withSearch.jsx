@@ -3,7 +3,7 @@
 import React from 'react';
 import queryString from 'query-string';
 import axios from 'axios';
-import search from '../../services/search';
+import search from '../../services/search/search';
 
 export default function withSearch(OriginalComponent, apiEndPoint) {
   return class extends React.Component {

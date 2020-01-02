@@ -47,26 +47,30 @@ export class file extends Datastore {
    * to search through.
    */
   async query(query = null, fields = null, facets = null, range = null, page = null, sort = null, count = false) {
-
     return new Promise( (resolve, reject) => {
       this._fetch().then(
         (data) => {
-          data = this._query(data, query)
 
-          if (count) {
-            let count = data.length
-            if (count < 100) {
-              // we get an empty record at the end, if less than a hundred.
-              count = count - 1
-            }
-            resolve(count)
-          }
+          data = this._query(data, query)
+          // if (count) {
+          //   let count = data.length
+          //   if (count < 100) {
+          //     // we get an empty record at the end, if less than a hundred.
+          //     count = count - 1
+          //   }
+          //   resolve(count)
+          // }
+          let count = data.length
+          // if (count < 100) {
+          //   // we get an empty record at the end, if less than a hundred.
+          //   count = count - 1
+          // }
 
           data = this._sort(data, sort)
 
           data = this._page(data, page, range)
 
-          resolve(data)
+          resolve({data: data, count: count})
         }
       )
     })
@@ -141,7 +145,7 @@ export class file extends Datastore {
                 return -Infinity;
               }
               return typeof row[srt.id] === "string"
-                  ? row[srt.id]//.toLowerCase()
+                  ? row[srt.id].toLowerCase()
                   : row[srt.id];
             };
           }),
@@ -159,10 +163,25 @@ export class dkan extends Datastore {
   columns = null
 
   constructor (id, columns, rootUrl) {
-    super();
+    super()
     this.id = id;
     this.columns = columns;
     this.rootUrl = rootUrl;
+  }
+
+  async getDatastoreInfo() {
+    return await axios.get(`${this.rootUrl}datastore/imports/${this.id}`)
+    .then(data => {
+      if(data) {
+        return data.data
+      } else {
+        return null
+      }
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
   }
 
   async getColumns() {
@@ -171,7 +190,9 @@ export class dkan extends Datastore {
     })
   }
 
-  async query(q = null, fields = null, facets = null, range = 0, page = null, sort = null, count = false) {
+  async query(q = null, fields = null, facets = null, range = null, page = null, sort = null, count = false) {
+   
+
     if (sort === null) {
       sort = []
     }
@@ -219,6 +240,7 @@ export class dkan extends Datastore {
         sort_string += " DESC]"
       }
     }
+
     let fields = ""
     let limit_string = ""
 
@@ -229,21 +251,16 @@ export class dkan extends Datastore {
       fields = '*'
       limit_string = '[LIMIT '+ limit +' OFFSET '+ offset +']'
     }
-    query = '/datastore/sql?query=[SELECT ' + fields + ' FROM ' + this.id +']' + where_string + sort_string + limit_string + ';'
+    query = 'datastore/sql/?query=[SELECT ' + fields + ' FROM ' + this.id +']' + where_string + sort_string + limit_string + ';'
     return new Promise((resolve, reject) => {
       axios.get(this.rootUrl + query).then(
           (response) => {
-            if (count && response.data[0]) {
-              resolve(response.data[0].expression)
-            }
-            else {
-              this.data = response.data
-              resolve(this.data);
-            }
+            this.data = response.data;
+            resolve({data: this.data, count: this.data.length})
           },
           (error) => {
             this.data = []
-            resolve(error);
+            resolve(this.data);
           }
       );
     });

@@ -10,6 +10,7 @@ const DataTable = ({
   columns,
   pageSize,
   pages,
+  currentPage,
   sortedChange,
   pageChange,
   filterChange,
@@ -25,8 +26,10 @@ const DataTable = ({
         index={index}
         data={data}
         filterable
+        page={currentPage}
         pages={pages}
         pageSize={pageSize}
+        defaultPageSize={pageSize}
         manual
         defaultFiltered={filtered}
         showPageJump={false}
@@ -43,6 +46,7 @@ const DataTable = ({
 
 DataTable.defaultProps = {
   density: '',
+  filtered: [],
 };
 
 DataTable.propTypes = {
@@ -56,6 +60,8 @@ DataTable.propTypes = {
   filterChange: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   density: PropTypes.string,
+  currentPage: PropTypes.number.isRequired,
+  filtered: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default DataTable;
