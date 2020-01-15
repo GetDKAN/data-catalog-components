@@ -16,6 +16,7 @@ export const defaultSearchState = {
   selectedFacets: [],
   sort: 'date',
   totalItems: 0,
+  items: []
 };
 
 export function searchReducer(state, action) {

@@ -14,6 +14,7 @@ import InputLarge from '../src/components/InputLarge';
 import FacetList from '../src/components/FacetList';
 import SearchInput from '../src/components/SearchInput';
 import SearchResultsMessage from '../src/components/SearchResultsMessage';
+import Search from '../src/templates/search';
 
 import search from './data/search.json';
 
@@ -88,4 +89,5 @@ storiesOf('Search', module)
       showQuery={boolean('Show Query', true)}
       showFacets={boolean('Show Facets', true)}
     />
-  ));
+  ))
+  .add('Search Template', () => (<Search />));
