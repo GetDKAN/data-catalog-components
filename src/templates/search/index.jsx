@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import SearchListItem from "../../components/SearchListItem";
 import SearchInput from "../../components/SearchInput";
 import Pagination from "react-js-pagination";
+import SearchSort from "../../components/SearchSort";
 import { searchReducer, defaultSearchState, SearchDispatch } from "../../services/search/search_tools";
 
 const Search = () => {
@@ -9,11 +10,11 @@ const Search = () => {
   defaultSearchState.pageSize = 2;
   // Initialize the useReducer hook using the imported searchState and reducer.
   const [searchState, dispatch] = useReducer(searchReducer, defaultSearchState);
-  const { items, totalItems, query, page, pageSize } = searchState;
+  const { items, totalItems, query, page, pageSize, sort } = searchState;
 
   // Fetch data on mount and when query changes.
   useEffect(() => {
-    let info = getData(query, page, pageSize);
+    let info = getData(query, page, pageSize, sort);
     
     dispatch({
       type: 'GET_SEARCH_DATA',
@@ -23,14 +24,24 @@ const Search = () => {
         facetsResults: {}
       }});
 
-  }, [query, page, pageSize]);
+  }, [query, page, pageSize, sort]);
 
-  function getData(query, page, pageSize) {
+  function getData(query, page, pageSize, sort) {
     let items = [
-      {title: "Hello", description: "Goodbye"},
-      {title: "Hola", description: "Chao"},
-      {title: "Bonjour", description: "Au revoir"},
+      {title: "Hello", description: "Goodbye", date: 1},
+      {title: "Hola", description: "Chao", date: 3},
+      {title: "Bonjour", description: "Au revoir", date: 2},
     ]
+
+    items.sort((a, b) => {
+      let comparison = 0;
+      if (a[sort] > b[sort]) {
+        comparison = 1;
+      } else if (a[sort] < b[sort]) {
+        comparison = -1;
+      }
+      return comparison;
+    })
 
     if (query) {
       items = items.filter((item) => {
@@ -55,6 +66,16 @@ const Search = () => {
             showSubmit={false}
             value={query}
             resetContent={"Clear text"}
+        />
+        <SearchSort
+          sortFunc={e =>
+            dispatch({ type: "UPDATE_SORT", data: { sort: e.target.value } })
+          }
+          options={ [
+            { value: 'date', label: 'Date' },
+            { value: 'title', label: 'Alphabetical' },
+          ] }
+          currentValue={searchState.sort}
         />
         <ol>
             {items.map(item => (
