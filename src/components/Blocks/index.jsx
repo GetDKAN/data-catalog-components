@@ -1,12 +1,11 @@
 /* eslint-disable */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import Wrapper from './Wrapper';
-import BasicBlock from './BasicBlock';
+import React from "react";
+import PropTypes from "prop-types";
+import Wrapper from "./Wrapper";
+import BasicBlock from "./BasicBlock";
 
 class Blocks extends React.PureComponent {
-
   render() {
     const { items } = this.props;
     const Block = this.props.component;
@@ -14,31 +13,25 @@ class Blocks extends React.PureComponent {
 
     if (paneTitle) {
       return (
-        <Wrapper className={'container-fluid ' + this.props.className}>
+        <Wrapper className={"container-fluid " + this.props.className}>
           <h2>{paneTitle}</h2>
           <div className="pane-content">
-            {
-              this.props.items.map(function(item, index){
-                return <Block content={item} key={index} />;
-              })
-            }
+            {this.props.items.map(function(item, index) {
+              return <Block content={item} key={index} />;
+            })}
           </div>
         </Wrapper>
       );
-    }
-    else {
+    } else {
       return (
-        <Wrapper className={'container-fluid ' + this.props.className}>
-
+        <Wrapper className={"container-fluid " + this.props.className}>
           <div className="pane-content">
-            {
-              this.props.items.map(function(item, index){
-                return <Block content={item} key={index} />;
-              })
-            }
+            {this.props.items.map(function(item, index) {
+              return <Block content={item} key={index} />;
+            })}
           </div>
         </Wrapper>
-      )
+      );
     }
   }
 }
@@ -46,7 +39,7 @@ class Blocks extends React.PureComponent {
 Blocks.defaultProps = {
   items: [],
   component: BasicBlock,
-  className: 'BasicBlock'
+  className: "BasicBlock"
 };
 
 Blocks.propTypes = {
@@ -55,4 +48,4 @@ Blocks.propTypes = {
   className: PropTypes.string
 };
 
-export default Blocks
+export default Blocks;

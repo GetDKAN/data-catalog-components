@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const SearchPageSizer = ({
   className,
@@ -8,28 +8,31 @@ const SearchPageSizer = ({
   label,
   options,
   resizeFunc,
-  showLabel,
+  showLabel
 }) => (
   <div className={className}>
-    {showLabel
-      && <label htmlFor="search-page-sizer">{label}</label> }
+    {showLabel && <label htmlFor="search-page-sizer">{label}</label>}
     <select
       id="search-page-sizer"
       className={inputClasses}
       value={currentValue}
       onChange={resizeFunc}
     >
-      {options.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+      {options.map(opt => (
+        <option key={opt} value={opt}>
+          {opt}
+        </option>
+      ))}
     </select>
   </div>
 );
 
 SearchPageSizer.defaultProps = {
-  className: 'search-page-sizer',
-  inputClasses: 'search-page-sizer-input',
-  label: 'Page Size',
+  className: "search-page-sizer",
+  inputClasses: "search-page-sizer-input",
+  label: "Page Size",
   options: [5, 10, 25, 50],
-  showLabel: true,
+  showLabel: true
 };
 
 SearchPageSizer.propTypes = {
@@ -39,7 +42,7 @@ SearchPageSizer.propTypes = {
   label: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.number),
   resizeFunc: PropTypes.func.isRequired,
-  showLabel: PropTypes.bool,
+  showLabel: PropTypes.bool
 };
 
 export default SearchPageSizer;

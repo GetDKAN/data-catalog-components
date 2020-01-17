@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   .table-hover {
     > tbody tr:nth-of-type(odd):hover,
     > tbody tr:nth-of-type(even):hover {
-      background-color: #FFFEEE;
+      background-color: #fffeee;
     }
   }
   table {
@@ -19,12 +19,13 @@ const Wrapper = styled.div`
         word-break: break-all;
       }
     }
-    tr td, tr th {
+    tr td,
+    tr th {
       border: 1px solid ${props => props.theme.borderColor};
       font-size: 1.4rem;
-      padding: .5rem;
+      padding: 0.5rem;
     }
-    
+
     tr th {
       background: ${props => props.theme.primaryDark};
       border-top-color: ${props => props.theme.primaryDark};

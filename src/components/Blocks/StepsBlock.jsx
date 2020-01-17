@@ -1,10 +1,9 @@
 /* eslint-disable */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 class StepsBlock extends React.PureComponent {
-
   render() {
     const { content } = this.props;
     return (
@@ -13,14 +12,14 @@ class StepsBlock extends React.PureComponent {
         <h3>{content.title}</h3>
         <p>{content.content}</p>
       </div>
-    )
+    );
   }
 }
 
 StepsBlock.propTypes = {
   step: PropTypes.string,
   title: PropTypes.string,
-  content: PropTypes.any,
+  content: PropTypes.any
 };
 
-export default StepsBlock
+export default StepsBlock;

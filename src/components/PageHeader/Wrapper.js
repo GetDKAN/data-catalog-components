@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   position: relative;
@@ -11,7 +11,6 @@ const Wrapper = styled.div`
     font-size: 40px;
     line-height: 46px;
   }
-  
 `;
 
 export default Wrapper;

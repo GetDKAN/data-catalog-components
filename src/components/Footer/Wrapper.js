@@ -17,7 +17,9 @@ const Wrapper = styled.div`
     padding-left: 30px;
     padding-right: 30px;
 
-    h2,h3,h4 {
+    h2,
+    h3,
+    h4 {
       color: ${props => props.theme.footerText};
     }
     a {

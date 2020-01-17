@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { DropTarget } from 'react-dnd';
-import DraggableItem from '../DraggableItem';
+import React from "react";
+import PropTypes from "prop-types";
+import { DropTarget } from "react-dnd";
+import DraggableItem from "../DraggableItem";
 
 const DraggableArea = ({
   onchange,
@@ -9,8 +9,8 @@ const DraggableArea = ({
   excludedColumns,
   connectDropTarget,
   moveCard,
-  itemClasses,
-}) => (
+  itemClasses
+}) =>
   connectDropTarget(
     <fieldset className="target">
       {items.map((item, index) => (
@@ -25,22 +25,19 @@ const DraggableArea = ({
           inputClass={itemClasses.input}
         />
       ))}
-    </fieldset>,
-  )
-);
+    </fieldset>
+  );
 
 const spec = {
   drop(props, monitor) {
     const item = monitor.getItem();
     props.onDrop(item);
     return item;
-  },
-};
-const collect = (connect) => (
-  {
-    connectDropTarget: connect.dropTarget(),
   }
-);
+};
+const collect = connect => ({
+  connectDropTarget: connect.dropTarget()
+});
 
 DraggableArea.propTypes = {
   onchange: PropTypes.func.isRequired,
@@ -50,8 +47,8 @@ DraggableArea.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   itemClasses: PropTypes.shape({
     input: PropTypes.string,
-    label: PropTypes.string,
-  }).isRequired,
+    label: PropTypes.string
+  }).isRequired
 };
 
-export default DropTarget('form-elements', spec, collect)(DraggableArea);
+export default DropTarget("form-elements", spec, collect)(DraggableArea);

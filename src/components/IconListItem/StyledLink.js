@@ -24,9 +24,8 @@ const StyledLink = styled(Link)`
   &:hover {
     background-color: ${props => props.theme.secondaryLight};
     text-decoration: none;
-    color: ${props => props.theme.primaryDark}
-    svg path {
-      fill: ${props => props.theme.primaryDark}
+    color: ${props => props.theme.primaryDark} svg path {
+      fill: ${props => props.theme.primaryDark};
     }
   }
   img {

@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
-import Draggable from '../Draggable';
+import React from "react";
+import PropTypes from "prop-types";
+import _ from "lodash";
+import Draggable from "../Draggable";
 
 class AdvancedOptionsForm extends React.Component {
   constructor(props) {
@@ -9,8 +9,11 @@ class AdvancedOptionsForm extends React.Component {
     const { excludedColumns, columns } = props;
     let { columnOrder } = props;
 
-    if (Object.keys(excludedColumns).length === 0 && excludedColumns.constructor === Object) {
-      columns.map((column) => {
+    if (
+      Object.keys(excludedColumns).length === 0 &&
+      excludedColumns.constructor === Object
+    ) {
+      columns.map(column => {
         const columnKey = column.accessor;
         excludedColumns[columnKey] = true;
         return excludedColumns;
@@ -22,7 +25,7 @@ class AdvancedOptionsForm extends React.Component {
     }
     this.state = {
       excludedColumns,
-      columnOrder,
+      columnOrder
     };
 
     this.moveCard = this.moveCard.bind(this);
@@ -50,21 +53,27 @@ class AdvancedOptionsForm extends React.Component {
     } else if (oldIndex === newIndex) {
       return;
     }
-    this.setState(() => ({
-      columnOrder: localColumnOrder,
-    }), () => reorderColumns(localColumnOrder));
+    this.setState(
+      () => ({
+        columnOrder: localColumnOrder
+      }),
+      () => reorderColumns(localColumnOrder)
+    );
   }
 
   handleColumnChange(event) {
     const { target } = event;
     const { value } = target;
     const { toggleColumns } = this.props;
-    this.setState((prevState) => ({
-      excludedColumns: {
-        ...prevState.excludedColumns,
-        [value]: !prevState.excludedColumns[value],
-      },
-    }), () => toggleColumns(this.state.excludedColumns));
+    this.setState(
+      prevState => ({
+        excludedColumns: {
+          ...prevState.excludedColumns,
+          [value]: !prevState.excludedColumns[value]
+        }
+      }),
+      () => toggleColumns(this.state.excludedColumns)
+    );
   }
 
   render() {
@@ -72,17 +81,16 @@ class AdvancedOptionsForm extends React.Component {
     const { columns, itemClasses } = this.props;
     return (
       <div className="advanced_table_setting_modal">
-        {columns.length
-        && (
-        <form>
-          <Draggable
-            moveCard={this.moveCard}
-            onchange={this.handleColumnChange}
-            excludedColumns={excludedColumns}
-            columns={columnOrder}
-            itemClasses={itemClasses}
-          />
-        </form>
+        {columns.length && (
+          <form>
+            <Draggable
+              moveCard={this.moveCard}
+              onchange={this.handleColumnChange}
+              excludedColumns={excludedColumns}
+              columns={columnOrder}
+              itemClasses={itemClasses}
+            />
+          </form>
         )}
       </div>
     );
@@ -90,7 +98,7 @@ class AdvancedOptionsForm extends React.Component {
 }
 AdvancedOptionsForm.defaultProps = {
   columnOrder: [],
-  excludedColumns: {},
+  excludedColumns: {}
 };
 
 AdvancedOptionsForm.propTypes = {
@@ -101,8 +109,8 @@ AdvancedOptionsForm.propTypes = {
   reorderColumns: PropTypes.func.isRequired,
   itemClasses: PropTypes.shape({
     input: PropTypes.string,
-    label: PropTypes.string,
-  }).isRequired,
+    label: PropTypes.string
+  }).isRequired
 };
 
 export default AdvancedOptionsForm;

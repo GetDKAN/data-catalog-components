@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const DataTablePageSizer = ({
   label,
@@ -8,14 +8,18 @@ const DataTablePageSizer = ({
   options,
   className,
   selectClassName,
-  id,
+  id
 }) => (
   <div className={className}>
     <label htmlFor={`table-${id}`} className="page-size-label">
-      <span className="page-size-label-text">{label}</span>
-      {' '}
-      <select id={`table-${id}`} className={selectClassName} value={currentOption} onChange={pageSizeChange}>
-        {options.map((option) => (
+      <span className="page-size-label-text">{label}</span>{" "}
+      <select
+        id={`table-${id}`}
+        className={selectClassName}
+        value={currentOption}
+        onChange={pageSizeChange}
+      >
+        {options.map(option => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
@@ -26,15 +30,15 @@ const DataTablePageSizer = ({
 );
 
 DataTablePageSizer.defaultProps = {
-  label: 'Rows per page',
-  className: 'page-size-options',
-  currentOption: '20',
+  label: "Rows per page",
+  className: "page-size-options",
+  currentOption: "20",
   options: [
-    { defaultChecked: true, label: '20', value: '20' },
-    { label: '50', value: '50' },
-    { label: '100', value: '100' },
+    { defaultChecked: true, label: "20", value: "20" },
+    { label: "50", value: "50" },
+    { label: "100", value: "100" }
   ],
-  selectClassName: 'page-size-select'
+  selectClassName: "page-size-select"
 };
 
 DataTablePageSizer.propTypes = {
@@ -42,13 +46,15 @@ DataTablePageSizer.propTypes = {
   className: PropTypes.string,
   selectClassName: PropTypes.string,
   pageSizeChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.shape({
-    defaultChecked: PropTypes.bool,
-    label: PropTypes.string,
-    value: PropTypes.string,
-  })),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      defaultChecked: PropTypes.bool,
+      label: PropTypes.string,
+      value: PropTypes.string
+    })
+  ),
   id: PropTypes.string.isRequired,
-  currentOption: PropTypes.string,
+  currentOption: PropTypes.string
 };
 
 export default DataTablePageSizer;

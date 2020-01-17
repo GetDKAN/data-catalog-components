@@ -1,19 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Table from '../../Table';
+import React from "react";
+import PropTypes from "prop-types";
+import Table from "../../Table";
 
-const ResourceInfoTable = ({
-  statistics, title, th1, th2, tableclass,
-}) => {
-  const numRows = 'rows' in statistics ? statistics.rows : '';
-  const numColumns = 'columns' in statistics ? statistics.columns : '';
+const ResourceInfoTable = ({ statistics, title, th1, th2, tableclass }) => {
+  const numRows = "rows" in statistics ? statistics.rows : "";
+  const numColumns = "columns" in statistics ? statistics.columns : "";
   const labelsT1 = {
     rows: {
-      label: numRows.toString(),
-    },
+      label: numRows.toString()
+    }
   };
   const valuesT1 = {
-    rows: numColumns.toString(),
+    rows: numColumns.toString()
   };
 
   return (
@@ -29,20 +27,20 @@ const ResourceInfoTable = ({
 };
 
 ResourceInfoTable.defaultProps = {
-  th1: 'Rows',
-  th2: 'Columns',
-  tableclass: 'table-one',
+  th1: "Rows",
+  th2: "Columns",
+  tableclass: "table-one"
 };
 
 ResourceInfoTable.propTypes = {
   statistics: PropTypes.shape({
     columns: PropTypes.number,
-    rows: PropTypes.number,
+    rows: PropTypes.number
   }).isRequired,
   title: PropTypes.string.isRequired,
   th1: PropTypes.string,
   th2: PropTypes.string,
-  tableclass: PropTypes.string,
+  tableclass: PropTypes.string
 };
 
 export default ResourceInfoTable;

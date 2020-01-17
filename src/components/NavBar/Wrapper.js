@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export default styled.div`
   &.base-styles {
-    background-color: ${(props) => props.theme.navBarBackgroundColor};
-    background-image: ${(props) => props.theme.navBarBackgroundImage};
+    background-color: ${props => props.theme.navBarBackgroundColor};
+    background-image: ${props => props.theme.navBarBackgroundImage};
     position: relative;
     display: block;
     clear: both;
@@ -18,51 +18,51 @@ export default styled.div`
       z-index: -1;
       background: rgba(0, 0, 0, 0.2);
     }
-  
-  .navbar-expand-md {
-    padding: 0;
-  }
-  .navbar-toggler {
-    margin: 0.5rem 1rem;
-  }
-  .nav-item a {
-    display: inline-flex;
-    padding: 0.9em 1.2em;
-    text-decoration: none;
-    -webkit-font-smoothing: antialiased;
-    -webkit-touch-callout: none;
-    user-select: none;
-    cursor: pointer;
-    font-weight: 500;
-    color: ${(props) => props.theme.navBarLink};
-    transition: all 0.2s linear;
 
-    &:hover {
-      color: ${(props) => props.theme.navBarLink};
+    .navbar-expand-md {
+      padding: 0;
+    }
+    .navbar-toggler {
+      margin: 0.5rem 1rem;
+    }
+    .nav-item a {
+      display: inline-flex;
+      padding: 0.9em 1.2em;
       text-decoration: none;
-      background-color: ${(props) => props.theme.navBarLinkHoverBack};
-    }
-    &.active {
-      background-color: none;
-      box-shadow: inset 0 -4px 0 ${(props) => props.theme.navBarLinkActiveHoverBack};
-      text-decoration: none;
-      color: ${(props) => props.theme.navBarLink};
-    }
-    &:hover.active {
-      background-color: none;
-      box-shadow: inset 0 -4px 0 ${(props) => props.theme.navBarLinkActiveHoverBack};
-      color: ${(props) => props.theme.navBarLink};
-    }
-  }
+      -webkit-font-smoothing: antialiased;
+      -webkit-touch-callout: none;
+      user-select: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: ${props => props.theme.navBarLink};
+      transition: all 0.2s linear;
 
-  @media screen and (max-width: 767px) {
-    .nav-item {
-      display: block;
-      width: 100%;
-      a {
+      &:hover {
+        color: ${props => props.theme.navBarLink};
+        text-decoration: none;
+        background-color: ${props => props.theme.navBarLinkHoverBack};
+      }
+      &.active {
+        background-color: none;
+        box-shadow: inset 0 -4px 0 ${props => props.theme.navBarLinkActiveHoverBack};
+        text-decoration: none;
+        color: ${props => props.theme.navBarLink};
+      }
+      &:hover.active {
+        background-color: none;
+        box-shadow: inset 0 -4px 0 ${props => props.theme.navBarLinkActiveHoverBack};
+        color: ${props => props.theme.navBarLink};
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .nav-item {
         display: block;
+        width: 100%;
+        a {
+          display: block;
+        }
       }
     }
   }
-}
 `;

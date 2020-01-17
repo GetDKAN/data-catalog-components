@@ -1,12 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types';
-import StyledLink from './StyledLink'
-import TopicImage from '../TopicImage'
+import React from "react";
+import PropTypes from "prop-types";
+import StyledLink from "./StyledLink";
+import TopicImage from "../TopicImage";
 
 class IconListItem extends React.PureComponent {
-
   render() {
-    let content = '';
+    let content = "";
 
     if (this.props.image) {
       // Image provided as a url.
@@ -15,25 +14,22 @@ class IconListItem extends React.PureComponent {
           <img src={this.props.image} alt={this.props.title} />
           <div>{this.props.title}</div>
         </StyledLink>
-      )
-    }
-    else {
+      );
+    } else {
       // Image provided by custom component.
-      content = ( 
+      content = (
         <StyledLink to={this.props.link}>
-          <TopicImage 
-            title={this.props.title} 
-            size={this.props.size} 
+          <TopicImage
+            title={this.props.title}
+            size={this.props.size}
             fill={this.props.color}
           />
           <div>{this.props.title}</div>
         </StyledLink>
-      )
-    };
+      );
+    }
 
-    return (
-      <li key={this.props.identifier}>{content}</li>
-    )
+    return <li key={this.props.identifier}>{content}</li>;
   }
 }
 
@@ -46,4 +42,4 @@ IconListItem.propTypes = {
   identifier: PropTypes.string
 };
 
-export default IconListItem
+export default IconListItem;

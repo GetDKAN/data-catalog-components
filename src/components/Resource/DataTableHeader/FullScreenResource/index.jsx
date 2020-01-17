@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import AriaModal from 'react-aria-modal';
-import ModalWrapper from './ModalWrapper';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import AriaModal from "react-aria-modal";
+import ModalWrapper from "./ModalWrapper";
 
 const FullScreenResource = ({
   modalOpenBtnText,
@@ -14,60 +14,65 @@ const FullScreenResource = ({
   appNode,
   children,
   includeDefaultStyles,
-  underlayClass,
+  underlayClass
 }) => {
   const [modalOpen, toggleModal] = useState(false);
   return (
     <div className="data-table-fullscreen">
-      {!modalOpen
-        && <button type="button" onClick={() => toggleModal(!modalOpen)}>{modalOpenBtnText}</button>}
-      {modalOpen
-        && (
-          <AriaModal
-            onExit={() => toggleModal(!modalOpen)}
-            getApplicationNode={() => document.getElementById(appNode)}
-            alert
-            focusDialog
-            titleText={titleText}
-            underlayClickExits={false}
-            dialogId="react-aria-fullscreen-modal"
-            verticallyCenter
-            dialogClass={className}
-            includeDefaultStyles={includeDefaultStyles}
-            underlayClass={underlayClass}
-          >
-            <ModalWrapper className={modalClass} role="document">
-              <header className={headerClass}>
-                <h1>{titleText}</h1>
-                <button
-                  type="button"
-                  className={closeModalClasses}
-                  onClick={() => toggleModal(!modalOpen)}
-                >
-                  {closeModalBtnText}
-                </button>
-              </header>
-              <div className="data-table-fullscreen-content" style={{ outline: 0 }}>
-                {children}
-              </div>
-            </ModalWrapper>
-          </AriaModal>
-        )}
+      {!modalOpen && (
+        <button type="button" onClick={() => toggleModal(!modalOpen)}>
+          {modalOpenBtnText}
+        </button>
+      )}
+      {modalOpen && (
+        <AriaModal
+          onExit={() => toggleModal(!modalOpen)}
+          getApplicationNode={() => document.getElementById(appNode)}
+          alert
+          focusDialog
+          titleText={titleText}
+          underlayClickExits={false}
+          dialogId="react-aria-fullscreen-modal"
+          verticallyCenter
+          dialogClass={className}
+          includeDefaultStyles={includeDefaultStyles}
+          underlayClass={underlayClass}
+        >
+          <ModalWrapper className={modalClass} role="document">
+            <header className={headerClass}>
+              <h1>{titleText}</h1>
+              <button
+                type="button"
+                className={closeModalClasses}
+                onClick={() => toggleModal(!modalOpen)}
+              >
+                {closeModalBtnText}
+              </button>
+            </header>
+            <div
+              className="data-table-fullscreen-content"
+              style={{ outline: 0 }}
+            >
+              {children}
+            </div>
+          </ModalWrapper>
+        </AriaModal>
+      )}
     </div>
   );
 };
 
 FullScreenResource.defaultProps = {
-  modalOpenBtnText: 'Full Screen',
-  className: 'data-table-fullscreen',
-  modalClass: 'data-table-fullscreen-modal',
-  closeModalBtnText: 'Close',
-  closeModalClasses: 'fullscreen-modal-close',
-  titleText: 'Dataset explorer',
-  appNode: '___gatsby',
+  modalOpenBtnText: "Full Screen",
+  className: "data-table-fullscreen",
+  modalClass: "data-table-fullscreen-modal",
+  closeModalBtnText: "Close",
+  closeModalClasses: "fullscreen-modal-close",
+  titleText: "Dataset explorer",
+  appNode: "___gatsby",
   includeDefaultStyles: true,
-  underlayClass: 'modal-underlay',
-  headerClass: 'modal-header',
+  underlayClass: "modal-underlay",
+  headerClass: "modal-header"
 };
 
 FullScreenResource.propTypes = {
@@ -81,7 +86,7 @@ FullScreenResource.propTypes = {
   underlayClass: PropTypes.string,
   includeDefaultStyles: PropTypes.bool,
   headerClass: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export default FullScreenResource;

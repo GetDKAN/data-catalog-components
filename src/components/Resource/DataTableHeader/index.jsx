@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import DataTablePageResults from './DataTablePageResults';
-import DataTableDensity from './DataTableDensity';
-import DataTablePageSizer from './DataTablePageSizer';
-import AdvancedOptions from './AdvancedOptions';
-import Wrapper from './Wrapper';
-import FullScreenResource from './FullScreenResource';
+import React from "react";
+import PropTypes from "prop-types";
+import DataTablePageResults from "./DataTablePageResults";
+import DataTableDensity from "./DataTableDensity";
+import DataTablePageSizer from "./DataTablePageSizer";
+import AdvancedOptions from "./AdvancedOptions";
+import Wrapper from "./Wrapper";
+import FullScreenResource from "./FullScreenResource";
 
 const DataTableHeader = ({
   dataPreview,
@@ -14,32 +14,29 @@ const DataTableHeader = ({
   className,
   options,
   FullScreenComponent,
-  fullScreenMode,
+  fullScreenMode
 }) => {
   const {
     pageSizer,
     pageResults,
     advancedOptions,
     tableDensity,
-    fullScreen,
+    fullScreen
   } = options;
-  const {
-    className: pageResultsClass,
-    hidePageResults,
-  } = pageResults;
+  const { className: pageResultsClass, hidePageResults } = pageResults;
   const {
     label,
     selectOptions,
     className: pageSizerClass,
     hidePageSizer,
-    selectClassName,
+    selectClassName
   } = pageSizer;
   const {
     items,
     className: densityClass,
     screenReaderClass,
     title,
-    hideDisplayDensity,
+    hideDisplayDensity
   } = tableDensity;
   const {
     titleText,
@@ -57,7 +54,7 @@ const DataTableHeader = ({
     modalClass,
     itemClasses,
     headerClass,
-    closeModalClasses,
+    closeModalClasses
   } = advancedOptions;
   const {
     modalOpenBtnText: fsModalOpenBtnText,
@@ -70,13 +67,12 @@ const DataTableHeader = ({
     appNode: fsAppNode,
     includeDefaultStyles: fsIncludeDefaultStyles,
     underlayClass: fsUnderlayClass,
-    hideFullScreen,
+    hideFullScreen
   } = fullScreen;
   return (
     <Wrapper>
       <div className={className}>
-        { !hidePageResults
-        && (
+        {!hidePageResults && (
           <DataTablePageResults
             total={parseInt(dataPreview.rowsTotal, 10)}
             pageSize={dataPreview.pageSize}
@@ -84,8 +80,7 @@ const DataTableHeader = ({
             className={pageResultsClass}
           />
         )}
-        { !hidePageSizer
-        && (
+        {!hidePageSizer && (
           <DataTablePageSizer
             pageSizeChange={dataFunctions.pageSizeChange}
             currentOption={dataPreview.pageSize.toString()}
@@ -96,8 +91,7 @@ const DataTableHeader = ({
             id={id}
           />
         )}
-        { !hideDisplayDensity
-        && (
+        {!hideDisplayDensity && (
           <DataTableDensity
             densityChange={dataFunctions.densityChange}
             items={items}
@@ -106,8 +100,7 @@ const DataTableHeader = ({
             title={title}
           />
         )}
-        { !hideAdvancedOptions
-        && (
+        {!hideAdvancedOptions && (
           <AdvancedOptions
             columns={dataPreview.columns}
             excludedColumns={dataPreview.excludedColumns}
@@ -131,8 +124,7 @@ const DataTableHeader = ({
             actionsClassNames={actionsClassNames}
           />
         )}
-        {(!hideFullScreen && !fullScreenMode || !fullScreenMode)
-        && (
+        {((!hideFullScreen && !fullScreenMode) || !fullScreenMode) && (
           <FullScreenResource
             modalOpenBtnText={fsModalOpenBtnText}
             className={fsDialogClass}
@@ -154,42 +146,42 @@ const DataTableHeader = ({
 };
 
 DataTableHeader.defaultProps = {
-  className: 'data-table-header',
+  className: "data-table-header",
   options: {
     pageResults: {
       hidePageResults: false,
-      className: 'data-table-results',
+      className: "data-table-results"
     },
     pageSizer: {
       hidePageSizer: false,
-      label: 'Rows per page',
+      label: "Rows per page",
       selectOptions: [
-        { defaultChecked: true, label: '20', value: '20' },
-        { label: '50', value: '50' },
-        { label: '100', value: '100' },
+        { defaultChecked: true, label: "20", value: "20" },
+        { label: "50", value: "50" },
+        { label: "100", value: "100" }
       ],
-      className: 'page-size-options',
+      className: "page-size-options"
     },
     tableDensity: {
       hideDisplayDensity: false,
       items: [
-        { icon: null, text: 'expanded' },
-        { icon: null, text: 'normal' },
-        { icon: null, text: 'tight' },
+        { icon: null, text: "expanded" },
+        { icon: null, text: "normal" },
+        { icon: null, text: "tight" }
       ],
-      className: 'data-table-density',
-      screenReaderClass: 'sr-only sr-only-focusable',
-      title: 'Display Density',
+      className: "data-table-density",
+      screenReaderClass: "sr-only sr-only-focusable",
+      title: "Display Density"
     },
     advancedOptions: {
-      hideAdvancedOptions: false,
+      hideAdvancedOptions: false
     },
     fullscreen: {
-      hideFullScreen: false,
-    },
+      hideFullScreen: false
+    }
   },
   FullScreenComponent: null,
-  fullScreenMode: false,
+  fullScreenMode: false
 };
 
 DataTableHeader.propTypes = {
@@ -204,31 +196,33 @@ DataTableHeader.propTypes = {
     pageSize: PropTypes.number,
     rowsTotal: PropTypes.string,
     sort: PropTypes.array,
-    values: PropTypes.arrayOf(PropTypes.object),
+    values: PropTypes.arrayOf(PropTypes.object)
   }).isRequired,
   options: PropTypes.shape({
     pageResultsOptions: PropTypes.shape({
-      className: PropTypes.string,
+      className: PropTypes.string
     }),
     pageSizerOptions: PropTypes.shape({
       label: PropTypes.string,
       options: PropTypes.arrayOf(PropTypes.object),
-      className: PropTypes.string,
+      className: PropTypes.string
     }),
     displayDensityOptions: PropTypes.shape({
       screenReaderClass: PropTypes.string,
       className: PropTypes.string,
-      items: PropTypes.arrayOf(PropTypes.shape({
-        icon: PropTypes.node,
-        text: PropTypes.string,
-      })),
-      title: PropTypes.string,
-    }),
+      items: PropTypes.arrayOf(
+        PropTypes.shape({
+          icon: PropTypes.node,
+          text: PropTypes.string
+        })
+      ),
+      title: PropTypes.string
+    })
   }),
   id: PropTypes.string.isRequired,
   dataFunctions: PropTypes.objectOf(PropTypes.func).isRequired,
   FullScreenComponent: PropTypes.node,
-  fullScreenMode: PropTypes.bool,
+  fullScreenMode: PropTypes.bool
 };
 
 export default DataTableHeader;

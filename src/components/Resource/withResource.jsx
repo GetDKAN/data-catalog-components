@@ -1,11 +1,9 @@
 /* eslint react/prop-types: 0 */
-import React from 'react';
-import axios from 'axios';
-import datastore from '../../services/resource/datastore';
+import React from "react";
+import axios from "axios";
+import datastore from "../../services/resource/datastore";
 
-export default function withResource(
-  OriginalComponent,
-) {
+export default function withResource(OriginalComponent) {
   return class extends React.Component {
     constructor(props) {
       super(props);
@@ -17,26 +15,26 @@ export default function withResource(
         dataPreview: {
           values: [],
           pageSize: 20,
-          rowsTotal: '0',
+          rowsTotal: "0",
           currentPage: 0,
           filters: [],
           sort: [],
           columns: this.columns,
-          density: 'density-3',
+          density: "density-3",
           columnOrder: [],
-          excludedColumns: {},
+          excludedColumns: {}
         },
         dataInfo: {},
         dataFunctions: {
-          pageChange: (page) => this.pageChange(page),
-          sortChange: (sort) => this.sortChange(sort),
-          filterChange: (filters) => this.filterChange(filters),
-          densityChange: (value) => this.densityChange(value),
-          pageSizeChange: (event) => this.pageSizeChange(event),
-          reorderColumns: (columns) => this.reorderColumns(columns),
-          toggleColumns: (columns) => this.toggleColumns(columns),
-          activeColumns: (columns) => this.activeColumns(columns)
-        },
+          pageChange: page => this.pageChange(page),
+          sortChange: sort => this.sortChange(sort),
+          filterChange: filters => this.filterChange(filters),
+          densityChange: value => this.densityChange(value),
+          pageSizeChange: event => this.pageSizeChange(event),
+          reorderColumns: columns => this.reorderColumns(columns),
+          toggleColumns: columns => this.toggleColumns(columns),
+          activeColumns: columns => this.activeColumns(columns)
+        }
       };
 
       this.activeColumns = this.activeColumns.bind(this);
@@ -61,46 +59,60 @@ export default function withResource(
           resolve(this.store);
         } else {
           if (this.columns.length > 0) {
-            let store = new datastore['dkan'](data.identifier, this.columns, rootUrl);
-            store.query(null, null, null, 0, null, null, true)
-              .then((data) => {
+            let store = new datastore["dkan"](
+              data.identifier,
+              this.columns,
+              rootUrl
+            );
+            store.query(null, null, null, 0, null, null, true).then(data => {
               this.store = store;
-              this.storeType = 'dkan'
+              this.storeType = "dkan";
               resolve(store);
-              })
+            });
           } else {
-            let store = new datastore['file'](data.data.downloadURL);
-            store.query(null, null, null, 0, null, null, true)
-              .then((data) => {
-                if (data) {
-                  this.store = store;
-                  this.storeType = 'file'
-                  this.setState({store: store})
-                  resolve(store);
-                } else {
-                  reject("No datastore available.")
-                }
-              })
+            let store = new datastore["file"](data.data.downloadURL);
+            store.query(null, null, null, 0, null, null, true).then(data => {
+              if (data) {
+                this.store = store;
+                this.storeType = "file";
+                this.setState({ store: store });
+                resolve(store);
+              } else {
+                reject("No datastore available.");
+              }
+            });
           }
         }
       });
     }
 
-    async getData(fields = null, facets = null, range = null, page = null, count = false) {
+    async getData(
+      fields = null,
+      facets = null,
+      range = null,
+      page = null,
+      count = false
+    ) {
       const { dataPreview } = this.state;
       const { sort } = dataPreview;
       const query = dataPreview.filters.length ? dataPreview.filters : null;
       if (count) {
-        await this.store.query(query, fields, facets, range, page, sort, count).then((data) => {
-          dataPreview.rowsTotal = data;
-        });
-        await this.store.query(query, fields, facets, range, page, sort).then((data) => {
-          dataPreview.values = data;
-        });
+        await this.store
+          .query(query, fields, facets, range, page, sort, count)
+          .then(data => {
+            dataPreview.rowsTotal = data;
+          });
+        await this.store
+          .query(query, fields, facets, range, page, sort)
+          .then(data => {
+            dataPreview.values = data;
+          });
       } else {
-        await this.store.query(query, fields, facets, range, page, sort).then((data) => {
-          dataPreview.values = data;
-        });
+        await this.store
+          .query(query, fields, facets, range, page, sort)
+          .then(data => {
+            dataPreview.values = data;
+          });
       }
       this.setState({ dataPreview });
     }
@@ -111,8 +123,9 @@ export default function withResource(
       let columns = null;
 
       if (data.identifier !== undefined) {
-        await axios.get(`${rootUrl}/datastore/imports/${data.identifier}`)
-          .then((response) => {
+        await axios
+          .get(`${rootUrl}/datastore/imports/${data.identifier}`)
+          .then(response => {
             this.columns = response.data.columns ? response.data.columns : [];
             columns = this.columns;
             this.setState({
@@ -121,32 +134,38 @@ export default function withResource(
                 data: data.data,
                 datastore_statistics: {
                   rows: response.data.numOfRows,
-                  columns: response.data.numOfColumns,
+                  columns: response.data.numOfColumns
                 },
-                indentifier: data.identifier,
-              },
+                indentifier: data.identifier
+              }
             });
           })
-          .catch((error) => (
-            console.log(error)
-          ));
+          .catch(error => console.log(error));
       }
       let store = await this.getStore();
       if (columns === null) {
         columns = await store.getColumns();
       }
       // dataPreview.columns = this.activeColumns(this.prepareColumns(columns));
-      dataPreview.columns = await this.activeColumns(this.prepareColumns(columns));
-      await this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage, true);
+      dataPreview.columns = await this.activeColumns(
+        this.prepareColumns(columns)
+      );
+      await this.getData(
+        null,
+        null,
+        dataPreview.pageSize,
+        dataPreview.currentPage,
+        true
+      );
       this.setState({ dataPreview });
     }
 
     prepareColumns(columns) {
-      return columns.map((column) => {
+      return columns.map(column => {
         return {
           Header: column,
           accessor: column
-        }
+        };
       });
     }
 
@@ -154,7 +173,7 @@ export default function withResource(
     async pageChange(page) {
       const { dataPreview } = this.state;
       dataPreview.currentPage = page;
-      this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage)
+      this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage);
     }
 
     async filterChange(filters) {
@@ -162,7 +181,13 @@ export default function withResource(
       dataPreview.filters = filters;
       // When filtering the pages gets reset.
       dataPreview.currentPage = 0;
-      this.getData(null, null, dataPreview.pageSize, dataPreview.currentPage, true);
+      this.getData(
+        null,
+        null,
+        dataPreview.pageSize,
+        dataPreview.currentPage,
+        true
+      );
     }
 
     async sortChange(sort) {
@@ -208,12 +233,11 @@ export default function withResource(
       if (columnOrder.length) {
         newItems = columnOrder;
       }
-      Object.keys(excludedColumnsData)
-        .forEach(function eachKey(key) {
-          if(!excludedColumnsData[key]) {
-            excludedArray.push(key);
-          }
-        });
+      Object.keys(excludedColumnsData).forEach(function eachKey(key) {
+        if (!excludedColumnsData[key]) {
+          excludedArray.push(key);
+        }
+      });
       return newItems.reduce((columns, item) => {
         if (!excludedArray.includes(item.accessor)) {
           columns.push(item);

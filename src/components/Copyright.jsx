@@ -21,6 +21,3 @@ Copyright.propTypes = {
 };
 
 export default Copyright;
-
-
-

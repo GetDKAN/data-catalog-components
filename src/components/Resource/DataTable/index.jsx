@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactTable from 'react-table';
-import Wrapper from './Wrapper';
-import 'react-table/react-table.css';
+import React from "react";
+import PropTypes from "prop-types";
+import ReactTable from "react-table";
+import Wrapper from "./Wrapper";
+import "react-table/react-table.css";
 
 const DataTable = ({
   data,
@@ -16,9 +16,11 @@ const DataTable = ({
   filterChange,
   index,
   density,
-  filtered,
+  filtered
 }) => {
-  const style = density ? `${density} -striped -highlight` : '-striped -highlight';
+  const style = density
+    ? `${density} -striped -highlight`
+    : "-striped -highlight";
   return (
     <Wrapper>
       <ReactTable
@@ -45,8 +47,8 @@ const DataTable = ({
 };
 
 DataTable.defaultProps = {
-  density: '',
-  filtered: [],
+  density: "",
+  filtered: []
 };
 
 DataTable.propTypes = {
@@ -61,7 +63,7 @@ DataTable.propTypes = {
   index: PropTypes.number.isRequired,
   density: PropTypes.string,
   currentPage: PropTypes.number.isRequired,
-  filtered: PropTypes.arrayOf(PropTypes.object),
+  filtered: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default DataTable;

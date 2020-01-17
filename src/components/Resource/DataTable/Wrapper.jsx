@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   .density-1 .rt-tbody .rt-td {
@@ -11,10 +11,10 @@ const Wrapper = styled.div`
     padding: 5px 5px;
   }
   .-striped .rt-tr.-odd {
-    background-color: rgba(0,0,0,.05);
+    background-color: rgba(0, 0, 0, 0.05);
   }
   .-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
-    background-color: #FFFEEE;
+    background-color: #fffeee;
   }
 `;
 

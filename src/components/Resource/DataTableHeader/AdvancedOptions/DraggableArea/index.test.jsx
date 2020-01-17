@@ -1,21 +1,21 @@
-import React from 'react';
-import { wrapInTestContext } from 'react-dnd-test-utils';
-import { mount } from 'enzyme';
-import DraggableArea from '.';
+import React from "react";
+import { wrapInTestContext } from "react-dnd-test-utils";
+import { mount } from "enzyme";
+import DraggableArea from ".";
 
 const excludedColumns = {
   foo: true,
-  dkan: true,
+  dkan: true
 };
 
 const items = [
-  { Header: 'foo', accessor: 'bar' },
-  { Header: 'dkan', accessor: 'getDKAN' },
+  { Header: "foo", accessor: "bar" },
+  { Header: "dkan", accessor: "getDKAN" }
 ];
 
-describe('<DraggableArea />', () => {
+describe("<DraggableArea />", () => {
   const DraggableContent = wrapInTestContext(DraggableArea);
-  const identity = (el) => el;
+  const identity = el => el;
   const area = mount(
     <DraggableContent
       onchange={identity}
@@ -24,13 +24,18 @@ describe('<DraggableArea />', () => {
       connectDropTarget={identity}
       moveCard={identity}
       onDrop={identity}
-      itemClasses={{ label: 'dkan', input: 'foobar' }}
-    />,
+      itemClasses={{ label: "dkan", input: "foobar" }}
+    />
   );
 
-  it('renders correct initial results', () => {
-    expect(area.exists('fieldset')).toBe(true);
-    expect(area.find('div')).toHaveLength(2);
-    expect(area.find('div label').first().text()).toBe('foo');
+  it("renders correct initial results", () => {
+    expect(area.exists("fieldset")).toBe(true);
+    expect(area.find("div")).toHaveLength(2);
+    expect(
+      area
+        .find("div label")
+        .first()
+        .text()
+    ).toBe("foo");
   });
 });

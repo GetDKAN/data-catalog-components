@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const FormGroup = styled.div`
   font-size: 1.6rem;
@@ -15,7 +15,7 @@ const FormGroup = styled.div`
   .input-group-btn {
     display: inline-block;
     button {
-      background-color: ${(props) => props.theme.primary};
+      background-color: ${props => props.theme.primary};
       border: none;
       border-radius: 100px;
       color: #fff;
@@ -34,7 +34,7 @@ const FormGroup = styled.div`
       white-space: nowrap;
       &:hover,
       &:focus {
-        background-color: ${(props) => props.theme.primaryDark};
+        background-color: ${props => props.theme.primaryDark};
       }
     }
   }

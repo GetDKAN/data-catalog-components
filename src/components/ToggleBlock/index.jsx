@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 export default function ToggleBlock({
   customId,
@@ -9,7 +9,7 @@ export default function ToggleBlock({
   headingClasses,
   innerClasses,
   allowToggle,
-  defaultClosed,
+  defaultClosed
 }) {
   const [show, toggleShow] = useState(!defaultClosed);
   let toggleBlockHeading = <h2 className={headingClasses}>{title}</h2>;
@@ -23,14 +23,9 @@ export default function ToggleBlock({
     );
   }
   return (
-    <div id={customId} className={`${className} ${show ? 'open' : 'closed'}`}>
+    <div id={customId} className={`${className} ${show ? "open" : "closed"}`}>
       {toggleBlockHeading}
-      {show
-        && (
-          <div className={innerClasses}>
-            {children}
-          </div>
-        )}
+      {show && <div className={innerClasses}>{children}</div>}
     </div>
   );
 }
@@ -38,10 +33,10 @@ export default function ToggleBlock({
 ToggleBlock.defaultProps = {
   customId: undefined,
   allowToggle: true,
-  headingClasses: 'toggle-block-title',
-  innerClasses: 'toggle-block-inner',
-  className: 'toggle-block',
-  defaultClosed: false,
+  headingClasses: "toggle-block-title",
+  innerClasses: "toggle-block-inner",
+  className: "toggle-block",
+  defaultClosed: false
 };
 
 ToggleBlock.propTypes = {
@@ -52,5 +47,5 @@ ToggleBlock.propTypes = {
   innerClasses: PropTypes.string,
   allowToggle: PropTypes.bool,
   className: PropTypes.string,
-  defaultClosed: PropTypes.bool,
+  defaultClosed: PropTypes.bool
 };

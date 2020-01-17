@@ -1,9 +1,9 @@
 /* eslint-disable */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import Text from '../Text';
-import Wrapper from './Wrapper';
+import React from "react";
+import PropTypes from "prop-types";
+import Text from "../Text";
+import Wrapper from "./Wrapper";
 
 class BasicBlock extends React.PureComponent {
   render() {
@@ -14,13 +14,13 @@ class BasicBlock extends React.PureComponent {
         <h2>{content.title}</h2>
         <Text value={content.content} />
       </Wrapper>
-    )
+    );
   }
 }
 
 BasicBlock.propTypes = {
   title: PropTypes.string,
-  content: PropTypes.any,
+  content: PropTypes.any
 };
 
-export default BasicBlock
+export default BasicBlock;

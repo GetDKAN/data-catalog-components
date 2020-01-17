@@ -1,9 +1,9 @@
 /* eslint-disable no-plusplus */
 /* eslint react/prop-types: 0 */
-import React from 'react';
-import queryString from 'query-string';
-import axios from 'axios';
-import search from '../../services/search/search';
+import React from "react";
+import queryString from "query-string";
+import axios from "axios";
+import search from "../../services/search/search";
 
 export default function withSearch(OriginalComponent, apiEndPoint) {
   return class extends React.Component {
@@ -11,7 +11,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
      * Maps search results to something like a familiar schema.
      */
     static async normalize(items) {
-      return items.map((x) => {
+      return items.map(x => {
         let item = {};
         item = {
           identifier: x.identifier,
@@ -20,12 +20,15 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
           theme: x.theme,
           format: x.distribution,
           title: x.title,
-          ref: `/dataset/${x.identifier}`,
+          ref: `/dataset/${x.identifier}`
         };
-        if (Object.prototype.hasOwnProperty.call(x, 'publisher') && Object.prototype.hasOwnProperty.call(x, 'name')) {
+        if (
+          Object.prototype.hasOwnProperty.call(x, "publisher") &&
+          Object.prototype.hasOwnProperty.call(x, "name")
+        ) {
           item.publisher = x.publisher.name;
         } else {
-          item.publisher = '';
+          item.publisher = "";
         }
         return item;
       });
@@ -37,17 +40,17 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       this.dynamicURL = apiEndPoint;
       this.sortOptions = [
         {
-          title: 'Relevance',
-          value: 'relevance',
+          title: "Relevance",
+          value: "relevance"
         },
         {
-          title: 'Date',
-          value: 'date',
+          title: "Date",
+          value: "date"
         },
         {
-          title: 'Alphabetical',
-          value: 'alpha',
-        },
+          title: "Alphabetical",
+          value: "alpha"
+        }
       ];
       this.state = {
         searchEngine: false,
@@ -55,7 +58,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
         selectedFacets: props.selectedFacets || [],
         totalFacets: {},
         facetsResults: {},
-        searchLink: '',
+        searchLink: ""
       };
 
       this.handleSortChange = this.handleSortChange.bind(this);
@@ -81,7 +84,10 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
     componentDidUpdate(prevProps) {
       const { location } = this.props;
       // Typical usage (don't forget to compare props):
-      if (location.search !== undefined && (location.search !== prevProps.location.search)) {
+      if (
+        location.search !== undefined &&
+        location.search !== prevProps.location.search
+      ) {
         this.resolveParams();
         this.fetchData();
       }
@@ -93,7 +99,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
     setUrl() {
       const { facets } = this.props;
       const { searchParams } = this.state;
-      const searchUrl = '/search';
+      const searchUrl = "/search";
       const newParams = {};
       const facetKeys = Object.keys(facets);
       const facetParams = searchParams.facets;
@@ -113,8 +119,8 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
 
       for (let i = 0; i < facetKeys.length; i += 1) {
         const key = facetKeys[i];
-        let paramString = '';
-        const facetItems = facetParams.filter((param) => {
+        let paramString = "";
+        const facetItems = facetParams.filter(param => {
           if (param[0] === key) {
             return param[1];
           }
@@ -128,10 +134,12 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
           newParams[key.toLowerCase()] = paramString;
         }
       }
-      const searchUrlParams = `${searchUrl}?${queryString.stringify(newParams)}`;
+      const searchUrlParams = `${searchUrl}?${queryString.stringify(
+        newParams
+      )}`;
       this.setState({ searchLink: searchUrlParams });
       if (window !== undefined) {
-        window.history.pushState({}, 'Search', `${searchUrlParams}`);
+        window.history.pushState({}, "Search", `${searchUrlParams}`);
       }
     }
 
@@ -142,12 +150,12 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       const { facets } = this.props;
       const searchType = this.searchEngineType;
       const searchEngine = new search[searchType]();
-      if (searchType === 'Lunr') {
+      if (searchType === "Lunr") {
         const { data } = await axios.get(apiEndPoint);
         await searchEngine.init(data, facets);
       }
       this.setState({
-        searchEngine,
+        searchEngine
       });
       await this.fetchData(true);
     }
@@ -171,11 +179,13 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
         searchParams.q = queryParams.q;
       }
       const facetKeys = Object.keys(facets);
-      const paramFacetArray = Object.entries(queryParams).filter((obj) => {
+      const paramFacetArray = Object.entries(queryParams).filter(obj => {
         for (let i = 0; i < facetKeys.length; i += 1) {
           if (facetKeys[i].toLowerCase() === obj[0]) {
             const capitalKey = obj[0].charAt(0).toUpperCase() + obj[0].slice(1);
-            const newFacetArray = obj[1].split(',').map((param) => [capitalKey, param]);
+            const newFacetArray = obj[1]
+              .split(",")
+              .map(param => [capitalKey, param]);
             return newFacetArray;
           }
         }
@@ -187,7 +197,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
 
       this.setState({
         searchParams,
-        selectedFacets,
+        selectedFacets
       });
     }
 
@@ -197,11 +207,21 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
     async fetchData(isInit = false) {
       const { searchParams, selectedFacets, searchEngine } = this.state;
       if (isInit) {
-        const r = await searchEngine.query('', [], searchParams.pageSize, searchParams.page, searchParams.sort);
+        const r = await searchEngine.query(
+          "",
+          [],
+          searchParams.pageSize,
+          searchParams.page,
+          searchParams.sort
+        );
         await this.setState({ totalFacets: r.facetsResults });
       }
       const r = await searchEngine.query(
-        searchParams.q, selectedFacets, searchParams.pageSize, searchParams.page, searchParams.sort,
+        searchParams.q,
+        selectedFacets,
+        searchParams.pageSize,
+        searchParams.page,
+        searchParams.sort
       );
       const items = await this.constructor.normalize(r.results);
       const { facetsResults, total } = r;
@@ -209,7 +229,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
         items,
         total,
         facetsResults,
-        show: false,
+        show: false
       });
       if (!isInit) {
         await this.setUrl();
@@ -255,7 +275,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       const { searchParams } = this.state;
       let term;
       if (reset) {
-        term = '';
+        term = "";
       } else {
         term = event.target.value;
       }
@@ -281,21 +301,23 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       if (active === true) {
         updatedFacets.push([facetType, facetValue]);
       } else {
-        updatedFacets = selectedFacets.filter((facet) => (facet[1] !== facetValue));
+        updatedFacets = selectedFacets.filter(facet => facet[1] !== facetValue);
       }
       searchParams.page = 1;
       searchParams.facets = updatedFacets;
       await this.setState({
         searchParams,
-        selectedFacets: updatedFacets,
+        selectedFacets: updatedFacets
       });
       await this.fetchData();
     }
 
     staticFacets(facetKey) {
       const { totalFacets, facetsResults } = this.state;
-      const returnedFacets = totalFacets[facetKey].map((facet) => {
-        const hasResults = facetsResults[facetKey].find((element) => element[0] === facet[0]);
+      const returnedFacets = totalFacets[facetKey].map(facet => {
+        const hasResults = facetsResults[facetKey].find(
+          element => element[0] === facet[0]
+        );
         if (!hasResults) {
           return [facet[0], 0];
         }
@@ -306,27 +328,30 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
 
     filteredFacets(facetKey) {
       const { totalFacets, selectedFacets, facetsResults } = this.state;
-      const returnedFacets = totalFacets[facetKey].filter((facet) => {
-        const hasResults = facetsResults[facetKey].find((activeFacet) => (
-          activeFacet[0] === facet[0]
-        ));
-        const selected = selectedFacets.find((selectedFacet) => (
-          (selectedFacet[1].toLowerCase() === facet[0].toLowerCase())
-          && (selectedFacet[0].toLowerCase() === facetKey.toLowerCase())
-        ));
-        if (selected || hasResults) {
-          return facet;
-        }
-        return false;
-      }).map((facet) => {
-        const hasResults = facetsResults[facetKey].find((activeFacet) => (
-          activeFacet[0] === facet[0]
-        ));
-        if (hasResults) {
-          return [facet[0], hasResults[1]];
-        }
-        return [facet[0], 0];
-      });
+      const returnedFacets = totalFacets[facetKey]
+        .filter(facet => {
+          const hasResults = facetsResults[facetKey].find(
+            activeFacet => activeFacet[0] === facet[0]
+          );
+          const selected = selectedFacets.find(
+            selectedFacet =>
+              selectedFacet[1].toLowerCase() === facet[0].toLowerCase() &&
+              selectedFacet[0].toLowerCase() === facetKey.toLowerCase()
+          );
+          if (selected || hasResults) {
+            return facet;
+          }
+          return false;
+        })
+        .map(facet => {
+          const hasResults = facetsResults[facetKey].find(
+            activeFacet => activeFacet[0] === facet[0]
+          );
+          if (hasResults) {
+            return [facet[0], hasResults[1]];
+          }
+          return [facet[0], 0];
+        });
       return returnedFacets;
     }
 
@@ -337,7 +362,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
         updatedFacets = selectedFacets;
       }
       if (facetKey) {
-        updatedFacets = updatedFacets.filter((facet) => {
+        updatedFacets = updatedFacets.filter(facet => {
           if (facet[0].toLowerCase() !== facetKey.toLowerCase()) {
             return facet;
           }
@@ -349,7 +374,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
       searchParams.facets = updatedFacets;
       await this.setState({
         searchParams,
-        selectedFacets: updatedFacets,
+        selectedFacets: updatedFacets
       });
       await this.fetchData();
     }
@@ -357,15 +382,16 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
     async paginationResults() {
       const { total, searchParams } = this.state;
       const startingNumber = total > 0 ? 1 : 0;
-      const currentLowestResult = startingNumber
-        + ((searchParams.pageSize * searchParams.page) - searchParams.pageSize);
-      let currentHighestResult = (searchParams.pageSize * searchParams.page);
+      const currentLowestResult =
+        startingNumber +
+        (searchParams.pageSize * searchParams.page - searchParams.pageSize);
+      let currentHighestResult = searchParams.pageSize * searchParams.page;
       if (currentHighestResult > total) {
         currentHighestResult = total;
       }
       return {
         currentHighestResult,
-        currentLowestResult,
+        currentLowestResult
       };
     }
 
@@ -377,7 +403,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
         total,
         searchParams,
         selectedFacets,
-        searchLink,
+        searchLink
       } = this.state;
       return (
         <OriginalComponent
@@ -391,7 +417,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
           selectedFacets={selectedFacets}
           searchLink={searchLink}
           options={{
-            sort: this.sortOptions,
+            sort: this.sortOptions
           }}
           searchFunctions={{
             sort: this.handleSortChange,
@@ -402,7 +428,7 @@ export default function withSearch(OriginalComponent, apiEndPoint) {
             filteredFacets: this.filteredFacets,
             staticFacets: this.staticFacets,
             resetFacets: this.resetFacets,
-            paginationResults: this.paginationResults,
+            paginationResults: this.paginationResults
           }}
         />
       );

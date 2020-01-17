@@ -1,13 +1,13 @@
-import React from 'react';
-import axios from 'axios';
-import queryString from 'query-string';
-import search from '../search/search';
+import React from "react";
+import axios from "axios";
+import queryString from "query-string";
+import search from "../search/search";
 
 export function useLunrSearch(url, defaultFacets) {
   const [searchEngine, setSearchEngine] = React.useState();
   React.useEffect(() => {
     // eslint-disable-next-line dot-notation
-    const newSearchEngine = new search['Lunr']();
+    const newSearchEngine = new search["Lunr"]();
     async function fetchSearchIndex() {
       const data = await axios.get(url);
       return data;
@@ -29,7 +29,7 @@ export function useSearchData(
   searchQuery,
   searchSort,
   searchPageSize,
-  selectedFacets,
+  selectedFacets
 ) {
   const [loading, setLoading] = React.useState(true);
   const [totalResults, setTotalResults] = React.useState(0);
@@ -38,7 +38,7 @@ export function useSearchData(
 
   React.useEffect(() => {
     function normalizeItems(resultItems) {
-      return resultItems.map((x) => {
+      return resultItems.map(x => {
         let item = {};
         item = {
           identifier: x.identifier,
@@ -47,12 +47,15 @@ export function useSearchData(
           theme: x.theme,
           format: x.distribution,
           title: x.title,
-          ref: `/dataset/${x.identifier}`,
+          ref: `/dataset/${x.identifier}`
         };
-        if (Object.prototype.hasOwnProperty.call(x, 'publisher') && Object.prototype.hasOwnProperty.call(x, 'name')) {
+        if (
+          Object.prototype.hasOwnProperty.call(x, "publisher") &&
+          Object.prototype.hasOwnProperty.call(x, "name")
+        ) {
           item.publisher = x.publisher.name;
         } else {
-          item.publisher = '';
+          item.publisher = "";
         }
         return item;
       });
@@ -61,7 +64,11 @@ export function useSearchData(
     async function fetchData() {
       if (searchEngine !== null) {
         const results = await searchEngine.query(
-          searchQuery, selectedFacets, searchPageSize, searchPage, searchSort,
+          searchQuery,
+          selectedFacets,
+          searchPageSize,
+          searchPage,
+          searchSort
         );
         setFacetResults(results.facetsResults);
         setItems(normalizeItems(results.results));
@@ -74,12 +81,16 @@ export function useSearchData(
       fetchData();
     }
   }, [
-    searchEngine, searchPage, searchQuery, searchSort, searchPageSize, selectedFacets,
+    searchEngine,
+    searchPage,
+    searchQuery,
+    searchSort,
+    searchPageSize,
+    selectedFacets
   ]);
 
   return [loading, items, facetResults, totalResults];
 }
-
 
 export function useFacetTypes(facets) {
   const facetTypes = Object.keys(facets);
@@ -87,7 +98,13 @@ export function useFacetTypes(facets) {
 }
 
 export function useUrlParams(
-  searchUrl, defaultFacets, searchPage, searchQuery, searchSort, searchPageSize, selectedFacets,
+  searchUrl,
+  defaultFacets,
+  searchPage,
+  searchQuery,
+  searchSort,
+  searchPageSize,
+  selectedFacets
 ) {
   const [newParams, setNewParams] = React.useState({});
   const facetKeys = Object.keys(defaultFacets);
@@ -99,16 +116,16 @@ export function useUrlParams(
     params.pageSize = searchPageSize;
     params.q = searchQuery;
 
-    facetKeys.map((key) => {
-      let paramString = '';
-      const facetItems = selectedFacets.filter((param) => {
+    facetKeys.map(key => {
+      let paramString = "";
+      const facetItems = selectedFacets.filter(param => {
         if (param[0] === key) {
           return param[1];
         }
         return false;
       });
 
-      facetItems.map((item) => {
+      facetItems.map(item => {
         paramString += `${item[1]},`;
         return paramString;
       });
@@ -129,31 +146,35 @@ export function useFilteredFacets(facetKey, selectedFacets, facetResults) {
   const [returnedFacets, setReturnedFacets] = React.useState([]);
 
   React.useEffect(() => {
-    const filteredFacets = facetResults[facetKey].filter((facet) => {
-      const hasResults = facetResults[facetKey].find((activeFacet) => (
-        activeFacet[0] === facet[0]
-      ));
-      const selected = selectedFacets.find((selFacet) => (
-        (selFacet[1].toLowerCase() === facet[0].toLowerCase())
-          && (selFacet[0].toLowerCase() === facetKey.toLowerCase())
-      ));
+    const filteredFacets = facetResults[facetKey]
+      .filter(facet => {
+        const hasResults = facetResults[facetKey].find(
+          activeFacet => activeFacet[0] === facet[0]
+        );
+        const selected = selectedFacets.find(
+          selFacet =>
+            selFacet[1].toLowerCase() === facet[0].toLowerCase() &&
+            selFacet[0].toLowerCase() === facetKey.toLowerCase()
+        );
 
-      if (selected || hasResults) {
-        return facet;
-      }
-      return false;
-    }).map((facet) => {
-      const hasResults = facetResults[facetKey].find((activeFacet) => (
-        activeFacet[0] === facet[0]
-      ));
+        if (selected || hasResults) {
+          return facet;
+        }
+        return false;
+      })
+      .map(facet => {
+        const hasResults = facetResults[facetKey].find(
+          activeFacet => activeFacet[0] === facet[0]
+        );
 
-      if (hasResults) {
-        return [facet[0], hasResults[1]];
-      }
-      return [facet[0], 0];
-    });
+        if (hasResults) {
+          return [facet[0], hasResults[1]];
+        }
+        return [facet[0], 0];
+      });
 
     setReturnedFacets(filteredFacets);
   }, [facetKey, selectedFacets, facetResults]);
+
   return returnedFacets;
 }
