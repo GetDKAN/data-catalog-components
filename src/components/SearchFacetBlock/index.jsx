@@ -13,7 +13,9 @@ const SearchFacetBlock = ({ facetType }) => {
   });
 
   const choices = myFacets.map(facet => {
-    let checked = selectedFacets.find(element => element.name === facet.name);
+    let checked = selectedFacets.find(element => element.name === facet.name)
+      ? true
+      : false;
     let disabled = facet.total === 0;
 
     return (
