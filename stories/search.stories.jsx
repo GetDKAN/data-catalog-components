@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { storiesOf } from '@storybook/react';
 import {
@@ -11,12 +11,13 @@ import { withA11y } from '@storybook/addon-a11y';
 import SearchList from '../src/components/SearchList';
 import SearchListItem from '../src/components/SearchListItem';
 import InputLarge from '../src/components/InputLarge';
-import FacetList from '../src/components/FacetList';
+import FacetBlock from '../src/components/SearchFacetBlock';
 import SearchInput from '../src/components/SearchInput';
 import SearchResultsMessage from '../src/components/SearchResultsMessage';
 import Search from '../src/templates/search';
 
 import search from './data/search.json';
+import { searchReducer, defaultSearchState, SearchDispatch } from "../src/services/search/search_tools";
 
 const InputSearchParent = () => {
   const [inputValue, setInputValue] = useState('');
@@ -53,6 +54,7 @@ const facetListProps = {
   Link,
   url: 'search',
 };
+
 const selectedFacetOptions1 = [
   ['Themes', 'Foo'],
   ['Keywords', 'Bar'],
@@ -65,13 +67,32 @@ const selectedFacetOptions2 = [
   ['Keywords', 'DKAN'],
 ];
 
+const FacetBlockWrapper = () => {
+  const facets = [
+    {type: "Language", name: "Spanish", total: 5}, 
+    {type: "Language", name: "English", total: 2}
+  ]
+  
+  const selectedFacets = [
+    {type: "Language", name: "Spanish"}
+  ]
+  
+  defaultSearchState.facets = facets;
+  defaultSearchState.selectedFacets = selectedFacets;
+  
+  // Initialize the useReducer hook using the imported searchState and reducer.
+  const [searchState, dispatch] = useReducer(searchReducer, defaultSearchState);
+
+  return(<SearchDispatch.Provider value={{ searchState, dispatch }}><FacetBlock facetType={"Language"} /></SearchDispatch.Provider>);
+};
+
 storiesOf('Search', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .add('Item', () => <SearchListItem item={search.items[0]} />)
   .add('List', () => <SearchList message={text('Title', '2 Datasets found')}>{searchListItems}</SearchList>)
   .add('Input Large', () => <InputLarge value={query} />)
-  .add('Facet List', () => <Router><FacetList {... facetListProps} /></Router>)
+  .add('Facet Block', () => (<FacetBlockWrapper />))
   .add('Search Input', () => (<InputSearchParent />))
   .add('Search Results Message', () => (
     <SearchResultsMessage
