@@ -17,7 +17,12 @@ const DataTableDensity = ({
           srClass = '';
         }
         return (
-          <button type="button" key={item.text} onClick={() => densityChange(item.value)}>
+          <button
+            type="button"
+            key={item.text}
+            onClick={() => densityChange(item.value)}
+            title={item.text}
+          >
             {item.icon
               && (
                 <>

@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import {
   withKnobs, text, select, number,
 } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import FormatIcon from '../src/components/FormatIcon';
 import FileDownload from '../src/components/FileDownload';
@@ -10,6 +11,7 @@ import Organization from '../src/components/Organization';
 import Text from '../src/components/Text';
 import Table from '../src/components/Table';
 import Tags from '../src/components/Tags';
+import DataTableDensity from '../src/components/Resource/DataTableHeader/DataTableDensity';
 import DataTablePageResults from '../src/components/Resource/DataTableHeader/DataTablePageResults';
 import data from './data/data.json';
 import tables from './data/tables.json';
@@ -58,5 +60,16 @@ storiesOf('Dataset', module)
       total={number('Total', 100)}
       pageSize={number('Page Size', 10)}
       currentPage={number('Current Page', 0)}
+    />
+  ))
+  .add('Datatable Density Buttons', () => (
+    <DataTableDensity
+      items={[
+        { icon: null, text: text('Density Button 1', 'Expanded'), value: 'density-1' },
+        { icon: null, text: text('Density Button 2', 'Normal'), value: 'density-2' },
+        { icon: null, text: text('Density Button 3', 'Tight'), value: 'density-3' },
+      ]}
+      title={text('Title', 'Display Density')}
+      densityChange={action('clicked')}
     />
   ));
