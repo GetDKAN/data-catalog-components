@@ -10,7 +10,7 @@ import IconListItem from '../src/components/IconListItem'
 import Blocks from '../src/components/Blocks';
 import StepsBlock from '../src/components/Blocks/StepsBlock';
 import StatBlock from '../src/components/Blocks/StatBlock';
-
+import "../src/theme/styles/index.scss";
 import home from './data/home.json';
 
 storiesOf('Home', module)

@@ -14,7 +14,7 @@ import InputLarge from '../src/components/InputLarge';
 import FacetList from '../src/components/FacetList';
 import SearchInput from '../src/components/SearchInput';
 import SearchResultsMessage from '../src/components/SearchResultsMessage';
-
+import "../src/theme/styles/index.scss";
 import search from './data/search.json';
 
 const InputSearchParent = () => {

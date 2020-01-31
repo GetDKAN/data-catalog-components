@@ -5,15 +5,12 @@ import {
   NavbarToggler,
   Nav,
   NavItem } from "reactstrap";
-import Wrapper from './Wrapper';
-
-
 
 const NavBar = ({navItems, expand, defaultStyling, customClasses}) => {
   const [isOpen, toggleOpen] = useState(false);
 
   return (
-    <Wrapper className={`${customClasses} ${defaultStyling ? 'container-fluid main-navigation base-styles' : ''}`}>
+    <div className={`${customClasses} ${defaultStyling ? 'container-fluid dc-main-navigation base-styles' : ''}`}>
       {expand && 
         <Navbar expand="md navbar-dark">
           <NavbarToggler onClick={() => toggleOpen(!isOpen)} />
@@ -39,7 +36,7 @@ const NavBar = ({navItems, expand, defaultStyling, customClasses}) => {
           </ul>
         </Navbar>
       }
-    </Wrapper>
+    </div>
   );
 }
 

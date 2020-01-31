@@ -15,6 +15,7 @@ import Footer from '../src/components/Footer';
 import ApiDocs from '../src/components/ApiDocs';
 import ToggleBlock from '../src/components/ToggleBlock';
 import ShowMoreContainer from '../src/components/ShowMoreContainer';
+import "../src/theme/styles/index.scss";
 
 import links from './data/menu.json';
 

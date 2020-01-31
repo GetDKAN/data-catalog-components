@@ -15,6 +15,7 @@ import DataTableDensity from '../src/components/Resource/DataTableHeader/DataTab
 import DataTablePageResults from '../src/components/Resource/DataTableHeader/DataTablePageResults';
 import data from './data/data.json';
 import tables from './data/tables.json';
+import "../src/theme/styles/index.scss";
 
 storiesOf('Dataset', module)
   .addDecorator(withKnobs)
@@ -35,8 +36,7 @@ storiesOf('Dataset', module)
     ),
     { knobs: { escapeHTML: false } },
   )
-  .add('File Download', () => <FileDownload label="Label" title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
-  .add('File Download - No label', () => <FileDownload title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
+  .add('File Download', () => <FileDownload title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
   .add('Organization', () => <Organization name={data.publisher.name} description={data.publisher.description} identifier={data.publisher.identifier} />)
   .add(
     'Text',
