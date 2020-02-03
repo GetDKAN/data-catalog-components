@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import TopicImage from '../TopicImage'
+import TopicImage from '../../templates/TopicImage'
 import { Link } from "gatsby";
 
 class IconListItem extends React.PureComponent {

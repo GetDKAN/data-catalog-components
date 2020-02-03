@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+@import "../../theme/styles/variables";
 
-const Wrapper = styled.div`
+.dc-icon-list {
   padding: 24px 0;
   h2 {
     display: block;
@@ -28,6 +28,4 @@ const Wrapper = styled.div`
       max-width: 25%;
     }
   }
-`;
-
-export default Wrapper;
+}

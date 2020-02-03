@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Wrapper from './Wrapper';
 
 function IconList(props) {
   const ComponentToRender = props.component;
@@ -28,21 +27,21 @@ function IconList(props) {
 
   if (props.paneTitle) {
     return (
-      <Wrapper className={ props.containerClass }>
+      <div className={`dc-icon-list  {$props.containerClass}`}>
         <h2 className="pane-title" style={styles}>{ props.paneTitle }</h2>
         <ul className={ props.listClass }>
           {content}
         </ul>
-      </Wrapper>
+      </div>
     );
   }
   else {
     return (
-      <Wrapper className={ props.containerClass }>
+      <div className={`dc-icon-list  {$props.containerClass}`}>
         <ul className={ props.listClass }>
           {content}
         </ul>
-      </Wrapper>
+      </div>
     );
   }
 }

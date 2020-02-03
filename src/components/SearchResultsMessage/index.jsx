@@ -76,7 +76,7 @@ const SearchResultsMessage = ({
   return (
     <div className={className}>
       <p>
-        {total}
+        {(total).toLocaleString('en') }
         {' '}
         {total !== 1 ? 'datasets' : 'dataset'}
         {' '}

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+@import "../../theme/styles/variables";
 
-const Wrapper = styled.div`
+.dc-hero {
   position: relative;
   background-size: cover;
   background-position: 50% 50%;
@@ -33,10 +33,10 @@ const Wrapper = styled.div`
     margin-top: 0;
   }
   .btn-hero a {
-    color: ${(props) => props.theme.primaryDark};
+    color: $primaryDark;
     &:hover,
     &:focus {
-      color: ${(props) => props.theme.primaryDark};
+      color: $primaryDark;
       text-decoration: none;
     }
   }
@@ -44,6 +44,4 @@ const Wrapper = styled.div`
   @media screen and (max-width: 768px) {
     flex-wrap: wrap;
   }
-`;
-
-export default Wrapper;
+}

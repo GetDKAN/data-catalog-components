@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 
 import Logo from '../Logo';
-import NavBar from '../NavBar';
+import NavBar from '../../templates/NavBar';
 import Wrapper from './Wrapper';
 
 class Header extends Component {

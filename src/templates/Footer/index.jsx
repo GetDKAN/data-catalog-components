@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Wrapper from './Wrapper';
-import Menu from '../Menu';
+import Menu from '../../components/Menu';
 import Branding from './Branding';
 
 class Footer extends React.Component {

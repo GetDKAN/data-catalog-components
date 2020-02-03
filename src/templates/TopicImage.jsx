@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-class TopicIcon extends React.PureComponent {
+class TopicImage extends React.PureComponent {
   render() {
     switch(this.props.title) {
       case 'Health':

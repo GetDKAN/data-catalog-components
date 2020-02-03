@@ -4,14 +4,14 @@ import { withKnobs, text, select, boolean, array, number } from '@storybook/addo
 import { withA11y } from '@storybook/addon-a11y';
 
 import Header from '../src/components/Header';
-import NavBar from '../src/components/NavBar';
+import NavBar from '../src/templates/NavBar';
 import Logo from '../src/components/Logo';
 import PageHeader from '../src/components/PageHeader';
 import Title from '../src/components/Title';
 import StyledButton from '../src/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DataIcon from '../src/components/DataIcon';
-import Footer from '../src/components/Footer';
+import Footer from '../src/templates/Footer';
 import ApiDocs from '../src/components/ApiDocs';
 import ToggleBlock from '../src/components/ToggleBlock';
 import ShowMoreContainer from '../src/components/ShowMoreContainer';

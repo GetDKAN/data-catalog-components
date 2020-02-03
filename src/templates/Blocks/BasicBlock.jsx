@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Text from '../Text';
+import Text from '../../components/Text';
 import Wrapper from './Wrapper';
 
 class BasicBlock extends React.PureComponent {

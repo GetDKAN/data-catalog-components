@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
-import Wrapper from './Wrapper';
 import defaultTheme from '../../theme/default';
-import SearchInput from '../SearchInput';
+import SearchInput from '../../components/SearchInput';
 
 const Hero = ({
   alignment,
@@ -21,7 +20,7 @@ const Hero = ({
   }
 
   return (
-    <Wrapper className="hero" style={{ backgroundImage: background }}>
+    <div className="dc-hero" style={{ backgroundImage: background }}>
       <div className={`block ${alignment}`}>
         <h1 className="hero-title">{title}</h1>
         <p>{intro}</p>
@@ -35,7 +34,7 @@ const Hero = ({
           />
         </form>
       </div>
-    </Wrapper>
+    </div>
   );
 };
 

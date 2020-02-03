@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Wrapper from './Wrapper';
 import excerpts from 'excerpts';
-import TopicImage from '../TopicImage';
+import TopicImage from '../../templates/TopicImage';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
 import { Link } from "gatsby";
