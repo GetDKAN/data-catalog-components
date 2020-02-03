@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AriaModal from 'react-aria-modal';
 import ModalWrapper from './ModalWrapper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const FullScreenResource = ({
   modalOpenBtnText,
@@ -20,7 +21,10 @@ const FullScreenResource = ({
   return (
     <div className="data-table-fullscreen">
       {!modalOpen
-        && <button type="button" onClick={() => toggleModal(!modalOpen)}>{modalOpenBtnText}</button>}
+        && <button type="button" onClick={() => toggleModal(!modalOpen)}>
+          <FontAwesomeIcon icon={['fas', 'expand-alt']} aria-hidden="true" title="Full Screen" />
+          <span sr-only>{modalOpenBtnText}</span>
+        </button>}
       {modalOpen
         && (
           <AriaModal
@@ -44,7 +48,8 @@ const FullScreenResource = ({
                   className={closeModalClasses}
                   onClick={() => toggleModal(!modalOpen)}
                 >
-                  {closeModalBtnText}
+                  <i className="fa fa-2x fa-times" aria-hidden="true" />
+                  <span className="sr-only">{closeModalBtnText}</span>
                 </button>
               </header>
               <div className="data-table-fullscreen-content" style={{ outline: 0 }}>

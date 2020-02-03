@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import DataIcon from '../../../DataIcon';
 
 const DataTableDensity = ({
   items,
@@ -39,9 +40,9 @@ const DataTableDensity = ({
 
 DataTableDensity.defaultProps = {
   items: [
-    { icon: null, text: 'expanded', value: 'density-1' },
-    { icon: null, text: 'normal', value: 'density-2' },
-    { icon: null, text: 'tight', value: 'density-3' },
+    { icon: <DataIcon name="density-1" height={20} width={20} icon={'density-1'} fill="#666666" />, text: 'expanded' },
+    { icon: <DataIcon name="density-2" height={20} width={20} icon={'density-2'} fill="#666666" />, text: 'normal' },
+    { icon: <DataIcon name="density-3" height={20} width={20} icon={'density-3'} fill="#666666" />, text: 'tight' },
   ],
   className: 'data-table-density',
   screenReaderClass: 'sr-only sr-only-focusable',

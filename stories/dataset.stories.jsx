@@ -11,6 +11,7 @@ import Organization from '../src/components/Organization';
 import Text from '../src/components/Text';
 import Table from '../src/components/Table';
 import Tags from '../src/components/Tags';
+import DataIcon from '../src/components/DataIcon';
 import DataTableDensity from '../src/components/Resource/DataTableHeader/DataTableDensity';
 import DataTablePageResults from '../src/components/Resource/DataTableHeader/DataTablePageResults';
 import data from './data/data.json';
@@ -75,10 +76,10 @@ storiesOf('Dataset', module)
   ))
   .add('Datatable Default Density Buttons', () => (
     <DataTableDensity
-      items=[
+      items={[
         { icon: <DataIcon name="density-1" height={20} width={20} icon={'density-1'} fill="#666666" />, text: 'expanded' },
         { icon: <DataIcon name="density-2" height={20} width={20} icon={'density-2'} fill="#666666" />, text: 'normal' },
         { icon: <DataIcon name="density-3" height={20} width={20} icon={'density-3'} fill="#666666" />, text: 'tight' }
-      ]
+      ]}
     />
   ));
