@@ -9,7 +9,6 @@ import Menu from '../src/components/Menu';
 import Logo from '../src/components/Logo';
 import PageHeader from '../src/components/PageHeader';
 import Title from '../src/components/Title';
-import StyledButton from '../src/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DataIcon from '../src/components/DataIcon';
 import Footer from '../src/templates/Footer';
@@ -71,11 +70,11 @@ storiesOf('General', module)
       />
     )
   })
-  .add('Button', () => <StyledButton color="primary">primary</StyledButton>)
-  .add('Preview Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="chart-bar" fill="#ffffff"/> Preview</StyledButton>)
-  .add('Download Button', () => <StyledButton color="primary"><FontAwesomeIcon icon="download" fill="#ffffff"/> Download</StyledButton>)
-  .add('Hero Button', () => <StyledButton className="btn-hero">Learn More</StyledButton>)
-  .add('Close Button', () => <StyledButton className="close"><span aria-hidden="true"><FontAwesomeIcon icon="times" fill="#666666"/></span></StyledButton>)
+  .add('Button', () => <button className="dc-button btn-primary">primary</button>)
+  .add('Preview Button', () => <button className="dc-button btn-primary"><FontAwesomeIcon icon="chart-bar" fill="#ffffff"/> Preview</button>)
+  .add('Download Button', () => <button className="dc-button btn-primary"><FontAwesomeIcon icon="download" fill="#ffffff"/> Download</button>)
+  .add('Hero Button', () => <button className="dc-button btn-hero">Learn More</button>)
+  .add('Close Button', () => <button className="dc-button btn-close"><span aria-hidden="true"><FontAwesomeIcon icon="times" fill="#666666"/></span></button>)
   .add(
     "Data Icon",
     () => (
