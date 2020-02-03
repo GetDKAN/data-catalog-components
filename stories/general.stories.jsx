@@ -5,6 +5,7 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import Header from '../src/templates/Header';
 import NavBar from '../src/templates/NavBar';
+import Menu from '../src/components/Menu';
 import Logo from '../src/components/Logo';
 import PageHeader from '../src/components/PageHeader';
 import Title from '../src/components/Title';
@@ -32,6 +33,7 @@ storiesOf('General', module)
     />
   )
   .add('NavBar', () => <NavBar navItems={links.main.map((item) => (<a href={item.url}>{item.label}</a>))} customClasses="container-fluid" />)
+  .add('Menu', () => <Menu items={links.footer1} title={text("Title", "Menu List")} menuId="sampleNav"/>)
   .add('Page Heading', () => <PageHeader title="Datasets" />)
   .add('Title', () => (
     <Title

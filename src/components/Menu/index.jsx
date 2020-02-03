@@ -1,30 +1,32 @@
 /* eslint-disable */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Wrapper from './Wrapper';
-import Link from './Link';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "gatsby";
 
 class Menu extends Component {
   
   render() {
     const heading = this.props.title ? this.props.title : "";
     const direction = this.props.horizontal ? "nav-horizontal" : "";
-    const classes = `${this.props.className} ${direction}`
+    const classes = `dc-menu ${this.props.className} ${direction}`
 
     return (
-      <Wrapper className={classes} aria-label={this.props.className}>
+      <div 
+        className={classes}
+        aria-label={this.props.menuId}
+        id={this.props.menuId} 
+      >
         { heading ? <h3>{heading}</h3> : '' }
-        <ul role="menu">
+        <ul>
         {
           this.props.items.map(function(item) {
             return (
-              <li key={item.url} role="none">
+              <li key={item.url}>
                 <Link 
-                  role="menu-item" 
                   href={item.url} 
                   target={item.target} 
-                  className="menu-item">
+                  className="dc-menu-item">
                     {item.label}
                 </Link>
               </li>
@@ -32,7 +34,7 @@ class Menu extends Component {
           })
         }
         </ul>
-      </Wrapper>
+      </div>
     )
   }
 }
@@ -40,14 +42,16 @@ class Menu extends Component {
 Menu.defaultProps = {
   items: [],
   className: "navigation-menu",
-  target: "_top"
+  target: "_top",
+  menuId: "menu"
 };
 
 Menu.propTypes = {
   items: PropTypes.any,
   className: PropTypes.any,
   title: PropTypes.string,
-  horizontal: PropTypes.bool
+  horizontal: PropTypes.bool,
+  menuId: PropTypes.string
 };
 
 export default Menu

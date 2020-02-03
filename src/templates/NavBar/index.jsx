@@ -26,7 +26,7 @@ const NavBar = ({navItems, expand, defaultStyling, customClasses}) => {
         </Navbar>
       }
       {!expand && 
-        <Navbar expand={false} className="container">
+        <Navbar expand={false} className={customClasses}>
           <ul>
             {navItems.map((item, index) => (
               <NavItem key={index}>
