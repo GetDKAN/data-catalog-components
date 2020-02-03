@@ -1,10 +1,8 @@
-/* eslint-disable */
+@import "../../theme/styles/variables";
 
-import styled from "styled-components";
-
-const Wrapper = styled.div`
-  background-color: ${props => props.theme.footerBackgroundColor};
-  color: ${props => props.theme.footerText};
+.dc-footer {
+  background-color: $footerBackgroundColor;
+  color: $footerText;
   padding: 40px 0;
 
   .page-footer {
@@ -18,14 +16,14 @@ const Wrapper = styled.div`
     padding-right: 30px;
 
     h2,h3,h4 {
-      color: ${props => props.theme.footerText};
+      color: $footerText;
     }
     a {
-      color: ${props => props.theme.footerLink};
+      color: $footerLink;
       text-decoration: none;
       &:hover,
       &:focus {
-        color: ${props => props.theme.footerLinkHover};
+        color: $footerLinkHover;
         text-decoration: underline;
       }
     }
@@ -47,6 +45,30 @@ const Wrapper = styled.div`
     }
   }
 
+  .branding {
+    flex-grow: 2;
+    max-width: 50%;
+    h3 {
+      font-weight: 500;
+      font-size: 30px;
+      margin: 20px 0 5px;
+    }
+    p {
+      margin: 0 2em 1em 0;
+    }
+    .social {
+      margin: 1em 0;
+      i {
+        font-size: 25px;
+        opacity: 0.3;
+        margin: 0 1em 1em 0;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
   @media screen and (max-width: 768px) {
     .page-footer {
       flex-wrap: wrap;
@@ -62,6 +84,4 @@ const Wrapper = styled.div`
       margin-top: 30px;
     }
   }
-`;
-
-export default Wrapper;
+}

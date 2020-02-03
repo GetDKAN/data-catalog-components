@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+@import "../../theme/styles/variables";
 
-const Wrapper = styled.div`
+.dc-header {
   .logo {
     display: inline-block;
     vertical-align: bottom;
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
     line-height: 1em;
     margin-bottom: 10px;
     a {
-      color: ${(props) => props.theme.headingColor};
+      color: $headingColor;
       font-size: 1.8rem;
     }
   }
@@ -26,6 +26,4 @@ const Wrapper = styled.div`
       display: block;
     }
   }
-`;
-
-export default Wrapper;
+}

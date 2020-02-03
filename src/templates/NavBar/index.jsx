@@ -10,7 +10,7 @@ const NavBar = ({navItems, expand, defaultStyling, customClasses}) => {
   const [isOpen, toggleOpen] = useState(false);
 
   return (
-    <div className={`${customClasses} ${defaultStyling ? 'container-fluid dc-main-navigation base-styles' : ''}`}>
+    <div className={`${customClasses} ${defaultStyling ? ' dc-main-navigation base-styles' : ''}`}>
       {expand && 
         <Navbar expand="md navbar-dark">
           <NavbarToggler onClick={() => toggleOpen(!isOpen)} />

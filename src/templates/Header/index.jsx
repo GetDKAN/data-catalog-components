@@ -2,9 +2,8 @@
 
 import React, { Component } from 'react';
 
-import Logo from '../Logo';
+import Logo from '../../components/Logo';
 import NavBar from '../../templates/NavBar';
-import Wrapper from './Wrapper';
 
 class Header extends Component {
 
@@ -14,8 +13,8 @@ class Header extends Component {
       const slogan = this.props.slogan ? <div className="slogan">{this.props.slogan}</div> : null;
 
       return (
-        <Wrapper>
-          <div className="container-fluid">
+        <div className="dc-header">
+          <div className={this.props.customClasses}>
             <div className="branding">
               <Logo/>
               <div className="site-name">
@@ -25,10 +24,10 @@ class Header extends Component {
             </div>
           </div>
           {this.props.navItems &&
-            <NavBar navItems={this.props.navItems} />
+            <NavBar navItems={this.props.navItems} className={this.props.customClasses} />
           }
           
-        </Wrapper>
+        </div>
       );
     }
 }

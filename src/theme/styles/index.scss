@@ -1,3 +1,6 @@
+@import url('http://fonts.googleapis.com/css?family=Rubik:300,500,700&amp;subset=latin');
+
+@import "general.scss";
 // Component styles.
 @import "../../components/FileDownload/filedownload.scss";
 @import "../../components/IconList/iconlist.scss";
@@ -5,5 +8,7 @@
 @import "../../components/Organization/organization.scss";
 
 // Template styles.
+@import "../../templates/Header/header.scss";
 @import "../../templates/Hero/hero.scss";
+@import "../../templates/Footer/footer.scss";
 @import "../../templates/NavBar/navbar.scss";

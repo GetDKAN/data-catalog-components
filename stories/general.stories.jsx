@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select, boolean, array, number } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 
-import Header from '../src/components/Header';
+import Header from '../src/templates/Header';
 import NavBar from '../src/templates/NavBar';
 import Logo from '../src/components/Logo';
 import PageHeader from '../src/components/PageHeader';
@@ -23,8 +23,15 @@ storiesOf('General', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .add('Logo', () => <Logo />)
-  .add('Header', () => <Header site="Open Data Catalog" slogan="Place your tag line here." navItems={links.main.map((item) => (<a href={item.url}>{item.label}</a>))} />)
-  .add('NavBar', () => <NavBar navItems={links.main.map((item) => (<a href={item.url}>{item.label}</a>))}/>)
+  .add('Header', () => 
+    <Header 
+      site="Open Data Catalog" 
+      slogan="Place your tag line here." 
+      customClasses="container-fluid"
+      navItems={links.main.map((item) => (<a href={item.url}>{item.label}</a>))}
+    />
+  )
+  .add('NavBar', () => <NavBar navItems={links.main.map((item) => (<a href={item.url}>{item.label}</a>))} customClasses="container-fluid" />)
   .add('Page Heading', () => <PageHeader title="Datasets" />)
   .add('Title', () => (
     <Title
@@ -110,5 +117,5 @@ storiesOf('General', module)
       />
     </span>
   ))
-  .add('Footer', () => <Footer links={links} />)
+  .add('Footer', () => <Footer links={links} customClasses="container-fluid" />)
   .add('API Documentation', () => <ApiDocs endpoint="https://petstore.swagger.io/v2/swagger.json" />)
