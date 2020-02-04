@@ -2,12 +2,14 @@
 
 @import "general.scss";
 @import "buttons.scss";
+
 // Component styles.
 @import "../../components/FileDownload/filedownload.scss";
 @import "../../components/IconList/iconlist.scss";
 @import "../../components/IconListItem/iconlistitem.scss";
 @import "../../components/Menu/menu.scss";
 @import "../../components/Organization/organization.scss";
+@import "../../components/SearchListItem/searchlistitem.scss";
 
 // Template styles.
 @import "../../templates/Header/header.scss";

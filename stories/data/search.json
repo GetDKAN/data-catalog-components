@@ -5,9 +5,7 @@
           "title": "Varicella (Chickenpox) Incidence and Mortality, Before and After the Vaccine",
           "description": "Centers for Disease Control and Prevention data regarding varicella (chickenpox) virus incidence and mortality rates.",
           "modified": "1/12/2018",
-          "publisher": {
-            "name": "Publish Inc."
-          },
+          "publisher": "Publish Inc.",
           "format": [
               {
                 "identifier": 1,
@@ -30,23 +28,14 @@
               }
           ],
           "ref": "dataset/wow",
-          "theme": [
-              {
-                  "identifier": 1,
-                  "title": "Healthcare",
-                  "icon": "physician",
-                  "link": "url"
-              }
-          ]
+          "theme": ["Healthcare"]
       },
       {
           "identifier": 5678,
           "title": "U.S. Tobacco Usage Statistics",
           "description": "Statistics on U.S. smoking rates and tobacco taxation rates for all fifty states. *Source:* Centers for Disease Control and Prevention, 2015 https://www.cdc.gov/tobacco/data_statistics/state_data/ [1] ",
           "modified": "2/12/2018",
-          "publisher": {
-            "name": "Publish Inc."
-          },
+          "publisher":"Publish Inc.",
           "format": [
               {
                 "identifier": 1,
@@ -69,14 +58,7 @@
               }
           ],
           "ref": "dataset/how",
-          "theme": [
-              {
-                  "identifier": 1,
-                  "title": "Healthcare",
-                  "icon": "physician",
-                  "link": "url"
-              }
-          ]
+          "theme": ["Healthcare"]
       },
       {
         "identifier": 91011,
@@ -90,11 +72,11 @@
       },
       "theme": {
           "label": "Category",
-          "field": "theme.title"
+          "field": "theme"
       },
       "org": {
           "label": "Organization",
-          "field": "publisher.name"
+          "field": "publisher"
       },
       "format": {
           "label": "Format",
