@@ -22,8 +22,8 @@ const FullScreenResource = ({
     <div className="data-table-fullscreen">
       {!modalOpen
         && <button type="button" onClick={() => toggleModal(!modalOpen)}>
-          <FontAwesomeIcon icon={['fas', 'expand-alt']} aria-hidden="true" title="Full Screen" />
-          <span sr-only>{modalOpenBtnText}</span>
+          <FontAwesomeIcon icon="expand-alt" aria-hidden="true" title="Full Screen" />
+          <span className="sr-only">{modalOpenBtnText}</span>
         </button>}
       {modalOpen
         && (
@@ -48,7 +48,7 @@ const FullScreenResource = ({
                   className={closeModalClasses}
                   onClick={() => toggleModal(!modalOpen)}
                 >
-                  <i className="fa fa-2x fa-times" aria-hidden="true" />
+                  <FontAwesomeIcon icon="times" aria-hidden="true" title="Close" />
                   <span className="sr-only">{closeModalBtnText}</span>
                 </button>
               </header>
