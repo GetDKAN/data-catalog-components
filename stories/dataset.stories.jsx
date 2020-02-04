@@ -38,7 +38,17 @@ storiesOf('Dataset', module)
     { knobs: { escapeHTML: false } },
   )
   .add('File Download', () => <FileDownload title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
-  .add('Organization', () => <Organization name={data.publisher.name} description={data.publisher.description} identifier={data.publisher.identifier} />)
+  .add('Organization', () => 
+    <Organization 
+      name={data.publisher.name} 
+      description={data.publisher.description} 
+      identifier={data.publisher.identifier}
+      alignment={select(
+        'Alignment',
+        ['left', 'right', 'center'],
+        'center',
+      )}
+    />)
   .add(
     'Text',
     () => (
