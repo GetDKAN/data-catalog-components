@@ -32,7 +32,8 @@ storiesOf('General', module)
     />
   )
   .add('NavBar', () => <NavBar navItems={links.main.map((item) => (<a href={item.url}>{item.label}</a>))} customClasses="container-fluid" />)
-  .add('Menu', () => <Menu items={links.footer1} title={text("Title", "Menu List")} menuId="sampleNav"/>)
+  .add('Menu (external links)', () => <Menu items={links.footer1} title={text("Title", "External links")} menuId="sampleNav"/>)
+  .add('Menu (internal links', () => <Menu items={links.main} title={text("Title", "Internal links")} menuId="sampleNav"/>)
   .add('Page Heading', () => <PageHeader title="Datasets" />)
   .add('Title', () => (
     <Title

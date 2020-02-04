@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
+import validator from 'validator';
 
 class Menu extends Component {
   
@@ -20,17 +21,26 @@ class Menu extends Component {
         { heading ? <h3>{heading}</h3> : '' }
         <ul>
         {
-          this.props.items.map(function(item) {
-            return (
-              <li key={item.url}>
+          this.props.items.map(function(item, i) {
+            return validator.isURL(item.url) ?
+              <li key={i}>
+                <a
+                  href={item.url}
+                  target={item.target} 
+                  className="dc-menu-item"
+                >
+                  {item.label}
+                </a>
+              </li>
+              :
+              <li key={i}>
                 <Link 
-                  href={item.url} 
+                  to={item.url} 
                   target={item.target} 
                   className="dc-menu-item">
                     {item.label}
                 </Link>
-              </li>
-            );
+              </li>;
           })
         }
         </ul>
