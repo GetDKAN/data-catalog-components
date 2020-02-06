@@ -30,21 +30,16 @@ export function buildInitialFacets(queryParams, defaultFacets) {
   const facetKeys = Object.keys(defaultFacets);
   const paramFacetArray = Object.entries(queryParams).filter((obj) => {
     for (let i = 0; i < facetKeys.length; i += 1) {
-      if (facetKeys[i] === obj[0]) {
-        const capitalKey = obj[0].charAt(0).toUpperCase() + obj[0].slice(1);
-        const newFacetArray = obj[1].split(',').map((param) => [capitalKey, param]);
+      if (facetKeys[i].toLowerCase() === obj[0].toLowerCase()) {
+        const newFacetArray = obj[1].split(',').map((param) => [obj[0].toLowerCase(), param]);
         return newFacetArray;
       }
     }
     return false;
   });
-  return {
-    type: 'UPDATE_FACETS',
-    data: {
-      selectedFacets: paramFacetArray,
-    },
-  };
+  return paramFacetArray;
 }
+
 
 export function setSelectedFacets(eventTarget, selectedFacets, singular) {
   const facetType = eventTarget.name;

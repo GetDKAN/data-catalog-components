@@ -6,12 +6,12 @@ import searchReducer from '../../services/search/search_reducer';
 import { SearchDispatch, defaultSearchState } from '../../services/search/search_defaults';
 
 const Search = ({
-  
+  initialSearchState,
   searchEndpoint,
   children,
   defaultFacets,
   sortOptions,
-  updateSearchUrl,
+  setSearchUrl,
   path,
   location,
   normalize,
@@ -21,6 +21,7 @@ const Search = ({
     searchReducer,
     {
       ...defaultSearchState,
+      ...initialSearchState,
       ...queryString.parse(location.search),
     },
   );
@@ -41,8 +42,11 @@ const Search = ({
     }
 
     async function getSearchData() {
+      // Get data
       dispatch({ type: 'FETCH_DATA' });
+      // Figure out sort options
       const currentSort = findSortParams();
+      // set search params using sort and searchState
       const searchParams = {
         sort: currentSort[0].field,
         sort_order: currentSort[0].order,
@@ -50,6 +54,7 @@ const Search = ({
         pageSize: searchState.pageSize,
         page: searchState.page,
       };
+      // Set selected facets for search
       if (searchState.selectedFacets.length) {
         const facetKeys = Object.keys(defaultFacets);
         facetKeys.map((key) => {
@@ -63,14 +68,19 @@ const Search = ({
           return false;
         });
       }
-      if (updateSearchUrl) {
-        const searchUrl = `${path}?${queryString.stringify(searchParams, { arrayFormat: 'comma' })}`;
+      const params = queryString.stringify(searchParams, { arrayFormat: 'comma' });
+      // set search url
+      if (setSearchUrl) {
+        const searchUrl = `${path}?${params}`;
         if (window !== undefined && searchUrl !== undefined) {
           window.history.pushState({}, 'Search', `${searchUrl}`);
         }
       }
-      const results = await axios.get(`${searchEndpoint}?${queryString.stringify(searchParams, { arrayFormat: 'comma' })}`);
 
+      // make the search api request
+      const results = await axios.get(`${searchEndpoint}?${params}`);
+
+      // dispatch results to reducer
       dispatch({
         type: 'GET_SEARCH_DATA',
         data: {
@@ -80,12 +90,14 @@ const Search = ({
         },
       });
     }
+
+    // Do all the above
     getSearchData();
   }, [
     sortOptions,
     defaultFacets,
     path,
-    updateSearchUrl,
+    setSearchUrl,
     searchEndpoint,
     searchState.sort,
     searchState.fulltext,
@@ -109,7 +121,7 @@ const Search = ({
 };
 
 Search.defaultProps = {
-  updateSearchUrl: true,
+  setSearchUrl: true,
   normalize: null,
 };
 
