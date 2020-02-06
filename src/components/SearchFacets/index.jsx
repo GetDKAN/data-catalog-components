@@ -52,7 +52,7 @@ const SearchFacets = ({
       let selected = selectedFacets.filter(
         (selectedFacet) => selectedFacet[1] === item.name,
       ).length > 0 || false;
-      let onChangeFunction = (e) => { dispatch(setSelectedFacets(e.target, selectedFacets)); };
+      let onChangeFunction = (e) => { dispatch(setSelectedFacets(e.target, selectedFacets, facet[1].showAll)); };
 
       if (index === 0 && type === 'radio') {
         onChangeFunction = () => { dispatch(resetSelectedFacets(selectedFacets, facetKey)); };
@@ -73,21 +73,20 @@ const SearchFacets = ({
             {`${item.name} (${item.total})`}
           </InputComponent>
         );
-      } else {
-        return (
-          <Label>
-            <Input
-              key={key}
-              checked={selected}
-              name={facetKey.toLowerCase()}
-              type={type}
-              value={item.name}
-              onChange={onChangeFunction}
-            />
-            {`${item.name} (${item.total})`}
-          </Label>
-        );
       }
+      return (
+        <Label>
+          <Input
+            key={key}
+            checked={selected}
+            name={facetKey.toLowerCase()}
+            type={type}
+            value={item.name}
+            onChange={onChangeFunction}
+          />
+          {`${item.name} (${item.total})`}
+        </Label>
+      );
     });
     return (
       <ToggleBlock
