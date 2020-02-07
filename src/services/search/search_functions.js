@@ -62,3 +62,8 @@ export function setSelectedFacets(eventTarget, selectedFacets, singular) {
     },
   };
 }
+
+export function updateSort(value, options) {
+  const newSort = options.filter((opt) => opt.field === value);
+  return { type: 'UPDATE_SORT', data: { sort: newSort[0].field, sort_order: newSort[0].order } };
+}

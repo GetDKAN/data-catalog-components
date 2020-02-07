@@ -47,7 +47,9 @@ export { default as withResource } from './components/Resource/withResource';
 export { SearchDispatch, defaultSearchState } from './services/search/search_defaults';
 
 export { default as searchReducer } from './services/search/search_reducer';
-export { setSelectedFacets, resetSelectedFacets, buildInitialFacets } from './services/search/search_functions';
+export {
+  setSelectedFacets, resetSelectedFacets, buildInitialFacets, updateSort,
+} from './services/search/search_functions';
 
 export {
   ResourceDispatch,

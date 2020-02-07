@@ -30,6 +30,7 @@ export default function searchReducer(state, action) {
       return {
         ...state,
         sort: action.data.sort,
+        sort_order: action.data.sort_order,
       };
     case 'UPDATE_FULLTEXT':
       return {

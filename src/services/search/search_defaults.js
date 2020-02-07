@@ -9,8 +9,8 @@ export const defaultSearchState = {
   page: 1,
   pageSize: 10,
   fulltext: '',
-  searchEngine: null,
   selectedFacets: [],
-  sort: 'date',
+  sort: 'modified',
+  sort_order: 'desc',
   totalItems: 0,
 };
