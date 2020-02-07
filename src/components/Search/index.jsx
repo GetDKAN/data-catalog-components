@@ -6,7 +6,6 @@ import searchReducer from '../../services/search/search_reducer';
 import { SearchDispatch, defaultSearchState } from '../../services/search/search_defaults';
 import { buildInitialFacets } from '../../services/search/search_functions';
 
-
 const Search = ({
   initialSearchState,
   searchEndpoint,
@@ -34,7 +33,8 @@ const Search = ({
       setHasWindow(true);
     }
     const initialFacets = buildInitialFacets(queryString.parse(location.search), defaultFacets);
-    searchState.selectedFacets = initialFacets;
+    searchState.selectedFacets = (initialSearchState && initialSearchState.selectedFacets)
+      ? initialSearchState.selectedFacets : initialFacets;
     searchState.fulltext = parsedQuery.fulltext ? parsedQuery.fulltext : '';
     searchState.page = parsedQuery.page ? parsedQuery.page : defaultSearchState.page;
     searchState.sort = parsedQuery.sort ? parsedQuery.page : defaultSearchState.sort;
