@@ -26,7 +26,7 @@ const Resource = ({
     }
   }, [dataPreview.values.length]);
 
-  const datasetURL = useDatasetUrl(data.data);
+  const datasetURL = dataInfo.data ? useDatasetUrl(dataInfo.data) : '';
 
   const { hideTable } = infoTableOptions;
   const { hideHeader } = headerOptions;
@@ -36,10 +36,10 @@ const Resource = ({
   const pageSize = 'pageSize' in dataPreview ? dataPreview.pageSize : 20;
   const pages = Math.ceil(parseInt(dataPreview.rowsTotal, 10) / pageSize);
   const statistics = 'datastore_statistics' in dataInfo ? dataInfo.datastore_statistics : { rows: parseInt(dataPreview.rowsTotal, 10), columns: columns.length };
-  
-  const type = data.data && data.data.mediaType ? data.data.mediaType.split("/") : '';
+
+  const type = dataInfo.data && dataInfo.data.mediaType ? dataInfo.data.mediaType.split('/') : '';
   const backup = type ? type[1] : '';
-  const format = data.data && data.data.format ? data.data.format : backup;
+  const format = dataInfo.data && dataInfo.data.format ? dataInfo.data.format : backup;
 
   const FullScreenModal = () => {
     if (dataKey) {
@@ -131,12 +131,12 @@ const Resource = ({
         )
         : (
           <div>
-            {data.data
+            {dataInfo.data
               && (
                 <FileDownload
                   format={format}
                   downloadURL={datasetURL}
-                  title={data.data.title}
+                  title={dataInfo.data.title}
                   key={`${data.indentifier}-file-download`}
                 />
               )}
