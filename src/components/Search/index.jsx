@@ -155,7 +155,7 @@ Search.propTypes = {
   sortOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   setSearchUrl: PropTypes.bool,
   path: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
+  location: PropTypes.objectOf(PropTypes.any).isRequired,
   normalize: PropTypes.func,
 };
 

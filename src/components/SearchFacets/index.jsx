@@ -75,9 +75,8 @@ const SearchFacets = ({
         );
       }
       return (
-        <Label>
+        <Label key={key}>
           <Input
-            key={key}
             checked={selected}
             name={facetKey.toLowerCase()}
             type={type}

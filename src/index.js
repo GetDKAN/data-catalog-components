@@ -44,13 +44,12 @@ export { default as ToggleBlock } from './components/ToggleBlock';
 export { default as Search } from './components/Search';
 export { default as withResource } from './components/Resource/withResource';
 
+// SERVICES
 export { SearchDispatch, defaultSearchState } from './services/search/search_defaults';
-
 export { default as searchReducer } from './services/search/search_reducer';
 export {
   setSelectedFacets, resetSelectedFacets, buildInitialFacets, updateSort,
 } from './services/search/search_functions';
-
 export {
   ResourceDispatch,
   defaultResourceState,
@@ -63,10 +62,6 @@ export {
   advancedColumns,
 } from './services/resource/resource_tools';
 
-// export {
-//   useSearchData,
-//   useLunrSearch,
-//   useFacetTypes,
-//   useUrlParams,
-//   useFilteredFacets,
-// } from './services/hooks/searchHooks';
+// TEMPLATES
+export { default as SearchSidebar } from './templates/SearchSidebar';
+export { default as SearchContent } from './templates/SearchContent';
