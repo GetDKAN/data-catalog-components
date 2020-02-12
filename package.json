@@ -10,7 +10,7 @@
   "author": "CivicActions <contact@civicactions.com>",
   "license": "GPL-3.0",
   "scripts": {
-    "lib": "npm run clean && babel src -d lib",
+    "lib": "npm run clean && babel src -d lib && node-sass --omit-source-map-url src/theme/styles/index.scss dist/index.css",
     "clean": "rm -rf lib && mkdir lib",
     "prepublish": "npm run lib",
     "storybook": "NODE_PATH=src start-storybook -p 6006",
@@ -120,6 +120,7 @@
     "url-loader": "^1.1.2"
   },
   "files": [
-    "lib"
+    "lib",
+    "dist"
   ]
 }
