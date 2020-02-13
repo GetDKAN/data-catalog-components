@@ -24,7 +24,7 @@ export { default as Organization } from './components/Organization';
 export { default as PageHeader } from './components/PageHeader';
 export { default as Resource } from './components/Resource';
 export { default as SearchFacetBlocks } from './components/SearchFacetBlocks';
-export { default as SearchFacetList } from './components/SearchFacetList';
+export { default as SearchFacets } from './components/SearchFacets';
 export { default as SearchInput } from './components/SearchInput';
 export { default as SearchList } from './components/SearchList';
 export { default as SearchListItem } from './components/SearchListItem';
@@ -41,22 +41,15 @@ export { default as Tags } from './components/Tags';
 export { default as Text } from './components/Text';
 export { default as Title } from './components/Title';
 export { default as ToggleBlock } from './components/ToggleBlock';
-export { default as withSearch } from './components/Search/withSearch';
+export { default as Search } from './components/Search';
 export { default as withResource } from './components/Resource/withResource';
 
+// SERVICES
+export { SearchDispatch, defaultSearchState } from './services/search/search_defaults';
+export { default as searchReducer } from './services/search/search_reducer';
 export {
-  SearchDispatch,
-  defaultSearchState,
-  searchReducer,
-  fetchSearchData,
-  getLunrSearch,
-  setSelectedFacets,
-  resetSelectedFacets,
-  setSearchURLParams,
-  buildInitialFacets,
-  filterFacets,
-} from './services/search/search_tools';
-
+  setSelectedFacets, resetSelectedFacets, buildInitialFacets, updateSort,
+} from './services/search/search_functions';
 export {
   ResourceDispatch,
   defaultResourceState,
@@ -69,10 +62,6 @@ export {
   advancedColumns,
 } from './services/resource/resource_tools';
 
-export {
-  useSearchData,
-  useLunrSearch,
-  useFacetTypes,
-  useUrlParams,
-  useFilteredFacets,
-} from './services/hooks/searchHooks';
+// TEMPLATES
+export { default as SearchSidebar } from './templates/SearchSidebar';
+export { default as SearchContent } from './templates/SearchContent';

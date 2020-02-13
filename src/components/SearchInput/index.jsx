@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Button, FormGroup, Label, Input,
@@ -18,6 +18,21 @@ const SearchInput = ({
   submitContent,
   showSubmit,
 }) => {
+  const [searchQuery, setSearchQuery] = useState(value);
+
+  useEffect(() => {
+    if (value === '') {
+      setSearchQuery(value);
+    }
+  }, [value]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onChangeFunction({ type: 'UPDATE_FULLTEXT', data: { fulltext: searchQuery } });
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchQuery, onChangeFunction]);
+
   let reset = (
     <Button
       type="reset"
@@ -49,8 +64,8 @@ const SearchInput = ({
         name="inputSearch"
         id="inputSearch"
         placeholder={placeholder}
-        value={value}
-        onChange={onChangeFunction}
+        value={searchQuery}
+        onChange={(e) => { setSearchQuery(e.target.value); }}
         bsSize={bsSize}
       />
       {value.length ? reset : null}

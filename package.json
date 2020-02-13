@@ -10,7 +10,7 @@
   "author": "CivicActions <contact@civicactions.com>",
   "license": "GPL-3.0",
   "scripts": {
-    "lib": "npm run clean && babel src -d lib",
+    "lib": "npm run clean && babel src -d lib && node-sass --omit-source-map-url src/theme/styles/index.scss dist/index.css",
     "clean": "rm -rf lib && mkdir lib",
     "prepublish": "npm run lib",
     "storybook": "NODE_PATH=src start-storybook -p 6006",
@@ -59,6 +59,7 @@
     "react-dnd-multi-backend": "^4.0.0",
     "react-dnd-touch-backend-cjs": "^9.4.0",
     "react-dom": "^16.9.0",
+    "react-js-pagination": "^3.0.2",
     "react-loader-advanced": "^1.7.1",
     "react-loading-spin": "^1.0.9",
     "react-router-dom": "^4.3.1",
@@ -119,6 +120,7 @@
     "url-loader": "^1.1.2"
   },
   "files": [
-    "lib"
+    "lib",
+    "dist"
   ]
 }
