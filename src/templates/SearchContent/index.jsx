@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import Loader from 'react-loader-advanced';
 import LoadingSpin from 'react-loading-spin';
 import Pagination from 'react-js-pagination';
@@ -19,7 +18,7 @@ const SearchContent = () => {
   const facetTypes = Object.keys(defaultFacets);
 
   return (
-    <div className="dc-results-list col-md-8 col-sm-12 p-5">
+    <div className="dc-results-list col-md-8 col-sm-12">
       {items
       && (
         <div>
@@ -86,8 +85,5 @@ const SearchContent = () => {
     </div>
   );
 };
-
-SearchContent.defaultProps = {};
-SearchContent.propTypes = {};
 
 export default SearchContent;

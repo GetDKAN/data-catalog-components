@@ -13,7 +13,7 @@ const SearchSidebar = ({ sortOptions }) => {
     facetsResults, selectedFacets, totalItems, fulltext,
   } = searchState;
   return (
-    <div className="search-sidebar col-md-4 col-sm-12 p-5">
+    <div className="search-sidebar col-md-4 col-sm-12">
       <div className="search-sidebar-options ds-u-radius">
         <Label for="search-list-sort">Sort by:</Label>
         <Input
