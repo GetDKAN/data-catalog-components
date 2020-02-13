@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   Nav,
-  NavItem } from "reactstrap";
+  NavItem,
+} from 'reactstrap';
 
-const NavBar = ({navItems, expand, defaultStyling, customClasses}) => {
+const NavBar = ({
+  navItems, expand, defaultStyling, customClasses,
+}) => {
   const [isOpen, toggleOpen] = useState(false);
 
   return (
