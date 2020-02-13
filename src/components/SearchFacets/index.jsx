@@ -75,16 +75,19 @@ const SearchFacets = ({
         );
       }
       return (
-        <Label key={key}>
+        <div className="dc-facet-option" key={key}>
           <Input
             checked={selected}
+            id = {key}
             name={facetKey.toLowerCase()}
             type={type}
             value={item.name}
             onChange={onChangeFunction}
           />
-          {`${item.name} (${item.total})`}
-        </Label>
+          <Label htmlFor={key}>
+            {`${item.name} (${item.total})`}
+          </Label>
+        </div>
       );
     });
     return (
