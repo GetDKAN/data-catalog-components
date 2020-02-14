@@ -28,12 +28,12 @@
   ],
   "footer1": [
     {
-      "label": "DKAN2 Docs",
-      "url": "https://dkan2.readthedocs.io/en/latest/",
+      "label": "DKANv2 Docs",
+      "url": "https://getdkan.github.io/dkan2/index.html",
       "target": "_blank"
     },
     {
-      "label": "DKAN 7 Demo",
+      "label": "DKANv1 Demo",
       "url": "https://demo.getdkan.com",
       "target": "_blank"
     },
@@ -45,10 +45,6 @@
     {
       "label": "Data.gov",
       "url": "https://data.gov"
-    },
-    {
-      "label": "Interra",
-      "url": "https://interra.io"
     }
   ],
   "footer2": [

@@ -68,7 +68,7 @@ describe('<Resource />', () => {
     />,
   );
   it('renders correctly', () => {
-    expect(defaultWrapper.exists('.file-download')).toBe(true);
+    expect(defaultWrapper.exists('.dc-file-download')).toBe(true);
     expect(defaultWrapper.exists('.data-table-header')).toBe(true);
     expect(defaultWrapper.exists('div.ReactTable.-striped.-highlight')).toBe(true);
     expect(defaultWrapper.exists('div.table-one')).toBe(true);

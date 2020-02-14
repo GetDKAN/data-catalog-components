@@ -8,11 +8,9 @@ module.exports = async ({ config }) => {
 
   // Make whatever fine-grained changes you need
   config.module.rules.push({
-    // test: /.scss$/,
-    // loader: ExtractTextPlugin.extract(
-    //   'style-loader', 'css-loader!postcss-loader', 'sass-loader'
-    // )
-    //include: path.resolve(__dirname, '../'),
+    test: /\.scss$/,
+    use: ['style-loader', 'css-loader', 'sass-loader'],
+    include: path.resolve(__dirname, '../'),
   });
 
   // Transpile Gatsby module because Gatsby includes un-transpiled ES6 code.

@@ -1,0 +1,29 @@
+@import "../../theme/styles/variables";
+
+.dc-header {
+  .logo {
+    display: inline-block;
+    vertical-align: bottom;
+  }
+  .site-name {
+    display: inline-block;
+    vertical-align: bottom;
+    line-height: 1em;
+    margin-bottom: 10px;
+    a {
+      color: $headingColor;
+      font-size: 1.8rem;
+    }
+  }
+  .slogan {
+    margin-top: 10px;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    .logo,
+    .site-name {
+      display: block;
+    }
+  }
+}

@@ -23,8 +23,8 @@ describe('<DataTableDensity />', () => {
 
   it('renders correct initial results', () => {
     expect(defaultWrapper.find('.density-buttons-title').text()).toBe('Display Density');
-    expect(defaultWrapper.find('.density-buttons button:first-child').text()).toBe('expanded');
-    expect(defaultWrapper.find('.density-buttons button:last-child').text()).toBe('tight');
+    expect(defaultWrapper.find('.density-buttons button:first-child span').text()).toBe('expanded');
+    expect(defaultWrapper.find('.density-buttons button:last-child span').text()).toBe('tight');
   });
 
   it('renders correct custom results', () => {

@@ -1,0 +1,20 @@
+.dc-file-download {
+  clear: both;
+  margin: 15px 0;
+  position: relative;
+  padding-left: 35px;
+  a {
+    line-height: 50px;
+  }
+  .dkan-icon {
+    color: transparent;
+    font-weight: normal;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    text-decoration: none;
+    top: 0;
+    width: 35px;
+    z-index: 0;
+  }
+}

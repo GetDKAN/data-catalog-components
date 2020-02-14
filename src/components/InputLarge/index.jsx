@@ -4,7 +4,6 @@ import React from 'react';
 import { Form, Label, Input, FormText } from 'reactstrap';
 import PropTypes from 'prop-types';
 import FormGroup from './FormGroup';
-import Button from '../Button';
 
 class InputLarge extends React.Component {
 
@@ -46,8 +45,8 @@ class InputLarge extends React.Component {
         <input type="text" name="search" id="search" className="form-control form-text" placeholder="Search for..."
           onChange={this.onFieldChange.bind(this)} value={this.props.value} />
         <span className="input-group-btn">
-          <Button type="submit" id="submit" name="op" className="btn btn-primary" onClick={this.onGo.bind(this)} type="button">Go!</Button>
-          <Button className="btn btn-primary" onClick={this.onReset.bind(this)} type="button">Reset</Button>
+          <button type="submit" id="submit" name="op" className="dc-button btn btn-primary" onClick={this.onGo.bind(this)} type="button">Go!</button>
+          <button className="dc-button btn btn-primary" onClick={this.onReset.bind(this)} type="button">Reset</button>
         </span>
       </FormGroup>
     )

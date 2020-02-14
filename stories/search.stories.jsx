@@ -14,7 +14,7 @@ import InputLarge from '../src/components/InputLarge';
 import FacetList from '../src/components/FacetList';
 import SearchInput from '../src/components/SearchInput';
 import SearchResultsMessage from '../src/components/SearchResultsMessage';
-
+import "../src/theme/styles/index.scss";
 import search from './data/search.json';
 
 const InputSearchParent = () => {
@@ -75,7 +75,7 @@ storiesOf('Search', module)
   .add('Search Results Message', () => (
     <SearchResultsMessage
       searchTerm={text('Search Term', '')}
-      total={number('Total Results', 10)}
+      total={number('Total Results', 1000)}
       facetLimit={number('Facet Limit', 3)}
       facetDelimiter={text('Facet Delimiter', ' or ')}
       facetSeparator={text('Facet Separator', ' | ')}

@@ -15,6 +15,7 @@ const SearchResultsMessage = ({
   searchQueryClass,
   facetDelimiter,
   facetSeparator,
+  defaultFacets,
 }) => {
   let queryText = null;
   const facetsText = [];
@@ -34,13 +35,16 @@ const SearchResultsMessage = ({
   if (showFacets && selectedFacets.length > 0) {
     const facetObj = {};
     for (let i = 0; i < facetTypes.length; i += 1) {
-      facetObj[facetTypes[i]] = selectedFacets.filter((facet) => facet[0] === facetTypes[i]);
+      facetObj[facetTypes[i]] = selectedFacets.filter(
+        (facet) => facet[0].toLowerCase() === facetTypes[i].toLowerCase(),
+      );
     }
+
     if (Object.keys(facetObj).length) {
       const keys = Object.keys(facetObj);
       facetsText.push(' in ');
       for (let i = 0; i < keys.length; i += 1) {
-        const facetTitle = <span className={facetTitleClass}>{keys[i]}</span>;
+        const facetTitle = <span className={facetTitleClass}>{defaultFacets[keys[i]].label}</span>;
         if (facetObj[keys[i]].length) {
           if (facetsText.length >= 2) {
             facetsText.push(facetSeparator);
@@ -76,7 +80,7 @@ const SearchResultsMessage = ({
   return (
     <div className={className}>
       <p>
-        {total}
+        {(total).toLocaleString('en') }
         {' '}
         {total !== 1 ? 'datasets' : 'dataset'}
         {' '}
@@ -113,6 +117,7 @@ SearchResultsMessage.propTypes = {
   searchTerm: PropTypes.string.isRequired,
   facetDelimiter: PropTypes.string,
   facetSeparator: PropTypes.string,
+  defaultFacets: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default SearchResultsMessage;

@@ -11,10 +11,12 @@ import Organization from '../src/components/Organization';
 import Text from '../src/components/Text';
 import Table from '../src/components/Table';
 import Tags from '../src/components/Tags';
+import DataIcon from '../src/components/DataIcon';
 import DataTableDensity from '../src/components/Resource/DataTableHeader/DataTableDensity';
 import DataTablePageResults from '../src/components/Resource/DataTableHeader/DataTablePageResults';
 import data from './data/data.json';
 import tables from './data/tables.json';
+import "../src/theme/styles/index.scss";
 
 storiesOf('Dataset', module)
   .addDecorator(withKnobs)
@@ -35,9 +37,18 @@ storiesOf('Dataset', module)
     ),
     { knobs: { escapeHTML: false } },
   )
-  .add('File Download', () => <FileDownload label="Label" title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
-  .add('File Download - No label', () => <FileDownload title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
-  .add('Organization', () => <Organization name={data.publisher.name} description={data.publisher.description} identifier={data.publisher.identifier} />)
+  .add('File Download', () => <FileDownload title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
+  .add('Organization', () => 
+    <Organization 
+      name={data.publisher.name} 
+      description={data.publisher.description} 
+      identifier={data.publisher.identifier}
+      alignment={select(
+        'Alignment',
+        ['left', 'right', 'center'],
+        'center',
+      )}
+    />)
   .add(
     'Text',
     () => (
@@ -62,7 +73,7 @@ storiesOf('Dataset', module)
       currentPage={number('Current Page', 0)}
     />
   ))
-  .add('Datatable Density Buttons', () => (
+  .add('Datatable Custom Density Buttons', () => (
     <DataTableDensity
       items={[
         { icon: null, text: text('Density Button 1', 'Expanded'), value: 'density-1' },
@@ -71,5 +82,14 @@ storiesOf('Dataset', module)
       ]}
       title={text('Title', 'Display Density')}
       densityChange={action('clicked')}
+    />
+  ))
+  .add('Datatable Default Density Buttons', () => (
+    <DataTableDensity
+      items={[
+        { icon: <DataIcon name="density-1" height={20} width={20} icon={'density-1'} fill="#666666" />, text: 'expanded' },
+        { icon: <DataIcon name="density-2" height={20} width={20} icon={'density-2'} fill="#666666" />, text: 'normal' },
+        { icon: <DataIcon name="density-3" height={20} width={20} icon={'density-3'} fill="#666666" />, text: 'tight' }
+      ]}
     />
   ));

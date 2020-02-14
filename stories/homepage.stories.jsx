@@ -4,13 +4,13 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from "@storybook/addon-knobs";
 import { withA11y } from '@storybook/addon-a11y';
 
-import Hero from '../src/components/Hero';
+import Hero from '../src/templates/Hero';
 import IconList from '../src/components/IconList';
 import IconListItem from '../src/components/IconListItem'
-import Blocks from '../src/components/Blocks';
-import StepsBlock from '../src/components/Blocks/StepsBlock';
-import StatBlock from '../src/components/Blocks/StatBlock';
-
+import Blocks from '../src/templates/Blocks';
+import StepsBlock from '../src/templates/Blocks/StepsBlock';
+import StatBlock from '../src/templates/Blocks/StatBlock';
+import "../src/theme/styles/index.scss";
 import home from './data/home.json';
 
 storiesOf('Home', module)
