@@ -8,6 +8,7 @@ export { default as DataTableHeader } from './components/Resource/DataTableHeade
 export { default as DataTableDensity } from './components/Resource/DataTableHeader/DataTableDensity';
 export { default as DataTablePageResults } from './components/Resource/DataTableHeader/DataTablePageResults';
 export { default as DataTablePageSizer } from './components/Resource/DataTableHeader/DataTablePageSizer';
+export { default as DynamicContent } from './components/DynamicContent';
 export { default as Header } from './templates/Header';
 export { default as Hero } from './templates/Hero';
 export { default as IconList } from './components/IconList';
@@ -61,6 +62,8 @@ export {
   getDKANDatastore,
   advancedColumns,
 } from './services/resource/resource_tools';
+
+export { default as DynamicContext } from './services/dynamic_content/dynamic_content';
 
 // TEMPLATES
 export { default as SearchSidebar } from './templates/SearchSidebar';
