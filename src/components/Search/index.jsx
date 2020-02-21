@@ -40,8 +40,8 @@ const Search = ({
     searchState.sort = parsedQuery.sort ? parsedQuery.page : defaultSearchState.sort;
     searchState.sort_order = parsedQuery.sort_order
       ? parsedQuery.sort_order : defaultSearchState.sort_order;
-    searchState.pageSize = parsedQuery.pageSize
-      ? parsedQuery.pageSize : defaultSearchState.pageSize;
+    searchState['page-size'] = parsedQuery['page-size']
+      ? parsedQuery['page-size'] : defaultSearchState['page-size'];
   }, [location]);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const Search = ({
 
     async function getSearchData() {
       const facetKeys = Object.keys(defaultFacets);
-      const urlOptions = ['fulltext', 'sort', 'sort_order', 'pageSize', 'page', ...facetKeys];
+      const urlOptions = ['fulltext', 'sort', 'sort_order', 'page-size', 'page', ...facetKeys];
       // Get data
       dispatch({ type: 'FETCH_DATA' });
       // Figure out sort options
@@ -124,7 +124,7 @@ const Search = ({
     searchEndpoint,
     searchState.sort,
     searchState.fulltext,
-    searchState.pageSize,
+    searchState['page-size'],
     searchState.page,
     searchState.selectedFacets,
     normalize,

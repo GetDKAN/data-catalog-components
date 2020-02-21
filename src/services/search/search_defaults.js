@@ -7,7 +7,7 @@ export const defaultSearchState = {
   facetsResults: {},
   loading: false,
   page: 1,
-  pageSize: 10,
+  'page-size': 10,
   fulltext: '',
   selectedFacets: [],
   sort: 'modified',
