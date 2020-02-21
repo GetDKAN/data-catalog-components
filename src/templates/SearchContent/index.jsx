@@ -16,7 +16,7 @@ const SearchContent = () => {
     items, fulltext, totalItems, selectedFacets, loading,
   } = searchState;
   const facetTypes = Object.keys(defaultFacets);
-
+  
   return (
     <div className="dc-results-list col-md-8 col-sm-12">
       {items
@@ -54,24 +54,23 @@ const SearchContent = () => {
               ))}
             </ol>
           </Loader>
-          
           <div className="dc-pagination-container">
             <SearchPaginationResults
               total={Number(totalItems)}
-              pageSize={Number(searchState.pageSize)}
+              pageSize={Number(searchState['page-size'])}
               currentPage={Number(searchState.page)}
             />
             <SearchPageSizer
-              currentValue={Number(searchState.pageSize)}
+              currentValue={Number(searchState['page-size'])}
               resizeFunc={(e) => dispatch({
                 type: 'UPDATE_PAGE_SIZE',
-                data: { pageSize: e.target.value },
+                data: { 'page-size': e.target.value },
               })}
             />
             <Pagination
               hideDisabled
               activePage={searchState.page}
-              itemsCountPerPage={searchState.pageSize}
+              itemsCountPerPage={searchState['page-size']}
               totalItemsCount={totalItems}
               pageRangeDisplayed={5}
               onChange={(e) => dispatch({

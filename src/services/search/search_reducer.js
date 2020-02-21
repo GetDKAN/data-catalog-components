@@ -40,7 +40,7 @@ export default function searchReducer(state, action) {
     case 'UPDATE_PAGE_SIZE':
       return {
         ...state,
-        pageSize: action.data.pageSize,
+        'page-size': action.data['page-size'],
         page: 1,
       };
     case 'UPDATE_CURRENT_PAGE':
