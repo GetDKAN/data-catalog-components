@@ -97,9 +97,11 @@ const SearchListItem = ({
       }
 
       { description &&
-        <Text className="dc-item-description">
-          {excerpts(description, {words: 35})}
-        </Text>
+        <div className="dc-item-description">
+          <Text>
+            {excerpts(description, {words: 35})}
+          </Text>
+        </div>
       }
 
       {format &&

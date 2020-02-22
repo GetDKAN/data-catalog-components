@@ -93,6 +93,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.6.2",
+    "@storybook/addon-viewport": "^5.3.13",
     "@storybook/storybook-deployer": "^2.8.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",

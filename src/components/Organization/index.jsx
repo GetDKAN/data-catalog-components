@@ -16,7 +16,7 @@ function Organization(props) {
         {name}
       </h3>
       {description &&
-        <div className="org-description">
+        <div className="dc-org-description">
           {description}
         </div>
       }

@@ -12,6 +12,7 @@ body {
     }
     a {
       color: $linkColor;
+      word-break: break-word;
       &:hover {
         color: $linkHoverColor;
       }

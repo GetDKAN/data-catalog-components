@@ -6,6 +6,7 @@ import {
   Nav,
   NavItem,
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NavBar = ({
   navItems, expand, defaultStyling, customClasses,
@@ -16,7 +17,17 @@ const NavBar = ({
     <div className={`${customClasses} ${defaultStyling ? ' dc-main-navigation base-styles' : ''}`}>
       {expand && 
         <Navbar expand="md navbar-dark">
-          <NavbarToggler onClick={() => toggleOpen(!isOpen)} />
+          <div className="dc-toggle">
+            <NavbarToggler onClick={() => toggleOpen(!isOpen)}>
+              <FontAwesomeIcon
+                icon={['fas', 'bars']}
+                aria-hidden="true"
+                role="presentation"
+              />
+              <span className="sr-only">Menu</span>
+            </NavbarToggler>   
+          </div>
+
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto">
               {navItems.map((item, index) => (
