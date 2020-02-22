@@ -5,7 +5,7 @@ import excerpts from 'excerpts';
 import TopicImage from '../../templates/TopicImage';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
-import { Link } from "gatsby";
+import { Link } from '@reach/router';
 
 const SearchListItem = ({
   className,
@@ -57,7 +57,7 @@ const SearchListItem = ({
         return(
           <Link
             key={`dist-${topic}-${Math.random() * 10}`}
-            to={"search?topics=" + topic}
+            to={"search?theme=" + topic}
           >
             <TopicImage title={topic} height="16" width="16"/>
             {topic}
