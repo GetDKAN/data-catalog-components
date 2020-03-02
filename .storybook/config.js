@@ -1,10 +1,16 @@
 import { configure } from '@storybook/react';
 import { addDecorator } from '@storybook/react';
+import { addParameters } from '@storybook/react';
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import GlobalStyles from '../src/theme/globalStyles';
 import Theme from '../src/theme/default'
 import { ThemeProvider } from 'styled-components'
+
+import {
+  INITIAL_VIEWPORTS,
+  // or MINIMAL_VIEWPORTS,
+} from '@storybook/addon-viewport';
 
 function withGlobalStyles(storyFn) {
   return (
@@ -20,6 +26,13 @@ function withGlobalStyles(storyFn) {
 }
 
 addDecorator(withGlobalStyles);
+addParameters({
+  viewport: {
+    viewports: {
+      ...INITIAL_VIEWPORTS,
+    },
+  },
+});
 
 // Automatically import all files ending in *.stories.js
 const req = require.context('../stories', true, /.stories.jsx$/);
