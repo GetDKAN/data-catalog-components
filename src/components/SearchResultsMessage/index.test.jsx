@@ -2,79 +2,108 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import SearchResultsMessage from '.';
 
+const defaultFacets = {
+  Theme: {
+    label: 'Topics',
+    field: 'theme.0.title',
+    showAll: false,
+    limit: 10,
+    reset: {
+      active: false,
+      icon: <span />,
+    },
+  },
+  Keyword: {
+    label: 'Tags',
+    field: 'keyword.*.title',
+    showAll: false,
+    limit: 10,
+    reset: {
+      active: false,
+      icon: <span />,
+    },
+  },
+};
+
 describe('<SearchResultMessage />', () => {
   const defaultWrapper = shallow(
     <SearchResultsMessage
       searchTerm=""
       selectedFacets={[]}
-      facetTypes={['Themes', 'Keywords']}
+      facetTypes={['Theme', 'Keyword']}
       total={10}
+      defaultFacets={defaultFacets}
     />,
   );
   const customWrapper = shallow(
     <SearchResultsMessage
       searchTerm="foobar"
       selectedFacets={[
-        ['Themes', 'Foo'],
-        ['Keywords', 'Bar'],
-        ['Keywords', 'Run'],
+        ['Theme', 'Foo'],
+        ['Keyword', 'Bar'],
+        ['Keyword', 'Run'],
       ]}
-      facetTypes={['Themes', 'Keywords']}
+      facetTypes={['Theme', 'Keyword']}
       total={10}
+      defaultFacets={defaultFacets}
     />,
   );
   const condensedWrapper = shallow(
     <SearchResultsMessage
       searchTerm="foobar"
       selectedFacets={[
-        ['Themes', 'Foo'],
-        ['Keywords', 'Bar'],
-        ['Keywords', 'Run'],
-        ['Keywords', 'Fun'],
+        ['Theme', 'Foo'],
+        ['Keyword', 'Bar'],
+        ['Keyword', 'Run'],
+        ['Keyword', 'Fun'],
       ]}
-      facetTypes={['Themes', 'Keywords']}
+      facetTypes={['Theme', 'Keyword']}
       total={10}
+      defaultFacets={defaultFacets}
     />,
   );
   const noShowWrapper = shallow(
     <SearchResultsMessage
       searchTerm="foobar"
       selectedFacets={[
-        ['Themes', 'Foo'],
-        ['Keywords', 'Bar'],
-        ['Keywords', 'Run'],
+        ['Theme', 'Foo'],
+        ['Keyword', 'Bar'],
+        ['Keyword', 'Run'],
       ]}
-      facetTypes={['Themes', 'Keywords']}
+      facetTypes={['Theme', 'Keyword']}
       total={10}
       showQuery={false}
       showFacets={false}
+      defaultFacets={defaultFacets}
     />,
   );
   const singleItemWrapper = shallow(
     <SearchResultsMessage
       searchTerm=""
       selectedFacets={[]}
-      facetTypes={['Themes', 'Keywords']}
+      facetTypes={['Theme', 'Keyword']}
       total={1}
+      defaultFacets={defaultFacets}
     />,
   );
   const delimiterWrapper = shallow(
     <SearchResultsMessage
       searchTerm="foobar"
       selectedFacets={[
-        ['Themes', 'Foo'],
-        ['Keywords', 'Bar'],
-        ['Keywords', 'Run'],
+        ['Theme', 'Foo'],
+        ['Keyword', 'Bar'],
+        ['Keyword', 'Run'],
       ]}
-      facetTypes={['Themes', 'Keywords']}
+      facetTypes={['Theme', 'Keyword']}
       total={10}
       facetDelimiter=", "
       facetSeparator=" &amp; "
+      defaultFacets={defaultFacets}
     />,
   );
-  const completeMessage = '10 datasets found for "foobar" in Themes: Foo | Keywords: Bar or Run';
-  const customDelimiterMessage = '10 datasets found for "foobar" in Themes: Foo & Keywords: Bar, Run';
-  const condensedMessage = '10 datasets found for "foobar" in Themes: Foo | Keywords: 3 selected Keywords';
+  const completeMessage = '10 datasets found for "foobar" in Topics: Foo | Tags: Bar or Run';
+  const customDelimiterMessage = '10 datasets found for "foobar" in Topics: Foo & Tags: Bar, Run';
+  const condensedMessage = '10 datasets found for "foobar" in Topics: Foo | Tags: 3 selected Keyword';
   it('renders with default message', () => {
     expect(defaultWrapper.find('div p').text()).toBe('10 datasets found');
   });
