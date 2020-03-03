@@ -17,6 +17,8 @@ import DataTablePageResults from '../src/components/Resource/DataTableHeader/Dat
 import data from './data/data.json';
 import tables from './data/tables.json';
 import "../src/theme/styles/index.scss";
+import TopicIcon from '../src/components/TopicIcon';
+import TopicWrapper from '../src/components/TopicWrapper';
 
 storiesOf('Dataset', module)
   .addDecorator(withKnobs)
@@ -66,6 +68,7 @@ storiesOf('Dataset', module)
   .add('Table 2', () => <Table configuration={tables.config2} data={tables.data2} title="What's in this Dataset?" th1="Rows" th2="Columns" tableclass="table-two" />)
   .add('Table 3', () => <Table configuration={tables.config3} data={tables.data3} title="Columns in this Dataset" th1="Column Name" th2="Type" tableclass="table-three" />)
   .add('Tags', () => <Tags label="Tags" tags={data.keyword} path="../search?keyword=" />)
+  .add('TopicWrapper', () => <TopicWrapper component={TopicIcon} topic="Education" />)
   .add('Datatable Results Message', () => (
     <DataTablePageResults
       total={number('Total', 100)}
