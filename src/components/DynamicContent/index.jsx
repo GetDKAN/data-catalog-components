@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Loader from 'react-loader-advanced';
+import LoadingSpin from 'react-loading-spin';
 import axios from 'axios';
 import { navigate } from '@reach/router';
 import DynamicContext from '../../services/dynamic_content/dynamic_content';
@@ -18,8 +20,15 @@ const DynamicContent = ({
   const [content, setContent] = useState(item);
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [hasWindow, setHasWindow] = useState(false);
   const apiUrl = `${apiPrefix}/${id}/${apiSuffix}`;
   const jsonApiUrl = `${process.env.DRUPAL_API_URL}/node/${nodeType}/${id}`;
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setHasWindow(true);
+    }
+  }, []);
 
   useEffect(() => {
     async function getDynamicContent() {
@@ -50,7 +59,6 @@ const DynamicContent = ({
           }
         })
         .catch(() => {
-          // console.error(error);
           setLoading(false);
         });
     }
@@ -63,13 +71,24 @@ const DynamicContent = ({
       setLoading(false);
     }
   }, [item, dynamicCallback, apiUrl]);
-
   return (
     <>
-      {(!notFound && content && !loading)
+      {!notFound && content
         && (
           <DynamicContext.Provider value={{ item: content }}>
-            { children }
+            {!hasWindow
+              ? children
+              : (
+                <Loader
+                  hideContentOnLoad
+                  backgroundStyle={{ backgroundColor: '#f9fafb' }}
+                  foregroundStyle={{ backgroundColor: '#f9fafb' }}
+                  show={loading}
+                  message={<LoadingSpin width="3px" primaryColor="#007BBC" />}
+                >
+                  { children }
+                </Loader>
+              )}
           </DynamicContext.Provider>
         )}
     </>
