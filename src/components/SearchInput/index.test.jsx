@@ -2,16 +2,18 @@ import React from 'react';
 import { mount } from 'enzyme';
 import SearchInput from './index';
 
+jest.useFakeTimers();
+
 describe('<SearchInput />', () => {
   const defaultWrapper = mount(
     <SearchInput
-      onChangeFunction={(event) => defaultWrapper.setProps({ value: event.target.value })}
+      onChangeFunction={() => {}}
     />,
   );
   const customWrapper = mount(
     <SearchInput
-      onChangeFunction={(event) => customWrapper.setProps({ value: event.target.value })}
-      onResetFunction={() => customWrapper.setProps({ value: '' })}
+      onChangeFunction={() => {}}
+      onResetFunction={() => {}}
       showSubmit={false}
       value="test"
       resetContent="Custom Reset"
@@ -29,7 +31,9 @@ describe('<SearchInput />', () => {
   });
   it('renders re-renders with input text and default Reset button', () => {
     defaultWrapper.find('input').simulate('change', { target: { value: 'abcdefg' } });
+    jest.advanceTimersByTime(500);
     expect(defaultWrapper.find('input').props().value).toBe('abcdefg');
+    expect(defaultWrapper.exists('button#inputReset')).toBe(true);
     expect(defaultWrapper.find('button#inputReset').text()).toBe('Reset');
   });
   it('renders without Submit button', () => {
