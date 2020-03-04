@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import excerpts from 'excerpts';
-import TopicImage from '../../templates/TopicImage';
+import TopicIcon from '../../templates/TopicIcon';
 import TopicWrapper from '../../components/TopicWrapper';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
@@ -56,7 +56,7 @@ const SearchListItem = ({
     } else {
       return theme.map((topic) => {
         return(
-          <TopicWrapper component={TopicImage} topic={topic}/>
+          <TopicWrapper component={TopicIcon} topic={topic}/>
         );
       })
     }

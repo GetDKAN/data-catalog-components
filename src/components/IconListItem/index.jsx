@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import TopicImage from '../../templates/TopicImage'
+import TopicIcon from '../../templates/TopicIcon'
 import { Link } from "gatsby";
 
 class IconListItem extends React.PureComponent {
@@ -21,7 +21,7 @@ class IconListItem extends React.PureComponent {
       // Image provided by custom component.
       content = ( 
         <Link to={this.props.link} className="dc-icon-link">
-          <TopicImage 
+          <TopicIcon 
             title={this.props.title} 
             size={this.props.size} 
             fill={this.props.color}

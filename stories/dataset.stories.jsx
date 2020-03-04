@@ -17,7 +17,7 @@ import DataTablePageResults from '../src/components/Resource/DataTableHeader/Dat
 import data from './data/data.json';
 import tables from './data/tables.json';
 import "../src/theme/styles/index.scss";
-import TopicIcon from '../src/components/TopicIcon';
+import TopicIcon from '../src/templates/TopicIcon';
 import TopicWrapper from '../src/components/TopicWrapper';
 
 storiesOf('Dataset', module)
