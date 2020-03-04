@@ -15,6 +15,7 @@ import Footer from '../src/templates/Footer';
 import ApiDocs from '../src/components/ApiDocs';
 import ToggleBlock from '../src/components/ToggleBlock';
 import ShowMoreContainer from '../src/components/ShowMoreContainer';
+import Announcement from '../src/templates/Announcement';
 import "../src/theme/styles/index.scss";
 
 import links from './data/menu.json';
@@ -121,3 +122,14 @@ storiesOf('General', module)
   ))
   .add('Footer', () => <Footer links={links} customClasses="container-fluid" />)
   .add('API Documentation', () => <ApiDocs endpoint="https://petstore.swagger.io/v2/swagger.json" />)
+  .add('Announcement', () => (
+    <Announcement 
+      heading={text('Heading', "Note")} 
+      variation={select(
+        "Variation",
+        ["","info", "success", "warn", "error"],
+        ""
+      )}>
+      Pay attention this is important information.
+    </Announcement>
+  ))
