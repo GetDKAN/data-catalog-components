@@ -85,9 +85,9 @@ class TopicIcon extends React.PureComponent {
   }
 }
 
-TopicImage.defaultProps = {
+TopicIcon.defaultProps = {
   title: "City Planning",
   size: 24,
 };
 
-export default TopicImage
+export default TopicIcon

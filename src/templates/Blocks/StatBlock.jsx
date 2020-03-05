@@ -2,18 +2,23 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Wrapper from './Wrapper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class StatBlock extends React.PureComponent {
 
   render() {
     const { content } = this.props;
     return (
-      <Wrapper key={content.ref} className="stat-block">
-        <i className={content.icon}></i>
+      <div key={content.ref} className="stat-block">
+        <FontAwesomeIcon
+          icon={['fas', `${content.icon}`]}
+          size="4x"
+          aria-hidden="true"
+          role="presentation"
+        />
         <h2>{content.title}</h2>
         <p>{content.content}</p>
-      </Wrapper>
+      </div>
     )
 
   }

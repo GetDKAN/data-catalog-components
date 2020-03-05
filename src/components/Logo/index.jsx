@@ -1,7 +1,6 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import Wrapper from './Wrapper';
 
 class Logo extends Component {
 
@@ -9,9 +8,9 @@ class Logo extends Component {
       let logo = this.props.image ? this.props.image : {image}
 
       return (
-        <Wrapper href="/" className="logo">
+        <div href="/" className="dc-logo">
           <img src={logo} alt="Open Data Catalog" />
-        </Wrapper>
+        </div>
       );
     }
 

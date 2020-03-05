@@ -2,7 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import excerpts from 'excerpts';
-import TopicImage from '../../templates/TopicImage';
+import TopicIcon from '../../templates/TopicIcon';
+import TopicWrapper from '../../components/TopicWrapper';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
 import { Link } from '@reach/router';
@@ -55,13 +56,7 @@ const SearchListItem = ({
     } else {
       return theme.map((topic) => {
         return(
-          <Link
-            key={`dist-${topic}-${Math.random() * 10}`}
-            to={"search?theme=" + topic}
-          >
-            <TopicImage title={topic} height="16" width="16"/>
-            {topic}
-          </Link>
+          <TopicWrapper component={TopicIcon} topic={topic}/>
         );
       })
     }
