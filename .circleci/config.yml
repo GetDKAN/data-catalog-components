@@ -12,6 +12,11 @@ jobs:
       - restore_cache:
           key: npm-cache-v1-{{ checksum "package-lock.json" }}
       - run:
+        name: "Setup variables"
+        command: |
+          echo CIRCLE_BRANCH
+          echo CIRCLE_PR_BRANCH
+      - run:
           name: Install Dependencies
           command: npm install
       - save_cache:
