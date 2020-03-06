@@ -22,6 +22,14 @@ jobs:
           name: Run Jest Tests
           command: npm test
       - run:
+          name: Install DKTL
+          command: |
+            cd ~
+            git clone --single-branch --depth 1 https://github.com/GetDKAN/dkan-tools.git
+            chmod 777 ./dkan-tools/bin/dktl
+            export PATH=$PATH:~/dkan-tools/bin
+            which dktl
+      - run:
           name: Initialize Project
           command: |
             export PATH=$PATH:~/dkan-tools/bin
