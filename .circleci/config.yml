@@ -14,8 +14,8 @@ jobs:
       - run:
           name: "Setup variables"
           command: |
-            echo CIRCLE_BRANCH
-            echo CIRCLE_PR_BRANCH
+            echo $CIRCLE_BRANCH
+            echo $CIRCLE_PR_BRANCH
       - run:
           name: Install Dependencies
           command: npm install
