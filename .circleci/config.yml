@@ -12,10 +12,10 @@ jobs:
       - restore_cache:
           key: npm-cache-v1-{{ checksum "package-lock.json" }}
       - run:
-        name: "Setup variables"
-        command: |
-          echo CIRCLE_BRANCH
-          echo CIRCLE_PR_BRANCH
+          name: "Setup variables"
+          command: |
+            echo CIRCLE_BRANCH
+            echo CIRCLE_PR_BRANCH
       - run:
           name: Install Dependencies
           command: npm install
@@ -71,7 +71,7 @@ jobs:
             dktl drush dkan-search:rebuild-tracker
             dktl drush search-api-index
             dktl dc exec web chmod -R 777 /var/www/docroot/data-catalog-frontend
-            dktl dc exec cli sh -c 'cd /var/www && git clone --single-branch -b $CIRCLE_PR_BRANCH git@github.com:GetDKAN/data-catalog-components.git'
+            dktl dc exec cli bash -c 'cd /var/www && git clone --single-branch -b $CIRCLE_PR_BRANCH git@github.com:GetDKAN/data-catalog-components.git'
             dktl dc exec cli npm link --prefix /var/www/data-catalog-components --unsafe-perm
             dktl dc exec cli npm install --prefix /var/www/docroot/data-catalog-frontend --unsafe-perm
             dktl dc exec cli npm link @civicactions/data-catalog-components --prefix /var/www/docroot/data-catalog-frontend --unsafe-perm
