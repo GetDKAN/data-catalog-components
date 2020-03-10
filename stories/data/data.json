@@ -47,7 +47,8 @@
             "downloadURL": "https://data.example.gov/fake/file.csv",
             "mediaType": "text/csv",
             "title": "file.csv",
-            "format": "csv"
+            "format": "csv",
+            "description": "This is the description of the distribution file."
         },
         {
             "identifier": "23ew-n7w9-pdf",
