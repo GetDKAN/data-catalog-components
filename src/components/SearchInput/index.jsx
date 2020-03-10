@@ -8,7 +8,6 @@ const SearchInput = ({
   className,
   labelContent,
   onChangeFunction,
-  onResetFunction,
   placeholder,
   value,
   bsSize,
@@ -17,6 +16,7 @@ const SearchInput = ({
   resetContent,
   submitContent,
   showSubmit,
+  showReset,
 }) => {
   const [searchQuery, setSearchQuery] = useState(value);
 
@@ -33,27 +33,15 @@ const SearchInput = ({
     return () => clearTimeout(timer);
   }, [searchQuery, onChangeFunction]);
 
-  let reset = (
+  const reset = (
     <Button
       type="reset"
       id="inputReset"
-      onClick={onResetFunction}
+      onClick={() => { setSearchQuery(''); }}
     >
-      Reset
+      {resetContent}
     </Button>
   );
-  if (resetContent) {
-    reset = (
-      <Button
-        type="reset"
-        id="inputReset"
-        onClick={onResetFunction}
-      >
-        {resetContent}
-      </Button>
-    );
-  }
-
   const labelClass = srOnly ? 'sr-only' : '';
 
   return (
@@ -68,7 +56,7 @@ const SearchInput = ({
         onChange={(e) => { setSearchQuery(e.target.value); }}
         bsSize={bsSize}
       />
-      {value.length ? reset : null}
+      {searchQuery.length ? reset : null}
       {showSubmit
         && <Button type="submit" id="inputSubmit">{submitContent}</Button>}
     </FormGroup>
@@ -83,10 +71,10 @@ SearchInput.defaultProps = {
   labelClassName: '',
   srOnly: true,
   className: '',
-  resetContent: null,
-  onResetFunction: null,
+  resetContent: 'Reset',
   submitContent: 'Submit',
   showSubmit: true,
+  showReset: true,
 };
 
 SearchInput.propTypes = {
@@ -98,9 +86,9 @@ SearchInput.propTypes = {
   className: PropTypes.string,
   resetContent: PropTypes.node,
   submitContent: PropTypes.node,
-  onResetFunction: PropTypes.func,
   onChangeFunction: PropTypes.func.isRequired,
   showSubmit: PropTypes.bool,
+  showReset: PropTypes.bool,
   labelContent: PropTypes.string,
 };
 
