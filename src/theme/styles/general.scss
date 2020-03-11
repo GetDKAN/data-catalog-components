@@ -1,43 +1,39 @@
 @import "./variables";
 
 body {
-    background-color: $backgroundColor;
-    color: $textColor;
-    font-weight: 300;
-    font-size: 1.6rem;
+  background-color: $backgroundColor;
+  color: $textColor;
+  font-weight: 300;
+  font-size: 1.6rem;
+  font-family: $fontText;
+
+  a, input, button, textarea {
+    transition: all 0.2s linear;
+  }
+  a {
+    color: $linkColor;
+    word-break: break-word;
+    &:hover {
+      color: $linkHoverColor;
+    }
+  }
+  h1,h2,h3,h4,h5 { 
+    color: $headingColor;
     font-family: $fontText;
+  }
+  h1 { font-size: 3.0rem }  // 30px
+  h2 { font-size: 2.4rem; } // 24px
+  h3 { font-size: 2.0rem; } // 20px
 
-    a, input, button, textarea {
-      transition: all 0.2s linear;
-    }
-    a {
-      color: $linkColor;
-      word-break: break-word;
-      &:hover {
-        color: $linkHoverColor;
-      }
-    }
-    h1,h2,h3,h4,h5 { 
-      color: $headingColor;
-      font-family: $fontText;
-    }
-    h1 { font-size: 3.0rem }  // 30px
-    h2 { font-size: 2.4rem; } // 24px
-    h3 { font-size: 2.0rem; } // 20px
-
-    .container-fluid {
-      padding-left: 25px;
-      padding-right: 25px;
-    }
-    table {
-      background-color: white;
-    }
-    .table-bordered td,
-    .table-bordered th {
-      border-color: $borderColor;
-    }
-    .form-control {
-      font-size: 1.6rem;
-      margin-bottom: 15px;
-    }
+  table {
+    background-color: white;
+  }
+  .table-bordered td,
+  .table-bordered th {
+    border-color: $borderColor;
+  }
+  .form-control {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
 }
