@@ -1,5 +1,6 @@
 export { default as AdvancedOptions } from './components/Resource/DataTableHeader/AdvancedOptions';
 export { default as AdvancedOptionsForm } from './components/Resource/DataTableHeader/AdvancedOptions/AdvancedOptionsForm';
+export { default as Announcement } from './templates/Announcement';
 export { default as ApiDocs } from './components/ApiDocs';
 export { default as Blocks } from './templates/Blocks';
 export { default as BasicBlock } from './templates/Blocks/BasicBlock';
