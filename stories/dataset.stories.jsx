@@ -40,6 +40,13 @@ storiesOf('Dataset', module)
     { knobs: { escapeHTML: false } },
   )
   .add('File Download', () => <FileDownload title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
+  .add('File Download with description', () => 
+    <FileDownload 
+      title={data.distribution[0].title} 
+      downloadURL={data.distribution[0].downloadURL} 
+      format={data.distribution[0].format} 
+      description={data.distribution[0].description}
+    />)
   .add('Organization', () => 
     <Organization 
       name={data.publisher.name} 
