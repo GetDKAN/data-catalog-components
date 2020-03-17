@@ -103,10 +103,18 @@ export function prepareColumns(columns) {
 
 // Get new rows of data from the datastore.
 export async function queryResourceData(resourceData, includeCount = false) {
-  const {
-    filters, pageSize, currentPage, sort, store,
-  } = resourceData;
-  const items = await store.query(filters, null, null, pageSize, currentPage, sort, includeCount)
+  // const {
+  //   filters, pageSize, currentPage, sort, store,
+  // } = resourceData;
+  const items = await resourceData.store.query(
+    resourceData.filters,
+    null,
+    null,
+    resourceData.pageSize,
+    resourceData.currentPage,
+    resourceData.sort,
+    includeCount,
+  )
     .then((data) => data);
   return {
     type: 'QUERY_STORE',
@@ -163,15 +171,14 @@ export async function getDKANDatastore(rootURL, resource) {
       console.warn(e.message);
     });
   if (checkForDatastore) {
-    const { columns, numOfRows } = checkForDatastore;
     // eslint-disable-next-line
-    const store = await new datastore['dkan'](identifier, columns, rootURL);
+    const store = await new datastore['dkan'](identifier, checkForDatastore.columns, rootURL);
     return {
       type: 'USE_STORE',
       data: {
         store,
-        rowsTotal: numOfRows,
-        columns: prepareColumns(columns),
+        rowsTotal: checkForDatastore.numOfRows,
+        columns: prepareColumns(checkForDatastore.columns),
         storeType: 'DKAN',
         queryAll: true,
       },

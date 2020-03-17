@@ -55,7 +55,8 @@ export default function withResource(
     }
 
     async getStore() {
-      const { data, rootUrl } = this.props;
+      const data = this.props.data;
+      const rootUrl = this.props.rootUrl;
       return new Promise((resolve, reject) => {
         if (this.store !== null) {
           resolve(this.store);
@@ -106,8 +107,9 @@ export default function withResource(
     }
 
     async fetchData() {
-      const { dataPreview } = this.state;
-      const { data, rootUrl } = this.props;
+      const dataPreview = this.state.dataPreview;
+      const data = this.props.data;
+      const rootUrl = this.props.rootUrl;
       let columns = null;
 
       if (data.identifier !== undefined) {

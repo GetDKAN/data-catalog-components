@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ToggleBlock from '../ToggleBlock';
 import ShowMoreContainer from '../ShowMoreContainer';
-import { useFilteredFacets } from '../../services/hooks/searchHooks';
+// import { useFilteredFacets } from '../../services/hooks/searchHooks';
 
 const SearchFacetList = ({
   facetKey,
@@ -11,7 +11,8 @@ const SearchFacetList = ({
   limit,
   facetChangeFunc,
 }) => {
-  const filteredFacets = useFilteredFacets(facetKey, selectedFacets, facetResults);
+  let filteredFacets = [];
+  // filteredFacets = useFilteredFacets(facetKey, selectedFacets, facetResults);
 
   const choices = filteredFacets.map((result) => {
     const type = 'checkbox';

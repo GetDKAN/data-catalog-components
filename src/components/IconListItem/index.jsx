@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import TopicIcon from '../../templates/TopicIcon'
-import { Link } from "gatsby";
+import { Link } from "@reach/router";
 
 class IconListItem extends React.PureComponent {
 
