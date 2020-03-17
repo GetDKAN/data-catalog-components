@@ -223,7 +223,8 @@ export class dkan extends Datastore {
       let where_clauses = [];
 
       where.forEach((v, i) => {
-        where_clauses[i] = v.id + " = '" + v.value + "'"
+        // Switch delimiter to, and strip any double-quote for Dkan2's sql query.
+        where_clauses[i] = v.id + " = \"" + v.value.replace("\"", "") + "\""
       });
 
       where_string = "[WHERE " + where_clauses.join(" AND ") + "]";
