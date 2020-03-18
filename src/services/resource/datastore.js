@@ -216,7 +216,6 @@ export class dkan extends Datastore {
 
   async _fetch(limit, offset, where, sort, count) {
     let query  = ""
-
     let where_string = ''
 
     if (where.length !== 0) {
