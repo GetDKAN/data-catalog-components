@@ -70,6 +70,10 @@ jobs:
             dktl drush dkan-search:rebuild-tracker
             dktl drush search-api-index
             dktl dc exec web chmod -R 777 /var/www/docroot/data-catalog-frontend
+            dktl dc exec cli npm cache clean -f
+            dktl dc exec cli npm install -g n
+            dktl dc exec cli n stable
+            dktl dc exec cli npm install npm@latest
             dktl dc exec cli sh -c 'cd /var/www && git clone --single-branch -b $CIRCLE_BRANCH git@github.com:GetDKAN/data-catalog-components.git'
             dktl dc exec cli sh -c 'cd /var/www/data-catalog-components && npm link'
             dktl dc exec cli sh -c 'cd /var/www/docroot/data-catalog-frontend && npm link @civicactions/data-catalog-components'
