@@ -28,10 +28,10 @@ const Hero = ({
 
   return (
     <div className="dc-hero" style={{ backgroundImage: background }}>
-      <div className={`block ${alignment}`}>
-        <h1 className="hero-title">{title}</h1>
+      <div className={`dc-hero-block ${alignment}`}>
+        <h1 className="dc-hero-title">{title}</h1>
         <p>{intro}</p>
-        <form onSubmit={(event) => handleSubmit(event)}>
+        <form onSubmit={(event) => handleSubmit(event)} className="dc-hero-search">
           <Label className="sr-only" htmlFor="hero_search">Search</Label>
           <Input
             onChange={(event) => setQuery(event.target.value)}

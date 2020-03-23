@@ -26,7 +26,6 @@ class Header extends Component {
           {this.props.navItems &&
             <NavBar navItems={this.props.navItems} className={this.props.customClasses} />
           }
-          
         </div>
       );
     }

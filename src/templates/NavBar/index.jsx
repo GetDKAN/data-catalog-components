@@ -15,8 +15,8 @@ const NavBar = ({
 
   return (
     <div className={`${customClasses} ${defaultStyling ? ' dc-main-navigation base-styles' : ''}`}>
-      {expand && 
-        <Navbar expand="md navbar-dark">
+      {expand &&
+        <Navbar expand="md">
           <div className="dc-toggle">
             <NavbarToggler onClick={() => toggleOpen(!isOpen)}>
               <FontAwesomeIcon
@@ -25,7 +25,7 @@ const NavBar = ({
                 role="presentation"
               />
               <span className="sr-only">Menu</span>
-            </NavbarToggler>   
+            </NavbarToggler>
           </div>
 
           <Collapse isOpen={isOpen} navbar>
@@ -39,7 +39,7 @@ const NavBar = ({
           </Collapse>
         </Navbar>
       }
-      {!expand && 
+      {!expand &&
         <Navbar expand={false} className={customClasses}>
           <ul>
             {navItems.map((item, index) => (

@@ -1,6 +1,12 @@
+@import "../../theme/styles/variables";
+
 .dc-topic-wrapper {
-    padding: 5px 20px 5px 0;
-    svg {
-        margin-right: 6px;
-    }
+  padding: 5px 20px 5px 0;
+  svg {
+    margin-right: 6px;
+    fill: $linkColor;
+  }
+  &:hover svg {
+    fill: $linkHoverColor;
+  }
 }

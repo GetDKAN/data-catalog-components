@@ -12,10 +12,10 @@
   flex-wrap: nowrap;
   justify-content: space-evenly;
 
-  .hero-title {
+  .dc-hero-title {
     color: white;
   }
-  .block {
+  .dc-hero-block {
     position: relative;
     margin: auto;
     color: white;
@@ -32,12 +32,30 @@
   h2 {
     margin-top: 0;
   }
-  .btn-hero a {
-    color: $primaryDark;
-    &:hover,
-    &:focus {
+
+  .dc-hero-search {
+    display: flex;
+    flex-wrap: nowrap;
+    input {
+      margin-right: 1em;
+    }
+    button {
+      border: none;
+      background-color: $secondary;
       color: $primaryDark;
-      text-decoration: none;
+      height: 34px;
+      padding: 0 30px;
+      font-weight: bold;
+      font-size: 1.6rem;
+      &[type="reset"] {
+        margin-left: 1em;
+      }
+      &:hover,
+      &:focus {
+        background-color: $secondaryDark;
+        color: $primaryDark;
+        text-decoration: none;
+      }
     }
   }
 
