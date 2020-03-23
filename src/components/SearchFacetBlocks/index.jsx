@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FacetList from '../SearchFacetList';
-import { useFacetTypes } from '../../services/hooks/searchHooks';
+// import { useFacetTypes } from '../../services/hooks/searchHooks';
 
 const SearchFacetBlocks = ({
   className,
@@ -9,7 +9,8 @@ const SearchFacetBlocks = ({
   limit,
   facetChangeFunc,
 }) => {
-  const facetTypes = useFacetTypes(facets.defaultFacets);
+  const facetTypes = {};
+  // facetTypes = useFacetTypes(facets.defaultFacets)
   return (
     <div className={className}>
       {facetTypes.map((facetKey) => (
