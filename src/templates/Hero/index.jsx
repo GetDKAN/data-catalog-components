@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from '@reach/router';
 import { Input, Label, Button } from 'reactstrap';
-import defaultTheme from '../../theme/default';
+import "../../theme/styles/variables.scss";
 
 const Hero = ({
   alignment,
@@ -16,7 +16,7 @@ const Hero = ({
   const [query, setQuery] = useState('');
   const background = image
     ? `url(${image})`
-    : `linear-gradient(${defaultTheme.primaryDark}, ${defaultTheme.primary})`;
+    : `linear-gradient(${primaryDark}, ${primary})`;
   async function handleSubmit(event) {
     event.preventDefault();
     let searchParams = '/search/';

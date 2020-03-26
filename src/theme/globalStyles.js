@@ -8,9 +8,6 @@ library.add(fab, fas);
 
 const GlobalStyles = createGlobalStyle`
 
-  html {
-    /*Convert font size to base 10 for easier calculations (1rem = 10px)*/
-    font-size: 62.5%;
-  }
+
 `;
 export default GlobalStyles;
