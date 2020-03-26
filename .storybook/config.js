@@ -3,9 +3,11 @@ import { addDecorator } from '@storybook/react';
 import { addParameters } from '@storybook/react';
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import GlobalStyles from '../src/theme/globalStyles';
-import Theme from '../src/theme/default'
-import { ThemeProvider } from 'styled-components'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
+library.add(fab, fas);
 
 import {
   INITIAL_VIEWPORTS,
@@ -15,12 +17,9 @@ import {
 function withGlobalStyles(storyFn) {
   return (
     <React.Fragment>
-      <GlobalStyles />
-      <ThemeProvider theme={Theme}>
-        <Router>
-          {storyFn()}
-        </Router>
-      </ThemeProvider>
+      <Router>
+        {storyFn()}
+      </Router>
     </React.Fragment>
   );
 }

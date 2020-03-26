@@ -14,10 +14,10 @@ function FileDownload(props) {
         {label}
       </a>
       {description && (
-        <Text value={description} wrapper="p"/>
+        <Text value={description} wrapper={{tag: "div", classes: "dc-file-description"}}/>
       )}
     </div>
-    
+
   return (
     <div className="dc-file-download">
       {item}

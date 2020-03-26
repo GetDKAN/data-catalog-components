@@ -1,4 +1,6 @@
-.catalog-search-input.form-group {
+@import "../../theme/styles/variables";
+
+.dc-search-input.form-group {
   padding-right: 125px;
   position: relative;
 
@@ -27,7 +29,7 @@
   #inputSubmit {
     top: 0;
     right: 0;
-    background-color: ${props => props.theme.secondary};;
+    background-color: $secondary;
     border-radius: 24px;
     border-style: none;
     font-size: 1.8rem;
@@ -37,23 +39,23 @@
     height: 48px;
     margin: 0;
     padding: 10px 0;
-    color: ${props => props.theme.primaryDark};
+    color: $primaryDark;
     width: 100px;
     svg {
       padding-top: 3px;
       vertical-align: top;
       path {
-        fill: ${props => props.theme.primaryDark};
+        fill: $primaryDark;
       }
     }
     &:hover {
-      background-color: ${props => props.theme.secondaryDark};
+      background-color: $secondaryDark;
     }
   }
 }
 
 @media screen and (max-width: 768px) {
-  .catalog-search-input.form-group {
+  .dc-search-input.form-group {
     position: relative;
     top: auto;
     right: auto;
@@ -65,4 +67,3 @@
     }
   }
 }
-
