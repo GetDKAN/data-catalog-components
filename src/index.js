@@ -1,22 +1,16 @@
 export { default as AdvancedOptions } from './components/Resource/DataTableHeader/AdvancedOptions';
 export { default as AdvancedOptionsForm } from './components/Resource/DataTableHeader/AdvancedOptions/AdvancedOptionsForm';
-export { default as Announcement } from './templates/Announcement';
 export { default as ApiDocs } from './components/ApiDocs';
-export { default as Blocks } from './templates/Blocks';
-export { default as BasicBlock } from './templates/Blocks/BasicBlock';
 export { default as DataTable } from './components/Resource/DataTable';
 export { default as DataTableHeader } from './components/Resource/DataTableHeader';
 export { default as DataTableDensity } from './components/Resource/DataTableHeader/DataTableDensity';
 export { default as DataTablePageResults } from './components/Resource/DataTableHeader/DataTablePageResults';
 export { default as DataTablePageSizer } from './components/Resource/DataTableHeader/DataTablePageSizer';
-export { default as Header } from './templates/Header';
-export { default as Hero } from './templates/Hero';
 export { default as IconList } from './components/IconList';
 export { default as IconListItem } from './components/IconListItem';
 export { default as InputLarge } from './components/InputLarge';
 export { default as FacetList } from './components/FacetList';
 export { default as FileDownload } from './components/FileDownload';
-export { default as Footer } from './templates/Footer';
 export { default as FormatIcon } from './components/FormatIcon';
 export { default as Logo } from './components/Logo';
 export { default as Menu } from './components/Menu';
@@ -34,8 +28,6 @@ export { default as SearchPaginationResults } from './components/SearchPaginatio
 export { default as SearchResultsMessage } from './components/SearchResultsMessage';
 export { default as SearchSort } from './components/SearchSort';
 export { default as ShowMoreContainer } from './components/ShowMoreContainer';
-export { default as StatBlock } from './templates/Blocks/StatBlock';
-export { default as StepsBlock } from './templates/Blocks/StepsBlock';
 export { default as String } from './components/String';
 export { default as Table } from './components/Table';
 export { default as Tags } from './components/Tags';
@@ -65,5 +57,13 @@ export {
 } from './services/resource/resource_tools';
 
 // TEMPLATES
+export { default as Announcement } from './templates/Announcement';
+export { default as Blocks } from './templates/Blocks';
+export { default as BasicBlock } from './templates/Blocks/BasicBlock';
+export { default as Header } from './templates/Header';
+export { default as Hero } from './templates/Hero';
+export { default as Footer } from './templates/Footer';
+export { default as StatBlock } from './templates/Blocks/StatBlock';
+export { default as StepsBlock } from './templates/Blocks/StepsBlock';
 export { default as SearchSidebar } from './templates/SearchSidebar';
 export { default as SearchContent } from './templates/SearchContent';

@@ -1,3 +1,5 @@
+@import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 @import "general.scss";
 @import "pagination";
 
@@ -7,6 +9,7 @@
 @import "../../components/IconListItem/iconlistitem.scss";
 @import "../../components/Menu/menu.scss";
 @import "../../components/Organization/organization.scss";
+@import "../../components/SearchInput/searchinput.scss";
 @import "../../components/SearchListItem/searchlistitem.scss";
 @import "../../components/Tags/tags.scss";
 @import "../../components/Table/table.scss";

@@ -6,7 +6,11 @@
     margin-right: 6px;
     fill: $linkColor;
   }
-  &:hover svg {
-    fill: $linkHoverColor;
+  &:focus,
+  &:hover {
+    color: $linkHoverColor;
+    svg {
+      fill: $linkHoverColor;
+    }
   }
 }

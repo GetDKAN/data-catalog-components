@@ -1,6 +1,6 @@
 // Colors.
 $backgroundColor:   #f9fafb;
-$borderColor:       #dce4ef;
+$borderColor:       #e8ebf0;
 $primaryDark:       #162e51; // blueDark.
 $primary:           #0978bc; // blue.
 $primaryLight:      #27AAE1; // blueLight.
@@ -34,10 +34,11 @@ $footerLinkHover:   #FFFFFF;
 $fontText: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
 $fontHeading: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
 // Alerts/Messaging.
-$info:          #27AAE1;
-$warning:       #E69D00;
-$danger:        #DB3545;
-$success:       #28A645;
+$info:          #039fce;
+$warning:       #fc9905;
+$danger:        #d9534f;
+$success:       #46a546;
+
 // File Formats.
 $csvIcon:       #0b4498;
 $rdfIcon:       #e36504;
@@ -47,3 +48,17 @@ $xmlIcon:       #5e962c;
 $zipIcon:       #3B0053;
 $htmlIcon:      #1c82b8;
 $dataIcon:      #666666;
+
+// Export vars for use in components.
+:export {
+  primary: $primary;
+  primaryDark: $primaryDark;
+  csvIcon: $csvIcon;
+  rdfIcon: $rdfIcon;
+  jsonIcon: $jsonIcon;
+  pdfIcon: $pdfIcon;
+  xmlIcon: $xmlIcon;
+  zipIcon: $zipIcon;
+  htmlIcon: $htmlIcon;
+  dataIcon: $dataIcon;
+}
