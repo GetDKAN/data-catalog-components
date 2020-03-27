@@ -13,9 +13,9 @@ const SearchSidebar = ({ sortOptions }) => {
     facetsResults, selectedFacets, totalItems, fulltext,
   } = searchState;
   return (
-    <div className="search-sidebar col-md-4 col-sm-12">
-      <div className="search-sidebar-options ds-u-radius">
-        <Label for="search-list-sort">Sort by:</Label>
+    <div className="dc-search-sidebar col-md-4 col-sm-12">
+      <div className="dc-search-sidebar-options">
+        <Label for="dc-search-list-sort">Sort by:</Label>
         <Input
           type="select"
           name="search-list-sort"
@@ -34,7 +34,7 @@ const SearchSidebar = ({ sortOptions }) => {
           ))}
         </Input>
       </div>
-      <div className="search-sidebar-options ds-u-radius">
+      <div className="dc-search-sidebar-options">
         {facetsResults && facetsResults.length
           && (
             <SearchFacets

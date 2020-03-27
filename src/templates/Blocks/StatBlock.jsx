@@ -2,7 +2,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class StatBlock extends React.PureComponent {
 
@@ -10,9 +9,7 @@ class StatBlock extends React.PureComponent {
     const { content } = this.props;
     return (
       <div key={content.ref} className="stat-block">
-        <FontAwesomeIcon
-          icon={['fas', `${content.icon}`]}
-          size="4x"
+        <i className={content.icon}
           aria-hidden="true"
           role="presentation"
         />

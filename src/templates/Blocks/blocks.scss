@@ -1,5 +1,11 @@
 @import "../../theme/styles/variables";
 
+.dc-block-wrapper {
+  background: white;
+  border: 1px solid $borderColor;
+  border-radius: $borderRadius;
+  padding: 1em;
+}
 .dc-block-content {
     display: flex;
     align-items: flex-start;

@@ -14,9 +14,9 @@ const NavBar = ({
   const [isOpen, toggleOpen] = useState(false);
 
   return (
-    <div className={`${customClasses} ${defaultStyling ? ' dc-main-navigation base-styles' : ''}`}>
+    <div className={` ${defaultStyling ? ' dc-main-navigation base-styles' : ''}`}>
       {expand &&
-        <Navbar expand="md">
+        <Navbar expand="md" className={customClasses}>
           <div className="dc-toggle">
             <NavbarToggler onClick={() => toggleOpen(!isOpen)}>
               <FontAwesomeIcon

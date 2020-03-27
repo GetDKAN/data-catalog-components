@@ -96,7 +96,6 @@ const SearchFacets = ({
         // TODO: Fix this so it's adjustable
         title={(
           <span>
-            <i className="fa fa-chevron-down" />
             {label}
           </span>
         )}

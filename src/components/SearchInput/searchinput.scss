@@ -1,7 +1,6 @@
 @import "../../theme/styles/variables";
 
 .dc-search-input.form-group {
-  padding-right: 125px;
   position: relative;
 
   input[type="text"] {
@@ -9,21 +8,34 @@
     font-size: 1.8rem;
     height: auto;
     width: 100%;
+    border-color: $borderColor;
+    border-radius: $borderRadius;
+    background-color: white;
   }
   button {
     position: absolute;
   }
   #inputReset {
     color: #333333;
-    top: 10px;
-    right: 140px;
+    top: 0;
+    right: 0;
     background: transparent;
     border: none;
+    font-size: 0;
+    color: white;
     &:active,
     &:focus {
       background: transparent;
       border: none;
       box-shadow: none;
+    }
+    &:before {
+      content:"\f00d";
+      font-family: "Font Awesome 5 Free";
+      font-size: 2.8rem;
+      color: $grayMedium;
+      margin-right: 10px;
+      vertical-align: middle;
     }
   }
   #inputSubmit {

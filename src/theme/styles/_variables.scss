@@ -1,6 +1,7 @@
 // Colors.
 $backgroundColor:   #f9fafb;
 $borderColor:       #e8ebf0;
+$borderRadius:      4px;
 $primaryDark:       #162e51; // blueDark.
 $primary:           #0978bc; // blue.
 $primaryLight:      #27AAE1; // blueLight.
@@ -50,15 +51,15 @@ $htmlIcon:      #1c82b8;
 $dataIcon:      #666666;
 
 // Export vars for use in components.
-:export {
-  primary: $primary;
-  primaryDark: $primaryDark;
-  csvIcon: $csvIcon;
-  rdfIcon: $rdfIcon;
-  jsonIcon: $jsonIcon;
-  pdfIcon: $pdfIcon;
-  xmlIcon: $xmlIcon;
-  zipIcon: $zipIcon;
-  htmlIcon: $htmlIcon;
-  dataIcon: $dataIcon;
-}
+// :export {
+//   primary: $primary;
+//   primaryDark: $primaryDark;
+//   csvIcon: $csvIcon;
+//   rdfIcon: $rdfIcon;
+//   jsonIcon: $jsonIcon;
+//   pdfIcon: $pdfIcon;
+//   xmlIcon: $xmlIcon;
+//   zipIcon: $zipIcon;
+//   htmlIcon: $htmlIcon;
+//   dataIcon: $dataIcon;
+// }
