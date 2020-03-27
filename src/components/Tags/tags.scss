@@ -12,7 +12,7 @@
       margin: 5px;
         a {
             border: 1px solid $borderColor;
-            border-radius: 8px;
+            border-radius: $borderRadius;
             background-color: $grayDust;
             color: $grayDark;
             padding: 4px 12px;
