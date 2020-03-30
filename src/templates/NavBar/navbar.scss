@@ -17,11 +17,15 @@
         background: rgba(0, 0, 0, 0.2);
     }
     .navbar-expand-md {
-        padding: 0;
+        padding-top: 0;
+        padding-bottom: 0;
     }
     .navbar-toggler {
         height: 34px;
         width: 34px;
+        svg {
+          color: white;
+        }
     }
     .nav-item a {
         display: inline-flex;

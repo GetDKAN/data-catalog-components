@@ -1,20 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "@reach/router";
 
 function Organization(props) {
   const { name, description, identifier, imageUrl } = props;
   const image = <img alt={name || "Organization Image"} src={imageUrl} />;
   const alignment = props.alignment ? props.alignment : 'center';
-  const link = `search?publisher=${identifier}`;
+  const link = `search/?publisher__name=${name}`;
 
   return (
     <div className="dc-org-block" style={{ textAlign: alignment }}>
-      <div className="dc-org-image" alt="Organization Logo">
+      <Link to={link} className="dc-org-image" alt="Organization Logo">
         {image}
-      </div>
-      <h3 className="dc-org-name">
-        {name}
-      </h3>
+        <h3 className="dc-org-name">
+          {name}
+        </h3>
+      </Link>
       {description &&
         <div className="dc-org-description">
           {description}

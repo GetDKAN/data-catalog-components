@@ -16,7 +16,7 @@ const SearchContent = () => {
     items, fulltext, totalItems, selectedFacets, loading,
   } = searchState;
   const facetTypes = Object.keys(defaultFacets);
-  
+
   return (
     <div className="dc-results-list col-md-8 col-sm-12">
       {items
