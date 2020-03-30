@@ -18,8 +18,8 @@ const SearchSidebar = ({ sortOptions }) => {
         <Label for="dc-search-list-sort">Sort by:</Label>
         <Input
           type="select"
-          name="search-list-sort"
-          id="search-list-sort"
+          name="dc-search-list-sort"
+          id="dc-search-list-sort"
           onChange={(e) => {
             dispatch({ type: 'UPDATE_SORT', data: { sort: e.target.value } });
           }}
