@@ -1,0 +1,38 @@
+[
+  {
+  "identifier": "16ff5622-bce8-513b-96a5-bbe13c8566ef",
+    "data": {
+      "@type": "org:Organization",
+      "name": "State Economic Council",
+      "image": "https://dkan-default-content-files.s3.amazonaws.com/files/publishers/money-saving.png",
+      "description": "The State Economic Council is responsible for increasing economic development of the state by collecting statistics and performing analysis on the labor force, workforce and employer demographics, generational trends, etc."
+    }
+  },
+  {
+  "identifier": "6293bc46-e5f1-5b94-aa4a-1e2b2cc961fb",
+    "data": {
+    "@type": "org:Organization",
+    "name": "Get DKAN",
+    "image": "https://dkan-default-content-files.s3.amazonaws.com/files/publishers/chart.png",
+    "description": "An open source data catalog built for you."
+    }
+  },
+  {
+  "identifier": "c5da9e9d-f8c9-5d5e-8faa-b88c50d3acd1",
+    "data": {
+    "@type": "org:Organization",
+    "name": "Advisory Council for Infectious Disease",
+    "image": "https://dkan-default-content-files.s3.amazonaws.com/files/publishers/clipboard.png",
+    "description": "Advisory Council for Infectious Disease is a working group that performs research and prepares reports to inform treatment and prevention programs nationally."
+    }
+  },
+  {
+  "identifier": "3e606d1c-bd19-5b29-9a9e-7e827a7d15fa",
+  "data": {
+    "@type": "org:Organization",
+    "name": "Committee on International Affairs",
+    "image": "https://dkan-default-content-files.s3.amazonaws.com/files/publishers/map.png",
+    "description": "The Committee on International Affairs is a working group to identify opportunities to learn from and collaborate with government and organizations across the globe."
+    }
+  }
+]

@@ -4,7 +4,7 @@ import React from 'react'
 class Icon extends React.PureComponent {
 
   render() {
-    let color = this.props.fill ? this.props.fill : '#162e51';
+    let color = this.props.fill ? this.props.fill : '#555555';
 
     switch(this.props.format) {
       case 'API':
