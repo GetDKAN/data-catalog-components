@@ -8,7 +8,7 @@ class StatBlock extends React.PureComponent {
 
   render() {
     const { content } = this.props;
-    console.log(content.icon);
+    console.log('content: ', content);
     return (
       <div key={content.ref} className="stat-block">
         <FontAwesomeIcon
