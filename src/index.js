@@ -2,7 +2,7 @@ export { default as AdvancedOptions } from './components/Resource/DataTableHeade
 export { default as AdvancedOptionsForm } from './components/Resource/DataTableHeader/AdvancedOptions/AdvancedOptionsForm';
 export { default as ApiDocs } from './components/ApiDocs';
 export { default as DataIcon } from './components/DataIcon';
-export { default as DataTable } from './components/Resource/DataTable';
+export { default as DataTable } from './templates/DataTable';
 export { default as DataTableHeader } from './components/Resource/DataTableHeader';
 export { default as DataTableDensity } from './components/Resource/DataTableHeader/DataTableDensity';
 export { default as DataTablePageResults } from './components/Resource/DataTableHeader/DataTablePageResults';
@@ -53,7 +53,6 @@ export {
   prepareColumns,
   queryResourceData,
   queryAllResourceData,
-  getFileDatastore,
   getDKANDatastore,
   advancedColumns,
 } from './services/resource/resource_tools';
