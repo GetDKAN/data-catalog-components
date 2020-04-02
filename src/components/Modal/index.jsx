@@ -16,6 +16,7 @@ const Modal = ({
         initialFocus={`#dc-modal-${titleId}-close`}
       >
         <div
+          className="dc-modal"
           id={`dc-modal-${titleId}`}
         >
           <header className="dc-modal-header">
@@ -48,7 +49,7 @@ const Modal = ({
     : false;
 
   return (
-    <div className="dc-modal">
+    <div className="dc-modal-container">
       <button
         className="dc-modal-open-button"
         id={`dc-modal-${titleId}-open`}
