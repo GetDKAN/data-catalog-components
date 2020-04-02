@@ -1,66 +1,11 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { ResourceDispatch } from '../../services/resource/resource_tools';
-import {
-  useTable,
-  usePagination,
-  useFilters,
-  useSortBy,
-  useBlockLayout,
-  useResizeColumns,
-  useColumnOrder,
-} from 'react-table'
 
 const DataTable = () => {
-  const { resourceState } = useContext(ResourceDispatch);
-  const data = resourceState.values;
-  const { columns } = resourceState;
+  const { resourceState, reactTable } = useContext(ResourceDispatch);
   const density = resourceState.density ? `${resourceState.density} -striped -highlight` : '-striped -highlight';
-  const filterTypes = React.useMemo(
-    () => ({
-      // Add a new fuzzyTextFilterFn filter type.
-      // fuzzyText: fuzzyTextFilterFn,
-      // Or, override the default text filter to use
-      // "startWith"
-      text: (rows, id, filterValue) => (
-        rows.filter((row) => {
-          const rowValue = row.values[id];
-          return rowValue !== undefined
-            ? String(rowValue)
-              .toLowerCase()
-              .startsWith(String(filterValue).toLowerCase())
-            : true;
-        })
-      ),
-    }),
-    [],
-  );
-  // Define a default UI for filtering
-  function DefaultColumnFilter({
-    column: { filterValue, preFilteredRows, setFilter },
-  }) {
-    const count = preFilteredRows.length
 
-    return (
-      <input
-        value={filterValue || ''}
-        onChange={e => {
-          setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
-        }}
-        placeholder={`Search ${count} records...`}
-      />
-    );
-  }
-  const defaultColumn = React.useMemo(
-    () => ({
-      // Let's set up our default Filter UI
-      Filter: DefaultColumnFilter,
-      minWidth: 30,
-      width: 150,
-      maxWidth: 400,
-    }),
-    []
-  )
   const {
     getTableProps,
     getTableBodyProps,
@@ -78,23 +23,7 @@ const DataTable = () => {
     setPageSize,
     allColumns,
     setColumnOrder,
-  } = useTable(
-    {
-      columns,
-      data,
-      initialState: { pageIndex: 0 },
-      manualPagination: true,
-      pageCount: Number(Math.ceil(resourceState.rowsTotal / 10)),
-      defaultColumn,
-      filterTypes,
-    },
-    useFilters,
-    useBlockLayout,
-    useResizeColumns,
-    useColumnOrder,
-    useSortBy,
-    usePagination,
-  );
+  } = reactTable;
 
   return (
     <div className={`dc-datatable -striped -highlight ${density}`}>
