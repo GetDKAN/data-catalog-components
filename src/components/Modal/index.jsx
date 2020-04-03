@@ -20,7 +20,12 @@ const Modal = ({
           id={`dc-modal-${titleId}`}
         >
           <header className="dc-modal-header">
-            <h2>{title}</h2>
+            <h2
+              id={`dc-modal-${titleId}-header-title`}
+              className="dc-modal-header-title"
+            >
+              {title}
+            </h2>
             <button
               type="button"
               id={`dc-modal-${titleId}-header-close`}
@@ -38,7 +43,7 @@ const Modal = ({
               type="button"
               id={`dc-modal-${titleId}-close`}
               onClick={() => setModalOpen(false)}
-              className="dc-modal-close-button"
+              className="dc-modal-close-button btn btn-primary"
             >
               {closeText}
             </button>
