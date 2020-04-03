@@ -97,7 +97,6 @@ const SearchFacets = ({
         </div>
       );
     });
-    console.log(toggleClasses);
     return (
       <ToggleBlock
         key={facetKey}
