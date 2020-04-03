@@ -6,7 +6,7 @@ import { Link } from "@reach/router";
 class Logo extends Component {
 
     render() {
-      let logo = this.props.image ? this.props.image : {image}
+      let logo = this.props.image;
 
       return (
         <Link to="/" className="dc-logo">
