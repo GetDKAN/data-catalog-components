@@ -9,6 +9,13 @@ jobs:
       DRUPAL_VERSION: V8
     steps:
       - checkout
+      - run:
+        name: Setup composer config
+        command: |
+          cd ~
+          mkdir .composer
+          cd .composer
+          bash -c 'echo "{\"github-oauth\": {\"github.com\": \"$GITHUB_TOKEN\"}}"' > auth.json
       - restore_cache:
           key: npm-cache-v1-{{ checksum "package-lock.json" }}
       - run:
@@ -45,7 +52,7 @@ jobs:
           command: |
             export PATH=$PATH:~/dkan-tools/bin
             cd ~/sandbox
-            dktl get 8.7.7
+            dktl get 8.7.11
       - run:
           name: Make DKAN
           command: |
