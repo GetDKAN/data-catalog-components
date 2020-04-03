@@ -51,8 +51,12 @@ jobs:
           command: |
             export PATH=$PATH:~/dkan-tools/bin
             cd ~/sandbox
+            sudo chmod 777 src/make/composer.json
+            cat src/make/composer.json
             dktl make --frontend
-            dktl updatedrush -y
+            rm -rf ./docroot/profiles/contrib/dkan2
+            mv ~/project ./docroot/profiles/contrib/dkan2
+            ls -lha ./docroot/profiles/contrib/dkan2
       - run:
           name: Install site
           command: |
