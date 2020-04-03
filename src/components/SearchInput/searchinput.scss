@@ -1,6 +1,6 @@
 @import "../../theme/styles/variables";
 
-.dc-search-input.form-group {
+.dc-search-input {
   position: relative;
 
   input[type="text"] {
@@ -17,25 +17,24 @@
   }
   #inputReset {
     color: #333333;
-    top: 0;
+    top: 5px;
     right: 0;
     background: transparent;
     border: none;
-    font-size: 0;
-    color: white;
     &:active,
     &:focus {
       background: transparent;
       border: none;
       box-shadow: none;
     }
-    &:before {
-      content:"\f00d";
-      font-family: "Font Awesome 5 Free";
-      font-size: 2.8rem;
+    svg {
+      font-size: 3.2rem;
       color: $grayMedium;
       margin-right: 10px;
       vertical-align: middle;
+    }
+    .reset-text {
+      font-size: 0;
     }
   }
   #inputSubmit {

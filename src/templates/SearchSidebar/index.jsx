@@ -39,7 +39,7 @@ const SearchSidebar = ({ sortOptions }) => {
           && (
             <SearchFacets
               defaultFacets={defaultFacets}
-              toggleClasses="ds-c-label"
+              toggleClasses="dc-facet-label"
               facetsResults={facetsResults}
               selectedFacets={selectedFacets}
               dispatch={dispatch}

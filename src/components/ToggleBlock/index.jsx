@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function ToggleBlock({
   customId,
@@ -17,6 +18,12 @@ export default function ToggleBlock({
     toggleBlockHeading = (
       <h2 className={headingClasses}>
         <button type="button" onClick={() => toggleShow(!show)}>
+          <FontAwesomeIcon
+              icon={['fas', show ? 'chevron-down' : 'chevron-right' ]}
+              size="1x"
+              aria-hidden="true"
+              role="presentation"
+          />
           {title}
         </button>
       </h2>
