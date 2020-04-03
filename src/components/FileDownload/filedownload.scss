@@ -1,3 +1,5 @@
+@import "../../theme/styles/variables";
+
 .dc-file-download {
   clear: both;
   margin: 15px 0;
@@ -16,5 +18,30 @@
     top: 0;
     width: 35px;
     z-index: 0;
+    &[title='CSV'] path {
+      fill: $csvIcon;
+    }
+    &[title='RDF'] path {
+      fill: $rdfIcon;
+    }
+    &[title='JSON'] path {
+      fill: $jsonIcon;
+    }
+    &[title='PDF'] path {
+      fill: $pdfIcon;
+    }
+    &[title='XML'] path {
+      fill: $xmlIcon;
+    }
+    &[title='ZIP'] path {
+      fill: $zipIcon;
+    }
+    &[title='WEB'] path,
+    &[title='HTML'] path {
+      fill: $htmlIcon;
+    }
+    &[title='DATA'] path {
+      fill: $dataIcon;
+    }
   }
 }
