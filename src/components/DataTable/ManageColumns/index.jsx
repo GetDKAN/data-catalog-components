@@ -10,18 +10,18 @@ import Modal from '../../Modal';
 const ManageColumns = () => {
   const { reactTable } = useContext(ResourceDispatch);
   const [cards, setCards] = React.useState(null);
-  
+
   React.useEffect(() => {
-    if(reactTable.allColumns.length && cards === null) {
-      setCards(reactTable.allColumns)
+    if (reactTable.allColumns.length && cards === null) {
+      setCards(reactTable.allColumns);
     }
-    console.log('eh', reactTable.allColumns)
-  }, [reactTable.allColumns])
-  console.log('fpp', cards)
+    console.log('eh', reactTable.allColumns);
+  }, [reactTable.allColumns]);
+  console.log('fpp', cards);
   // const [cards, setCards] = React.useState(reactTable.allColumns);
   const moveCard = React.useCallback(
     (dragIndex, hoverIndex) => {
-      const dragCard = reactTable.allColumns[dragIndex]
+      const dragCard = reactTable.allColumns[dragIndex];
 
       setCards(update(cards, {
         $splice: [
@@ -32,7 +32,6 @@ const ManageColumns = () => {
     },
     [cards, reactTable.allColumns],
   );
-  // reactTable.setColumnOrder(cards.map((d) => d.id));
   useEffect(() => {
     if (cards) {
       reactTable.setColumnOrder(cards.map((d) => d.id));
@@ -67,3 +66,7 @@ const ManageColumns = () => {
 };
 
 export default ManageColumns;
+
+// Manage Columns - holds code
+// -- Modal is launched from Manage Columns with cards
+// -- -- Cards take children and Cards only adds the dnd feature

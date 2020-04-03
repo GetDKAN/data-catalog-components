@@ -1,11 +1,51 @@
 .dc-modal {
-  padding: 8px 0 0;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   z-index: 12;
   background: white;
+  border-radius: 5px;
 }
 
 .dc-modal-header {
-  padding: 16px 24px;
-  background: pink;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid black;
+  .dc-modal-header-title {
+    margin-right: 10px;
+  }
+  .dc-modal-close-button {
+    color: #333333;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-size: 0;
+    color: white;
+    &:active,
+    &:focus {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+    &:before {
+      content:"\f00d";
+      font-family: "Font Awesome 5 Free";
+      font-size: 2.8rem;
+      color: $grayMedium;
+      vertical-align: middle;
+    }
+  }
+}
+
+.dc-modal-body {
+  padding: 10px;
+}
+
+.dc-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-top: 1px solid black;
 }
