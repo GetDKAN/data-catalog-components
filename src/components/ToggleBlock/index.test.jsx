@@ -32,7 +32,7 @@ describe('<ToggleBlock />', () => {
   );
 
   it('renders as default h2 with button title', () => {
-    expect(defaultWrapper.find('h2 button').text()).toBe('My Title');
+    expect(defaultWrapper.find('h2 button').text()).toBe('<FontAwesomeIcon />My Title');
   });
 
   it('renders with default classes', () => {
