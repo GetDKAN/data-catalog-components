@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from '@reach/router';
 import { Input, Label, Button } from 'reactstrap';
-//import vars from '../../theme/styles/_variables.scss'
 
 const Hero = ({
   alignment,
