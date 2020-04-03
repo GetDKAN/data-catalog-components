@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Input, Label } from 'reactstrap';
 import ToggleBlock from '../ToggleBlock';
 import ShowMoreContainer from '../ShowMoreContainer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setSelectedFacets, resetSelectedFacets } from '../../services/search/search_functions';
 
 const SearchFacets = ({
@@ -85,11 +86,18 @@ const SearchFacets = ({
             onChange={onChangeFunction}
           />
           <Label htmlFor={key}>
+            <FontAwesomeIcon
+              icon={['fas', selected ? 'check-square' : 'square']}
+              size="1x"
+              aria-hidden="true"
+              role="presentation"
+            />
             {`${item.name} (${item.total})`}
           </Label>
         </div>
       );
     });
+    console.log(toggleClasses);
     return (
       <ToggleBlock
         key={facetKey}
