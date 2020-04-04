@@ -1,5 +1,32 @@
 @import "../../theme/styles/variables";
 
+.dc-page .dc-search-input.form-group {
+  position: relative;
+  #inputReset {
+    position: absolute;
+    color: #333333;
+    top: 5px;
+    right: 0;
+    background: transparent;
+    border: none;
+    &:active,
+    &:focus {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+    svg {
+      font-size: 3.2rem;
+      color: $grayMedium;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    .reset-text {
+      font-size: 0;
+    }
+  }
+}
+
 .dc-results-list {
   .dc-search-results-message p {
     margin: 16px 0;
