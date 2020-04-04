@@ -1,7 +1,7 @@
 @import "../../theme/styles/variables";
 
 .dc-search-input.form-group {
-  position: relative;
+  display: flex;
 
   input[type="text"] {
     padding: 1rem 1.5rem;
@@ -11,50 +11,24 @@
     border-color: $borderColor;
     border-radius: $borderRadius;
     background-color: white;
+    position: relative;
   }
   button {
-    position: absolute;
-  }
-  #inputReset {
-    color: #333333;
-    top: 5px;
-    right: 0;
-    background: transparent;
-    border: none;
-    &:active,
-    &:focus {
-      background: transparent;
-      border: none;
-      box-shadow: none;
-    }
-    svg {
-      font-size: 3.2rem;
-      color: $grayMedium;
-      margin-right: 10px;
-      vertical-align: middle;
-    }
-    .reset-text {
-      font-size: 0;
-    }
-  }
-  #inputSubmit {
-    top: 0;
-    right: 0;
     background-color: $secondary;
-    border-radius: 24px;
+    border-radius: $borderRadius;
     border-style: none;
     font-size: 1.8rem;
     font-weight: bold;
     text-transform: uppercase;
     display: inline-block;
     height: 48px;
-    margin: 0;
+    margin: 0 0 0 10px;
     padding: 10px 0;
     color: $primaryDark;
     width: 100px;
     svg {
-      padding-top: 3px;
-      vertical-align: top;
+      margin-right: 5px;
+      vertical-align: middle;
       path {
         fill: $primaryDark;
       }
