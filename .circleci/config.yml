@@ -45,14 +45,13 @@ jobs:
           command: |
             export PATH=$PATH:~/dkan-tools/bin
             cd ~/sandbox
-            dktl get 8.7.7
+            dktl get 8.8.5
       - run:
           name: Make DKAN
           command: |
             export PATH=$PATH:~/dkan-tools/bin
             cd ~/sandbox
             dktl make --frontend
-            dktl updatedrush -y
       - run:
           name: Install site
           command: |
