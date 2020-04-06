@@ -52,8 +52,6 @@ jobs:
             export PATH=$PATH:~/dkan-tools/bin
             cd ~/sandbox
             dktl make --frontend
-            dktl updatedrush -y
-            
       - run:
           name: Install site
           command: |
