@@ -1,9 +1,9 @@
 @import "../../theme/styles/variables";
 
 .dc-header {
-  .logo {
+  .dc-logo {
+    margin: 10px 10px 10px 0;
     display: inline-block;
-    vertical-align: bottom;
   }
   .site-name {
     display: inline-block;
@@ -21,7 +21,7 @@
 
   @media screen and (max-width: 768px) {
     flex-wrap: wrap;
-    .logo,
+    .dc-logo,
     .site-name {
       display: block;
     }

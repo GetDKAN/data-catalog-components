@@ -24,10 +24,10 @@ storiesOf('General', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .add('Logo', () => <Logo />)
-  .add('Header', () => 
-    <Header 
-      site="Open Data Catalog" 
-      slogan="Place your tag line here." 
+  .add('Header', () =>
+    <Header
+      site="Open Data Catalog"
+      slogan="Place your tag line here."
       customClasses="container-fluid"
       navItems={links.main.map((item) => (<a href={item.url}>{item.label}</a>))}
     />
@@ -72,11 +72,6 @@ storiesOf('General', module)
       />
     )
   })
-  .add('Button', () => <button className="dc-button btn-primary">primary</button>)
-  .add('Preview Button', () => <button className="dc-button btn-primary"><FontAwesomeIcon icon="chart-bar" fill="#ffffff"/> Preview</button>)
-  .add('Download Button', () => <button className="dc-button btn-primary"><FontAwesomeIcon icon="download" fill="#ffffff"/> Download</button>)
-  .add('Hero Button', () => <button className="dc-button btn-hero">Learn More</button>)
-  .add('Close Button', () => <button className="dc-button btn-close"><span aria-hidden="true"><FontAwesomeIcon icon="times" fill="#666666"/></span></button>)
   .add(
     "Data Icon",
     () => (
@@ -123,12 +118,12 @@ storiesOf('General', module)
   .add('Footer', () => <Footer links={links} customClasses="container-fluid" />)
   .add('API Documentation', () => <ApiDocs endpoint="https://petstore.swagger.io/v2/swagger.json" />)
   .add('Announcement', () => (
-    <Announcement 
-      heading={text('Heading', "Note")} 
+    <Announcement
+      heading={text('Heading', "Note")}
       variation={select(
         "Variation",
         ["","info", "success", "warn", "error"],
-        ""
+        "info"
       )}>
       Pay attention this is important information.
     </Announcement>

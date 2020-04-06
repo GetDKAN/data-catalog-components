@@ -64,7 +64,7 @@ const SearchListItem = ({
 
   function publishers(publisher) {
     if (!publisher) {
-      return null;      
+      return null;
     } else {
         return (
           <span>
@@ -78,7 +78,7 @@ const SearchListItem = ({
   return(
     <div className={className}>
       <h2><Link to={ref}>{title}</Link></h2>
-      
+
       {publisher !== 'undefined' &&
         <div className="dc-item-publisher">
           {publishers(publisher)}

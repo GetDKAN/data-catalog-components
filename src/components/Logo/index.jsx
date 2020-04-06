@@ -1,23 +1,24 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
+import { Link } from "@reach/router";
 
 class Logo extends Component {
 
     render() {
-      let logo = this.props.image ? this.props.image : {image}
+      let logo = this.props.image;
 
       return (
-        <div href="/" className="dc-logo">
+        <Link to="/" className="dc-logo">
           <img src={logo} alt="Open Data Catalog" />
-        </div>
+        </Link>
       );
     }
 
 }
 
 Logo.defaultProps = {
-    image: 'http://demo.getdkan.com/profiles/dkan/themes/nuboot_radix/logo.svg'
+    image: 'https://dkan-default-content-files.s3.amazonaws.com/files/logo.svg'
 };
 
 export default Logo;

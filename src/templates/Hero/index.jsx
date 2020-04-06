@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from '@reach/router';
 import { Input, Label, Button } from 'reactstrap';
-import defaultTheme from '../../theme/default';
 
 const Hero = ({
   alignment,
@@ -16,7 +15,7 @@ const Hero = ({
   const [query, setQuery] = useState('');
   const background = image
     ? `url(${image})`
-    : `linear-gradient(${defaultTheme.primaryDark}, ${defaultTheme.primary})`;
+    : `linear-gradient(#162e51, #0978bc)`;
   async function handleSubmit(event) {
     event.preventDefault();
     let searchParams = '/search/';
@@ -28,10 +27,10 @@ const Hero = ({
 
   return (
     <div className="dc-hero" style={{ backgroundImage: background }}>
-      <div className={`block ${alignment}`}>
-        <h1 className="hero-title">{title}</h1>
+      <div className={`dc-hero-block ${alignment}`}>
+        <h1 className="dc-hero-title">{title}</h1>
         <p>{intro}</p>
-        <form onSubmit={(event) => handleSubmit(event)}>
+        <form onSubmit={(event) => handleSubmit(event)} className="dc-hero-search">
           <Label className="sr-only" htmlFor="hero_search">Search</Label>
           <Input
             onChange={(event) => setQuery(event.target.value)}

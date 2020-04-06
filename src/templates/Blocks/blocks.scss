@@ -1,5 +1,11 @@
 @import "../../theme/styles/variables";
 
+.dc-block-wrapper {
+  background: white;
+  border: 1px solid $borderColor;
+  border-radius: $borderRadius;
+  padding: 1em;
+}
 .dc-block-content {
     display: flex;
     align-items: flex-start;
@@ -30,7 +36,7 @@
     }
 }
 .StatBlock {
-    background-color: $primaryLight;
+    background-color: $primary;
     color: #ffffff;
     position: relative;
     .stat-block {
@@ -57,6 +63,9 @@
 }
 .StepsBlock {
     background-color: #ffffff;
+    h2 {
+      padding-bottom: 1.6rem;
+    }
     .steps-block {
         position: relative;
         padding: 0 20px;
@@ -88,8 +97,11 @@
 @media screen and (max-width: 768px) {
     .dc-block-content {
         flex-wrap: wrap;
+        .stat-block,
         .steps-block {
             max-width: 100%;
+            width: 100%;
+            text-align: center;
         }
     }
 }

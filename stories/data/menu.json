@@ -12,7 +12,7 @@
     },
     {
       "label": "Publishers",
-      "url": "/groups",
+      "url": "/publishers",
       "target": "_top"
     },
     {
@@ -22,18 +22,18 @@
     },
     {
       "label": "API",
-      "url": "/docs",
+      "url": "/api",
       "target": "_top"
     }
   ],
   "footer1": [
     {
-      "label": "DKANv2 Docs",
+      "label": "DKAN v2.x Docs",
       "url": "https://getdkan.github.io/dkan2/index.html",
       "target": "_blank"
     },
     {
-      "label": "DKANv1 Demo",
+      "label": "DKAN v1.x Demo",
       "url": "https://demo.getdkan.com",
       "target": "_blank"
     },

@@ -14,9 +14,9 @@ const NavBar = ({
   const [isOpen, toggleOpen] = useState(false);
 
   return (
-    <div className={`${customClasses} ${defaultStyling ? ' dc-main-navigation base-styles' : ''}`}>
-      {expand && 
-        <Navbar expand="md navbar-dark">
+    <div className={` ${defaultStyling ? ' dc-main-navigation base-styles' : ''}`}>
+      {expand &&
+        <Navbar expand="md" className={customClasses}>
           <div className="dc-toggle">
             <NavbarToggler onClick={() => toggleOpen(!isOpen)}>
               <FontAwesomeIcon
@@ -25,7 +25,7 @@ const NavBar = ({
                 role="presentation"
               />
               <span className="sr-only">Menu</span>
-            </NavbarToggler>   
+            </NavbarToggler>
           </div>
 
           <Collapse isOpen={isOpen} navbar>
@@ -39,7 +39,7 @@ const NavBar = ({
           </Collapse>
         </Navbar>
       }
-      {!expand && 
+      {!expand &&
         <Navbar expand={false} className={customClasses}>
           <ul>
             {navItems.map((item, index) => (

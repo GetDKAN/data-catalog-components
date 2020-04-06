@@ -1,5 +1,6 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 @import "general.scss";
-@import "buttons.scss";
 
 // Component styles.
 @import "../../components/FileDownload/filedownload.scss";
@@ -7,6 +8,8 @@
 @import "../../components/IconListItem/iconlistitem.scss";
 @import "../../components/Menu/menu.scss";
 @import "../../components/Organization/organization.scss";
+@import "../../components/PublisherList/publisherslist.scss";
+@import "../../components/SearchInput/searchinput.scss";
 @import "../../components/SearchListItem/searchlistitem.scss";
 @import "../../components/Tags/tags.scss";
 @import "../../components/Table/table.scss";
@@ -20,3 +23,5 @@
 @import "../../templates/NavBar/navbar.scss";
 @import "../../templates/Blocks/blocks.scss";
 @import "../../templates/Announcement/announcement.scss";
+@import "../../templates/SearchContent/searchcontent.scss";
+@import "../../templates/SearchSidebar/searchsidebar.scss";

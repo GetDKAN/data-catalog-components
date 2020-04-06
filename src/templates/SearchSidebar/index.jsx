@@ -13,13 +13,13 @@ const SearchSidebar = ({ sortOptions }) => {
     facetsResults, selectedFacets, totalItems, fulltext,
   } = searchState;
   return (
-    <div className="search-sidebar col-md-4 col-sm-12">
-      <div className="search-sidebar-options ds-u-radius">
-        <Label for="search-list-sort">Sort by:</Label>
+    <div className="dc-search-sidebar col-md-4 col-sm-12">
+      <div className="dc-search-sidebar-options">
+        <Label for="dc-search-list-sort">Sort by:</Label>
         <Input
           type="select"
-          name="search-list-sort"
-          id="search-list-sort"
+          name="dc-search-list-sort"
+          id="dc-search-list-sort"
           onChange={(e) => {
             dispatch({ type: 'UPDATE_SORT', data: { sort: e.target.value } });
           }}
@@ -34,12 +34,12 @@ const SearchSidebar = ({ sortOptions }) => {
           ))}
         </Input>
       </div>
-      <div className="search-sidebar-options ds-u-radius">
+      <div className="dc-search-sidebar-options">
         {facetsResults && facetsResults.length
           && (
             <SearchFacets
               defaultFacets={defaultFacets}
-              toggleClasses="ds-c-label"
+              toggleClasses="dc-facet-label"
               facetsResults={facetsResults}
               selectedFacets={selectedFacets}
               dispatch={dispatch}

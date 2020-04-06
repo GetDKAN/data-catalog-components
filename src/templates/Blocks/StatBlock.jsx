@@ -11,7 +11,7 @@ class StatBlock extends React.PureComponent {
     return (
       <div key={content.ref} className="stat-block">
         <FontAwesomeIcon
-          icon={['fas', `${content.icon}`]}
+          icon={content.icon}
           size="4x"
           aria-hidden="true"
           role="presentation"

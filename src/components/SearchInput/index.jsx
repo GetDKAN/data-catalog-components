@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Button, FormGroup, Label, Input,
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SearchInput = ({
   className,
@@ -39,13 +40,19 @@ const SearchInput = ({
       id="inputReset"
       onClick={() => { setSearchQuery(''); }}
     >
-      {resetContent}
+      <FontAwesomeIcon
+        icon={['fas', 'times' ]}
+        size="1x"
+        aria-hidden="true"
+        role="presentation"
+      />
+      <span className="reset-text">{resetContent}</span>
     </Button>
   );
   const labelClass = srOnly ? 'sr-only' : '';
 
   return (
-    <FormGroup className={className}>
+    <FormGroup className={`dc-search-input ${className}`}>
       <Label for="inputSearch" className={`${labelClass} ${labelClassName}`}>{labelContent}</Label>
       <Input
         type="text"

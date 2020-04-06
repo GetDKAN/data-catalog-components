@@ -22,13 +22,13 @@
     padding-top: 1rem;
   }
   .dc-item-publisher {
-    color: $grayMedium;
+    color: $primary;
     font-style: italic;
     margin: .5em 0;
     svg {
       margin-right: 1rem;
       path {
-        fill: $grayMedium;
+        fill: $primary;
       }
     }
   }
@@ -38,7 +38,7 @@
     margin: .5em 0;
     padding-bottom: .75em;
     a {
-      color: $grayMedium;
+      color: $primary;
       display: inline-block;
       position: relative;
       padding: 0 20px 0 30px;
@@ -47,7 +47,7 @@
       position: absolute;
       top:0;
       left:0;
-      fill: $grayMedium;
+      fill: $primary;
     }
   }
   .format-types {
@@ -75,7 +75,7 @@
   .label[data-format="csv"]     { background: $csvIcon; }
   .label[data-format="json"]    { background: $jsonIcon; }
   .label[data-format="pdf"]     { background: $pdfIcon; }
-  .label[data-format="rdf"],     
+  .label[data-format="rdf"],
   .label[data-format="rdf+xml"] { background: $rdfIcon; }
   .label[data-format="xml"]     { background: $xmlIcon; }
   .label[data-format="zip"]     { background: $zipIcon; }

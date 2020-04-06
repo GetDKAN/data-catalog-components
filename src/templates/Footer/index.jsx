@@ -13,9 +13,9 @@ class Footer extends React.Component {
     const customClasses = this.props.customClasses;
 
     return (
-      <div className={`${customClasses} dc-footer`}>
-        <div className="page-footer">
-          
+      <div className="dc-footer">
+        <div className={`${customClasses} page-footer`}>
+
             <div className="branding">
               <h2>Open Source Open Data</h2>
               <p>
