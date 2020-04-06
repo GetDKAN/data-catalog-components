@@ -16,9 +16,11 @@ import ApiDocs from '../src/components/ApiDocs';
 import ToggleBlock from '../src/components/ToggleBlock';
 import ShowMoreContainer from '../src/components/ShowMoreContainer';
 import Announcement from '../src/templates/Announcement';
+import PublisherList from '../src/components/PublisherList';
 import "../src/theme/styles/index.scss";
 
 import links from './data/menu.json';
+import orgs from './data/publishers.json';
 
 storiesOf('General', module)
   .addDecorator(withKnobs)
@@ -127,4 +129,7 @@ storiesOf('General', module)
       )}>
       Pay attention this is important information.
     </Announcement>
+  ))
+  .add('Publisher List', () => (
+    <PublisherList items={orgs} />
   ))

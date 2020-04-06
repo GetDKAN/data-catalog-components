@@ -4,26 +4,27 @@ import Organization from "../Organization";
 
 function PublisherList(props) {
   let content = (<div></div>);
+  const custom = 'className' in props.items ? className : "";
 
   if (props.items) {
     content = props.items.map((item) => (
-        <Organization
-          name={item.name}
-          key={item.identifier}
-          imageUrl={item.image}
-          description={item.description}
-        />
+      <Organization
+        name={item.name}
+        key={item.identifier}
+        imageUrl={item.imageUrl}
+        description={item.description}
+      />
     ));
   }
 
   return (
-    <ul className={`dc-publisher-list ${className}`}>
+    <ul className={`dc-publisher-list ${custom}`}>
       {content}
     </ul>
   );
 }
 
-List.propTypes = {
+PublisherList.propTypes = {
   items: PropTypes.array,
   className: PropTypes.string,
 };
