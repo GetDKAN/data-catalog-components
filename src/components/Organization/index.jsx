@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { Link } from "@reach/router";
 
 function Organization(props) {
-  const { name, description, identifier, imageUrl } = props;
+  const { name, description, identifier, imageUrl, searchUrl } = props;
   const image = <img alt={name || "Organization Image"} src={imageUrl} />;
   const alignment = props.alignment ? props.alignment : 'center';
-  const link = `search/?publisher__name=${name}`;
+  const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
 
   return (
     <div className="dc-org-block" style={{ textAlign: alignment }}>
@@ -37,7 +37,8 @@ Organization.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   identifier: PropTypes.string,
-  imageUrl: PropTypes.string
+  imageUrl: PropTypes.string,
+  searchUrl: PropTypes.string
 };
 
 export default Organization;
