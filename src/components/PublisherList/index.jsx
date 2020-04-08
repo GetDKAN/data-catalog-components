@@ -4,7 +4,7 @@ import Organization from "../Organization";
 
 function PublisherList(props) {
   let content = (<div></div>);
-  const custom = 'className' in props.items ? className : "";
+  const custom = 'className' in props ? props.className : "";
 
   if (props.items) {
     content = props.items.map((item) => (

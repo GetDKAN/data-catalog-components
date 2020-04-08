@@ -131,5 +131,5 @@ storiesOf('General', module)
     </Announcement>
   ))
   .add('Publisher List', () => (
-    <PublisherList items={orgs} />
+    <PublisherList items={orgs} className="test" />
   ))
