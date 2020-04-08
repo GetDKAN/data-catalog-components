@@ -1,12 +1,13 @@
 @import "../../theme/styles/variables";
 
-.dc-page .dc-search-input.form-group {
+.dc-results-list .dc-search-input {
   position: relative;
   #inputReset {
     position: absolute;
     color: #333333;
-    top: 5px;
+    top: 0;
     right: 0;
+    width: auto;
     background: transparent;
     border: none;
     &:active,
@@ -15,11 +16,13 @@
       border: none;
       box-shadow: none;
     }
-    svg {
+    svg.fa-times {
       font-size: 3.2rem;
-      color: $grayMedium;
-      margin-right: 10px;
+      margin-right: 15px;
       vertical-align: middle;
+      path {
+        fill: $grayMedium;
+      }
     }
     .reset-text {
       font-size: 0;

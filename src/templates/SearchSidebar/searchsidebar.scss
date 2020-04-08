@@ -53,9 +53,11 @@
     svg {
       vertical-align: middle;
       margin-right: 15px;
-      color: $grayMedium;
       height: 24px;
       width: 24px;
+      &.fa-square {
+        color: $grayLight;
+      }
       &.fa-check-square {
         color: $primary;
       }
