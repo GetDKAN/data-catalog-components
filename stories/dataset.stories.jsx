@@ -12,13 +12,27 @@ import Text from '../src/components/Text';
 import Table from '../src/components/Table';
 import Tags from '../src/components/Tags';
 import DataIcon from '../src/components/DataIcon';
-import DataTableDensity from '../src/components/Resource/DataTableHeader/DataTableDensity';
-import DataTablePageResults from '../src/components/Resource/DataTableHeader/DataTablePageResults';
+import DataTableDensity from '../src/components/DataTable/DataTableDensity';
+import DataTablePageResults from '../src/components/DataTable/DataTablePageResults';
 import data from './data/data.json';
 import tables from './data/tables.json';
-import "../src/theme/styles/index.scss";
+import '../src/theme/styles/index.scss';
 import TopicIcon from '../src/templates/TopicIcon';
 import TopicWrapper from '../src/components/TopicWrapper';
+import { ResourceDispatch } from '../src/services/resource/resource_tools';
+import DataTable from '../src/templates/DataTable';
+import {resourceData} from './data/resourceData';
+import {
+  useTable,
+  usePagination,
+  useFilters,
+  useSortBy,
+  useBlockLayout,
+  useResizeColumns,
+  useColumnOrder,
+} from 'react-table'
+
+
 
 storiesOf('Dataset', module)
   .addDecorator(withKnobs)
@@ -40,24 +54,26 @@ storiesOf('Dataset', module)
     { knobs: { escapeHTML: false } },
   )
   .add('File Download', () => <FileDownload title={data.distribution[0].title} downloadURL={data.distribution[0].downloadURL} format={data.distribution[0].format} />)
-  .add('File Download with description', () => 
-    <FileDownload 
-      title={data.distribution[0].title} 
-      downloadURL={data.distribution[0].downloadURL} 
-      format={data.distribution[0].format} 
+  .add('File Download with description', () => (
+    <FileDownload
+      title={data.distribution[0].title}
+      downloadURL={data.distribution[0].downloadURL}
+      format={data.distribution[0].format}
       description={data.distribution[0].description}
-    />)
-  .add('Organization', () => 
-    <Organization 
-      name={data.publisher.name} 
-      description={data.publisher.description} 
+    />
+  ))
+  .add('Organization', () => (
+    <Organization
+      name={data.publisher.name}
+      description={data.publisher.description}
       identifier={data.publisher.identifier}
       alignment={select(
         'Alignment',
         ['left', 'right', 'center'],
         'center',
       )}
-    />)
+    />
+  ))
   .add(
     'Text',
     () => (
@@ -102,4 +118,74 @@ storiesOf('Dataset', module)
         { icon: <DataIcon name="density-3" height={20} width={20} icon={'density-3'} fill="#666666" />, text: 'tight' }
       ]}
     />
-  ));
+  ))
+  .add('Datatable', () => {
+    const filterTypes = React.useMemo(
+      () => ({
+        // Add a new fuzzyTextFilterFn filter type.
+        // fuzzyText: fuzzyTextFilterFn,
+        // Or, override the default text filter to use
+        // "startWith"
+        text: (rows, id, filterValue) => (
+          rows.filter((row) => {
+            const rowValue = row.values[id];
+            return rowValue !== undefined
+              ? String(rowValue)
+                .toLowerCase()
+                .startsWith(String(filterValue).toLowerCase())
+              : true;
+          })
+        ),
+      }),
+      [],
+    );
+    function DefaultColumnFilter({
+      column: { filterValue, preFilteredRows, setFilter },
+    }) {
+      const count = preFilteredRows.length;
+
+      return (
+        <input
+          value={filterValue || ''}
+          onChange={(e) => {
+            setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+          }}
+          placeholder={`Search ${count} records...`}
+        />
+      );
+    }
+    const defaultColumn = React.useMemo(
+      () => ({
+        // Let's set up our default Filter UI
+        Filter: DefaultColumnFilter,
+        minWidth: 30,
+        width: 150,
+        maxWidth: 400,
+      }),
+      [],
+    );
+    const reactTable = useTable(
+      {
+        columns: resourceData.columns,
+        data: resourceData.store.data,
+        initialState: { pageIndex: 0 },
+        manualPagination: true,
+        pageCount: Number(Math.ceil(resourceData.rowsTotal / 10)),
+        defaultColumn,
+        filterTypes,
+      },
+      useFilters,
+      useBlockLayout,
+      useResizeColumns,
+      useColumnOrder,
+      useSortBy,
+      usePagination,
+    );
+    return (
+      <ResourceDispatch.Provider
+        value={{ resourceState: resourceData, dispatch: () => ({}), reactTable }}
+      >
+        <DataTable />
+      </ResourceDispatch.Provider>
+    );
+  });

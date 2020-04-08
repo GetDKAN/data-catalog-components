@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { DndProvider } from 'react-dnd';
 import Backend from 'react-dnd-html5-backend'
 import update from 'immutability-helper'
 import Card from './Card';
@@ -9,15 +9,13 @@ import Modal from '../../Modal';
 
 const ManageColumns = () => {
   const { reactTable } = useContext(ResourceDispatch);
-  const [cards, setCards] = React.useState(null);
+  const [cards, setCards] = useState(null);
 
   React.useEffect(() => {
     if (reactTable.allColumns.length && cards === null) {
       setCards(reactTable.allColumns);
     }
-    console.log('eh', reactTable.allColumns);
   }, [reactTable.allColumns]);
-  console.log('fpp', cards);
   // const [cards, setCards] = React.useState(reactTable.allColumns);
   const moveCard = React.useCallback(
     (dragIndex, hoverIndex) => {
