@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DataIcon from '../../../DataIcon';
+import DataIcon from '../../DataIcon';
 
 const DataTableDensity = ({
   items,

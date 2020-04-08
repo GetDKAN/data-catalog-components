@@ -56,7 +56,7 @@ const Modal = ({
   return (
     <div className="dc-modal-container">
       <button
-        className="dc-modal-open-button"
+        className="dc-modal-open-button btn btn-primary"
         id={`dc-modal-${titleId}-open`}
         type="button"
         onClick={() => setModalOpen(!modalOpen)}

@@ -1,11 +1,9 @@
 // export { default as AdvancedOptions } from './components/Resource/DataTableHeader/AdvancedOptions';
 // export { default as AdvancedOptionsForm } from './components/Resource/DataTableHeader/AdvancedOptions/AdvancedOptionsForm';
-export { default as Announcement } from './templates/Announcement';
 export { default as ApiDocs } from './components/ApiDocs';
 export { default as DataIcon } from './components/DataIcon';
-export { default as DataTable } from './templates/DataTable';
-export { default as DataTableDensity } from './components/Resource/DataTableHeader/DataTableDensity';
-export { default as DataTablePageResults } from './components/Resource/DataTableHeader/DataTablePageResults';
+export { default as DataTableDensity } from './components/DataTable/DataTableDensity';
+export { default as DataTablePageResults } from './components/DataTable/DataTablePageResults';
 export { default as DataTablePageSizer } from './components/Resource/DataTableHeader/DataTablePageSizer';
 export { default as IconList } from './components/IconList';
 export { default as IconListItem } from './components/IconListItem';
@@ -63,6 +61,7 @@ export {
 export { default as Announcement } from './templates/Announcement';
 export { default as Blocks } from './templates/Blocks';
 export { default as BasicBlock } from './templates/Blocks/BasicBlock';
+export { default as DataTable } from './templates/DataTable';
 export { default as Header } from './templates/Header';
 export { default as Hero } from './templates/Hero';
 export { default as Footer } from './templates/Footer';

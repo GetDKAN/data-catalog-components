@@ -1,13 +1,92 @@
 import React from 'react';
+import { Label, Input } from 'reactstrap';
 import { ResourceDispatch } from '../../services/resource/resource_tools';
 import ManageColumns from '../../components/DataTable/ManageColumns';
+import DataTablePageResults from '../../components/DataTable/DataTablePageResults';
+import DataTableDensity from '../../components/DataTable/DataTableDensity';
+import DataIcon from '../../components/DataIcon';
 
-const DataTableHeader = ({}) => {
-  const { reactTable } = React.useContext(ResourceDispatch);
+const DataTableHeader = () => {
+  const { reactTable, resourceState, dispatch } = React.useContext(ResourceDispatch);
+  const pageSizeOptions = [
+    { defaultChecked: true, label: '20', value: '20' },
+    { label: '50', value: '50' },
+    { label: '100', value: '100' },
+  ];
   return (
     <div className="dc-datatable-header">
-      {reactTable.allColumns
-        && <ManageColumns /> }
+      {resourceState.store
+        && (
+        <>
+          <DataTablePageResults
+            total={resourceState.rowsTotal}
+            pageSize={resourceState.pageSize}
+            currentPage={resourceState.currentPage}
+          />
+          <div>
+            <Label htmlFor={`dc-${resourceState.store.id}-pagesize`}>Rows per page</Label>
+            <Input
+              onChange={(event) => dispatch({
+                type: 'UPDATE_PAGE_SIZE',
+                data: { pageSize: event.target.value },
+              })}
+              type="select"
+              name={`dc-${resourceState.store.id}-pagesize`}
+              id={`dc-${resourceState.store.id}-pagesize`}
+            >
+              {pageSizeOptions.map((opt) => <option value={opt.value} key={opt.value}>{opt.label}</option>)}
+            </Input>
+          </div>
+          <DataTableDensity
+            densityChange={(density) => dispatch({ type: 'UPDATE_DENSITY', data: { density } })}
+            items={[
+              {
+                icon: (
+                  <DataIcon
+                    icon="density-1"
+                    name="density-1"
+                    fill="#666666"
+                    height={20}
+                    width={20}
+                  />
+                ),
+                text: 'expanded',
+                value: 'density-1',
+              },
+              {
+                icon: (
+                  <DataIcon
+                    icon="density-2"
+                    name="density-2"
+                    fill="#666666"
+                    height={20}
+                    width={20}
+                  />
+                ),
+                text: 'normal',
+                value: 'density-2',
+              },
+              {
+                icon: (
+                  <DataIcon
+                    icon="density-3"
+                    name="density-3"
+                    fill="#666666"
+                    height={20}
+                    width={20}
+                  />
+                ),
+                text: 'tight',
+                value: 'density-3',
+              },
+            ]}
+          />
+          {reactTable.allColumns
+            && <ManageColumns /> }
+        </>
+        )
+      }
+      
     </div>
   );
 };
