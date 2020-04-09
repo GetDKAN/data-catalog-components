@@ -1,9 +1,9 @@
 import React from 'react';
-import { Label, Input } from 'reactstrap';
 import { ResourceDispatch } from '../../services/resource/resource_tools';
 import ManageColumns from '../../components/DataTable/ManageColumns';
 import DataTablePageResults from '../../components/DataTable/DataTablePageResults';
 import DataTableDensity from '../../components/DataTable/DataTableDensity';
+import DataTablePageSizer from '../../components/DataTable/DataTablePageSizer';
 import DataIcon from '../../components/DataIcon';
 
 const DataTableHeader = () => {
@@ -23,20 +23,13 @@ const DataTableHeader = () => {
             pageSize={resourceState.pageSize}
             currentPage={resourceState.currentPage}
           />
-          <div>
-            <Label htmlFor={`dc-${resourceState.store.id}-pagesize`}>Rows per page</Label>
-            <Input
-              onChange={(event) => dispatch({
-                type: 'UPDATE_PAGE_SIZE',
-                data: { pageSize: event.target.value },
-              })}
-              type="select"
-              name={`dc-${resourceState.store.id}-pagesize`}
-              id={`dc-${resourceState.store.id}-pagesize`}
-            >
-              {pageSizeOptions.map((opt) => <option value={opt.value} key={opt.value}>{opt.label}</option>)}
-            </Input>
-          </div>
+          <DataTablePageSizer
+            pageSizeChange={(event) => dispatch({
+              type: 'UPDATE_PAGE_SIZE',
+              data: { pageSize: event.target.value },
+            })}
+            id={resourceState.store.id}
+          />
           <DataTableDensity
             densityChange={(density) => dispatch({ type: 'UPDATE_DENSITY', data: { density } })}
             items={[

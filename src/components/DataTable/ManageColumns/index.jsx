@@ -7,16 +7,33 @@ import Card from './Card';
 import { ResourceDispatch } from '../../../services/resource/resource_tools';
 import Modal from '../../Modal';
 
-const ManageColumns = () => {
+const defaultCard = (card, index, moveCard) => {
+  return (
+    <Card
+      key={card.id}
+      index={index}
+      id={card.id}
+      column={card}
+      moveCard={moveCard}
+    >
+      <label htmlFor={card.id}>
+        <input id={card.id} type="checkbox" {...card.getToggleHiddenProps()} />{' '}
+        {card.Header}
+      </label>
+    </Card>
+  );
+};
+
+const ManageColumns = ({
+  renderCard,
+}) => {
   const { reactTable } = useContext(ResourceDispatch);
   const [cards, setCards] = useState(null);
-
   React.useEffect(() => {
     if (reactTable.allColumns.length && cards === null) {
       setCards(reactTable.allColumns);
     }
   }, [reactTable.allColumns]);
-  // const [cards, setCards] = React.useState(reactTable.allColumns);
   const moveCard = React.useCallback(
     (dragIndex, hoverIndex) => {
       const dragCard = reactTable.allColumns[dragIndex];
@@ -35,18 +52,7 @@ const ManageColumns = () => {
       reactTable.setColumnOrder(cards.map((d) => d.id));
     }
   }, [cards]);
-  const renderCard = (card, index) => {
-    return (
-      <Card
-        key={card.id}
-        index={index}
-        id={card.id}
-        text={card.text}
-        column={card}
-        moveCard={moveCard}
-      />
-    );
-  };
+
   return (
     <div>
       <Modal
@@ -55,12 +61,16 @@ const ManageColumns = () => {
       >
         <DndProvider backend={Backend}>
           <p>cards</p>
-          {cards //renderCard(column, i))
-            && cards.map((column, i) => renderCard(column, i))}
+          {cards
+            && cards.map((column, i) => renderCard(column, i, moveCard))}
         </DndProvider>
       </Modal>
     </div>
   );
+};
+
+ManageColumns.defaultProps = {
+  renderCard: defaultCard,
 };
 
 export default ManageColumns;

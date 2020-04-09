@@ -1,9 +1,12 @@
 import React from 'react';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import PropTypes from 'prop-types';
+import { useDrag, useDrop } from 'react-dnd';
 const ItemTypes = {
   CARD: 'card',
 };
-const Card = ({id, index, moveCard, children}) => {
+const Card = ({
+  id, index, moveCard, children,
+}) => {
   const ref = React.useRef(null);
   const [, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -60,19 +63,11 @@ const Card = ({id, index, moveCard, children}) => {
   );
 };
 
+Card.propTypes = {
+  id: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  children: PropTypes.node.isRequired,
+  moveCard: PropTypes.func.isRequired,
+};
+
 export default Card;
-
-
-
-// <label
-//   className="dc-card-label"
-//   htmlFor={column.id}
-// >
-//   <input
-//     className="dc-card-input"
-//     id={column.id}
-//     type="checkbox"
-//     {...column.getToggleHiddenProps()}
-//   />
-//   {column.id}
-// </label>

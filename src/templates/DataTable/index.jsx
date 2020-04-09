@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ResourceDispatch } from '../../services/resource/resource_tools';
 
 const DataTable = () => {
-  const { resourceState, reactTable } = useContext(ResourceDispatch);
+  const { resourceState, reactTable, dispatch } = useContext(ResourceDispatch);
   const density = resourceState.density ? `${resourceState.density} -striped -highlight` : '-striped -highlight';
 
   const {
@@ -13,7 +13,7 @@ const DataTable = () => {
     prepareRow,
     pageCount,
     page,
-    state: { pageIndex, pageSize},
+    state: { pageIndex, pageSize },
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -24,6 +24,12 @@ const DataTable = () => {
     allColumns,
     setColumnOrder,
   } = reactTable;
+
+  // React.useEffect(() => {
+  //   dispatch(() => dispatch({ type: "UPDATE_PAGE", data: { page: pageIndex } }))
+    
+  //   // fetchData({ pageIndex, pageSize })
+  // }, [pageIndex, pageSize])
 
   return (
     <div className={`dc-datatable -striped -highlight ${density}`}>
