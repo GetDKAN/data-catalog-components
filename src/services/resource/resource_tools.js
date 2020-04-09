@@ -1,5 +1,7 @@
 import { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
+import update from 'immutability-helper';
+
 import datastore from './datastore';
 
 export const ResourceDispatch = createContext(null);
@@ -141,7 +143,6 @@ export async function queryAllResourceData(store) {
 // Create a new datastore using the DKAN datastore.
 export async function getDKANDatastore(rootURL, resource) {
   const identifier = resource.identifier;
-  console.log("2133443433123")
   const checkForDatastore = await axios.get(`${rootURL}datastore/imports/${identifier}`)
     .then((res) => res.data)
     .catch((e) => {
@@ -149,7 +150,6 @@ export async function getDKANDatastore(rootURL, resource) {
       console.warn(e.message);
     });
   if (checkForDatastore) {
-    console.log("213123")
     // eslint-disable-next-line
     const store = await new datastore['dkan'](identifier, checkForDatastore.columns, rootURL);
     return {

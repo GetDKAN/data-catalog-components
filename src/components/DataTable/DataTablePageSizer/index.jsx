@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Label, Input } from 'reactstrap';
 
 const DataTablePageSizer = ({
   label,
@@ -11,30 +12,31 @@ const DataTablePageSizer = ({
   id,
 }) => (
   <div className={className}>
-    <label htmlFor={`table-${id}`} className="page-size-label">
-      <span className="page-size-label-text">{label}</span>
-      {' '}
-      <select id={`table-${id}`} className={selectClassName} value={currentOption} onChange={pageSizeChange}>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </label>
+    <Label htmlFor={`dc-${id}-pagesize`}>{label}</Label>
+    <Input
+      className={selectClassName}
+      onChange={pageSizeChange}
+      type="select"
+      name={`dc-${id}-pagesize`}
+      id={`dc-${id}-pagesize`}
+    >
+      {options.map((opt) => (
+        <option value={opt.value} key={opt.value}>{opt.label}</option>
+      ))}
+    </Input>
   </div>
 );
 
 DataTablePageSizer.defaultProps = {
   label: 'Rows per page',
-  className: 'page-size-options',
+  className: 'dc-page-size-options',
   currentOption: '20',
   options: [
     { defaultChecked: true, label: '20', value: '20' },
     { label: '50', value: '50' },
     { label: '100', value: '100' },
   ],
-  selectClassName: 'page-size-select'
+  selectClassName: 'page-size-select',
 };
 
 DataTablePageSizer.propTypes = {

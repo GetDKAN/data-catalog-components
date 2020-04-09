@@ -36,11 +36,7 @@ const Resource = ({
       }
     }
     async function queryStore() {
-      if (resourceState.queryAll) {
-        dispatch(await queryAllResourceData(resourceState.store));
-      } else {
-        dispatch(await queryResourceData(resourceState));
-      }
+      dispatch(await queryResourceData(resourceState));
     }
     dispatch({ type: 'GET_STORE' });
     if (resourceState.store !== null) {
@@ -94,7 +90,6 @@ const Resource = ({
     }),
     [],
   );
-  
   const defaultColumn = React.useMemo(
     () => ({
       // Let's set up our default Filter UI
