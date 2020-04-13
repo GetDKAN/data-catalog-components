@@ -68,3 +68,4 @@ export { default as StatBlock } from './templates/Blocks/StatBlock';
 export { default as StepsBlock } from './templates/Blocks/StepsBlock';
 export { default as SearchSidebar } from './templates/SearchSidebar';
 export { default as SearchContent } from './templates/SearchContent';
+export { default as TopicIcon } from './templates/TopicIcon';
