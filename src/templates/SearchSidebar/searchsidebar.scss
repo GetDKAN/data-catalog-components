@@ -44,7 +44,11 @@
     max-width: 100%;
     min-height: 32px;
     position: relative;
-
+    label {
+      display: block;
+      cursor: pointer;
+      width: 100%;
+    }
     input {
       left: -999em;
       opacity: 0;
