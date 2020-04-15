@@ -74,13 +74,15 @@ jobs:
             dktl dc exec cli npm install -g n
             dktl dc exec cli n stable
             dktl dc exec cli npm install npm@latest
+            dktl dc run cli git clone --single-branch -b $CIRCLE_BRANCH https://github.com/GetDKAN/data-catalog-components.git
+            dktl dc run cli npm install --prefix /var/www/data-catalog-components
+            dktl dc run cli npm run lib --prefix /var/www/data-catalog-components
+            dktl dc run -w /var/www/docroot/data-catalog-frontend cli npm install ../../data-catalog-components
+            dktl dc run cli cat /var/www/docroot/data-catalog-frontend/package.json
+            dktl dc run -w /var/www/docroot/data-catalog-frontend cli rm -rf node_modules
+            dktl dc run -w /var/www/docroot/data-catalog-frontend cli rm package-lock.json 
             dktl dc exec cli npm install --prefix /var/www/docroot/data-catalog-frontend --unsafe-perm
-            dktl dc exec cli cat /var/www/docroot/data-catalog-frontend/node_modules/@civicactions/data-catalog-components/package.json
-            dktl dc exec cli git clone --single-branch -b $CIRCLE_BRANCH git@github.com:GetDKAN/data-catalog-components.git
-            dktl dc exec cli cat /var/www/data-catalog-components/package.json
-            dktl dc exec cli npm link --prefix /var/www/docroot/data-catalog-components
-            dktl dc exec cli npm link @civicactions/data-catalog-components --prefix /var/www/docroot/data-catalog-frontend --unsafe-perm
-            dktl dc exec cli cat /var/www/docroot/data-catalog-frontend/node_modules/@civicactions/data-catalog-components/package.json
+            dktl dc run cli cat /var/www/docroot/data-catalog-frontend/node_modules/@civicactions/data-catalog-components/package.json
             dktl frontend:build
             dktl dc exec web chmod -R 777 /var/www/docroot/sites/default/files/dkan-tmp
             dktl drush cr
