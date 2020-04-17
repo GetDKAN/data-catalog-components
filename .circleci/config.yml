@@ -75,8 +75,8 @@ jobs:
             dktl dc exec cli n stable
             dktl dc exec cli npm install npm@latest
             dktl dc run cli git clone --single-branch -b $CIRCLE_BRANCH https://github.com/GetDKAN/data-catalog-components.git
-            dktl dc run cli npm install --prefix /var/www/data-catalog-components
-            dktl dc run -w /var/www/data-catalog-components cli npm pack
+            dktl dc run cli npm install --prefix /var/www/data-catalog-components --unsafe-perm
+            dktl dc run -w /var/www/data-catalog-components cli npm pack --unsafe-perm
             dktl dc run -w /var/www/docroot/data-catalog-frontend cli npm install ../../data-catalog-components/civicactions-data-catalog-components-0.1.9.tgz
             dktl dc run cli cat /var/www/docroot/data-catalog-frontend/package.json
             dktl dc run -w /var/www/docroot/data-catalog-frontend cli rm -rf node_modules
