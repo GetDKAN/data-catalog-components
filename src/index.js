@@ -1,6 +1,7 @@
 export { default as AdvancedOptions } from './components/Resource/DataTableHeader/AdvancedOptions';
 export { default as AdvancedOptionsForm } from './components/Resource/DataTableHeader/AdvancedOptions/AdvancedOptionsForm';
 export { default as ApiDocs } from './components/ApiDocs';
+export { default as DataIcon } from './components/DataIcon';
 export { default as DataTable } from './components/Resource/DataTable';
 export { default as DataTableHeader } from './components/Resource/DataTableHeader';
 export { default as DataTableDensity } from './components/Resource/DataTableHeader/DataTableDensity';
