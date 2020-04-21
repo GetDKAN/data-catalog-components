@@ -1,6 +1,10 @@
-version: 2
+version: 2.1
 jobs:
   build:
+    parameters:
+      pr-version:
+        type: string
+        default: "0.1.10"
     parallelism: 1
     machine:
       image: circleci/classic:latest
@@ -77,7 +81,7 @@ jobs:
             dktl dc run cli git clone --single-branch -b $CIRCLE_BRANCH https://github.com/GetDKAN/data-catalog-components.git
             dktl dc run cli npm install --prefix /var/www/data-catalog-components --unsafe-perm
             dktl dc run -w /var/www/data-catalog-components cli npm pack --unsafe-perm
-            dktl dc run -w /var/www/docroot/data-catalog-frontend cli npm install ../../data-catalog-components/civicactions-data-catalog-components-0.1.9.tgz
+            dktl dc run -w /var/www/docroot/data-catalog-frontend cli npm install ../../data-catalog-components/civicactions-data-catalog-components-<< parameters.pr-version >>.tgz
             dktl dc run cli cat /var/www/docroot/data-catalog-frontend/package.json
             dktl dc run -w /var/www/docroot/data-catalog-frontend cli rm -rf node_modules
             dktl dc run -w /var/www/docroot/data-catalog-frontend cli rm package-lock.json 
