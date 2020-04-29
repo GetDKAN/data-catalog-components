@@ -9,7 +9,7 @@ import {
   useBlockLayout,
   useResizeColumns,
   useColumnOrder,
-} from 'react-table'
+} from 'react-table';
 import {
   ResourceDispatch,
   defaultResourceState,
@@ -53,13 +53,13 @@ const Resource = ({
     resourceState.sort,
   ]);
 
-  const { columns } = resourceState;
+  const { columns, currentPage } = resourceState;
   const data = resourceState.values;
   // Define a default UI for filtering
   function DefaultColumnFilter({
     column: { filterValue, preFilteredRows, setFilter },
   }) {
-    const count = preFilteredRows.length
+    const count = preFilteredRows ? preFilteredRows.length : 0;
 
     return (
       <input
@@ -104,9 +104,11 @@ const Resource = ({
     {
       columns,
       data,
-      initialState: { pageIndex: 0 },
+      initialState: { pageIndex: currentPage },
       manualPagination: true,
-      pageCount: Number(Math.ceil(resourceState.rowsTotal / 10)),
+      manualSortBy: true,
+      manualFilters: true,
+      pageCount: Number(Math.ceil(resourceState.rowsTotal / resourceState.pageSize)),
       defaultColumn,
       filterTypes,
     },
