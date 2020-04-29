@@ -19,7 +19,7 @@ const DataTableHeader = () => {
         && (
         <>
           <DataTablePageResults
-            total={resourceState.rowsTotal}
+            total={resourceState.count}
             pageSize={resourceState.pageSize}
             currentPage={resourceState.currentPage}
           />
@@ -79,7 +79,6 @@ const DataTableHeader = () => {
         </>
         )
       }
-      
     </div>
   );
 };

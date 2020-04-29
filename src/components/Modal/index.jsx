@@ -12,6 +12,7 @@ const Modal = ({
     ? (
       <AriaModal
         titleText={title}
+        onExit={() => setModalOpen(false)}
         getApplicationNode={getNode}
         initialFocus={`#dc-modal-${titleId}-close`}
       >

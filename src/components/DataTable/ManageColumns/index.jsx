@@ -60,7 +60,6 @@ const ManageColumns = ({
         nodeId="___gatsby"
       >
         <DndProvider backend={Backend}>
-          <p>cards</p>
           {cards
             && cards.map((column, i) => renderCard(column, i, moveCard))}
         </DndProvider>

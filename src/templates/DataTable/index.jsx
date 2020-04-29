@@ -13,7 +13,9 @@ const DataTable = () => {
     prepareRow,
     pageCount,
     page,
-    state: { pageIndex, pageSize },
+    state: {
+      pageIndex, pageSize, sortBy, filters,
+    },
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -24,12 +26,23 @@ const DataTable = () => {
     allColumns,
     setColumnOrder,
   } = reactTable;
+  React.useEffect(() => {
+    if (resourceState.currentPage !== pageIndex) {
+      dispatch({ type: 'UPDATE_PAGE', data: { page: pageIndex } });
+    }
+  }, [pageIndex]);
 
-  // React.useEffect(() => {
-  //   dispatch(() => dispatch({ type: "UPDATE_PAGE", data: { page: pageIndex } }))
-    
-  //   // fetchData({ pageIndex, pageSize })
-  // }, [pageIndex, pageSize])
+  React.useEffect(() => {
+    if (resourceState.sort !== sortBy) {
+      dispatch({ type: 'UPDATE_COLUMN_SORT', data: { sort: sortBy } });
+    }
+  }, [sortBy]);
+
+  React.useEffect(() => {
+    if (resourceState.filters !== filters) {
+      dispatch({ type: 'UPDATE_FILTERS', data: { filters } });
+    }
+  }, [filters]);
 
   return (
     <div className={`dc-datatable -striped -highlight ${density}`}>
@@ -122,7 +135,7 @@ const DataTable = () => {
           <div className="-next">
             <button
               type="button"
-              onClick={() => nextPage()}
+              onClick={() => nextPage()} //
               disabled={!canNextPage}
               className="-btn"
             >
