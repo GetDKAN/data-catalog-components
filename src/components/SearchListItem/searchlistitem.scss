@@ -32,24 +32,6 @@
       }
     }
   }
-  .dc-item-theme {
-    font-style: normal;
-    letter-spacing: .25px;
-    margin: .5em 0;
-    padding-bottom: .75em;
-    a {
-      color: $primary;
-      display: inline-block;
-      position: relative;
-      padding: 0 20px 0 30px;
-    }
-    img, svg {
-      position: absolute;
-      top:0;
-      left:0;
-      fill: $primary;
-    }
-  }
   .format-types {
     display: flex;
     align-items: flex-start;
