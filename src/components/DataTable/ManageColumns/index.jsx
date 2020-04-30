@@ -1,13 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DndProvider } from 'react-dnd';
-import Backend from 'react-dnd-html5-backend'
-import update from 'immutability-helper'
+import Backend from 'react-dnd-html5-backend';
+import update from 'immutability-helper';
 import Card from './Card';
 
 import { ResourceDispatch } from '../../../services/resource/resource_tools';
 import Modal from '../../Modal';
 
 const defaultCard = (card, index, moveCard) => {
+  if (card.Header === "price") {
+    console.log(card.getToggleHiddenProps().onChange)
+  }
+  
   return (
     <Card
       key={card.id}
@@ -17,7 +21,14 @@ const defaultCard = (card, index, moveCard) => {
       moveCard={moveCard}
     >
       <label htmlFor={card.id}>
-        <input id={card.id} type="checkbox" {...card.getToggleHiddenProps()} />{' '}
+        <input
+          id={card.id}
+          type="checkbox"
+          // checked={card.getToggleHiddenProps().checked}
+          // onChange={card.getToggleHiddenProps().onChange}
+          {...card.getToggleHiddenProps()}
+        />
+        {' '}
         {card.Header}
       </label>
     </Card>
@@ -60,8 +71,8 @@ const ManageColumns = ({
         nodeId="___gatsby"
       >
         <DndProvider backend={Backend}>
-          {cards
-            && cards.map((column, i) => renderCard(column, i, moveCard))}
+          {reactTable.allColumns
+            && reactTable.allColumns.map((column, i) => renderCard(column, i, moveCard))}
         </DndProvider>
       </Modal>
     </div>

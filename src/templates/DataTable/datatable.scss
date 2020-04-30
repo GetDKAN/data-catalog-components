@@ -84,6 +84,7 @@ $expandSize: 7px;
         box-shadow: 0 2px 15px 0px rgba(0,0,0,.15);
       }
       .th {
+        overflow: hidden;
         text-align: center;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -169,6 +170,17 @@ $expandSize: 7px;
       border-right: 0;
     }
       
+    .resizer {
+      display: inline-block;
+      position: absolute;
+      width: 36px;
+      top: 0;
+      bottom: 0;
+      right: -18px;
+      cursor: col-resize;
+      z-index: 10;
+    }
+    
   }
     
     
@@ -187,8 +199,7 @@ $expandSize: 7px;
   //       overflow: hidden
 
   //   .rt-resizable-header-content
-  //     overflow: hidden
-  //     text-overflow: ellipsis
+  
 
   //   .rt-header-pivot
   //     border-right-color: #f7f7f7
@@ -279,15 +290,7 @@ $expandSize: 7px;
   //   &.-open:after
   //       transform: translate(-50%, -50%) rotate(0deg)
 
-  // .rt-resizer
-  //   display: inline-block
-  //   position: absolute
-  //   width: 36px
-  //   top: 0
-  //   bottom: 0
-  //   right: -18px
-  //   cursor: col-resize
-  //   z-index: 10
+  
 
   // .rt-tfoot
   //   flex: 1 0 auto

@@ -118,11 +118,22 @@ export async function queryResourceData(resourceData, includeCount = false) {
     includeCount,
   )
     .then((data) => data);
+  // Make a second call to get the correct count.
+  const count = await resourceData.store.query(
+    resourceData.filters,
+    null,
+    null,
+    resourceData.pageSize,
+    resourceData.currentPage,
+    resourceData.sort,
+    true,
+  )
+    .then((data) => data);
   return {
     type: 'QUERY_STORE',
     data: {
       values: items.data,
-      count: items.count,
+      count: Number(count.data[0].expression),
     },
   };
 }
