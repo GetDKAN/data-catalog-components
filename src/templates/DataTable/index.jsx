@@ -43,7 +43,6 @@ const DataTable = () => {
       dispatch({ type: 'UPDATE_FILTERS', data: { filters } });
     }
   }, [filters]);
-
   return (
     <div className={`dc-datatable -striped -highlight ${density}`}>
       <div {...getTableProps()} role="grid" className="dc-table">
@@ -60,7 +59,6 @@ const DataTable = () => {
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   className="th"
                 >
-                  {column.render('Header')}
                   <span>
                     {column.isSorted
                       ? column.isSortedDesc
@@ -68,6 +66,8 @@ const DataTable = () => {
                         : ' 🔼'
                       : ''}
                   </span>
+                  {column.render('Header')}
+                  
                   <div
                     {...column.getResizerProps()}
                     className={`resizer ${column.isResizing ? 'isResizing' : ''}`}

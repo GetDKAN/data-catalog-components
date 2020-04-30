@@ -7,6 +7,7 @@ import {
   useFilters,
   useSortBy,
   useBlockLayout,
+  useFlexLayout,
   useResizeColumns,
   useColumnOrder,
 } from 'react-table';
@@ -95,7 +96,7 @@ const Resource = ({
       // Let's set up our default Filter UI
       Filter: DefaultColumnFilter,
       minWidth: 30,
-      width: 150,
+      // width: 150,
       maxWidth: 400,
     }),
     [],
@@ -113,7 +114,7 @@ const Resource = ({
       filterTypes,
     },
     useFilters,
-    useBlockLayout,
+    useFlexLayout,
     useResizeColumns,
     useColumnOrder,
     useSortBy,
