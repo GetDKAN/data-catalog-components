@@ -113,7 +113,7 @@
     "react-test-renderer": "^16.9.0",
     "sass-loader": "^7.1.0",
     "styled-components": "^5.0.1",
-    "swagger-ui-react": "^3.23.9",
+    "swagger-ui-react": "3.25.0",
     "url-loader": "^1.1.2"
   },
   "peerDependencies": {
