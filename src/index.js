@@ -1,5 +1,3 @@
-// export { default as AdvancedOptions } from './components/Resource/DataTableHeader/AdvancedOptions';
-// export { default as AdvancedOptionsForm } from './components/Resource/DataTableHeader/AdvancedOptions/AdvancedOptionsForm';
 export { default as ApiDocs } from './components/ApiDocs';
 export { default as DataIcon } from './components/DataIcon';
 export { default as DataTableDensity } from './components/DataTable/DataTableDensity';
@@ -38,7 +36,6 @@ export { default as Title } from './components/Title';
 export { default as ToggleBlock } from './components/ToggleBlock';
 export { default as TopicWrapper } from './components/TopicWrapper';
 export { default as Search } from './components/Search';
-export { default as withResource } from './components/Resource/withResource';
 
 // SERVICES
 export { SearchDispatch, defaultSearchState } from './services/search/search_defaults';
