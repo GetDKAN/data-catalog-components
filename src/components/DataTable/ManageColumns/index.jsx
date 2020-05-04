@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { DndProvider } from 'react-dnd';
 import Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
@@ -7,33 +8,25 @@ import Card from './Card';
 import { ResourceDispatch } from '../../../services/resource/resource_tools';
 import Modal from '../../Modal';
 
-const defaultCard = (card, index, moveCard) => {
-  if (card.Header === "price") {
-    console.log(card.getToggleHiddenProps().onChange)
-  }
-  
-  return (
-    <Card
-      key={card.id}
-      index={index}
-      id={card.id}
-      column={card}
-      moveCard={moveCard}
-    >
-      <label htmlFor={card.id}>
-        <input
-          id={card.id}
-          type="checkbox"
-          // checked={card.getToggleHiddenProps().checked}
-          // onChange={card.getToggleHiddenProps().onChange}
-          {...card.getToggleHiddenProps()}
-        />
-        {' '}
-        {card.Header}
-      </label>
-    </Card>
-  );
-};
+const defaultCard = (card, index, moveCard) => (
+  <Card
+    key={card.id}
+    index={index}
+    id={card.id}
+    column={card}
+    moveCard={moveCard}
+  >
+    <label htmlFor={card.id}>
+      <input
+        id={card.id}
+        type="checkbox"
+        {...card.getToggleHiddenProps()}
+      />
+      {' '}
+      {card.Header}
+    </label>
+  </Card>
+);
 
 const ManageColumns = ({
   renderCard,
@@ -81,6 +74,10 @@ const ManageColumns = ({
 
 ManageColumns.defaultProps = {
   renderCard: defaultCard,
+};
+
+ManageColumns.propTypes = {
+  renderCard: PropTypes.func,
 };
 
 export default ManageColumns;

@@ -29,13 +29,6 @@
       border: none;
       box-shadow: none;
     }
-    &:before {
-      content:"\f00d";
-      font-family: "Font Awesome 5 Free";
-      font-size: 2.8rem;
-      color: $grayMedium;
-      vertical-align: middle;
-    }
   }
 }
 

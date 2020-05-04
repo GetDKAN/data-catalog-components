@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AriaModal from 'react-aria-modal';
+import DataIcon from '../DataIcon';
 
 const Modal = ({
-  nodeId, children, closeText, openText, title,
+  nodeId, children, closeText, closeIcon, openText, title,
 }) => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const getNode = () => document.getElementById(nodeId);
@@ -33,6 +34,7 @@ const Modal = ({
               onClick={() => setModalOpen(false)}
               className="dc-modal-close-button"
             >
+              {closeIcon}
               {closeText}
             </button>
           </header>
@@ -70,11 +72,13 @@ const Modal = ({
 };
 
 Modal.defaultProps = {
+  closeIcon: <DataIcon icon="times" />,
   closeText: 'Close Modal',
   openText: 'Open Modal',
 };
 
 Modal.propTypes = {
+  closeIcon: PropTypes.node,
   title: PropTypes.string.isRequired,
   closeText: PropTypes.string,
   openText: PropTypes.string,

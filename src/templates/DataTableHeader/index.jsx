@@ -8,11 +8,6 @@ import DataIcon from '../../components/DataIcon';
 
 const DataTableHeader = () => {
   const { reactTable, resourceState, dispatch } = React.useContext(ResourceDispatch);
-  const pageSizeOptions = [
-    { defaultChecked: true, label: '20', value: '20' },
-    { label: '50', value: '50' },
-    { label: '100', value: '100' },
-  ];
   return (
     <div className="dc-datatable-header">
       {resourceState.store
@@ -77,8 +72,7 @@ const DataTableHeader = () => {
           {reactTable.allColumns
             && <ManageColumns /> }
         </>
-        )
-      }
+        )}
     </div>
   );
 };
