@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResourceDispatch } from '../../services/resource/resource_tools';
+import { ResourceDispatch } from '../../services/resource/resource_defaults';
 import ManageColumns from '../../components/DataTable/ManageColumns';
 import DataTablePageResults from '../../components/DataTable/DataTablePageResults';
 import DataTableDensity from '../../components/DataTable/DataTableDensity';

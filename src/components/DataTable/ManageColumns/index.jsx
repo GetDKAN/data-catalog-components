@@ -5,7 +5,7 @@ import Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import Card from './Card';
 
-import { ResourceDispatch } from '../../../services/resource/resource_tools';
+import { ResourceDispatch } from '../../../services/resource/resource_defaults';
 import Modal from '../../Modal';
 
 const defaultCard = (card, index, moveCard) => (

@@ -10,13 +10,18 @@ import {
   useResizeColumns,
   useColumnOrder,
 } from 'react-table';
+
 import {
   ResourceDispatch,
   defaultResourceState,
-  resourceReducer,
+} from '../../services/resource/resource_defaults';
+
+import { resourceReducer } from '../../services/resource/resource_reducer';
+
+import {
   queryResourceData,
   getDKANDatastore,
-} from '../../services/resource/resource_tools';
+} from '../../services/resource/resource_functions';
 
 const Resource = ({
   apiURL,

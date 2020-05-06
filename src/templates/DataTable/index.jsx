@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { ResourceDispatch } from '../../services/resource/resource_tools';
+import { ResourceDispatch } from '../../services/resource/resource_defaults';
 
 const DataTable = () => {
   const { resourceState, reactTable, dispatch } = useContext(ResourceDispatch);
