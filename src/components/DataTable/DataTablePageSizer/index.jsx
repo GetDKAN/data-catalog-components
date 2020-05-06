@@ -10,22 +10,33 @@ const DataTablePageSizer = ({
   className,
   selectClassName,
   id,
-}) => (
-  <div className={className}>
-    <Label htmlFor={`dc-${id}-pagesize`}>{label}</Label>
-    <Input
-      className={selectClassName}
-      onChange={pageSizeChange}
-      type="select"
-      name={`dc-${id}-pagesize`}
-      id={`dc-${id}-pagesize`}
-    >
-      {options.map((opt) => (
-        <option value={opt.value} key={opt.value}>{opt.label}</option>
-      ))}
-    </Input>
-  </div>
-);
+}) => {
+  const [selValue, setSelValue] = React.useState('');
+  React.useEffect(() => {
+    if (!selValue) {
+      const initValue = options.filter((opt) => opt.defaultChecked);
+      setSelValue(initValue[0].value);
+    }
+    pageSizeChange();
+  }, [selValue]);
+  return (
+    <div className={className}>
+      <label htmlFor={`dc-${id}-pagesize`}>{label}</label>
+      <select
+        value={selValue}
+        className={selectClassName}
+        onChange={(e) => setSelValue(e.target.value)}
+        type="select"
+        name={`dc-${id}-pagesize`}
+        id={`dc-${id}-pagesize`}
+      >
+        {options.map((opt) => (
+          <option value={opt.value} key={opt.value}>{opt.label}</option>
+        ))}
+      </select>
+    </div>
+  );
+};
 
 DataTablePageSizer.defaultProps = {
   label: 'Rows per page',

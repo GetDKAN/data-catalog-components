@@ -1,12 +1,11 @@
 import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import update from 'immutability-helper';
+
 import {
   useTable,
   usePagination,
   useFilters,
   useSortBy,
-  useBlockLayout,
   useFlexLayout,
   useResizeColumns,
   useColumnOrder,
@@ -16,7 +15,6 @@ import {
   defaultResourceState,
   resourceReducer,
   queryResourceData,
-  queryAllResourceData,
   getDKANDatastore,
 } from '../../services/resource/resource_tools';
 
@@ -25,11 +23,14 @@ const Resource = ({
   children,
   resource,
 }) => {
-  // const [cards, setCards] = React.useState(null);
+
+
   const [resourceState, dispatch] = useReducer(
     resourceReducer,
     defaultResourceState,
   );
+
+
   useEffect(() => {
     async function getStore() {
       if (resourceState.store === null) {
@@ -56,6 +57,8 @@ const Resource = ({
 
   const { columns, currentPage } = resourceState;
   const data = resourceState.values;
+
+
   // Define a default UI for filtering
   function DefaultColumnFilter({
     column: { filterValue, preFilteredRows, setFilter },
@@ -72,6 +75,8 @@ const Resource = ({
       />
     );
   }
+
+
   const filterTypes = React.useMemo(
     () => ({
       // Add a new fuzzyTextFilterFn filter type.
@@ -91,6 +96,8 @@ const Resource = ({
     }),
     [],
   );
+
+
   const defaultColumn = React.useMemo(
     () => ({
       // Let's set up our default Filter UI
@@ -101,6 +108,8 @@ const Resource = ({
     }),
     [],
   );
+
+
   const reactTable = useTable(
     {
       columns,

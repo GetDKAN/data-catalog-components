@@ -11,20 +11,15 @@ const DataTable = () => {
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    pageCount,
     page,
     state: {
-      pageIndex, pageSize, sortBy, filters,
+      pageIndex, sortBy, filters,
     },
     canPreviousPage,
     canNextPage,
     pageOptions,
-    gotoPage,
     nextPage,
     previousPage,
-    setPageSize,
-    allColumns,
-    setColumnOrder,
   } = reactTable;
   React.useEffect(() => {
     if (resourceState.currentPage !== pageIndex) {

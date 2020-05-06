@@ -1,16 +1,16 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import DataTablePageSizer from '.';
 
 describe('<DataTablePageSizer />', () => {
-  const defaultWrapper = shallow(
+  const defaultWrapper = mount(
     <DataTablePageSizer
       pageSizeChange={() => () => true}
       id="1234"
     />,
   );
 
-  const customWrapper = shallow(
+  const customWrapper = mount(
     <DataTablePageSizer
       pageSizeChange={() => () => true}
       id="1234"
@@ -28,14 +28,14 @@ describe('<DataTablePageSizer />', () => {
   );
 
   it('renders correct initial results', () => {
-    expect(defaultWrapper.find('.page-size-label-text').text()).toBe('Rows per page');
-    expect(defaultWrapper.find('select').props().value).toBe('20');
+    expect(defaultWrapper.find('.dc-page-size-options label').text()).toBe('Rows per page');
+    expect(defaultWrapper.find('.dc-page-size-options .page-size-select').props().value).toBe('20');
     expect(defaultWrapper.find('option')).toHaveLength(3);
   });
 
   it('renders correct custom results', () => {
-    expect(customWrapper.find('.page-size-label-text').text()).toBe('Foobar');
-    expect(customWrapper.find('select').props().value).toBe('150');
+    expect(customWrapper.find('.dc-page-size-options label').text()).toBe('Foobar');
+    expect(customWrapper.find('.page-size-select').props().value).toBe('150');
     expect(customWrapper.find('option')).toHaveLength(6);
   });
 });

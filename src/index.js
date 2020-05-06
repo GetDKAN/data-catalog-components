@@ -37,22 +37,35 @@ export { default as ToggleBlock } from './components/ToggleBlock';
 export { default as TopicWrapper } from './components/TopicWrapper';
 export { default as Search } from './components/Search';
 
-// SERVICES
-export { SearchDispatch, defaultSearchState } from './services/search/search_defaults';
-export { default as searchReducer } from './services/search/search_reducer';
+// SERVICES > DEFAULTS
 export {
-  setSelectedFacets, resetSelectedFacets, buildInitialFacets, updateSort,
-} from './services/search/search_functions';
+  SearchDispatch,
+  defaultSearchState,
+} from './services/search/search_defaults';
 export {
   ResourceDispatch,
   defaultResourceState,
-  resourceReducer,
+} from './services/resource/resource_defaults';
+
+// SERVICES > REDUCERS
+export { default as searchReducer } from './services/search/search_reducer';
+export { default as resourceReducer } from './services/resource/resource_reducer';
+
+// SERVICES > FUNCTIONS
+export {
+  setSelectedFacets,
+  resetSelectedFacets,
+  buildInitialFacets,
+  updateSort,
+} from './services/search/search_functions';
+
+export {
   prepareColumns,
   queryResourceData,
   queryAllResourceData,
   getDKANDatastore,
   advancedColumns,
-} from './services/resource/resource_tools';
+} from './services/resource/resource_functions';
 
 // TEMPLATES
 export { default as Announcement } from './templates/Announcement';
