@@ -124,5 +124,8 @@
   "files": [
     "lib",
     "dist"
-  ]
+  ],
+  "scarfSettings": {
+    "enabled": false
+  }
 }
