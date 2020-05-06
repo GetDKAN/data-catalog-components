@@ -19,11 +19,12 @@ const DataTableHeader = () => {
             currentPage={resourceState.currentPage}
           />
           <DataTablePageSizer
-            pageSizeChange={(event) => dispatch({
+            pageSizeChange={(value) => dispatch({
               type: 'UPDATE_PAGE_SIZE',
-              data: { pageSize: event.target.value },
+              data: { pageSize: value },
             })}
             id={resourceState.store.id}
+            initSize={resourceState.pageSize}
           />
           <DataTableDensity
             densityChange={(density) => dispatch({ type: 'UPDATE_DENSITY', data: { density } })}

@@ -16,7 +16,7 @@ import {
   defaultResourceState,
 } from '../../services/resource/resource_defaults';
 
-import { resourceReducer } from '../../services/resource/resource_reducer';
+import resourceReducer from '../../services/resource/resource_reducer';
 
 import {
   queryResourceData,

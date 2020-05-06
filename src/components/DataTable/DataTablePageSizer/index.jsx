@@ -1,23 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Label, Input } from 'reactstrap';
 
 const DataTablePageSizer = ({
   label,
   pageSizeChange,
-  currentOption,
+  initSize,
   options,
   className,
   selectClassName,
   id,
 }) => {
-  const [selValue, setSelValue] = React.useState('');
+  const [selValue, setSelValue] = React.useState(initSize);
   React.useEffect(() => {
-    if (!selValue) {
-      const initValue = options.filter((opt) => opt.defaultChecked);
-      setSelValue(initValue[0].value);
-    }
-    pageSizeChange();
+    pageSizeChange(Number(selValue));
   }, [selValue]);
   return (
     <div className={className}>
@@ -41,9 +36,9 @@ const DataTablePageSizer = ({
 DataTablePageSizer.defaultProps = {
   label: 'Rows per page',
   className: 'dc-page-size-options',
-  currentOption: '20',
+  initSize: 20,
   options: [
-    { defaultChecked: true, label: '20', value: '20' },
+    { label: '20', value: '20' },
     { label: '50', value: '50' },
     { label: '100', value: '100' },
   ],
@@ -61,7 +56,7 @@ DataTablePageSizer.propTypes = {
     value: PropTypes.string,
   })),
   id: PropTypes.string.isRequired,
-  currentOption: PropTypes.string,
+  initSize: PropTypes.number,
 };
 
 export default DataTablePageSizer;

@@ -1,4 +1,4 @@
-function resourceReducer(state, action) {
+export default function resourceReducer(state, action) {
   switch (action.type) {
     case 'GET_STORE':
       return {
@@ -69,5 +69,3 @@ function resourceReducer(state, action) {
       return 'Not a valid action type.';
   }
 }
-
-export default resourceReducer;
