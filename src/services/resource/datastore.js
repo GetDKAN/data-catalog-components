@@ -42,7 +42,7 @@ export class dkan extends Datastore {
     })
   }
 
-  async query(q = null, fields = null, facets = null, range = null, page = null, sort = null, count = false) {
+  async query(q = null, fields = null, facets = null, range = null, page = null, sort = null, count = false, showDBColumnNames) {
    
 
     if (sort === null) {
@@ -59,14 +59,14 @@ export class dkan extends Datastore {
       return v
     })
 
-    return this._fetch(range, page * range, new_q, sort[0], count)
+    return this._fetch(range, page * range, new_q, sort[0], count, showDBColumnNames)
   }
 
   async update() {}
 
   async remove() {}
 
-  async _fetch(limit, offset, where, sort, count) {
+  async _fetch(limit, offset, where, sort, count, showDBColumnNames) {
     let query  = ""
     let where_string = ''
 
@@ -103,7 +103,8 @@ export class dkan extends Datastore {
       fields = '*'
       limit_string = '[LIMIT '+ limit +' OFFSET '+ offset +']'
     }
-    query = 'datastore/sql/?query=[SELECT ' + fields + ' FROM ' + this.id +']' + where_string + sort_string + limit_string + ';'
+    let dbColumns = showDBColumnNames ? '&show-db-columns' : '';
+    query = 'datastore/sql/?query=[SELECT ' + fields + ' FROM ' + this.id +']' + where_string + sort_string + limit_string + ';' + dbColumns;
     return new Promise((resolve, reject) => {
       axios.get(this.rootUrl + query).then(
           (response) => {

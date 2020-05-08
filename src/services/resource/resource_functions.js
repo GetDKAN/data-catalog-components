@@ -34,9 +34,9 @@ export function advancedColumns(columns = [], updatedColumns = [], excludedColum
 }
 
 // Create a new datastore using the DKAN datastore.
-export async function getDKANDatastore(rootURL, resource) {
+export async function getDKANDatastore(rootURL, resource, initLimit = 20, showDBCols = false) {
   const identifier = resource.identifier;
-  const checkForDatastore = await axios.get(`${rootURL}datastore/imports/${identifier}`)
+  const checkForDatastore = await axios.get(`${rootURL}datastore/sql/?query=[SELECT COUNT(*) FROM ${identifier}]${showDBCols ? '&show-db-columns' : ''}`)
     .then((res) => res.data)
     .catch((e) => {
       // eslint-disable-next-line no-console
@@ -44,16 +44,18 @@ export async function getDKANDatastore(rootURL, resource) {
     });
   if (checkForDatastore) {
     // eslint-disable-next-line
-    const sqlColumns = await axios.get(`${rootURL}datastore/sql/?query=[SELECT * FROM ${identifier}][LIMIT 1 OFFSET 0]`);
+    const sqlColumns = await axios.get(`${rootURL}datastore/sql/?query=[SELECT * FROM ${identifier}][LIMIT ${initLimit} OFFSET 0]${showDBCols ? '&show-db-columns' : ''}`);
     const store = await new datastore['dkan'](identifier, Object.keys(sqlColumns.data[0]), rootURL);
     return {
       type: 'USE_STORE',
       data: {
         store,
-        rowsTotal: checkForDatastore.numOfRows,
+        rowsTotal: Number(checkForDatastore[0].expression),
         columns: prepareColumns(Object.keys(sqlColumns.data[0])),
         storeType: 'DKAN',
         queryAll: true,
+        values: sqlColumns.data,
+        count: Number(checkForDatastore[0].expression),
       },
     };
   }
@@ -63,10 +65,11 @@ export async function getDKANDatastore(rootURL, resource) {
 }
 
 // Get new rows of data from the datastore.
-export async function queryResourceData(resourceData, includeCount = false) {
+export async function queryResourceData(resourceData, showDBCols = false, includeCount = false) {
   // const {
   //   filters, pageSize, currentPage, sort, store,
   // } = resourceData;
+  console.log('q', showDBCols)
   const items = await resourceData.store.query(
     resourceData.filters,
     null,
@@ -75,6 +78,7 @@ export async function queryResourceData(resourceData, includeCount = false) {
     resourceData.currentPage,
     resourceData.sort,
     includeCount,
+    showDBCols,
   )
     .then((data) => data);
   // Make a second call to get the correct count.
@@ -86,6 +90,7 @@ export async function queryResourceData(resourceData, includeCount = false) {
     resourceData.currentPage,
     resourceData.sort,
     true,
+    showDBCols,
   )
     .then((data) => data);
   return {

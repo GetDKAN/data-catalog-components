@@ -27,6 +27,7 @@ const Resource = ({
   apiURL,
   children,
   resource,
+  showDBColumnNames,
 }) => {
 
 
@@ -35,25 +36,39 @@ const Resource = ({
     defaultResourceState,
   );
 
-
   useEffect(() => {
+    dispatch({ type: 'GET_STORE' });
     async function getStore() {
       if (resourceState.store === null) {
-        dispatch(await getDKANDatastore(apiURL, resource));
+        dispatch(await getDKANDatastore(apiURL, resource, resourceState.pageSize, showDBColumnNames));
       }
     }
-    async function queryStore() {
-      dispatch(await queryResourceData(resourceState));
-    }
+    getStore();
+  }, []);
+
+
+  useEffect(() => {
     dispatch({ type: 'GET_STORE' });
-    if (resourceState.store !== null) {
-      queryStore();
-    } else {
-      getStore();
+
+    // async function getStore() {
+    //   if (resourceState.store === null) {
+    //     dispatch(await getDKANDatastore(apiURL, resource, resourceState.pageSize, true));
+    //   }
+    // }
+    async function queryStore() {
+      dispatch(await queryResourceData(resourceState, showDBColumnNames));
     }
+    if (resourceState.updateQuery) {
+      queryStore();
+    }
+   
+    // if (resourceState.store !== null) {
+      
+    // } else {
+      // getStore();
+    // }
   }, [
-    resourceState.store,
-    resourceState.storeType,
+    resourceState.updateQuery,
     resourceState.currentPage,
     resourceState.filters,
     resourceState.pageSize,
@@ -61,6 +76,7 @@ const Resource = ({
   ]);
 
   const { columns, currentPage } = resourceState;
+  console.log(columns);
   const data = resourceState.values;
 
 
@@ -137,13 +153,18 @@ const Resource = ({
 
   return (
     <ResourceDispatch.Provider value={{ resourceState, dispatch, reactTable }}>
-      {children}
+      { children }
     </ResourceDispatch.Provider>
   );
 };
 
+Resource.defaultProps = {
+  showDBColumnNames: false,
+};
+
 Resource.propTypes = {
   apiURL: PropTypes.string.isRequired,
+  showDBColumnNames: PropTypes.bool,
 };
 
 export default Resource;

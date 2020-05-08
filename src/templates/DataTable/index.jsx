@@ -22,22 +22,28 @@ const DataTable = () => {
     previousPage,
   } = reactTable;
   React.useEffect(() => {
-    if (resourceState.currentPage !== pageIndex) {
-      dispatch({ type: 'UPDATE_PAGE', data: { page: pageIndex } });
+    if (resourceState.store) {
+      if (resourceState.currentPage !== pageIndex) {
+        dispatch({ type: 'UPDATE_PAGE', data: { page: pageIndex } });
+      }
     }
-  }, [pageIndex]);
+  }, [resourceState.store, pageIndex]);
 
   React.useEffect(() => {
-    if (resourceState.sort !== sortBy) {
-      dispatch({ type: 'UPDATE_COLUMN_SORT', data: { sort: sortBy } });
+    if (resourceState.store) {
+      if (resourceState.sort !== sortBy) {
+        dispatch({ type: 'UPDATE_COLUMN_SORT', data: { sort: sortBy } });
+      }
     }
-  }, [sortBy]);
+  }, [resourceState.store, sortBy]);
 
   React.useEffect(() => {
-    if (resourceState.filters !== filters) {
-      dispatch({ type: 'UPDATE_FILTERS', data: { filters } });
+    if (resourceState.store) {
+      if (resourceState.filters !== filters) {
+        dispatch({ type: 'UPDATE_FILTERS', data: { filters } });
+      }
     }
-  }, [filters]);
+  }, [resourceState.store, filters]);
   return (
     <div className={`dc-datatable -striped -highlight ${density}`}>
       <div {...getTableProps()} role="grid" className="dc-table">
