@@ -57,7 +57,7 @@ jobs:
           command: |
             export PATH=$PATH:~/dkan-tools/bin
             cd ~/sandbox
-            dktl make --frontend=update-data-table
+            dktl make --frontend
       - run:
           name: Install site
           command: |
@@ -70,11 +70,10 @@ jobs:
             export PATH=$PATH:~/dkan-tools/bin
             cd ~/sandbox
             dktl drush user:create testuser --password="2jqzOAnXS9mmcLasy"
-            dktl drush en dkan_dummy_content dkan_frontend -y
-            dktl drush dkan-dummy-content:create
-            dktl drush queue:run dkan_datastore_import
-            dktl drush en dkan_frontend
-            dktl drush dkan-search:rebuild-tracker
+            dktl drush en sample_content frontend -y
+            dktl drush dkan:sample-content:create
+            dktl drush queue:run datastore_import
+            dktl drush dkan:metastore-search:rebuild-tracker
             dktl drush search-api-index
             dktl dc exec web chmod -R 777 /var/www/docroot/data-catalog-frontend
             dktl dc run cli git clone --single-branch -b $CIRCLE_BRANCH https://github.com/GetDKAN/data-catalog-components.git
