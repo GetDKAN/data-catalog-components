@@ -1,4 +1,3 @@
-import Papa from 'papaparse';
 import _ from "lodash";
 import axios from 'axios';
 
@@ -10,153 +9,6 @@ class Datastore {
 
   async remove() {}
 }
-
-export class file extends Datastore {
-
-  columns = null
-
-  constructor(uri) {
-    super()
-    this.uri = uri;
-  }
-
-  async getColumns() {
-    return new Promise((resolve, reject) => {
-
-      if (this.columns !== null) {
-        resolve(this.columns)
-      }
-
-      Papa.parse(this.uri, {
-        complete: (data) => {
-          this.columns = Object.keys(data.data[0]);
-          resolve(this.columns);
-        },
-        download: true,
-        preview: 1,
-        header: true
-      });
-    });
-  }
-
-  /**
-   * Queries the records.
-   *
-   * @param {string | array} query - Query item to search with. Can be a string
-   * to search through all records or an array of objects [{field: X, value: Y}]
-   * to search through.
-   */
-  async query(query = null, fields = null, facets = null, range = null, page = null, sort = null, count = false) {
-    return new Promise( (resolve, reject) => {
-      this._fetch().then(
-        (data) => {
-
-          data = this._query(data, query)
-          // if (count) {
-          //   let count = data.length
-          //   if (count < 100) {
-          //     // we get an empty record at the end, if less than a hundred.
-          //     count = count - 1
-          //   }
-          //   resolve(count)
-          // }
-          let count = data.length
-          // if (count < 100) {
-          //   // we get an empty record at the end, if less than a hundred.
-          //   count = count - 1
-          // }
-
-          data = this._sort(data, sort)
-
-          data = this._page(data, page, range)
-
-          resolve({data: data, count: count})
-        }
-      )
-    })
-  }
-
-  async update() {}
-
-  async remove() {}
-
-  async _fetch () {
-    return new Promise((resolve, reject) => {
-
-      if (typeof this.data !== 'undefined') {
-        resolve(this.data)
-      }
-
-      Papa.parse(this.uri, {
-        complete: (data) => {
-          this.data = data.data;
-          resolve(this.data);
-        },
-        download: true,
-        preview: 100,
-        header: true
-      });
-    });
-  }
-
-  _query(data, query) {
-    let queried = data
-    if (query) {
-      // Searches across fields.
-      if (Array.isArray(query)) {
-        queried = query.reduce((filteredSoFar, nextFilter) => {
-          return filteredSoFar.filter(row => {
-            return (row[nextFilter.id] + "").includes(nextFilter.value);
-          });
-        }, queried);
-      }
-      // Searches across all data.
-      else {
-        queried = queried.reduce((acc, doc) => {
-          const haystack = JSON.stringify(doc);
-          const needleRegExp = new RegExp(query.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), "i");
-          const result = needleRegExp.test(haystack);
-          if (result) {
-            acc.push(doc);
-          }
-          return acc;
-        }, []);
-      }
-    }
-    return queried
-  }
-
-  _page(data, page, range) {
-    let paged = data;
-    if (page !== null && range !== null) {
-      paged = paged.slice(range * page, range * page + range);
-    }
-    return paged
-  }
-
-  _sort(data, sort) {
-    let sorted = data;
-    if (sort) {
-      sorted = _.orderBy(
-          sorted,
-          sort.map(srt => {
-            return row => {
-              if (row[srt.id] === null || row[srt.id] === undefined) {
-                return -Infinity;
-              }
-              return typeof row[srt.id] === "string"
-                  ? row[srt.id].toLowerCase()
-                  : row[srt.id];
-            };
-          }),
-          sort.map(d => (d.desc ? "desc" : "asc"))
-      );
-    }
-    return sorted
-  }
-}
-
-
 export class dkan extends Datastore {
 
   id = null
@@ -190,7 +42,7 @@ export class dkan extends Datastore {
     })
   }
 
-  async query(q = null, fields = null, facets = null, range = null, page = null, sort = null, count = false) {
+  async query(q = null, fields = null, facets = null, range = null, page = null, sort = null, count = false, showDBColumnNames) {
    
 
     if (sort === null) {
@@ -207,14 +59,14 @@ export class dkan extends Datastore {
       return v
     })
 
-    return this._fetch(range, page * range, new_q, sort[0], count)
+    return this._fetch(range, page * range, new_q, sort[0], count, showDBColumnNames)
   }
 
   async update() {}
 
   async remove() {}
 
-  async _fetch(limit, offset, where, sort, count) {
+  async _fetch(limit, offset, where, sort, count, showDBColumnNames) {
     let query  = ""
     let where_string = ''
 
@@ -251,7 +103,8 @@ export class dkan extends Datastore {
       fields = '*'
       limit_string = '[LIMIT '+ limit +' OFFSET '+ offset +']'
     }
-    query = 'datastore/sql/?query=[SELECT ' + fields + ' FROM ' + this.id +']' + where_string + sort_string + limit_string + ';'
+    let dbColumns = showDBColumnNames ? '&show-db-columns' : '';
+    query = 'datastore/sql/?query=[SELECT ' + fields + ' FROM ' + this.id +']' + where_string + sort_string + limit_string + ';' + dbColumns;
     return new Promise((resolve, reject) => {
       axios.get(this.rootUrl + query).then(
           (response) => {
@@ -268,7 +121,6 @@ export class dkan extends Datastore {
 }
 
 const datastore = {
-  file,
   dkan,
 };
 

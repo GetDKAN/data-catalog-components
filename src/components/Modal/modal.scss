@@ -1,0 +1,44 @@
+.dc-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 12;
+  background: white;
+  border-radius: 5px;
+}
+
+.dc-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid black;
+  .dc-modal-header-title {
+    margin-right: 10px;
+  }
+  .dc-modal-close-button {
+    color: #333333;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-size: 0;
+    color: white;
+    &:active,
+    &:focus {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.dc-modal-body {
+  padding: 10px;
+}
+
+.dc-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-top: 1px solid black;
+}
