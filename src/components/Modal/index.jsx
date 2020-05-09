@@ -46,7 +46,7 @@ const Modal = ({
               type="button"
               id={`dc-modal-${titleId}-close`}
               onClick={() => setModalOpen(false)}
-              className="dc-modal-close-button btn btn-primary"
+              className="dc-modal-close-button btn"
             >
               {closeText}
             </button>
@@ -59,7 +59,7 @@ const Modal = ({
   return (
     <div className="dc-modal-container">
       <button
-        className="dc-modal-open-button btn btn-primary"
+        className="dc-modal-open-button btn"
         id={`dc-modal-${titleId}-open`}
         type="button"
         onClick={() => setModalOpen(!modalOpen)}

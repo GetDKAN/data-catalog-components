@@ -62,6 +62,7 @@ const ManageColumns = ({
       <Modal
         title="Manage Columns"
         nodeId="___gatsby"
+        openText="Manage Columns"
       >
         <DndProvider backend={Backend}>
           {reactTable.allColumns
