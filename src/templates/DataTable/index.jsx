@@ -44,6 +44,11 @@ const DataTable = () => {
       }
     }
   }, [resourceState.store, filters]);
+
+  if (!reactTable.data.length) {
+    return null;
+  }
+
   return (
     <div className={`dc-datatable -striped -highlight ${density}`}>
       <div {...getTableProps()} role="grid" className="dc-table">
