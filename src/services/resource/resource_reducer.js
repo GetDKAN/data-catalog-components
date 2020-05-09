@@ -32,14 +32,12 @@ export default function resourceReducer(state, action) {
         updateQuery: false,
       };
     case 'UPDATE_PAGE':
-      console.log('UPDATE_PAGE')
       return {
         ...state,
         currentPage: action.data.page,
         updateQuery: true,
       };
     case 'UPDATE_FILTERS':
-      console.log('UPDATE_FILTERS')
       return {
         ...state,
         filters: action.data.filters,
@@ -47,7 +45,6 @@ export default function resourceReducer(state, action) {
         updateQuery: true,
       };
     case 'UPDATE_PAGE_SIZE':
-      console.log('UPDATE_PAGE_SIZE')
       return {
         ...state,
         pageSize: Number(action.data.pageSize),
@@ -55,28 +52,24 @@ export default function resourceReducer(state, action) {
         updateQuery: true,
       };
     case 'UPDATE_COLUMN_SORT':
-      console.log('UPDATE_COLUMN_SORT')
       return {
         ...state,
         sort: action.data.sort,
         updateQuery: true,
       };
     case 'REORDER_COLUMNS':
-      console.log('REORDER_COLUMNS')
       return {
         ...state,
         columnOrder: action.data.columnOrder,
         updateQuery: true,
       };
     case 'TOGGLE_COLUMNS':
-      console.log('TOGGLE_COLUMNS')
       return {
         ...state,
         excludedColumns: action.data.excludedColumns,
         updateQuery: true,
       };
     case 'UPDATE_DENSITY':
-      console.log('UPDATE_DENSITY')
       return {
         ...state,
         density: action.data.density,
