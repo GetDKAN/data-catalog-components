@@ -4,7 +4,7 @@ jobs:
     parameters:
       pr-version:
         type: string
-        default: "1.0.0"
+        default: "1.0.1"
     parallelism: 1
     machine:
       image: circleci/classic:latest
