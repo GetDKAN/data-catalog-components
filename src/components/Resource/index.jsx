@@ -76,7 +76,6 @@ const Resource = ({
   ]);
 
   const { columns, currentPage } = resourceState;
-  console.log(columns);
   const data = resourceState.values;
 
 

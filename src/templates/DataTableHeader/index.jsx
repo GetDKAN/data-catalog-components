@@ -8,6 +8,10 @@ import DataIcon from '../../components/DataIcon';
 
 const DataTableHeader = () => {
   const { reactTable, resourceState, dispatch } = React.useContext(ResourceDispatch);
+
+  if (!reactTable.data.length) {
+    return null;
+  }
   return (
     <div className="dc-datatable-header">
       {resourceState.store

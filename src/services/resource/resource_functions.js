@@ -69,7 +69,6 @@ export async function queryResourceData(resourceData, showDBCols = false, includ
   // const {
   //   filters, pageSize, currentPage, sort, store,
   // } = resourceData;
-  console.log('q', showDBCols)
   const items = await resourceData.store.query(
     resourceData.filters,
     null,
