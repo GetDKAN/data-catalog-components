@@ -5,6 +5,10 @@
   border: 1px solid $borderColor;
   border-radius: $borderRadius;
   padding: 1em;
+  margin-bottom: 32px;
+  svg.fa-arrow-left {
+    margin-right: 1rem;
+  }
 }
 .dc-block-content {
     display: flex;
