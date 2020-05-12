@@ -35,7 +35,7 @@ export function advancedColumns(columns = [], updatedColumns = [], excludedColum
 
 // Create a new datastore using the DKAN datastore.
 export async function getDKANDatastore(rootURL, resource, initLimit = 20, showDBCols = false) {
-  const identifier = resource.identifier;
+  const { identifier } = resource;
   const checkForDatastore = await axios.get(`${rootURL}datastore/sql/?query=[SELECT COUNT(*) FROM ${identifier}]${showDBCols ? '&show-db-columns' : ''}`)
     .then((res) => res.data)
     .catch((e) => {
@@ -45,7 +45,7 @@ export async function getDKANDatastore(rootURL, resource, initLimit = 20, showDB
   if (checkForDatastore) {
     // eslint-disable-next-line
     const sqlColumns = await axios.get(`${rootURL}datastore/sql/?query=[SELECT * FROM ${identifier}][LIMIT ${initLimit} OFFSET 0]${showDBCols ? '&show-db-columns' : ''}`);
-    const store = await new datastore['dkan'](identifier, Object.keys(sqlColumns.data[0]), rootURL);
+    const store = await new datastore.dkan(identifier, Object.keys(sqlColumns.data[0]), rootURL);
     return {
       type: 'USE_STORE',
       data: {

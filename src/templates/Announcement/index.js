@@ -1,8 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Announcement = ({heading, children, role, variation}) => {
+const Announcement = ({
+  heading, children, role, variation,
+}) => {
   let icon = 'info-circle';
   switch (variation) {
     case 'success':
@@ -20,7 +22,8 @@ const Announcement = ({heading, children, role, variation}) => {
       className={`dc-alert dc-alert--${variation}`}
       role={role}
     >
-      {heading &&
+      {heading
+        && (
         <h3>
           <FontAwesomeIcon
             icon={['fas', `${icon}`]}
@@ -30,22 +33,22 @@ const Announcement = ({heading, children, role, variation}) => {
           />
           {heading}
         </h3>
-      }
+        )}
       {children}
     </div>
-  )
+  );
 };
 
 Announcement.defaultProps = {
   heading: 'Announcement',
-  role: 'alert'
+  role: 'alert',
 };
 
-Announcement.propTypes ={
+Announcement.propTypes = {
   heading: PropTypes.string,
   children: PropTypes.node.isRequired,
   role: PropTypes.oneOf(['alert', 'alertdialog']),
-  variation: PropTypes.oneOf(['error', 'warn', 'success', 'info'])
-}
+  variation: PropTypes.oneOf(['error', 'warn', 'success', 'info']),
+};
 
 export default Announcement;
