@@ -9,6 +9,7 @@ export default {
   themeConfig: {
     showPlaygroundEditor: true,
   },
+  base: '/docz',
   // menu: [
   //   'Home',
   //   {
