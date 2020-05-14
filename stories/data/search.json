@@ -65,30 +65,5 @@
         "title": "Dataset with only a title"
       }
   ],
-  "facets": {
-      "keyword": {
-          "label": "Tags",
-          "field": "keyword.title"
-      },
-      "theme": {
-          "label": "Category",
-          "field": "theme"
-      },
-      "org": {
-          "label": "Organization",
-          "field": "publisher"
-      },
-      "format": {
-          "label": "Format",
-          "field": "dataset.distribution.format"
-      }
-  },
-  "selectedFacets": [["theme", "Water"]],
-  "facetsResults": {
-      "keyword": [["economy", 3],["budget", 5]],
-      "theme": [["Health Care", 20],["Water", 5]],
-      "org": [["Group 1", 5],["Group 4", 2]],
-      "format": [["csv", 20],["zip", 2]]
-  },
   "query": "statistics"
 }

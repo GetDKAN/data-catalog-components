@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { storiesOf } from '@storybook/react';
 import {
   withKnobs, text, number, select, boolean,
@@ -11,15 +10,12 @@ import { withA11y } from '@storybook/addon-a11y';
 import SearchList from '../src/components/SearchList';
 import SearchListItem from '../src/components/SearchListItem';
 import InputLarge from '../src/components/InputLarge';
-import FacetList from '../src/components/FacetList';
 import SearchInput from '../src/components/SearchInput';
 import SearchResultsMessage from '../src/components/SearchResultsMessage';
 import "../src/theme/styles/index.scss";
 import search from './data/search.json';
 
-const {
-  selectedFacets, facetsResults, query, facets, facetCallback, items,
-} = search;
+const { query, items } = search;
 
 const InputSearchParent = () => {
   const [inputValue, setInputValue] = useState('');
@@ -41,23 +37,12 @@ const InputSearchParent = () => {
   );
 };
 
-const facetListProps = {
-  query,
-  facets,
-  facetsResults,
-  selectedFacets,
-  facetCallback,
-  Link,
-  url: 'search',
-};
-
 storiesOf('Search', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .add('Item', () => <SearchListItem item={getItem()} />)
   .add('List', () => <SearchList message={text('Title', '2 Datasets found')}>{getSearchListItems()}</SearchList>)
   .add('Input Large', () => <InputLarge value={query} />)
-  .add('Facet List', () => <Router><FacetList {... facetListProps} /></Router>)
   .add('Search Input', () => (<InputSearchParent />))
   .add('Search Results Message', () => (
     <SearchResultsMessage
@@ -87,7 +72,6 @@ function getSearchListItems() {
 }
 
 function getSelectedFacetOptions($index) {
-  return [];
   if ($index == 1) {
     return [
       ['Themes', 'Foo'],
