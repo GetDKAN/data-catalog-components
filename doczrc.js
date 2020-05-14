@@ -9,7 +9,7 @@ export default {
   themeConfig: {
     showPlaygroundEditor: true,
   },
-  base: '/docz',
+  base: '/data-catalog-components',
   // menu: [
   //   'Home',
   //   {

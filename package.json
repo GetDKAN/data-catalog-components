@@ -22,7 +22,7 @@
     "test:watch": "npm run test -- --watch",
     "test:coverage": "npm run test -- --coverage",
     "docz:dev": "docz dev",
-    "docz:build": "docz build",
+    "docz:build": "docz build && gh-pages -d ./docs",
     "docz:serve": "docz build && docz serve"
   },
   "keywords": [
@@ -120,6 +120,7 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "gatsby-plugin-sass": "^2.3.1",
+    "gh-pages": "^2.2.0",
     "jest": "^24.9.0",
     "node-sass": "^4.13.1",
     "prettier": "^1.16.0",
