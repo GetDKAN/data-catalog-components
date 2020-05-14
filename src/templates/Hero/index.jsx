@@ -15,7 +15,7 @@ const Hero = ({
   const [query, setQuery] = useState('');
   const background = image
     ? `url(${image})`
-    : `linear-gradient(#162e51, #0978bc)`;
+    : 'linear-gradient(#162e51, #0978bc)';
   async function handleSubmit(event) {
     event.preventDefault();
     let searchParams = '/search/';
@@ -28,11 +28,12 @@ const Hero = ({
   return (
     <div className="dc-hero" style={{ backgroundImage: background }}>
       <div className={`dc-hero-block ${alignment}`}>
-        <h1 className="dc-hero-title">{title}</h1>
+        <h2 className="dc-hero-title">{title}</h2>
         <p>{intro}</p>
         <form onSubmit={(event) => handleSubmit(event)} className="dc-hero-search">
           <Label className="sr-only" htmlFor="hero_search">Search</Label>
           <Input
+            value={query}
             onChange={(event) => setQuery(event.target.value)}
             id="hero_search"
           />
@@ -60,7 +61,7 @@ Hero.defaultProps = {
   image: '',
   includeReset: true,
   resetContent: 'Clear',
-  submitContent: 'Go'
+  submitContent: 'Go',
 };
 
 Hero.propTypes = {
