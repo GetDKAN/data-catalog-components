@@ -19,7 +19,7 @@ import tables from './data/tables.json';
 import '../src/theme/styles/index.scss';
 import TopicIcon from '../src/templates/TopicIcon';
 import TopicWrapper from '../src/components/TopicWrapper';
-import { ResourceDispatch } from '../src/services/resource/resource_tools';
+//import { ResourceDispatch } from '../src/services/resource/resource_tools';
 import DataTable from '../src/templates/DataTable';
 import {resourceData} from './data/resourceData';
 import {
