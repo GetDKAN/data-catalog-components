@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Collapse,
   Navbar,
@@ -59,5 +60,12 @@ NavBar.defaultProps = {
   expand: true,
   customClasses: ""
 }
+
+NavBar.propTypes = {
+  customClasses: PropTypes.string,
+  defaultStyling: PropTypes.bool,
+  expand: PropTypes.bool,
+  navItems: PropTypes.array,
+};
 
 export default NavBar;
