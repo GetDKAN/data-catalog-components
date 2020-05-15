@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Loader from 'react-loader-advanced';
-import LoadingSpin from 'react-loading-spin';
+// import LoadingSpin from 'react-loading-spin';
 import Pagination from 'react-js-pagination';
 
 import SearchResultsMessage from '../../components/SearchResultsMessage';
@@ -46,7 +46,7 @@ const SearchContent = () => {
             backgroundStyle={{ backgroundColor: '#f9fafb' }}
             foregroundStyle={{ backgroundColor: '#f9fafb' }}
             show={loading}
-            message={<LoadingSpin width="3px" primaryColor="#007BBC" />}
+            message={<p>loading</p>} //<LoadingSpin width="3px" primaryColor="#007BBC" />
           >
             <ol>
               {items.map((item) => (

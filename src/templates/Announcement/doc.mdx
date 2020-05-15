@@ -1,0 +1,25 @@
+---
+name: Announcement
+menu: Templates
+route: /templates/announcement
+---
+
+import { Playground, Props } from 'docz'
+import Announcement from './index'
+import './announcement.scss'
+import '../../theme/styles/general.scss'
+import '../../theme/styles/index.scss'
+
+# Announcement
+
+## Properties
+
+<Props of={Announcement} />
+
+## Basic usage
+
+<Playground>
+  <Announcement>
+    <p>This is my announcement</p>
+  </Announcement>
+</Playground>
