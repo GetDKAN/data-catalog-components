@@ -1,0 +1,35 @@
+---
+name: NavBar
+menu: Templates
+route: /templates/navbar
+---
+
+import { Playground, Props } from 'docz'
+import NavBar from './index'
+import '../../theme/styles/index.scss'
+
+
+# Announcement
+
+## Properties
+
+<Props of={NavBar} />
+
+## Basic usage
+
+<Playground>
+  <NavBar
+    navItems={[
+    {
+      "label": "Home",
+      "url": "/",
+      "target": "_top"
+    },
+    {
+      "label": "Topic Icon",
+      "url": "/templates/topic-icon",
+      "target": "_top"
+    }
+  ].map((item) => (<a href={item.url}>{item.label}</a>))}
+  />
+</Playground>
