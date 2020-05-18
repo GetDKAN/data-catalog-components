@@ -3,3 +3,21 @@ name: Search Sort
 menu: Components
 route: /components/search-sort
 ---
+
+import { Playground, Props } from 'docz'
+import SearchSort from './index'
+
+# Search Sort
+
+## Properties
+
+<Props of={SearchSort} />
+
+## Basic usage
+
+<Playground>
+  <SearchSort
+    sortFunc={() => ({})}
+    currentValue="relevance"
+  />
+</Playground>
