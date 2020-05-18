@@ -3,3 +3,22 @@ name: Title
 menu: Components
 route: /components/title
 ---
+
+import { Playground, Props } from 'docz'
+import Title from './index'
+
+# Title
+
+## Properties
+
+<Props of={Title} />
+
+## Basic usage
+
+<Playground>
+  <Title
+    headerLevel="h1"
+    title="Title"
+    classes="my-class"
+  />
+</Playground>
