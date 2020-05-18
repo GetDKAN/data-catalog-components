@@ -1,0 +1,25 @@
+---
+name: Topic Wrapper
+menu: Components
+route: /components/topic-wrapper
+---
+
+import { Playground, Props } from 'docz'
+import TopicWrapper from './index'
+import TopicIcon from '../../templates/TopicIcon';
+import '../../theme/styles/index.scss'
+
+# Topic Wrapper
+
+## Properties
+
+<Props of={TopicWrapper} />
+
+## Basic usage
+
+<Playground>
+  <TopicWrapper 
+    component={TopicIcon}
+    topic={'My Topic Name'}
+  />
+</Playground>
