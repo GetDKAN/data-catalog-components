@@ -3,3 +3,26 @@ name: Table
 menu: Components
 route: /components/table
 ---
+
+import { Playground, Props } from 'docz'
+import Table from './index'
+
+# Table
+
+## Properties
+
+<Props of={Table} />
+
+## Basic usage
+
+<Playground>
+  <Table
+    configuration={{
+      homepage: { label: "Homepage URL" }
+    }}
+    data={{
+      homepage:'<a href="/">Home</a>'
+    }}
+    tableclass="table-three"
+  />
+</Playground>
