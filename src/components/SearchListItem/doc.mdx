@@ -3,3 +3,28 @@ name: Search List Item
 menu: Components
 route: /components/search-list-item
 ---
+
+import { Playground, Props } from 'docz'
+import SearchListItem from './index'
+
+# Search List Item
+
+## Properties
+
+<Props of={SearchListItem} />
+
+## Basic usage
+
+<Playground>
+  <SearchListItem
+    item={{
+      ref: "/",
+      title: "Title",
+      description: "This is the description.",
+      publisher: undefined,
+      format: 'csv',
+      theme: [],
+      identifier: "123",
+    }}
+  />
+</Playground>
