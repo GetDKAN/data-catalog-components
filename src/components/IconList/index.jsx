@@ -12,15 +12,15 @@ function IconList({
 
   // If we have items, render them
   if (items) {
-    content = items.map((item, i) => (
+    content = items.map((item) => (
       <ComponentToRender
-        key={i}
+        key={item.id}
         title={item.title}
         image={item.image}
         link={item.ref}
         color={item.color}
         size={item.size}
-        index={i}
+        index={item.id}
       />
     ));
   } else {
