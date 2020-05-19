@@ -8,6 +8,7 @@ import Hero from '../src/templates/Hero';
 import IconList from '../src/components/IconList';
 import IconListItem from '../src/components/IconListItem'
 import Blocks from '../src/templates/Blocks';
+import BasicBlock from '../src/templates/Blocks/BasicBlock';
 import StepsBlock from '../src/templates/Blocks/StepsBlock';
 import StatBlock from '../src/templates/Blocks/StatBlock';
 import "../src/theme/styles/index.scss";
@@ -18,6 +19,6 @@ storiesOf('Home', module)
     .add('Topics List - internal images', () => <IconList items={home.topics2} paneTitle="Section Title" component={IconListItem} listClass="icon-list" containerClass="container" />)
     .add('Hero with image', () => <Hero image="https://images.pexels.com/photos/1903702/pexels-photo-1903702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />)
     .add('Hero without image', () => <Hero  />)
-    .add('Basic Blocks', () => <Blocks items={home.basic} />) 
-    .add('Stat Blocks', () => <Blocks items={home.stats} component={StatBlock} className="StatBlock" />) 
-    .add('Step Blocks', () => <Blocks items={home.api} component={StepsBlock} className="StepsBlock" paneTitle="Getting Started with Open Data" />)
+    .add('Basic Blocks', () => <Blocks items={home.basic} component={BasicBlock} />)
+    .add('Stat Blocks', () => <Blocks items={home.stats} component={StatBlock} blockClass="StatBlock" />)
+    .add('Step Blocks', () => <Blocks items={home.api} component={StepsBlock} blockClass="StepsBlock" paneTitle="Getting Started with Open Data" />)

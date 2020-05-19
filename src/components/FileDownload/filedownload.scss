@@ -18,11 +18,20 @@
     top: 0;
     width: 35px;
     z-index: 0;
+    &[title='API'] path {
+      fill: $apiIcon;
+    }
+    &[title='BIN'] path {
+      fill: $binIcon;
+    }
     &[title='CSV'] path {
       fill: $csvIcon;
     }
     &[title='RDF'] path {
       fill: $rdfIcon;
+    }
+    &[title='KML'] path {
+      fill: $kmlIcon;
     }
     &[title='JSON'] path {
       fill: $jsonIcon;
@@ -30,13 +39,18 @@
     &[title='PDF'] path {
       fill: $pdfIcon;
     }
+    &[title='PPT'] path {
+      fill: $pptIcon;
+    }
+    &[title='XLS'] path {
+      fill: $xlsIcon;
+    }
     &[title='XML'] path {
       fill: $xmlIcon;
     }
     &[title='ZIP'] path {
       fill: $zipIcon;
     }
-    &[title='WEB'] path,
     &[title='HTML'] path {
       fill: $htmlIcon;
     }
