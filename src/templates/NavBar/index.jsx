@@ -16,7 +16,7 @@ const NavBar = ({
 
   return (
     <div className={` ${defaultStyling ? ' dc-main-navigation base-styles' : ''}`}>
-      {expand &&
+      {expand && (
         <Navbar expand="md" className={customClasses}>
           <div className="dc-toggle">
             <NavbarToggler onClick={() => toggleOpen(!isOpen)}>
@@ -39,8 +39,8 @@ const NavBar = ({
             </Nav>
           </Collapse>
         </Navbar>
-      }
-      {!expand &&
+      )}
+      {!expand && (
         <Navbar expand={false} className={customClasses}>
           <ul>
             {navItems.map((item, index) => (
@@ -50,22 +50,25 @@ const NavBar = ({
             ))}
           </ul>
         </Navbar>
-      }
+      )}
     </div>
   );
-}
+};
 
 NavBar.defaultProps = {
   defaultStyling: true,
   expand: true,
   customClasses: ""
-}
+};
 
 NavBar.propTypes = {
   customClasses: PropTypes.string,
   defaultStyling: PropTypes.bool,
   expand: PropTypes.bool,
-  navItems: PropTypes.array,
+  navItems: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    url: PropTypes.string,
+  })).isRequired,
 };
 
 export default NavBar;

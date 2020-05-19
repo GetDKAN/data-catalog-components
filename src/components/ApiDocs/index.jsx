@@ -12,7 +12,6 @@ const ApiDocs = ({ endpoint, uuid }) => {
 };
 
 ApiDocs.defaultProps = {
-  endpoint: '',
   uuid: '',
 };
 

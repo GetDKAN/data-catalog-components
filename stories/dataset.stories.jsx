@@ -5,6 +5,15 @@ import {
 } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
+import {
+  useTable,
+  usePagination,
+  useFilters,
+  useSortBy,
+  useBlockLayout,
+  useResizeColumns,
+  useColumnOrder,
+} from 'react-table'
 import FormatIcon from '../src/components/FormatIcon';
 import FileDownload from '../src/components/FileDownload';
 import Organization from '../src/components/Organization';
@@ -19,20 +28,9 @@ import tables from './data/tables.json';
 import '../src/theme/styles/index.scss';
 import TopicIcon from '../src/templates/TopicIcon';
 import TopicWrapper from '../src/components/TopicWrapper';
-//import { ResourceDispatch } from '../src/services/resource/resource_tools';
+import { ResourceDispatch } from '../src/services/resource/resource_defaults';
 import DataTable from '../src/templates/DataTable';
-import {resourceData} from './data/resourceData';
-import {
-  useTable,
-  usePagination,
-  useFilters,
-  useSortBy,
-  useBlockLayout,
-  useResizeColumns,
-  useColumnOrder,
-} from 'react-table'
-
-
+import { resourceData } from './data/resourceData';
 
 storiesOf('Dataset', module)
   .addDecorator(withKnobs)

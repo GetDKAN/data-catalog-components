@@ -10,7 +10,6 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import SearchList from '../src/components/SearchList';
 import SearchListItem from '../src/components/SearchListItem';
-import InputLarge from '../src/components/InputLarge';
 import FacetList from '../src/components/FacetList';
 import SearchInput from '../src/components/SearchInput';
 import SearchResultsMessage from '../src/components/SearchResultsMessage';
@@ -69,7 +68,6 @@ storiesOf('Search', module)
   .addDecorator(withA11y)
   .add('Item', () => <SearchListItem item={search.items[0]} />)
   .add('List', () => <SearchList message={text('Title', '2 Datasets found')}>{searchListItems}</SearchList>)
-  .add('Input Large', () => <InputLarge value={query} />)
   .add('Facet List', () => <Router><FacetList {... facetListProps} /></Router>)
   .add('Search Input', () => (<InputSearchParent />))
   .add('Search Results Message', () => (

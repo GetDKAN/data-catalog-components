@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function IconList(items, component, containerClass, listClass, paneTitle, titleAlign) {
+function IconList({
+  items, component, containerClass, listClass, paneTitle, titleAlign,
+}) {
   const ComponentToRender = component;
   let content = (<div />);
   const styles = {
@@ -28,8 +30,8 @@ function IconList(items, component, containerClass, listClass, paneTitle, titleA
 
   if (paneTitle) {
     return (
-      <div className={'dc-icon-list  {containerClass}'}>
-        <h2 className="pane-title" style={styles}>{ paneTitle }</h2>
+      <div className={`dc-icon-list  ${containerClass}`}>
+        <h2 className="pane-title" style={styles}>{paneTitle}</h2>
         <ul className={listClass}>
           {content}
         </ul>
@@ -46,8 +48,6 @@ function IconList(items, component, containerClass, listClass, paneTitle, titleA
 }
 
 IconList.defaultProps = {
-  ComponentToRender: 'IconListItem',
-  items: [],
   listClass: 'dc-list',
   containerClass: 'container',
   paneTitle: '',
@@ -55,12 +55,19 @@ IconList.defaultProps = {
 };
 
 IconList.propTypes = {
-  ComponentToRender: PropTypes.string,
-  items: PropTypes.arrayOf,
+  component: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+    image: PropTypes.string,
+    size: PropTypes.string,
+    color: PropTypes.string,
+    identifier: PropTypes.string,
+  })).isRequired,
   listClass: PropTypes.string,
   containerClass: PropTypes.string,
   paneTitle: PropTypes.string,
-  titleAlign: PropTypes.string
+  titleAlign: PropTypes.string,
 };
 
 export default IconList;
