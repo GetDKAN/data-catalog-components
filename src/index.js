@@ -51,7 +51,6 @@ export { default as resourceReducer } from './services/resource/resource_reducer
 
 // SERVICES > FUNCTIONS
 export {
-  setSelectedFacets,
   resetSelectedFacets,
   buildInitialFacets,
   updateSort,

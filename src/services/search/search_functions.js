@@ -40,29 +40,6 @@ export function buildInitialFacets(queryParams, defaultFacets) {
   return paramFacetArray;
 }
 
-
-export function setSelectedFacets(eventTarget, selectedFacets, singular) {
-  const facetType = eventTarget.name;
-  const facetValue = eventTarget.value;
-  const active = eventTarget.checked;
-  let updatedFacets = selectedFacets;
-  let newFacetList = [];
-  if (singular) {
-    updatedFacets = selectedFacets.filter((facet) => (facet[0] !== facetType));
-  }
-  if (active === true) {
-    newFacetList = [...updatedFacets, [facetType, facetValue]];
-  } else {
-    newFacetList = updatedFacets.filter((facet) => (facet[1] !== facetValue));
-  }
-  return {
-    type: 'UPDATE_FACETS',
-    data: {
-      selectedFacets: newFacetList,
-    },
-  };
-}
-
 export function updateSort(value, options) {
   const newSort = options.filter((opt) => opt.field === value);
   return { type: 'UPDATE_SORT', data: { sort: newSort[0].field, sort_order: newSort[0].order } };

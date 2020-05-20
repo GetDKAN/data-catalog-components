@@ -18,34 +18,38 @@ const SearchResultsMessage = ({
   facetSeparator,
   defaultFacets,
 }) => {
-  
-  let facets = [];
-  let term = "";
+  let facets = [...selectedFacets];
+  let term = '';
 
   if (selectedFacets.length > 0 && showFacets) {
     facets = selectedFacets.map((item) => {
-      item[0] = defaultFacets[item[0]].label;
-      return item;
+      const newItem = [...item];
+      const facetType = item[0];
+      if (facetType in defaultFacets) {
+        newItem[0] = defaultFacets[facetType].label;
+      }
+      return newItem;
     });
   }
 
   if (searchTerm && showQuery) {
     term = searchTerm;
   }
-  
-  return (  
-  <SearchResultsMessage2 
-    total= {total} 
-    searchTerm={term} 
-    facets={facets} 
-    className={className} 
-    facetTitleClass={facetTitleClass} 
-    facetListClass={facetListClass} 
-    searchClass={searchQueryClass} 
-    facetDelimiter={facetDelimiter}
-    facetTypeDelimiter={facetSeparator} 
-  />)
-}
+
+  return (
+    <SearchResultsMessage2
+      total={total}
+      searchTerm={term}
+      facets={facets}
+      className={className}
+      facetTitleClass={facetTitleClass}
+      facetListClass={facetListClass}
+      searchClass={searchQueryClass}
+      facetDelimiter={facetDelimiter}
+      facetTypeDelimiter={facetSeparator}
+    />
+  );
+};
 
 SearchResultsMessage.defaultProps = {
   showQuery: true,
@@ -77,18 +81,3 @@ SearchResultsMessage.propTypes = {
 };
 
 export default SearchResultsMessage;
-
-
-/*
-if (facetArray.length >= facetLimit) {
-facetsList = (
-<span className={`${facetListClass} combined-facets`}>
-{facetArray.length}
-{' '}
-selected
-{' '}
-{keys[i]}
-</span>
-);
-}
-*/

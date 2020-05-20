@@ -1,17 +1,14 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Label, Input } from 'reactstrap';
-
 import SearchFacets from '../../components/SearchFacets';
 import { SearchDispatch } from '../../services/search/search_defaults';
 
 const SearchSidebar = ({ sortOptions }) => {
-  const {
-    searchState, dispatch, defaultFacets,
-  } = useContext(SearchDispatch);
-  const {
-    facetsResults, selectedFacets, totalItems, fulltext,
-  } = searchState;
+  console.log("SearchSidebar");
+  const { searchState, dispatch, defaultFacets } = useContext(SearchDispatch);
+  const { facetsResults } = searchState;
+
   return (
     <div className="dc-search-sidebar col-md-4 col-sm-12">
       <div className="dc-search-sidebar-options">
@@ -38,13 +35,10 @@ const SearchSidebar = ({ sortOptions }) => {
         {facetsResults && facetsResults.length
           && (
             <SearchFacets
-              defaultFacets={defaultFacets}
-              toggleClasses="dc-facet-label"
+              facetsConfig={defaultFacets}
               facetsResults={facetsResults}
-              selectedFacets={selectedFacets}
+              selectedFacets={searchState.selectedFacets}
               dispatch={dispatch}
-              totalItems={totalItems}
-              fulltext={fulltext}
             />
           )}
       </div>
