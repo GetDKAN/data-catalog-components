@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SearchResultsMessage2 from './revisions/SearchResultsMessage2'
+import SearchResultsMessage2 from './revisions/SearchResultsMessage2';
 
 const SearchResultsMessage = ({
   searchTerm,
