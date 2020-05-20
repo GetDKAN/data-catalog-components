@@ -18,10 +18,13 @@ const SearchResultsMessage = ({
   facetSeparator,
   defaultFacets,
 }) => {
-  let facets = [...selectedFacets];
   let term = '';
+  let facets = [];
+  if (showFacets) {
+    facets = [...selectedFacets];
+  }
 
-  if (selectedFacets.length > 0 && showFacets) {
+  if (facets.length > 0 && showFacets) {
     facets = selectedFacets.map((item) => {
       const newItem = [...item];
       const facetType = item[0];
