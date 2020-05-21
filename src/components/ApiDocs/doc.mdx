@@ -5,7 +5,15 @@ route: /components/api-docs
 ---
 
 import { Playground, Props } from 'docz'
+import ApiDocs from './index'
 
 # API Docs
 
 ## Properties
+<Props of={ApiDocs} />
+
+## Basic usage
+
+<Playground>
+  <ApiDocs />
+</Playground>
