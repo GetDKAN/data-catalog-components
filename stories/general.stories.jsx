@@ -2,13 +2,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select, boolean, array, number } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-
 import Header from '../src/templates/Header';
 import NavBar from '../src/templates/NavBar';
 import Menu from '../src/components/Menu';
-import Logo from '../src/components/Logo';
 import PageHeader from '../src/components/PageHeader';
-import Title from '../src/components/Title';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DataIcon from '../src/components/DataIcon';
 import Footer from '../src/templates/Footer';
@@ -25,7 +22,6 @@ import orgs from './data/publishers.json';
 storiesOf('General', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
-  .add('Logo', () => <Logo />)
   .add('Header', () =>
     <Header
       site="Open Data Catalog"
@@ -38,17 +34,6 @@ storiesOf('General', module)
   .add('Menu (external links)', () => <Menu items={links.footer1} title={text("Title", "External links")} menuId="sampleNav"/>)
   .add('Menu (internal links', () => <Menu items={links.main} title={text("Title", "Internal links")} menuId="sampleNav"/>)
   .add('Page Heading', () => <PageHeader title="Datasets" />)
-  .add('Title', () => (
-    <Title
-      title={text("Title", "I am a title")}
-      headerLevel={select(
-        "Header Level",
-        ["h1", "h2", "h3", "h4", "h5", "h6"],
-        "h1"
-      )}
-      classes={text("Classes", "")}
-    />
-  ))
   .add('ToggleBlock', () => (
     <ToggleBlock
       title={text('Title', 'Block Title')}
