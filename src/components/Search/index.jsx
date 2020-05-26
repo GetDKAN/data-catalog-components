@@ -17,6 +17,7 @@ const Search = ({
   path,
   location,
   normalize,
+  trailingSlashInUrl,
 }) => {
   const defaultState = {
     ...defaultSearchState,
@@ -156,7 +157,13 @@ const Search = ({
 
     if (setSearchUrl) {
       const loc = window.location;
-      const searchUrl = Object.keys(params).length ? `${path}/?${params}` : `${path}/`;
+      let searchUrl = '';
+      if (trailingSlashInUrl) {
+        searchUrl = Object.keys(params).length ? `${path}/?${params}` : `${path}/`;
+      }
+      else {
+        searchUrl = Object.keys(params).length ? `${path}?${params}` : `${path}`;
+      }
       const currentUrl = `${loc.pathname}${loc.search}`;
 
       if (window !== undefined && searchUrl !== currentUrl) {
@@ -184,6 +191,7 @@ Search.defaultProps = {
   setSearchUrl: true,
   normalize: null,
   initialSearchState: {},
+  trailingSlashInUrl: true,
 };
 
 Search.propTypes = {
@@ -196,6 +204,7 @@ Search.propTypes = {
   path: PropTypes.string.isRequired,
   location: PropTypes.objectOf(PropTypes.any).isRequired,
   normalize: PropTypes.func,
+  trailingSlashInUrl: PropTypes.bool,
 };
 
 export default Search;
