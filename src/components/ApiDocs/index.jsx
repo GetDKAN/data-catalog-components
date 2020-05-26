@@ -5,10 +5,9 @@ import 'swagger-ui-react/swagger-ui.css';
 
 const ApiDocs = ({ endpoint, uuid }) => {
   const url = uuid ? `${endpoint}/${uuid}` : endpoint;
-
-  return (
-    <SwaggerUI url={url} docExpansion="list" />
-  );
+  return typeof window === 'undefined'
+    ? null
+    : <SwaggerUI url={url} docExpansion="list" />;
 };
 
 ApiDocs.defaultProps = {
