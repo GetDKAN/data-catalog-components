@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import SearchResultsMessage from '.';
 
 const defaultFacets = {
@@ -26,7 +26,8 @@ const defaultFacets = {
 };
 
 describe('<SearchResultMessage />', () => {
-  const defaultWrapper = shallow(
+    
+  const defaultWrapper = mount(
     <SearchResultsMessage
       searchTerm=""
       selectedFacets={[]}
@@ -35,7 +36,25 @@ describe('<SearchResultMessage />', () => {
       defaultFacets={defaultFacets}
     />,
   );
-  const customWrapper = shallow(
+  it('renders with default message', () => {
+    let ps = defaultWrapper.find('div p');
+    expect(defaultWrapper.find('div p').text()).toBe('10 datasets found');
+  });
+
+  const singleItemWrapper = mount(
+    <SearchResultsMessage
+      searchTerm=""
+      selectedFacets={[]}
+      facetTypes={['Theme', 'Keyword']}
+      total={1}
+      defaultFacets={defaultFacets}
+    />,
+  );
+  it('renders with default single message', () => {
+    expect(singleItemWrapper.find('p').text()).toBe('1 dataset found');
+  });
+
+  const customWrapper = mount(
     <SearchResultsMessage
       searchTerm="foobar"
       selectedFacets={[
@@ -48,7 +67,12 @@ describe('<SearchResultMessage />', () => {
       defaultFacets={defaultFacets}
     />,
   );
-  const condensedWrapper = shallow(
+  const completeMessage = '10 datasets found for "foobar" in Topics: Foo | Tags: Bar or Run';
+  it('renders complete message', () => {
+    expect(customWrapper.find('p').text()).toBe(completeMessage);
+  });
+
+  const condensedWrapper = mount(
     <SearchResultsMessage
       searchTerm="foobar"
       selectedFacets={[
@@ -62,7 +86,12 @@ describe('<SearchResultMessage />', () => {
       defaultFacets={defaultFacets}
     />,
   );
-  const noShowWrapper = shallow(
+  const condensedMessage = '10 datasets found for "foobar" in Topics: Foo | Tags: 3 selected Tags';
+  it('renders a condensed facets message', () => {
+    expect(condensedWrapper.find('p').text()).toBe(condensedMessage);
+  });
+
+  const noShowWrapper = mount(
     <SearchResultsMessage
       searchTerm="foobar"
       selectedFacets={[
@@ -77,16 +106,11 @@ describe('<SearchResultMessage />', () => {
       defaultFacets={defaultFacets}
     />,
   );
-  const singleItemWrapper = shallow(
-    <SearchResultsMessage
-      searchTerm=""
-      selectedFacets={[]}
-      facetTypes={['Theme', 'Keyword']}
-      total={1}
-      defaultFacets={defaultFacets}
-    />,
-  );
-  const delimiterWrapper = shallow(
+  it('renders a message with no query or facets', () => {
+    expect(noShowWrapper.find('p').text()).toBe('10 datasets found');
+  });
+
+  const delimiterWrapper = mount(
     <SearchResultsMessage
       searchTerm="foobar"
       selectedFacets={[
@@ -101,25 +125,8 @@ describe('<SearchResultMessage />', () => {
       defaultFacets={defaultFacets}
     />,
   );
-  const completeMessage = '10 datasets found for "foobar" in Topics: Foo | Tags: Bar or Run';
   const customDelimiterMessage = '10 datasets found for "foobar" in Topics: Foo & Tags: Bar, Run';
-  const condensedMessage = '10 datasets found for "foobar" in Topics: Foo | Tags: 3 selected Keyword';
-  it('renders with default message', () => {
-    expect(defaultWrapper.find('div p').text()).toBe('10 datasets found');
-  });
-  it('renders with default single message', () => {
-    expect(singleItemWrapper.find('div p').text()).toBe('1 dataset found');
-  });
-  it('renders complete message', () => {
-    expect(customWrapper.find('div p').text()).toBe(completeMessage);
-  });
-  it('renders a condensed facets message', () => {
-    expect(condensedWrapper.find('div p').text()).toBe(condensedMessage);
-  });
-  it('renders a message with no query or facets', () => {
-    expect(noShowWrapper.find('div p').text()).toBe('10 datasets found');
-  });
   it('renders facets with correct delimiter', () => {
-    expect(delimiterWrapper.find('div p').text()).toBe(customDelimiterMessage);
+    expect(delimiterWrapper.find('p').text()).toBe(customDelimiterMessage);
   });
 });

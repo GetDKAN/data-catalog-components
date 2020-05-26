@@ -3,7 +3,7 @@ import { createContext } from 'react';
 export const SearchDispatch = createContext(null);
 
 export const defaultSearchState = {
-  facets: [],
+  items: [],
   facetsResults: {},
   loading: false,
   page: 1,

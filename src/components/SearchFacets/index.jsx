@@ -1,157 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Label } from 'reactstrap';
-import ToggleBlock from '../ToggleBlock';
-import ShowMoreContainer from '../ShowMoreContainer';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setSelectedFacets, resetSelectedFacets } from '../../services/search/search_functions';
+import SearchFacet from './SearchFacet';
 
 const SearchFacets = ({
-  defaultFacets,
-  dispatch,
-  selectedFacets,
+  facetsConfig,
   facetsResults,
+  selectedFacets,
+  dispatch,
   className,
-  toggleClasses,
-  InputComponent,
-  totalItems,
-  fulltext,
 }) => {
-  const facetList = Object.entries(defaultFacets);
+  const facetList = Object.entries(facetsConfig);
+  const facetComponents = facetList.map(
+    (facetInfo) => {
+      const facetType = facetInfo[0];
+      const facets = facetsResults.filter((facetItem) => facetItem.type === facetType);
+      const selected = selectedFacets
+        .filter((item) => item[0] === facetType)
+        .map((item) => item[1]);
 
-  function buildSearchFacet(facet) {
-    const facetKey = facet[0];
-    const { label, showAll } = facet[1];
-    const hasSelection = selectedFacets.filter((facet) => facet[0].toLowerCase() === facetKey.toLowerCase()) || [];
-    let results = [];
-    if (facetsResults && facetsResults.length) {
-      results = facetsResults.filter(
-        (result) => result.type.toLowerCase() === facetKey.toLowerCase(),
-      );
-    }
-    if (!showAll) {
-      results = results.filter((result) => parseInt(result.total, 10) > 0);
-    }
-
-    if (
-      (facet[1].facetType === 'radio')
-      && (
-        results[0] !== (`All ${facet[1].label.toLowerCase()}`
-        || `All matched ${facet[1].label.toLowerCase()}`))
-    ) {
-      const newName = (fulltext.length || selectedFacets.length) ? `All matched ${facet[1].label.toLowerCase()}` : `All ${facet[1].label.toLowerCase()}`
-      results.unshift({
-        type: facetKey.toLowerCase(),
-        name: newName,
-        total: totalItems
-      });
-    }
-
-    const choices = results.map((item, index) => {
-      const type = facet[1].facetType ? facet[1].facetType : 'checkbox';
-      const key = `${facetKey.toLowerCase()}-${item.name.replace(/\s/g, '')}-${Math.random() * 100}`;
-      let selected = selectedFacets.filter(
-        (selectedFacet) => selectedFacet[1] === item.name,
-      ).length > 0 || false;
-      let onChangeFunction = (e) => { dispatch(setSelectedFacets(e.target, selectedFacets, facet[1].showAll)); };
-
-      if (index === 0 && type === 'radio') {
-        onChangeFunction = () => { dispatch(resetSelectedFacets(selectedFacets, facetKey)); };
-        selected = hasSelection.length === 0;
-      }
-
-
-      if (InputComponent) {
-        return (
-          <InputComponent
-            key={key}
-            checked={selected}
-            name={facetKey.toLowerCase()}
-            type={type}
-            value={item.name}
-            onChange={onChangeFunction}
-          >
-            {`${item.name} (${item.total})`}
-          </InputComponent>
-        );
-      }
       return (
-        <div className="dc-facet-option" key={key}>
-          <Input
-            checked={selected}
-            id = {key}
-            name={facetKey.toLowerCase()}
-            type={type}
-            value={item.name}
-            onChange={onChangeFunction}
-          />
-          <Label htmlFor={key}>
-            <FontAwesomeIcon
-              icon={['fas', selected ? 'check-square' : 'square']}
-              size="1x"
-              aria-hidden="true"
-              role="presentation"
-            />
-            {`${item.name} (${item.total})`}
-          </Label>
-        </div>
-      );
-    });
-    return (
-      <ToggleBlock
-        key={facetKey}
-        // TODO: Fix this so it's adjustable
-        title={(
-          <span>
-            {label}
-          </span>
-        )}
-        headingClasses={`facet-block-${label.toLowerCase()}-inner ${toggleClasses}`}
-        innerClasses={`inner-${label.toLowerCase()}-facets`}
-      >
-        {(facet[1].reset.active && hasSelection.length)
-        ? <button onClick={() => dispatch(resetSelectedFacets(selectedFacets, facetKey))} className='facet-reset-button'>
-            {facet[1].reset.icon
-              && (
-                <span className="undo-icon">
-                  {facet[1].reset.icon}
-                </span>
-                )
-            }
-            Reset
-          </button>
-        : null
-      }
-        <ShowMoreContainer
-          container="div"
-          items={choices}
-          limit={facet[1].limit}
+        <SearchFacet
+          key={facetType}
+          facetType={facetType}
+          label={facetInfo[1].label}
+          facets={facets}
+          dispatch={dispatch}
+          selected={selected}
         />
-      </ToggleBlock>
-    );
-  }
+      );
+    },
+  );
 
   return (
     <div className={className}>
-      {facetList.map((facet) => buildSearchFacet(facet))}
+      {facetComponents}
     </div>
   );
 };
 
 SearchFacets.defaultProps = {
   className: '',
-  toggleClasses: '',
-  InputComponent: null,
+  selectedFacets: [],
 };
 
 SearchFacets.propTypes = {
-  defaultFacets: PropTypes.objectOf(PropTypes.object).isRequired,
-  dispatch: PropTypes.func.isRequired,
-  selectedFacets: PropTypes.arrayOf(PropTypes.array).isRequired,
+  facetsConfig: PropTypes.objectOf(PropTypes.object).isRequired,
   facetsResults: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  selectedFacets: PropTypes.arrayOf(PropTypes.object),
   className: PropTypes.string,
-  toggleClasses: PropTypes.string,
-  InputComponent: PropTypes.func,
 };
 
 export default SearchFacets;

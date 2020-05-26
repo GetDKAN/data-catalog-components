@@ -29,7 +29,7 @@ describe('<DataTablePageSizer />', () => {
 
   it('renders correct initial results', () => {
     expect(defaultWrapper.find('.dc-page-size-options label').text()).toBe('Rows per page');
-    expect(defaultWrapper.find('.dc-page-size-options .page-size-select').props().value).toBe('20');
+    expect(defaultWrapper.find('.dc-page-size-options .page-size-select').props().value).toBe(20);
     expect(defaultWrapper.find('option')).toHaveLength(3);
   });
 

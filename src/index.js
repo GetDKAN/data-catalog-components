@@ -6,7 +6,6 @@ export { default as DataTablePageSizer } from './components/DataTable/DataTableP
 export { default as IconList } from './components/IconList';
 export { default as IconListItem } from './components/IconListItem';
 export { default as InputLarge } from './components/InputLarge';
-export { default as FacetList } from './components/FacetList';
 export { default as FileDownload } from './components/FileDownload';
 export { default as FormatIcon } from './components/FormatIcon';
 export { default as Logo } from './components/Logo';
@@ -18,7 +17,6 @@ export { default as Organization } from './components/Organization';
 export { default as PageHeader } from './components/PageHeader';
 export { default as PublisherList } from './components/PublisherList';
 export { default as Resource } from './components/Resource';
-export { default as SearchFacetBlocks } from './components/SearchFacetBlocks';
 export { default as SearchFacets } from './components/SearchFacets';
 export { default as SearchInput } from './components/SearchInput';
 export { default as SearchList } from './components/SearchList';
@@ -53,7 +51,6 @@ export { default as resourceReducer } from './services/resource/resource_reducer
 
 // SERVICES > FUNCTIONS
 export {
-  setSelectedFacets,
   resetSelectedFacets,
   buildInitialFacets,
   updateSort,

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
-import TopicIcon from '../../templates/TopicIcon'
+import TopicIcon from '../../templates/TopicIcon';
 import { Link } from "@reach/router";
 
 class IconListItem extends React.PureComponent {

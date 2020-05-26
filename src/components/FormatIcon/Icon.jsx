@@ -1,5 +1,4 @@
-import React from 'react'
-//import vars from '../../theme/styles/_variables.scss'
+import React from 'react';
 
 class Icon extends React.PureComponent {
 

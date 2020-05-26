@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import Loader from 'react-loader-advanced';
 import LoadingSpin from 'react-loading-spin';
 import Pagination from 'react-js-pagination';
-
 import SearchResultsMessage from '../../components/SearchResultsMessage';
 import SearchListItem from '../../components/SearchListItem';
 import SearchInput from '../../components/SearchInput';
@@ -12,9 +11,7 @@ import { SearchDispatch } from '../../services/search/search_defaults';
 
 const SearchContent = () => {
   const { searchState, dispatch, defaultFacets } = useContext(SearchDispatch);
-  const {
-    items, fulltext, totalItems, selectedFacets, loading,
-  } = searchState;
+  const { items, fulltext, totalItems, selectedFacets, loading } = searchState;
   const facetTypes = Object.keys(defaultFacets);
 
   return (
@@ -70,8 +67,8 @@ const SearchContent = () => {
             <Pagination
               hideDisabled
               activePage={searchState.page}
-              itemsCountPerPage={searchState['page-size']}
-              totalItemsCount={totalItems}
+              itemsCountPerPage={Number(searchState['page-size'])}
+              totalItemsCount={Number(totalItems)}
               pageRangeDisplayed={5}
               onChange={(e) => dispatch({
                 type: 'UPDATE_CURRENT_PAGE',

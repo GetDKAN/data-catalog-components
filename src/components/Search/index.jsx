@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, {
+  useEffect, useState, useReducer, useRef,
+} from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import queryString from 'query-string';
 import searchReducer from '../../services/search/search_reducer';
 import { SearchDispatch, defaultSearchState } from '../../services/search/search_defaults';
-import { buildInitialFacets } from '../../services/search/search_functions';
+import getData from './functions';
 
 const Search = ({
   initialSearchState,
@@ -16,119 +17,162 @@ const Search = ({
   path,
   location,
   normalize,
+  trailingSlashInUrl,
 }) => {
-  const parsedQuery = queryString.parse(location.search);
+  const defaultState = {
+    ...defaultSearchState,
+    ...initialSearchState,
+  };
+
   const [hasWindow, setHasWindow] = useState(false);
-  const [searchState, dispatch] = useReducer(
-    searchReducer,
-    {
-      ...defaultSearchState,
-      ...initialSearchState,
-      ...parsedQuery,
-    },
-  );
+  const [searchState, dispatch] = useReducer(searchReducer, defaultState);
 
+  const firstUrl = useRef(true);
+  const firstFetchSearch = useRef(true);
+  const firstFetchFacet = useRef(true);
+
+  // On Mount: Synchronize url params with search state.
   useEffect(() => {
-    if (window !== undefined) {
-      setHasWindow(true);
-    }
-    const initialFacets = buildInitialFacets(queryString.parse(location.search), defaultFacets);
-    searchState.selectedFacets = (initialSearchState && initialSearchState.selectedFacets)
-      ? initialSearchState.selectedFacets : initialFacets;
-    searchState.fulltext = parsedQuery.fulltext ? parsedQuery.fulltext : '';
-    searchState.page = parsedQuery.page ? parsedQuery.page : defaultSearchState.page;
-    searchState.sort = parsedQuery.sort ? parsedQuery.page : defaultSearchState.sort;
-    searchState.sort_order = parsedQuery.sort_order
-      ? parsedQuery.sort_order : defaultSearchState.sort_order;
-    searchState['page-size'] = parsedQuery['page-size']
-      ? parsedQuery['page-size'] : defaultSearchState['page-size'];
-  }, [location]);
+    setHasWindow(true);
 
-  useEffect(() => {
-    function findSortParams() {
-      const returnedSort = sortOptions.filter(
-        (option) => (option.field === searchState.sort)
-          || (option.label.toLowerCase() === searchState.sort),
-      );
-      if (!returnedSort.length) {
-        returnedSort.push(sortOptions[0]);
-      }
-      return returnedSort;
-    }
+    // Set the state from query parameters.
+    const params = queryString.parse(window.location.search);
 
-    async function getSearchData() {
-      const facetKeys = Object.keys(defaultFacets);
-      const urlOptions = ['fulltext', 'sort', 'sort_order', 'page-size', 'page', ...facetKeys];
-      // Get data
-      dispatch({ type: 'FETCH_DATA' });
-      // Figure out sort options
-      const currentSort = findSortParams();
-      searchState.sort = currentSort[0].field;
-      // set search params using sort and searchState
-      const searchParams = {};
-      const apiSearchParams = {};
+    let dispatched = false;
 
-      urlOptions.forEach((param) => {
-        if (searchState[param] !== defaultSearchState[param]) {
-          searchParams[param] = searchState[param];
-        }
-        apiSearchParams[param] = searchState[param];
-      });
+    const actions = {};
+    actions['page-size'] = 'UPDATE_PAGE_SIZE';
+    actions.page = 'UPDATE_CURRENT_PAGE';
+    actions.fulltext = 'UPDATE_FULLTEXT';
+    actions.sort = 'UPDATE_SORT_ONLY';
+    actions.sort_order = 'UPDATE_SORT_ORDER';
 
-      // Set selected facets for search
-      if (searchState.selectedFacets.length) {
-        facetKeys.map((key) => {
-          const searchFacets = searchState.selectedFacets.filter(
-            (facet) => facet[0].toLowerCase() === key.toLowerCase(),
-          );
-          const facetText = searchFacets.map((facet) => facet[1]);
-          if (facetText.length) {
-            searchParams[key.toLowerCase()] = facetText;
-            apiSearchParams[key.toLowerCase()] = facetText;
-          }
-          return false;
+    const urlOptions = Object.keys(actions);
+
+    urlOptions.forEach((param) => {
+      if (params[param]) {
+        const data = {};
+        data[param] = params[param];
+
+        dispatched = true;
+        dispatch({
+          type: actions[param],
+          data,
         });
       }
+    });
 
-      const params = queryString.stringify(searchParams, { arrayFormat: 'comma' });
-      const apiParams = queryString.stringify(apiSearchParams, { arrayFormat: 'comma' });
-      // set search url
-      if (setSearchUrl) {
-        const searchUrl = Object.keys(params).length ? `${path}/?${params}` : `${path}/`;
-        if (window !== undefined && searchUrl !== `${location.pathname}${location.search}`) {
-          window.history.pushState({}, 'Search', `${searchUrl}`);
-        }
+    const facetKeys = Object.keys(defaultFacets);
+    facetKeys.forEach((key) => {
+      if (params[key]) {
+        params[key].split(',').forEach((facetName) => {
+          const newFacet = [key, facetName];
+          dispatched = true;
+          dispatch({
+            type: 'UPDATE_FACETS',
+            data: {
+              newFacet,
+            },
+          });
+        });
       }
+    });
 
-      // make the search api request
-      const results = await axios.get(`${searchEndpoint}?${apiParams}`);
-
-      // dispatch results to reducer
-      dispatch({
-        type: 'GET_SEARCH_DATA',
-        data: {
-          totalItems: results.data.total,
-          items: normalize ? normalize(results.data.results) : results.data.results,
-          facetsResults: results.data.facets,
-        },
-      });
+    // We are relying on a state change to trigger a data fetch.
+    // If we have no parameters to trigger the state change and dispatch,
+    // lets force a data fetch.
+    if (!dispatched) {
+      getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch);
+      getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch, true);
     }
+  }, []);
 
-    // Do all the above
-    getSearchData();
+  // Fetch Search Data.
+  useEffect(() => {
+    if (firstFetchSearch.current) {
+      firstFetchSearch.current = false;
+      return;
+    }
+    getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch);
   }, [
-    sortOptions,
-    defaultFacets,
-    path,
-    setSearchUrl,
-    searchEndpoint,
     searchState.sort,
     searchState.fulltext,
     searchState['page-size'],
     searchState.page,
     searchState.selectedFacets,
-    normalize,
-    location,
+  ]);
+
+  // Fetch Facet Data.
+  useEffect(() => {
+    if (firstFetchFacet.current) {
+      firstFetchFacet.current = false;
+      return;
+    }
+    getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch, true);
+  }, [
+    searchState.sort,
+    searchState.fulltext,
+    searchState['page-size'],
+    searchState.page,
+    searchState.selectedFacets,
+  ]);
+
+  // Update URL.
+  useEffect(() => {
+    if (firstUrl.current) {
+      firstUrl.current = false;
+      return;
+    }
+
+    const searchParams = {};
+    const facetKeys = Object.keys(defaultFacets);
+    const state = { ...searchState };
+
+    // Set other url parameters
+    const urlOptions = ['fulltext', 'sort', 'sort_order', 'page-size', 'page'];
+    urlOptions.forEach((option) => {
+      // We only want to store state in the url if they are not the default state.
+      if (state[option] && state[option] !== defaultState[option]) {
+        searchParams[option] = state[option];
+      }
+    });
+
+    // Set selected facets for search
+    if (state.selectedFacets.length) {
+      facetKeys.forEach((key) => {
+        const searchFacets = state.selectedFacets.filter(
+          (facet) => facet[0].toLowerCase() === key.toLowerCase(),
+        );
+
+        searchFacets.forEach((facet) => {
+          if (!(key in searchParams)) {
+            searchParams[key] = [];
+          }
+          searchParams[key].push(facet[1]);
+        });
+      });
+    }
+
+    const params = queryString.stringify(searchParams, { arrayFormat: 'comma' });
+
+    if (setSearchUrl) {
+      const loc = window.location;
+      let searchUrl = '';
+      if (trailingSlashInUrl) {
+        searchUrl = Object.keys(params).length ? `${path}/?${params}` : `${path}/`;
+      }
+      else {
+        searchUrl = Object.keys(params).length ? `${path}?${params}` : `${path}`;
+      }
+      const currentUrl = `${loc.pathname}${loc.search}`;
+
+      if (window !== undefined && searchUrl !== currentUrl) {
+        window.history.pushState({}, 'Search', `${searchUrl}`);
+      }
+    }
+  }, [
+    searchState.items,
+    searchState.facetsResults,
   ]);
 
   return (
@@ -146,9 +190,12 @@ const Search = ({
 Search.defaultProps = {
   setSearchUrl: true,
   normalize: null,
+  initialSearchState: {},
+  trailingSlashInUrl: true,
 };
 
 Search.propTypes = {
+  initialSearchState: PropTypes.objectOf(PropTypes.object),
   searchEndpoint: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   defaultFacets: PropTypes.objectOf(PropTypes.object).isRequired,
@@ -157,6 +204,7 @@ Search.propTypes = {
   path: PropTypes.string.isRequired,
   location: PropTypes.objectOf(PropTypes.any).isRequired,
   normalize: PropTypes.func,
+  trailingSlashInUrl: PropTypes.bool,
 };
 
 export default Search;

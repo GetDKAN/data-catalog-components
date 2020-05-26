@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { storiesOf } from '@storybook/react';
 import {
   withKnobs, text, number, select, boolean,
@@ -11,11 +10,12 @@ import { withA11y } from '@storybook/addon-a11y';
 import SearchList from '../src/components/SearchList';
 import SearchListItem from '../src/components/SearchListItem';
 import InputLarge from '../src/components/InputLarge';
-import FacetList from '../src/components/FacetList';
 import SearchInput from '../src/components/SearchInput';
 import SearchResultsMessage from '../src/components/SearchResultsMessage';
 import "../src/theme/styles/index.scss";
 import search from './data/search.json';
+
+const { query, items } = search;
 
 const InputSearchParent = () => {
   const [inputValue, setInputValue] = useState('');
@@ -37,55 +37,53 @@ const InputSearchParent = () => {
   );
 };
 
-const {
-  selectedFacets, facetsResults, query, facets, facetCallback, items,
-} = search;
-
-const searchListItems = items.map((item) => (<SearchListItem item={item} />));
-
-const facetListProps = {
-  query,
-  facets,
-  facetsResults,
-  selectedFacets,
-  facetCallback,
-  Link,
-  url: 'search',
-};
-const selectedFacetOptions1 = [
-  ['Themes', 'Foo'],
-  ['Keywords', 'Bar'],
-  ['Keywords', 'Run'],
-];
-const selectedFacetOptions2 = [
-  ['Themes', 'Foo'],
-  ['Keywords', 'Bar'],
-  ['Keywords', 'Run'],
-  ['Keywords', 'DKAN'],
-];
-
 storiesOf('Search', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
-  .add('Item', () => <SearchListItem item={search.items[0]} />)
-  .add('List', () => <SearchList message={text('Title', '2 Datasets found')}>{searchListItems}</SearchList>)
+  .add('Item', () => <SearchListItem item={getItem()} />)
+  .add('List', () => <SearchList message={text('Title', '2 Datasets found')}>{getSearchListItems()}</SearchList>)
   .add('Input Large', () => <InputLarge value={query} />)
-  .add('Facet List', () => <Router><FacetList {... facetListProps} /></Router>)
   .add('Search Input', () => (<InputSearchParent />))
   .add('Search Results Message', () => (
     <SearchResultsMessage
-      searchTerm={text('Search Term', '')}
+      searchTerm={text('Search Term', 'hello')}
       total={number('Total Results', 1000)}
       facetLimit={number('Facet Limit', 3)}
       facetDelimiter={text('Facet Delimiter', ' or ')}
       facetSeparator={text('Facet Separator', ' | ')}
       selectedFacets={select(
-        'Seleced Facets',
-        { '2 Keywords': selectedFacetOptions1, '3 Keywords': selectedFacetOptions2 },
-        selectedFacetOptions1,
+        'Selected Facets',
+        { '2 Keywords': getSelectedFacetOptions(1), '3 Keywords': getSelectedFacetOptions(2) },
+        getSelectedFacetOptions(1),
       )}
       facetTypes={['Themes', 'Keywords']}
       showQuery={boolean('Show Query', true)}
       showFacets={boolean('Show Facets', true)}
+      defaultFacets={{ Themes: {label: 'Themes'}, Keywords: {label: 'Keywords'}}}
     />
-  ));
+));
+
+function getItem() {
+  return search.items[0];
+}
+
+function getSearchListItems() {
+  return items.map((item) => (<SearchListItem item={item} />));
+}
+
+function getSelectedFacetOptions($index) {
+  if ($index == 1) {
+    return [
+      ['Themes', 'Foo'],
+      ['Keywords', 'Bar'],
+      ['Keywords', 'Run'],
+    ];
+  }
+  
+  return [
+    ['Themes', 'Foo'],
+    ['Keywords', 'Bar'],
+    ['Keywords', 'Run'],
+    ['Keywords', 'DKAN'],
+  ];
+}
