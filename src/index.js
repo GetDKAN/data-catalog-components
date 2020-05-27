@@ -5,11 +5,6 @@ export { default as DataTablePageResults } from './components/DataTable/DataTabl
 export { default as DataTablePageSizer } from './components/DataTable/DataTablePageSizer';
 export { default as IconList } from './components/IconList';
 export { default as IconListItem } from './components/IconListItem';
-<<<<<<< HEAD
-export { default as InputLarge } from './components/InputLarge';
-=======
-export { default as FacetList } from './components/FacetList';
->>>>>>> Test docz merge (#73)
 export { default as FileDownload } from './components/FileDownload';
 export { default as FormatIcon } from './components/FormatIcon';
 export { default as ManageColumns } from './components/DataTable/ManageColumns';
