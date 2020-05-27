@@ -71,7 +71,7 @@ export default async function getData(
       facetsResults: results.data.facets,
     };
   } else {
-    const results = await axios.get(`${searchEndpoint}?${apiParams}`);
+    const results = await axios.get(`${searchEndpoint}?${apiParams}&facets=0`);
     type = 'SET_SEARCH_DATA';
     data = {
       totalItems: results.data.total,
