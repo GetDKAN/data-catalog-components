@@ -1,4 +1,4 @@
-function updateSelectedFacetsState(state, action) {
+export function updateSelectedFacetsState(state, action) {
   const { selectedFacets } = state;
   const { newFacet } = action.data;
   const newSelectedFacets = [...selectedFacets];

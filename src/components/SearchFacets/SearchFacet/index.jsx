@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
 import ToggleBlock from '../../ToggleBlock';
 import ShowMoreContainer from '../../ShowMoreContainer';
+
+library.add(fas);
 
 const SearchFacet = ({
   facetType,
