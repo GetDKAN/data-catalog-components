@@ -3,14 +3,14 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     actions.setWebpackConfig({
       module: {
         rules: [
-          // {
-          //   test: /react-loader-advanced/,
-          //   use: loaders.null(),
-          // },
-          // {
-          //   test: /react-loading-spin/,
-          //   use: loaders.null(),
-          // },
+          {
+            test: /react-loader-advanced/,
+            use: loaders.null(),
+          },
+          {
+            test: /react-loading-spin/,
+            use: loaders.null(),
+          },
           {
             test: /swagger-ui-react/,
             use: loaders.null(),
