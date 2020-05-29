@@ -76,6 +76,6 @@ export default function resourceReducer(state, action) {
         updateQuery: true,
       };
     default:
-      return 'Not a valid action type.';
+      return state;
   }
 }
