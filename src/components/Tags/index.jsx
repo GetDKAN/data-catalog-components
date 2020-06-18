@@ -1,22 +1,36 @@
-/* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Tags(props) {
-  const label = props.label ? <h3>{props.label}</h3> : '';
-  const tags = props.tags.map((tag) => {
-    const ref = `{${props.path}${tag.data}`;
+const Tags = ({ tags, label, path }) => {
+  const heading = label ? <h3>{label}</h3> : '';
+  const tagsList = tags.map((tag) => {
+    const ref = `${path}${tag.data}`;
     return (
       <div className="dc-tag" key={tag.identifier}>
-        <a href={ref}> {tag.data} </a>
+        <a href={ref}>
+          {tag.data}
+        </a>
       </div>
     );
   }, '<div></div>');
 
   return (
     <div className="dc-tag-wrapper">
-      {label} {tags}
+      {heading}
+      {' '}
+      {tagsList}
     </div>
   );
-}
+};
+
+Tags.defaultProps = {
+  label: null,
+};
+
+Tags.propTypes = {
+  label: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+  path: PropTypes.string.isRequired,
+};
 
 export default Tags;
