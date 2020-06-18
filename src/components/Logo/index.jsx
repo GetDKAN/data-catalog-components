@@ -1,24 +1,19 @@
-/* eslint-disable */
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from '@reach/router';
 
-import React, { Component } from 'react';
-import { Link } from "@reach/router";
-
-class Logo extends Component {
-
-    render() {
-      let logo = this.props.image;
-
-      return (
-        <Link to="/" className="dc-logo">
-          <img src={logo} alt="Open Data Catalog" />
-        </Link>
-      );
-    }
-
-}
+const Logo = ({ image }) => (
+  <Link to="/" className="dc-logo">
+    <img src={image} alt="Open Data Catalog" />
+  </Link>
+);
 
 Logo.defaultProps = {
-    image: 'https://dkan-default-content-files.s3.amazonaws.com/files/logo.svg'
+  image: 'https://dkan-default-content-files.s3.amazonaws.com/files/logo.svg'
+};
+
+Logo.propTypes = {
+  image: PropTypes.string,
 };
 
 export default Logo;
