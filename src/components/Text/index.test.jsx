@@ -1,39 +1,78 @@
-import React from "react";
-import { shallow } from "enzyme";
-import Text from "./index";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import Text from './index';
 
-describe("<Title />", () => {
-  it("renders as plain text", () => {
-    const wrapper = shallow(<Text value="<u>My Value</u>" />);
-    expect(wrapper.html()).toBe("<u>My Value</u>");
+describe('<Text />', () => {
+  test('renders with children ignoring of value', () => {
+    render(
+      <Text
+        label="DKAN"
+        wrapper={{
+          tag: 'h1',
+          classes: 'my-class',
+        }}
+        value="my value"
+      >
+        my text
+      </Text>,
+    );
+    expect(screen.getByRole('heading', 'DKAN: my text')).toHaveClass('my-class');
   });
 
-  it("renders as children instead of value", () => {
-    const wrapper = shallow(
-      <Text value="<u>My Value</u>">
-        <p>My Children</p>
-      </Text>
+  test('renders with children ignoring wrapper', () => {
+    render(
+      <Text
+        label="DKAN"
+        wrapper={{
+          classes: 'my-class',
+        }}
+      >
+        <h1 className="custom">my custom html</h1>
+      </Text>,
     );
-    expect(wrapper.html()).toBe("<u>My Value</u>");
+    expect(screen.getByText('my custom html')).toHaveClass('custom');
   });
 
-  it("renders as children instead of value", () => {
-    const wrapper = shallow(
-      <Text>
-        <p>My Children</p>
-      </Text>
+  test('renders with children', () => {
+    render(
+      <Text
+        label="DKAN"
+        wrapper={{
+          tag: 'h1',
+          classes: 'my-class',
+        }}
+      >
+        my text
+      </Text>,
     );
-    expect(wrapper.html()).toBe("<p>My Children</p>");
+    expect(screen.getByRole('heading', 'DKAN: my text')).toHaveClass('my-class');
   });
 
-  it("renders as children inside a tag with a classname", () => {
-    const wrapper = shallow(
-      <Text wrapper={{ tag: "div", classes: "class1 class2" }}>
-        <p>My Children</p>
-      </Text>
+  test('renders with value', () => {
+    render(
+      <Text
+        label="DKAN"
+        wrapper={{
+          classes: 'my-class',
+        }}
+        value="<h1>my value without tag</h1>"
+      />,
     );
-    expect(wrapper.html()).toBe(
-      '<div class="class1 class2"><p>My Children</p></div>'
+    expect(screen.getByRole('heading', 'DKAN: my value without tag')).not.toHaveClass('my-class');
+  });
+
+  test('renders with value', () => {
+    render(
+      <Text
+        label="DKAN"
+        wrapper={{
+          tag: 'h1',
+          classes: 'my-class',
+        }}
+        value="my value"
+      />,
     );
+    expect(screen.getByRole('heading', 'DKAN: my value')).toHaveClass('my-class');
   });
 });
