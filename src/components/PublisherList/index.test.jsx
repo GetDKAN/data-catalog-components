@@ -24,7 +24,6 @@ describe('<PublisherList />', () => {
         className="custom"
       />,
     );
-    screen.debug()
     expect(screen.getByRole('list')).toHaveClass('custom');
     expect(screen.getByRole('listitem')).toHaveLength(4);
   });
