@@ -19,7 +19,8 @@
     "deploy-storybook": "storybook-to-ghpages",
     "lint": "eslint ./src",
     "test": "jest --verbose",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "test:coverage": "npm run test -- --coverage"
   },
   "keywords": [
     "react",
@@ -90,6 +91,10 @@
     "@storybook/addons": "^5.2.0",
     "@storybook/react": "^5.3.12",
     "@storybook/storybook-deployer": "^2.8.1",
+    "@testing-library/dom": "^7.16.1",
+    "@testing-library/jest-dom": "^5.10.1",
+    "@testing-library/react": "^10.2.1",
+    "@testing-library/react-hooks": "^3.3.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",

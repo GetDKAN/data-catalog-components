@@ -1,8 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Parser } from "html-to-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Parser } from 'html-to-react';
 
-const Text = ({ label, value, children, wrapper }) => {
+const Text = ({
+  label, value, children, wrapper,
+}) => {
   const parser = new Parser();
   const { tag, classes } = wrapper;
   const TextWrapper = () => {
@@ -26,10 +28,10 @@ const Text = ({ label, value, children, wrapper }) => {
 };
 
 Text.defaultProps = {
-  label: ``,
-  value: ``,
-  children: ``,
-  wrapper: {}
+  label: '',
+  value: '',
+  children: '',
+  wrapper: {},
 };
 
 Text.propTypes = {
@@ -41,10 +43,10 @@ Text.propTypes = {
   // If classes are added, will wrap text in div with classes.
   wrapper: PropTypes.shape({
     tag: PropTypes.string,
-    classes: PropTypes.string
+    classes: PropTypes.string,
   }),
   // Deprecated way to pass markup to the Text component.
-  value: PropTypes.string
+  value: PropTypes.string,
 };
 
 export default Text;
