@@ -5,7 +5,6 @@ import SearchFacets from '../../components/SearchFacets';
 import { SearchDispatch } from '../../services/search/search_defaults';
 
 const SearchSidebar = ({ sortOptions }) => {
-  console.log("SearchSidebar");
   const { searchState, dispatch, defaultFacets } = useContext(SearchDispatch);
   const { facetsResults } = searchState;
 

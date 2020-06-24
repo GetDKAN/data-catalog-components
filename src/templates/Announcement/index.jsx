@@ -16,6 +16,8 @@ const Announcement = ({
     case 'error':
       icon = 'times-circle';
       break;
+    default:
+      icon = 'info-cirlce';
   }
   return (
     <div
@@ -40,6 +42,7 @@ const Announcement = ({
 };
 
 Announcement.defaultProps = {
+  icon: '',
   heading: 'Announcement',
   role: 'alert',
 };

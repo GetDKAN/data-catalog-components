@@ -1,0 +1,26 @@
+---
+name: Tags
+menu: Components
+route: /components/tags
+---
+
+import { Playground, Props } from 'docz'
+import Tags from './index'
+
+# Tags
+
+## Properties
+
+<Props of={Tags} />
+
+## Basic usage
+
+<Playground>
+  <Tags
+    path="http://localhost:3000/"
+    tags={[
+      {data: 'dkan', identifier: '1234'},
+      {data: 'react', identifier: '4321'},
+    ]}
+  />
+</Playground>

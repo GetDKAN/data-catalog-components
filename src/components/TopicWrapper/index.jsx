@@ -17,8 +17,7 @@ const TopicWrapper = ({ component, topic }) => {
 };
 
 TopicWrapper.propTypes = {
-  component: PropTypes.func.isRequired,
+  component: PropTypes.string.isRequired,
   topic: PropTypes.string.isRequired,
 };
-
 export default TopicWrapper;

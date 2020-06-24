@@ -3,3 +3,5 @@ package-lock.json
 lib
 dist
 .idea
+.docz
+docs

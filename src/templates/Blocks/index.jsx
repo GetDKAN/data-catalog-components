@@ -1,57 +1,49 @@
-/* eslint-disable */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import BasicBlock from './BasicBlock';
 
-class Blocks extends React.PureComponent {
+function Blocks({
+  items, component, paneTitle, containerClass, blockClass,
+}) {
+  const Block = component || BasicBlock;
 
-  render() {
-    const { items } = this.props;
-    const Block = this.props.component;
-    let paneTitle = this.props.paneTitle;
-
-    if (paneTitle) {
-      return (
-        <div className={'container-fluid ' + this.props.className}>
-          <h2>{paneTitle}</h2>
-          <div className="dc-block-content">
-            {
-              this.props.items.map(function(item, index){
-                return <Block content={item} key={index} />;
-              })
-            }
-          </div>
+  if (paneTitle && items) {
+    return (
+      <div className={`${containerClass} ${blockClass}`}>
+        <h2>{paneTitle}</h2>
+        <div className="dc-block-content">
+          {
+            items.map((item) => {
+              return <Block content={item} key={item.id} />;
+            })
+          }
         </div>
-      );
-    }
-    else {
-      return (
-        <div className={'container-fluid ' + this.props.className}>
-
-          <div className="dc-block-content">
-            {
-              this.props.items.map(function(item, index){
-                return <Block content={item} key={index} />;
-              })
-            }
-          </div>
-        </div>
-      )
-    }
+      </div>
+    );
   }
+  return (
+    <div className={`${containerClass} ${blockClass}`}>
+      <div className="dc-block-content">
+        { items
+          && items.map((item) => <Block content={item} key={item.id} />)}
+      </div>
+    </div>
+  );
 }
 
 Blocks.defaultProps = {
-  items: [],
-  component: BasicBlock,
-  className: 'BasicBlock'
+  component: 'BasicBlock',
+  containerClass: 'container',
+  blockClass: 'BasicBlock',
+  paneTitle: '',
 };
 
 Blocks.propTypes = {
-  items: PropTypes.array,
-  component: PropTypes.func.isRequired,
-  className: PropTypes.string
+  items: PropTypes.isRequired,
+  component: PropTypes.string,
+  containerClass: PropTypes.string,
+  blockClass: PropTypes.string,
+  paneTitle: PropTypes.string,
 };
 
-export default Blocks
+export default Blocks;

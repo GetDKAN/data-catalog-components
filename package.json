@@ -20,7 +20,11 @@
     "lint": "eslint ./src",
     "test": "jest --verbose",
     "test:watch": "npm run test -- --watch",
-    "test:coverage": "npm run test -- --coverage"
+    "test:coverage": "npm run test -- --coverage",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
+    "docz:serve": "docz build && docz serve",
+    "docz:publish": "docz build && gh-pages -d ./docs"
   },
   "keywords": [
     "react",
@@ -106,6 +110,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "core-js": "^2.6.5",
     "css-loader": "^2.1.0",
+    "docz": "^2.3.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.2.1",
@@ -115,6 +120,8 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "extract-text-webpack-plugin": "^3.0.2",
+    "gatsby-plugin-sass": "^2.3.1",
+    "gh-pages": "^2.2.0",
     "jest": "^24.9.0",
     "node-sass": "^4.13.1",
     "prettier": "^1.16.0",

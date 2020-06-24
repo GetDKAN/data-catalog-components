@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import Text from '../../components/Text';
@@ -13,13 +11,18 @@ class BasicBlock extends React.PureComponent {
         <h2>{content.title}</h2>
         <Text value={content.content} />
       </div>
-    )
+    );
   }
 }
 
-BasicBlock.propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.any,
+BasicBlock.defaultProps = {
+  title: '',
+  content: '',
 };
 
-export default BasicBlock
+BasicBlock.propTypes = {
+  title: PropTypes.string,
+  content: PropTypes.string,
+};
+
+export default BasicBlock;

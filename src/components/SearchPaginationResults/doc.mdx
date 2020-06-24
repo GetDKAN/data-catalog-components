@@ -1,0 +1,24 @@
+---
+name: Search Pagination Results
+menu: Components
+route: /components/search-pagination-results
+---
+
+import { Playground, Props } from 'docz'
+import SearchPaginationResults from './index'
+
+# Search Pagination Results
+
+## Properties
+
+<Props of={SearchPaginationResults} />
+
+## Basic usage
+
+<Playground>
+  <SearchPaginationResults
+    total={20}
+    pageSize={10}
+    currentPage={1}
+  />
+</Playground>

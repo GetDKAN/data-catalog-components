@@ -8,7 +8,7 @@ import StepsBlock from './StepsBlock';
 
 describe('<Blocks />', () => {
   test('renders a heading by default', () => {
-    render(<Blocks paneTitle="Welcome to DKAN" />);
+    render(<Blocks paneTitle="Welcome to DKAN" items={[{ title: 'Welcome to DKAN', ref: '/dkan' }]} />);
     expect(screen.getByRole('heading', 'Welcome to DKAN')).toBeInTheDocument();
   });
 });

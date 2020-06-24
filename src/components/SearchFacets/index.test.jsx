@@ -14,7 +14,6 @@ describe('<SearchFacets />', () => {
         dispatch={() => ({})}
       />,
     );
-    screen.debug()
     expect(screen.getByRole('button', 'topic')).toBeInTheDocument();
   });
 });

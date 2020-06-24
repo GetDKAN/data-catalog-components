@@ -39,7 +39,7 @@ const SearchFacets = ({
 };
 
 SearchFacets.defaultProps = {
-  className: '',
+  className: 'dc-search-facets',
   selectedFacets: [],
 };
 
@@ -47,7 +47,7 @@ SearchFacets.propTypes = {
   facetsConfig: PropTypes.objectOf(PropTypes.object).isRequired,
   facetsResults: PropTypes.arrayOf(PropTypes.object).isRequired,
   dispatch: PropTypes.func.isRequired,
-  selectedFacets: PropTypes.arrayOf(PropTypes.object),
+  selectedFacets: PropTypes.arrayOf(PropTypes.array),
   className: PropTypes.string,
 };
 

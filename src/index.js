@@ -5,10 +5,8 @@ export { default as DataTablePageResults } from './components/DataTable/DataTabl
 export { default as DataTablePageSizer } from './components/DataTable/DataTablePageSizer';
 export { default as IconList } from './components/IconList';
 export { default as IconListItem } from './components/IconListItem';
-export { default as InputLarge } from './components/InputLarge';
 export { default as FileDownload } from './components/FileDownload';
 export { default as FormatIcon } from './components/FormatIcon';
-export { default as Logo } from './components/Logo';
 export { default as ManageColumns } from './components/DataTable/ManageColumns';
 export { default as Menu } from './components/Menu';
 export { default as Modal } from './components/Modal';
@@ -30,7 +28,6 @@ export { default as String } from './components/String';
 export { default as Table } from './components/Table';
 export { default as Tags } from './components/Tags';
 export { default as Text } from './components/Text';
-export { default as Title } from './components/Title';
 export { default as ToggleBlock } from './components/ToggleBlock';
 export { default as TopicWrapper } from './components/TopicWrapper';
 export { default as Search } from './components/Search';
