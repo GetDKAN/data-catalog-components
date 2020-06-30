@@ -14,14 +14,16 @@ describe('<TopicWrapper />', () => {
         tags={[
           { data: 'dkan1', identifier: 1 },
           { data: 'dkan2', identifier: 2 },
+          { data: 'open data', identifier: 3 },
         ]}
         label="dkan"
         path="/my-path/"
       />,
     );
     expect(screen.getByRole('heading', 'dkan')).toBeTruthy();
-    expect(screen.getAllByRole('link')).toHaveLength(2);
+    expect(screen.getAllByRole('link')).toHaveLength(3);
     expect(screen.getByRole('link', { name: 'dkan1' })).toHaveAttribute('href', '/my-path/dkan1');
     expect(screen.getByRole('link', { name: 'dkan2' })).toHaveAttribute('href', '/my-path/dkan2');
+    expect(screen.getByRole('link', { name: 'open data' })).toHaveAttribute('href', '/my-path/open%20data');
   });
 });
