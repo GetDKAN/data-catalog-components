@@ -26,6 +26,10 @@ To see the available components:
 1) Start storybook
     1) ``npm run storybook``
 
+## Docz preview
+- Comment out `base: '/data-catalog-components'` from doczrc.js
+- Run `npm run docz:serve` then visit `http://localhost:3000`.
+
 ## Publishing
 
 1) Review exports in index.js

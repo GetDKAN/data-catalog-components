@@ -1,44 +1,47 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "@reach/router";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from '@reach/router';
 
 function Organization(props) {
-  const { name, description, identifier, imageUrl, searchUrl } = props;
-  const image = <img alt={name || "Organization Image"} src={imageUrl} />;
-  const alignment = props.alignment ? props.alignment : 'center';
+  const {
+    name, description, identifier, imageUrl, searchUrl, alignment,
+  } = props;
+  const image = <img alt={name || 'Organization Image'} src={imageUrl} />;
   const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
 
   return (
     <div className="dc-org-block" style={{ textAlign: alignment }}>
-      <Link to={link} className="dc-org-image" alt="Organization Logo">
+      <Link to={link} className="dc-org-image" alt="Organization Logo" id={identifier}>
         {image}
         <h3 className="dc-org-name">
           {name}
         </h3>
       </Link>
-      {description &&
+      {description && (
         <div className="dc-org-description">
           {description}
         </div>
-      }
+      )}
     </div>
   );
 }
 
 Organization.defaultProps = {
-  name: "",
-  description: "",
-  identifier: "",
+  alignment: 'center',
+  name: '',
+  description: '',
+  identifier: '',
   imageUrl:
-    "https://s3.amazonaws.com/dkan-default-content-files/files/group.png"
+    'https://s3.amazonaws.com/dkan-default-content-files/files/group.png',
 };
 
 Organization.propTypes = {
+  alignment: PropTypes.string,
   name: PropTypes.string,
   description: PropTypes.string,
   identifier: PropTypes.string,
   imageUrl: PropTypes.string,
-  searchUrl: PropTypes.string
+  searchUrl: PropTypes.string,
 };
 
 export default Organization;

@@ -1,30 +1,29 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import "general.scss";
 
 // Component styles.
 @import "../../components/DataTable/ManageColumns/card.scss";
-@import "../../components/FileDownload/filedownload.scss";
-@import "../../components/IconList/iconlist.scss";
-@import "../../components/IconListItem/iconlistitem.scss";
+//@import "../../components/FileDownload/filedownload.scss";
+// @import "../../components/IconList/iconlist.scss";
+// @import "../../components/IconListItem/iconlistitem.scss";
 @import "../../components/Menu/menu.scss";
 @import "../../components/Modal/modal.scss";
-@import "../../components/Organization/organization.scss";
-@import "../../components/PublisherList/publisherslist.scss";
-@import "../../components/SearchInput/searchinput.scss";
-@import "../../components/SearchListItem/searchlistitem.scss";
-@import "../../components/SearchFacets/searchfacets.scss";
-@import "../../components/Tags/tags.scss";
-@import "../../components/Table/table.scss";
-@import "../../components/TopicWrapper/topicwrapper.scss";
+// @import "../../components/Organization/organization.scss";
+// @import "../../components/PublisherList/publisherslist.scss";
+// @import "../../components/SearchInput/searchinput.scss";
+// @import "../../components/SearchListItem/searchlistitem.scss";
+// @import "../../components/SearchFacets/searchfacets.scss";
+// @import "../../components/Tags/tags.scss";
+// @import "../../components/Table/table.scss";
+// @import "../../components/TopicWrapper/topicwrapper.scss";
 
 // Template styles.
-@import "../../templates/DataTable/datatable.scss";
+//@import "../../templates/DataTable/datatable.scss";
 @import "../../templates/DataTableHeader/datatableheader.scss";
-@import "../../templates/Header/header.scss";
+//@import "../../templates/Header/header.scss";
 @import "../../templates/Hero/hero.scss";
-@import "../../templates/Footer/footer.scss";
-@import "../../templates/NavBar/navbar.scss";
-@import "../../templates/Blocks/blocks.scss";
-@import "../../templates/Announcement/announcement.scss";
-@import "../../templates/SearchContent/searchcontent.scss";
-@import "../../templates/SearchSidebar/searchsidebar.scss";
+//@import "../../templates/Footer/footer.scss";
+//@import "../../templates/NavBar/navbar.scss";
+//@import "../../templates/Blocks/blocks.scss";
+// @import "../../templates/Announcement/announcement.scss";
+// @import "../../templates/SearchContent/searchcontent.scss";
+// @import "../../templates/SearchSidebar/searchsidebar.scss";

@@ -16,5 +16,23 @@ import Menu from './index'
 ## Basic usage
 
 <Playground>
-  <Menu />
+  <Menu items={
+    [
+      {
+        "label": "Home",
+        "url": "/",
+        "target": "_top"
+      },
+      {
+        "label": "Datasets",
+        "url": "/search",
+        "target": "_top"
+      },
+      {
+        "label": "Publishers",
+        "url": "/publishers",
+        "target": "_top"
+      }
+    ]
+  }/>
 </Playground>

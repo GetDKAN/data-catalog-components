@@ -6,9 +6,7 @@ route: /templates/header
 
 import { Playground, Props } from 'docz'
 import Header from './index'
-import './header.scss'
-import '../../theme/styles/general.scss'
-import '../../theme/styles/index.scss'
+import menu from '../../examples/menu.json'
 
 # Header
 
@@ -19,5 +17,8 @@ import '../../theme/styles/index.scss'
 ## Basic usage
 
 <Playground>
-  <Header />
+  <Header navItems={
+    menu.map((item) => (<a href={item.url}>{item.label}</a>))}
+    site="Site Name"
+  />
 </Playground>
