@@ -54,7 +54,7 @@ export default function searchReducer(state, action) {
       return {
         ...state,
         sort: action.data.sort,
-        sort_order: action.data.sort_order,
+        'sort-order': action.data.sort-order,
       };
     case 'UPDATE_SORT_ONLY':
       return {
@@ -64,7 +64,7 @@ export default function searchReducer(state, action) {
     case 'UPDATE_SORT_ORDER':
       return {
         ...state,
-        sort_order: action.data.sort_order,
+        'sort-order': action.data['sort-order'],
       };
     case 'UPDATE_FULLTEXT':
       return {

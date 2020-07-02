@@ -17,7 +17,7 @@ function getApiSearchParams(searchState, defaultFacets, sortOptions) {
   state = Object.assign(state, searchState);
 
   const facetKeys = Object.keys(defaultFacets);
-  const urlOptions = ['fulltext', 'sort', 'sort_order', 'page-size', 'page', ...facetKeys];
+  const urlOptions = ['fulltext', 'sort', 'sort-order', 'page-size', 'page', ...facetKeys];
 
   // Figure out sort options
   const currentSort = getSortParams(state, sortOptions);
