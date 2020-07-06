@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Tags = ({ tags, label, path }) => {
   const heading = label ? <h3>{label}</h3> : '';
   const tagsList = tags.map((tag) => {
-    const ref = `${path}${tag.data}`;
+    const ref = `${path}${encodeURIComponent(tag.data)}`;
     return (
       <div className="dc-tag" key={tag.identifier}>
         <a href={ref}>
