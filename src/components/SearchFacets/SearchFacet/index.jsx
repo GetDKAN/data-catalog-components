@@ -16,6 +16,8 @@ const SearchFacet = ({
   facets,
   dispatch,
   selected,
+  toggleClasses,
+  InputComponent,
 }) => {
   if (facets.length === 0) {
     return '';
@@ -57,6 +59,21 @@ const SearchFacet = ({
       });
     };
 
+    if (InputComponent) {
+      return (
+        <InputComponent
+          key={key}
+          checked={checked}
+          name={facetType}
+          type="checkbox"
+          value={itemName}
+          onChange={onChangeFunction}
+        >
+          {`${itemName} (${itemTotal})`}
+        </InputComponent>
+      );
+    }
+
     return (
       <div className="dc-facet-option" key={key}>
         <Input
@@ -89,7 +106,7 @@ const SearchFacet = ({
           {myLabel}
         </span>
       )}
-      headingClasses={`facet-block-${facetType}-inner`}
+      headingClasses={`facet-block-${facetType}-inner${toggleClasses ? ` ${toggleClasses}` : ''}`}
       innerClasses={`inner-${facetType}-facets`}
     >
       <ShowMoreContainer
@@ -104,6 +121,8 @@ const SearchFacet = ({
 SearchFacet.defaultProps = {
   label: '',
   selected: [],
+  toggleClasses: null,
+  InputComponent: null,
 };
 
 SearchFacet.propTypes = {
@@ -112,6 +131,8 @@ SearchFacet.propTypes = {
   dispatch: PropTypes.func.isRequired,
   label: PropTypes.string,
   selected: PropTypes.arrayOf(PropTypes.arrayOf),
+  toggleClasses: PropTypes.string,
+  InputComponent: PropTypes.func,
 };
 
 export default SearchFacet;
