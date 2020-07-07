@@ -8,6 +8,8 @@ const SearchFacets = ({
   selectedFacets,
   dispatch,
   className,
+  toggleClasses,
+  InputComponent,
 }) => {
   const facetList = Object.entries(facetsConfig);
   const facetComponents = facetList.map(
@@ -26,6 +28,8 @@ const SearchFacets = ({
           facets={facets}
           dispatch={dispatch}
           selected={selected}
+          toggleClasses={toggleClasses}
+          InputComponent={InputComponent}
         />
       );
     },
@@ -41,6 +45,8 @@ const SearchFacets = ({
 SearchFacets.defaultProps = {
   className: 'dc-search-facets',
   selectedFacets: [],
+  toggleClasses: null,
+  InputComponent: null,
 };
 
 SearchFacets.propTypes = {
@@ -49,6 +55,8 @@ SearchFacets.propTypes = {
   dispatch: PropTypes.func.isRequired,
   selectedFacets: PropTypes.arrayOf(PropTypes.array),
   className: PropTypes.string,
+  toggleClasses: PropTypes.string,
+  InputComponent: PropTypes.func,
 };
 
 export default SearchFacets;
