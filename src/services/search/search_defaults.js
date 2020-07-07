@@ -11,6 +11,6 @@ export const defaultSearchState = {
   fulltext: '',
   selectedFacets: [],
   sort: 'modified',
-  sort_order: 'desc',
+  'sort-order': 'desc',
   totalItems: 0,
 };
