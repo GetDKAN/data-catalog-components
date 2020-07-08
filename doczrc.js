@@ -7,7 +7,7 @@ export default {
   themeConfig: {
     showPlaygroundEditor: true,
   },
-  //base: '/data-catalog-components',
+  base: '/data-catalog-components',
   menu: [
     'Home',
     'Components',
