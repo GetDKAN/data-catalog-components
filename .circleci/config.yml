@@ -45,6 +45,7 @@ jobs:
           name: Initialize Project
           command: |
             export PATH=$PATH:~/dkan-tools/bin
+            which dktl
             mkdir ~/sandbox
             cd ~/sandbox
             dktl init
