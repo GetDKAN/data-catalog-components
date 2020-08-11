@@ -7,7 +7,7 @@ jobs:
         default: "1.2.0"
     parallelism: 1
     machine:
-      image: ubuntu-1604:201903-01
+      image: circleci/classic:latest
     environment:
       TEST_RESULTS: /tmp/test-results
       DRUPAL_VERSION: V8
@@ -32,6 +32,8 @@ jobs:
           name: Run Jest Tests
           command: |
             node --version
+            nvm install v10
+            node --version
             npm run test
       - run:
           name: Install DKTL
@@ -45,7 +47,6 @@ jobs:
           name: Initialize Project
           command: |
             export PATH=$PATH:~/dkan-tools/bin
-            which dktl
             mkdir ~/sandbox
             cd ~/sandbox
             dktl init
