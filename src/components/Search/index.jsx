@@ -45,7 +45,7 @@ const Search = ({
     actions.page = 'UPDATE_CURRENT_PAGE';
     actions.fulltext = 'UPDATE_FULLTEXT';
     actions.sort = 'UPDATE_SORT_ONLY';
-    actions.sort_order = 'UPDATE_SORT_ORDER';
+    actions['sort-order'] = 'UPDATE_SORT_ORDER';
 
     const urlOptions = Object.keys(actions);
 
@@ -129,7 +129,7 @@ const Search = ({
     const state = { ...searchState };
 
     // Set other url parameters
-    const urlOptions = ['fulltext', 'sort', 'sort_order', 'page-size', 'page'];
+    const urlOptions = ['fulltext', 'sort', 'sort-order', 'page-size', 'page'];
     urlOptions.forEach((option) => {
       // We only want to store state in the url if they are not the default state.
       if (state[option] && state[option] !== defaultState[option]) {
