@@ -7,7 +7,7 @@ jobs:
         default: "1.2.0"
     parallelism: 1
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-1604:201903-01
     environment:
       TEST_RESULTS: /tmp/test-results
       DRUPAL_VERSION: V8
