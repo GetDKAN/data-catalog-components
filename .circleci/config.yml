@@ -69,6 +69,7 @@ jobs:
           command: |
             export PATH=$PATH:~/dkan-tools/bin
             cd ~/sandbox
+            dktl dc up -d
             dktl drush user:create testuser --password="2jqzOAnXS9mmcLasy"
             dktl drush en sample_content frontend -y
             dktl drush dkan:sample-content:create
