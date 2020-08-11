@@ -30,7 +30,9 @@ jobs:
       #       - /home/circleci/.npm
       - run:
           name: Run Jest Tests
-          command: npm run test
+          command: |
+            node --version
+            npm run test
       - run:
           name: Install DKTL
           command: |
