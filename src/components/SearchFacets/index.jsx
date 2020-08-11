@@ -30,6 +30,8 @@ const SearchFacets = ({
           selected={selected}
           toggleClasses={toggleClasses}
           InputComponent={InputComponent}
+          reset={facetInfo[1].reset}
+          selectedFacets={selectedFacets}
         />
       );
     },
