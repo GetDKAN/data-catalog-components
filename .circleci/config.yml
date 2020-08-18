@@ -30,14 +30,11 @@ jobs:
       - run:
           name: Install DKTL
           command: |
-            cd ~
             git clone -b $DKTL_VERSION https://github.com/GetDKAN/dkan-tools.git ~/dkan-tools
             echo "export PATH=~/dkan-tools/bin:$PATH" >> $BASH_ENV
-            which dktl
       - run:
           name: Run cypress tests
           command: |
-            export PATH=$PATH:~/dkan-tools/bin
             mkdir ~/sandbox
             cd ~/sandbox
             dktl init
