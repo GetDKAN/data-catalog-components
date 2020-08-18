@@ -55,6 +55,8 @@ jobs:
             cat node_modules/@civicactions/data-catalog-components/package.json
             dktl frontend:install
             dktl frontend:build
+            dktl drush config-set frontend.config build_folder '/build' -y
+            dktl drush config-set frontend.config frontend_path '/frontend' -y
             dktl drush cr
             dktl frontend:test
       - store_artifacts:
