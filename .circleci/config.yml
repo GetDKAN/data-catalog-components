@@ -43,13 +43,13 @@ jobs:
             dktl install:sample
             dktl frontend:install
             git clone --single-branch -b $CIRCLE_BRANCH https://github.com/GetDKAN/data-catalog-components.git
-            cd data-catalog-compontents
+            cd ~/sandbox/data-catalog-compontents
             npm install --unsafe-perms
             npm pack --unsafe-perm
             filename=`ls ./ | grep tgz`
             echo $filename
             cd ~/sandbox/src/frontend
-            npm install ../../$filename
+            npm install ../../data-catalog-components/$filename
             cat package.json
             rm -rf node_modules
             rm package-lock.json
