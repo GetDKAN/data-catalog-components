@@ -76,6 +76,8 @@ jobs:
             dktl drush search-api-index
             dktl dc exec web chmod -R 777 /var/www/docroot/data-catalog-frontend
             dktl dc run cli git clone --single-branch -b $CIRCLE_BRANCH https://github.com/GetDKAN/data-catalog-components.git
+            version=$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json)
+            echo $version
             dktl dc run cli npm install --prefix /var/www/data-catalog-components --unsafe-perm
             dktl dc run -w /var/www/data-catalog-components cli npm pack --unsafe-perm
             dktl dc run -w /var/www/docroot/data-catalog-frontend cli npm install ../../data-catalog-components/civicactions-data-catalog-components-<< parameters.pr-version >>.tgz
