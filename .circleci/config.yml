@@ -41,6 +41,7 @@ jobs:
             dktl make
             dktl install
             dktl install:sample
+            dktl frontend:install
             git clone --single-branch -b $CIRCLE_BRANCH https://github.com/GetDKAN/data-catalog-components.git
             cd ~/sandbox/data-catalog-components
             npm install --unsafe-perms
