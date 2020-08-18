@@ -50,6 +50,7 @@ jobs:
             echo $filename
             cd ~/sandbox/src/frontend
             npm install ../../data-catalog-components/$filename
+            npm rebuild node-sass
             cat package.json
             rm -rf node_modules
             rm package-lock.json
