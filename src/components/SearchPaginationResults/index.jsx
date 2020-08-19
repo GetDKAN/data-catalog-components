@@ -19,7 +19,7 @@ const SearchPaginationResults = ({
       -
       {currentHighestResult}
       {' '}
-      out of
+      of
       {' '}
       {total}
       {' '}
