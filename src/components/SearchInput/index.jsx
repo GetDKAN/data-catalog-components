@@ -29,7 +29,9 @@ const SearchInput = ({
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      onChangeFunction({ type: 'UPDATE_FULLTEXT', data: { fulltext: searchQuery } });
+      if(searchQuery !== value) {
+        onChangeFunction({ type: 'UPDATE_FULLTEXT', data: { fulltext: searchQuery, page: 1 } });
+      }
     }, 500);
     return () => clearTimeout(timer);
   }, [searchQuery, onChangeFunction]);
