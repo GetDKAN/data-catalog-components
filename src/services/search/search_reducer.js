@@ -14,7 +14,7 @@ export function updateSelectedFacetsState(state, action) {
   return {
     ...state,
     selectedFacets: newSelectedFacets,
-    page: 1,
+    page: action.data.page || 1,
   };
 }
 
@@ -70,13 +70,13 @@ export default function searchReducer(state, action) {
       return {
         ...state,
         fulltext: action.data.fulltext,
-        page: 1,
+        page: action.data.page || 1,
       };
     case 'UPDATE_PAGE_SIZE':
       return {
         ...state,
         'page-size': action.data['page-size'],
-        page: 1,
+        page: action.data.page || 1,
       };
     case 'UPDATE_CURRENT_PAGE':
       return {
@@ -94,7 +94,7 @@ export default function searchReducer(state, action) {
       return {
         ...state,
         selectedFacets: action.data.selectedFacets,
-        page: 1,
+        page: action.data.page || 1,
       };
     case 'RESET_ALL':
       return {
