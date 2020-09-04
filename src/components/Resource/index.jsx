@@ -28,9 +28,8 @@ const Resource = ({
   children,
   resource,
   showDBColumnNames,
+  transformQueryData: handleTransformQueryData,
 }) => {
-
-
   const [resourceState, dispatch] = useReducer(
     resourceReducer,
     defaultResourceState,
@@ -56,7 +55,17 @@ const Resource = ({
     //   }
     // }
     async function queryStore() {
-      dispatch(await queryResourceData(resourceState, showDBColumnNames));
+      let resourceData;
+
+      if (handleTransformQueryData) {
+        resourceData = handleTransformQueryData({
+          ...resourceState,
+        });
+      } else {
+        resourceData = resourceState;
+      }
+
+      dispatch(await queryResourceData(resourceData, showDBColumnNames));
     }
     if (resourceState.updateQuery) {
       queryStore();
@@ -159,11 +168,13 @@ const Resource = ({
 
 Resource.defaultProps = {
   showDBColumnNames: false,
+  transformQueryData: null,
 };
 
 Resource.propTypes = {
   apiURL: PropTypes.string.isRequired,
   showDBColumnNames: PropTypes.bool,
+  transformQueryData: PropTypes.func,
 };
 
 export default Resource;
