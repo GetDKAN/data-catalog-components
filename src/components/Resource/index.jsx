@@ -87,15 +87,15 @@ const Resource = ({
   const { columns, currentPage } = resourceState;
   const data = resourceState.values;
 
-
   // Define a default UI for filtering
   function DefaultColumnFilter({
-    column: { filterValue, preFilteredRows, setFilter },
+    column: { filterValue, preFilteredRows, setFilter, Header },
   }) {
     const count = preFilteredRows ? preFilteredRows.length : 0;
 
     return (
       <input
+        aria-label={Header}
         value={filterValue || ''}
         onChange={(e) => {
           setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
