@@ -1,7 +1,7 @@
 node_modules
 package-lock.json
-lib
-dist
+# lib
+# dist
 .idea
 .docz
 docs
