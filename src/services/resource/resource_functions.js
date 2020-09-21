@@ -36,25 +36,32 @@ export function advancedColumns(columns = [], updatedColumns = [], excludedColum
 // Create a new datastore using the DKAN datastore.
 export async function getDKANDatastore(rootURL, resource, initLimit = 20, showDBCols = false) {
   const { identifier } = resource;
-  const checkForDatastore = await axios.get(`${rootURL}datastore/sql/?query=[SELECT COUNT(*) FROM ${identifier}]${showDBCols ? '&show-db-columns' : ''}`)
-    .then((res) => res.data)
-    .catch((e) => {
-      // eslint-disable-next-line no-console
-      console.warn(e.message);
-    });
-  if (checkForDatastore) {
+  const store = await datastore.create(identifier, rootURL);
+  const {columns, numOfRows} = await store.getDatastoreInfo();
+  if (numOfRows) {
     // eslint-disable-next-line
-    const store = await datastore.create(identifier, rootURL);
-    const {sqlColumns, numOfRows} = await store.getDatastoreInfo();
+    console.log(showDBCols)
+    const items = await store.query(
+      null,
+      null,
+      null,
+      initLimit,
+      0,
+      null,
+      false,
+      showDBCols,
+    );
+    console.log(items)
+    //const sqlColumns = await axios.get(`${rootURL}datastore/sql/?query=[SELECT * FROM ${identifier}][LIMIT ${initLimit} OFFSET 0]${showDBCols ? '&show-db-columns' : ''}`);
     return {
       type: 'USE_STORE',
       data: {
         store,
         rowsTotal: numOfRows,
-        columns: prepareColumns(Object.keys(sqlColumns)),
+        columns: prepareColumns(columns),
         storeType: 'DKAN',
         queryAll: true,
-        values: sqlColumns,
+        values: items.data,
         count: numOfRows,
       },
     };
@@ -78,8 +85,7 @@ export async function queryResourceData(resourceData, showDBCols = false, includ
     resourceData.sort,
     includeCount,
     showDBCols,
-  )
-    .then((data) => data);
+  );
   // Make a second call to get the correct count.
   const count = await resourceData.store.query(
     resourceData.filters,
@@ -103,8 +109,7 @@ export async function queryResourceData(resourceData, showDBCols = false, includ
 
 // Return all rows from the datastore.
 export async function queryAllResourceData(store) {
-  const items = await store.query(null, null, null, 0, null, null)
-    .then((data) => data);
+  const items = await store.query(null, null, null, 0, null, null);;
   return {
     type: 'QUERY_STORE',
     data: {

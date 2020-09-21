@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const datastore = {
-  create: function(rootUrl, id) {
+  create: function(id, rootUrl) {
     const entity = Object.create(this);
     entity.rootUrl = rootUrl;
     entity.id = id;
@@ -9,7 +9,7 @@ const datastore = {
     return entity;
   },
   getDatastoreInfo: async function() {
-    return await axios.get(`${this.rootUrl}/datastore/imports/${this.id}`)
+    return await axios.get(`${this.rootUrl}datastore/imports/${this.id}`)
       .then((data) => {
         if (data) {
           return data.data;
@@ -27,7 +27,7 @@ const datastore = {
       v.value = `%25${v.value}%25`;
       return v;
     });
-    return this.fetch(range, page * range, new_q, sort[0], count);
+    return this.fetch(range, page * range, new_q, sort[0], count, showDBColumnNames);
   },
   fetch: async function(limit, offset, where, sort, count, showDBColumnNames) {
     let query = '';
@@ -61,11 +61,12 @@ const datastore = {
       limit_string = `[LIMIT ${limit} OFFSET ${offset}]`;
     }
 
-    const dbColumns = showDBColumnNames ? '$show-db-columns' : '';
-    query = `/datastore/sql/?query=[SELECT ${fields} FROM ${this.id}]${where_string}${sort_string}${limit_string};${dbColumns}`;
+    const dbColumns = showDBColumnNames ? '&show-db-columns' : '';
+    query = `datastore/sql/?query=[SELECT ${fields} FROM ${this.id}]${where_string}${sort_string}${limit_string};${dbColumns}`;
+    console.log('q', query);
     return await axios.get(this.rootUrl + query)
       .then((res) => {
-        this.data = response.data;
+        this.data = res.data;
         return ({data: this.data, count: this.data.length});
       })
       .catch((error) => {
