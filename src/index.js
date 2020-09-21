@@ -61,6 +61,8 @@ export {
   advancedColumns,
 } from './services/resource/resource_functions';
 
+export { default as datastore } from './services/resource/datastore';
+
 // TEMPLATES
 export { default as Announcement } from './templates/Announcement';
 export { default as Blocks } from './templates/Blocks';
