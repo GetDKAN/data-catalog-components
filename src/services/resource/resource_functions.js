@@ -44,18 +44,18 @@ export async function getDKANDatastore(rootURL, resource, initLimit = 20, showDB
     });
   if (checkForDatastore) {
     // eslint-disable-next-line
-    const sqlColumns = await axios.get(`${rootURL}datastore/sql/?query=[SELECT * FROM ${identifier}][LIMIT ${initLimit} OFFSET 0]${showDBCols ? '&show-db-columns' : ''}`);
-    const store = await new datastore.dkan(identifier, Object.keys(sqlColumns.data[0]), rootURL);
+    const store = await datastore.create(identifier, rootURL);
+    const {sqlColumns, count: numOfRows} = store.getDatastoreInfo().columns;
     return {
       type: 'USE_STORE',
       data: {
         store,
-        rowsTotal: Number(checkForDatastore[0].expression),
-        columns: prepareColumns(Object.keys(sqlColumns.data[0])),
+        rowsTotal: count,
+        columns: prepareColumns(Object.keys(sqlColumns)),
         storeType: 'DKAN',
         queryAll: true,
-        values: sqlColumns.data,
-        count: Number(checkForDatastore[0].expression),
+        values: sqlColumns,
+        count: count,
       },
     };
   }
