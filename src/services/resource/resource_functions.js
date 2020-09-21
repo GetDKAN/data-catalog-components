@@ -45,17 +45,17 @@ export async function getDKANDatastore(rootURL, resource, initLimit = 20, showDB
   if (checkForDatastore) {
     // eslint-disable-next-line
     const store = await datastore.create(identifier, rootURL);
-    const {sqlColumns, count: numOfRows} = store.getDatastoreInfo().columns;
+    const {sqlColumns, numOfRows} = await store.getDatastoreInfo();
     return {
       type: 'USE_STORE',
       data: {
         store,
-        rowsTotal: count,
+        rowsTotal: numOfRows,
         columns: prepareColumns(Object.keys(sqlColumns)),
         storeType: 'DKAN',
         queryAll: true,
         values: sqlColumns,
-        count: count,
+        count: numOfRows,
       },
     };
   }
