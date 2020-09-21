@@ -40,7 +40,6 @@ export async function getDKANDatastore(rootURL, resource, initLimit = 20, showDB
   const {columns, numOfRows} = await store.getDatastoreInfo();
   if (numOfRows) {
     // eslint-disable-next-line
-    console.log(showDBCols)
     const items = await store.query(
       null,
       null,
@@ -51,8 +50,6 @@ export async function getDKANDatastore(rootURL, resource, initLimit = 20, showDB
       false,
       showDBCols,
     );
-    console.log(items)
-    //const sqlColumns = await axios.get(`${rootURL}datastore/sql/?query=[SELECT * FROM ${identifier}][LIMIT ${initLimit} OFFSET 0]${showDBCols ? '&show-db-columns' : ''}`);
     return {
       type: 'USE_STORE',
       data: {

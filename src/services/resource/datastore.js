@@ -3,13 +3,17 @@ import axios from 'axios';
 const datastore = {
   create: function(id, rootUrl) {
     const entity = Object.create(this);
-    entity.rootUrl = rootUrl;
+    if (rootUrl.slice(-1) === '/') {
+      entity.rootUrl = rootUrl.slice(0, -1);
+    } else {
+      entity.rootUrl = rootUrl;
+    }
     entity.id = id;
     entity.columns = null;
     return entity;
   },
   getDatastoreInfo: async function() {
-    return await axios.get(`${this.rootUrl}datastore/imports/${this.id}`)
+    return await axios.get(`${this.rootUrl}/datastore/imports/${this.id}`)
       .then((data) => {
         if (data) {
           return data.data;
@@ -62,7 +66,7 @@ const datastore = {
     }
 
     const dbColumns = showDBColumnNames ? '&show-db-columns' : '';
-    query = `datastore/sql/?query=[SELECT ${fields} FROM ${this.id}]${where_string}${sort_string}${limit_string};${dbColumns}`;
+    query = `/datastore/sql/?query=[SELECT ${fields} FROM ${this.id}]${where_string}${sort_string}${limit_string};${dbColumns}`;
     console.log('q', query);
     return await axios.get(this.rootUrl + query)
       .then((res) => {
