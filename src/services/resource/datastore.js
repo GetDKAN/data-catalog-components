@@ -47,7 +47,7 @@ const datastore = {
 
     let sort_string = '';
     if(typeof(sort) === 'object') {
-      sort_string = `[ORDER BY ${sort.id}]`;
+      sort_string = `[ORDER BY ${sort.id} `;
       if(sort.desc) {
         sort_string += 'DESC]';
       }
@@ -67,7 +67,6 @@ const datastore = {
 
     const dbColumns = showDBColumnNames ? '&show-db-columns' : '';
     query = `/datastore/sql/?query=[SELECT ${fields} FROM ${this.id}]${where_string}${sort_string}${limit_string};${dbColumns}`;
-    console.log('q', query);
     return await axios.get(this.rootUrl + query)
       .then((res) => {
         this.data = res.data;
