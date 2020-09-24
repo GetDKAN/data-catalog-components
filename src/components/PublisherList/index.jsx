@@ -10,7 +10,7 @@ function PublisherList(props) {
     content = props.items.map((item) => (
       <Organization
         name={item.name}
-        key={item.identifier}
+        identifier={item.identifier}
         imageUrl={item.imageUrl}
         description={item.description}
         searchUrl={item.searchUrl}
