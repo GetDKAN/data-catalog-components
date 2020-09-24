@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Announcement = ({
   heading, children, role, variation,
 }) => {
-  let icon = 'info-circle';
+  let icon = null;
   switch (variation) {
     case 'success':
       icon = 'check-circle';
@@ -16,8 +16,11 @@ const Announcement = ({
     case 'error':
       icon = 'times-circle';
       break;
+    case 'info':
+      icon = 'info-circle';
+      break;
     default:
-      icon = 'info-cirlce';
+      icon = null;
   }
   return (
     <div
@@ -42,9 +45,9 @@ const Announcement = ({
 };
 
 Announcement.defaultProps = {
-  icon: '',
   heading: 'Announcement',
   role: 'alert',
+  variation: null,
 };
 
 Announcement.propTypes = {

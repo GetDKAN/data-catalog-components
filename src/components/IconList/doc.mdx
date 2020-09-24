@@ -6,7 +6,8 @@ route: /components/icon-list
 
 import { Playground, Props } from 'docz'
 import IconList from './index'
-import TopicIcon from '../../templates/TopicIcon'
+import IconListItem from '../IconListItem'
+import themes from '../../examples/themes.json'
 
 # Icon List
 
@@ -17,6 +18,5 @@ import TopicIcon from '../../templates/TopicIcon'
 ## Basic usage
 
 <Playground>
-  <IconList component={TopicIcon} />
+  <IconList paneTitle="My list of theme links" component={IconListItem} items={themes} />
 </Playground>
-

@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Wrapper from './Wrapper';
 
 const PageHeader = ({ title }) => (
-  <Wrapper>
+  <div>
     <h1>{title}</h1>
-  </Wrapper>
+  </div>
 );
 
 PageHeader.propTypes = {

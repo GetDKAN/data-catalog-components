@@ -6,8 +6,10 @@ route: /components/search-list-item
 
 import { Playground, Props } from 'docz'
 import SearchListItem from './index'
+import items from '../../../stories/data/search.json'
 
 # Search List Item
+This is the dataset _teaser_ for display on the search results page and will link to the full dataset page.
 
 ## Properties
 
@@ -18,13 +20,30 @@ import SearchListItem from './index'
 <Playground>
   <SearchListItem
     item={{
-      ref: "/",
-      title: "Title",
-      description: "This is the description.",
-      publisher: undefined,
-      format: 'csv',
-      theme: [],
-      identifier: "123",
-    }}
+    ref: '/',
+    title: 'Dataset Title',
+    description: 'This is the description.',
+    publisher: 'Data Provider Name',
+    format: [
+              {
+                "identifier": 1,
+                "format": "csv"
+              },
+              { "identifier":2,
+                "format": "json"
+              },
+              { "identifier":3,
+                "format": "pdf"
+              },
+              { "identifier":4,
+                "format": "rdf"
+              },
+              { "identifier":5,
+                "format": "xml"
+              }
+          ],
+    theme: ['category'],
+    identifier: '123',
+  }}
   />
 </Playground>
