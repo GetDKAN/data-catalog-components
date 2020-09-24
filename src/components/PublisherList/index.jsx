@@ -13,6 +13,7 @@ function PublisherList(props) {
         key={item.identifier}
         imageUrl={item.imageUrl}
         description={item.description}
+        searchUrl={item.searchUrl}
       />
     ));
   }
