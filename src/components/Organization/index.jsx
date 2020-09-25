@@ -4,9 +4,9 @@ import { Link } from '@reach/router';
 
 function Organization(props) {
   const {
-      name, description, key, imageUrl, searchUrl, alignment
+      name, description, key, imageUrl, searchUrl, alignment,
   } = props;
-  const image = <img alt={name || "Organization Image"} src={imageUrl} />;
+  const image = <img alt={name || 'Organization Image'} src={imageUrl} />;
   const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
 
   return (
