@@ -4,7 +4,9 @@ import { Input, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { isEmpty } from 'lodash'
 
+import { resetSelectedFacets } from '../../../services/search/search_functions';
 import ToggleBlock from '../../ToggleBlock';
 import ShowMoreContainer from '../../ShowMoreContainer';
 
@@ -16,6 +18,13 @@ const SearchFacet = ({
   facets,
   dispatch,
   selected,
+  toggleClasses,
+  InputComponent,
+  reset: {
+    active: resetActive,
+    icon: resetIcon
+  },
+  selectedFacets,
 }) => {
   if (facets.length === 0) {
     return '';
@@ -57,6 +66,21 @@ const SearchFacet = ({
       });
     };
 
+    if (InputComponent) {
+      return (
+        <InputComponent
+          key={key}
+          checked={checked}
+          name={facetType}
+          type="checkbox"
+          value={itemName}
+          onChange={onChangeFunction}
+        >
+          {`${itemName} (${itemTotal})`}
+        </InputComponent>
+      );
+    }
+
     return (
       <div className="dc-facet-option" key={key}>
         <Input
@@ -81,29 +105,42 @@ const SearchFacet = ({
   });
 
   return (
-    <ToggleBlock
-      key={facetType}
-      // TODO: Fix this so it's adjustable
-      title={(
-        <span>
-          {myLabel}
-        </span>
-      )}
-      headingClasses={`facet-block-${facetType}-inner`}
-      innerClasses={`inner-${facetType}-facets`}
-    >
-      <ShowMoreContainer
-        container="div"
-        items={choices}
-        limit={10}
-      />
-    </ToggleBlock>
+    <div className='dc-search-facet-container'>
+      {(resetActive && !isEmpty(selected)) ? (
+        <button type='button' onClick={() => dispatch(resetSelectedFacets(selectedFacets, facetType))} className='facet-reset-button'>
+          {(resetIcon) && (
+            <span className="undo-icon">{resetIcon}</span>
+          )}
+          Reset
+        </button>
+      ) : null}
+      <ToggleBlock
+        key={facetType}
+        // TODO: Fix this so it's adjustable
+        title={(
+          <span>
+            {myLabel}
+          </span>
+        )}
+        headingClasses={`facet-block-${facetType}-inner${toggleClasses ? ` ${toggleClasses}` : ''}`}
+        innerClasses={`inner-${facetType}-facets`}
+      >
+        <ShowMoreContainer
+          container="div"
+          items={choices}
+          limit={10}
+        />
+      </ToggleBlock>
+    </div>
   );
 };
 
 SearchFacet.defaultProps = {
   label: '',
   selected: [],
+  toggleClasses: null,
+  InputComponent: null,
+  reset: { active: false },
 };
 
 SearchFacet.propTypes = {
@@ -112,6 +149,10 @@ SearchFacet.propTypes = {
   dispatch: PropTypes.func.isRequired,
   label: PropTypes.string,
   selected: PropTypes.arrayOf(PropTypes.arrayOf),
+  toggleClasses: PropTypes.string,
+  InputComponent: PropTypes.func,
+  selectedFacets: PropTypes.arrayOf(PropTypes.array),
+  reset: PropTypes.object,
 };
 
 export default SearchFacet;
