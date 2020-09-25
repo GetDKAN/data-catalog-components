@@ -7,7 +7,6 @@ function Organization(props) {
       name, description, key, imageUrl, searchUrl, alignment
   } = props;
   const image = <img alt={name || "Organization Image"} src={imageUrl} />;
-  const alignment = props.alignment ? props.alignment : 'center';
   const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
 
   return (
