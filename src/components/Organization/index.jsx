@@ -11,7 +11,7 @@ function Organization(props) {
   const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
 
   return (
-    <div className="dc-org-block" style={{ textAlign: alignment }} key={key}>
+    <div className="dc-org-block" style={{ textAlign: alignment }}>
       <Link to={link} className="dc-org-image" alt="Organization Logo">
         {image}
         <h3 className="dc-org-name">
