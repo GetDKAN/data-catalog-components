@@ -16,6 +16,7 @@ function PublisherList(props) {
         imageUrl={item.imageUrl}
         description={item.description}
         searchUrl={item.searchUrl}
+        alignment={item.alignment}
       />
     ));
   }

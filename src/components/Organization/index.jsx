@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
 
 function Organization(props) {
-  const { 
+  const {
       name, description, key, imageUrl, searchUrl, alignment
   } = props;
   const image = <img alt={name || "Organization Image"} src={imageUrl} />;
@@ -11,8 +11,8 @@ function Organization(props) {
   const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
 
   return (
-    <div className="dc-org-block" style={{ textAlign: alignment }}>
-      <Link to={link} className="dc-org-image" alt="Organization Logo" key={key}>
+    <div className="dc-org-block" style={{ textAlign: alignment }} key={key}>
+      <Link to={link} className="dc-org-image" alt="Organization Logo">
         {image}
         <h3 className="dc-org-name">
           {name}
