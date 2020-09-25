@@ -6,8 +6,10 @@ route: /components/publisher-list
 
 import { Playground, Props } from 'docz'
 import PublisherList from './index'
+import items from '../../examples/publishers.json'
 
 # Publisher List
+Pass an array of 'publisher' objects that include the properties listed in the [Organization](/components/organization) component.
 
 ## Properties
 
@@ -16,5 +18,5 @@ import PublisherList from './index'
 ## Basic usage
 
 <Playground>
-  <PublisherList />
+  <PublisherList items={items}/>
 </Playground>

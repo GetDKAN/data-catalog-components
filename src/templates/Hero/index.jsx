@@ -11,11 +11,12 @@ const Hero = ({
   resetContent,
   includeReset,
   submitContent,
+  gradient,
 }) => {
   const [query, setQuery] = useState('');
   const background = image
     ? `url(${image})`
-    : 'linear-gradient(#162e51, #0978bc)';
+    : `linear-gradient(${gradient})`;
   async function handleSubmit(event) {
     event.preventDefault();
     let searchParams = '/search/';
@@ -62,6 +63,7 @@ Hero.defaultProps = {
   includeReset: true,
   resetContent: 'Clear',
   submitContent: 'Go',
+  gradient: '#cccccc,#eeeeee',
 };
 
 Hero.propTypes = {
@@ -72,6 +74,7 @@ Hero.propTypes = {
   resetContent: PropTypes.node,
   includeReset: PropTypes.bool,
   submitContent: PropTypes.node,
+  gradient: PropTypes.string,
 };
 
 export default Hero;

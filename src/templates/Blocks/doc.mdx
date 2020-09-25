@@ -6,11 +6,11 @@ route: /templates/blocks
 
 import { Playground, Props } from 'docz'
 import Blocks from './index'
+import BasicBlock from './BasicBlock'
 import StatBlock from './StatBlock'
 import StepsBlock from './StepsBlock'
-import './blocks.scss'
-import '../../theme/styles/general.scss'
 import '../../theme/styles/index.scss'
+import items from '../../examples/blocks.json'
 
 # Blocks
 
@@ -21,23 +21,9 @@ import '../../theme/styles/index.scss'
 ## Basic usage
 
 <Playground>
-  <Blocks />
-</Playground>
-
-<Playground>
-  <StatBlock
-     content={{
-       title: "dkan",
-      content: "Foo"
-    }}
-  />
-</Playground>
-
-<Playground>
-  <StepsBlock
-    content={{
-      title: "dkan",
-      content: "Foo"
-    }}
+  <Blocks
+    paneTitle="A series of block content"
+    items={items.basic}
+    component={BasicBlock}
   />
 </Playground>

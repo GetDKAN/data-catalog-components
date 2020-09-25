@@ -1,9 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "@reach/router";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from '@reach/router';
 
 function Organization(props) {
-  const { name, description, key, imageUrl, searchUrl } = props;
+  const { 
+      name, description, key, imageUrl, searchUrl, alignment
+  } = props;
   const image = <img alt={name || "Organization Image"} src={imageUrl} />;
   const alignment = props.alignment ? props.alignment : 'center';
   const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
@@ -16,29 +18,31 @@ function Organization(props) {
           {name}
         </h3>
       </Link>
-      {description &&
+      {description && (
         <div className="dc-org-description">
           {description}
         </div>
-      }
+      )}
     </div>
   );
 }
 
 Organization.defaultProps = {
-  name: "",
-  description: "",
-  key: "",
+  alignment: 'center',
+  name: '',
+  description: '',
+  key: '',
   imageUrl:
-    "https://s3.amazonaws.com/dkan-default-content-files/files/group.png"
+    'https://s3.amazonaws.com/dkan-default-content-files/files/group.png',
 };
 
 Organization.propTypes = {
+  alignment: PropTypes.string,
   name: PropTypes.string,
   description: PropTypes.string,
   key: PropTypes.string,
   imageUrl: PropTypes.string,
-  searchUrl: PropTypes.string
+  searchUrl: PropTypes.string,
 };
 
 export default Organization;

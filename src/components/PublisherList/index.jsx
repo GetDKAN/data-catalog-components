@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Organization from "../Organization";
+import Organization from '../Organization';
 
 function PublisherList(props) {
-  let content = (<div></div>);
-  const custom = 'className' in props ? props.className : "";
+  const {
+    items, className,
+  } = props;
+  let content = (<div />);
 
-  if (props.items) {
+  if (items) {
     content = props.items.map((item) => (
       <Organization
         name={item.name}
@@ -19,14 +21,25 @@ function PublisherList(props) {
   }
 
   return (
-    <ul className={`dc-publisher-list ${custom}`}>
+    <ul className={`dc-publisher-list ${className}`}>
       {content}
     </ul>
   );
 }
 
+PublisherList.defaultProps = {
+  className: '',
+};
+
 PublisherList.propTypes = {
-  items: PropTypes.array,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    alignment: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    identifier: PropTypes.string,
+    imageUrl: PropTypes.string,
+    searchUrl: PropTypes.string,
+  })).isRequired,
   className: PropTypes.string,
 };
 

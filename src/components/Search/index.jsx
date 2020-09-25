@@ -51,9 +51,7 @@ const Search = ({
 
     urlOptions.forEach((param) => {
       if (params[param]) {
-        const data = {};
-        data[param] = params[param];
-
+        const data = params;
         dispatched = true;
         dispatch({
           type: actions[param],
@@ -72,6 +70,7 @@ const Search = ({
             type: 'UPDATE_FACETS',
             data: {
               newFacet,
+              page: params.page
             },
           });
         });
