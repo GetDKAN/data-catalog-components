@@ -13,11 +13,14 @@ export class dkan extends Datastore {
 
   columns = null
 
+  labelToColumn = null;
+
   constructor(id, columns, rootUrl) {
     super();
     this.id = id;
     this.columns = columns;
     this.rootUrl = rootUrl;
+    this.labelToColumn = [];
   }
 
   async getDatastoreInfo() {
@@ -40,7 +43,47 @@ export class dkan extends Datastore {
     });
   }
 
+  /**
+   * Translate a column to the 'real' column name.
+   *
+   * The frontend could be displaying the real column namd or a label.
+   * This function returns the correct value needed for querying.
+   *
+   * If we can't determine what the real column name is, we return an empty
+   * string.
+   */
+  getRealColumnName(column) {
+
+    const machineNames = Object.keys(this.labelToColumn);
+
+    if (machineNames.includes(column)) {
+      return column;
+    }
+
+    const realColumn = machineNames.reduce((accumulator, currentValue) => {
+      const info = this.labelToColumn[currentValue]
+
+      if (info.hasOwnProperty('description') &&
+          info.description === column) {
+        accumulator += currentValue;
+      }
+      return accumulator;
+    }, "");
+
+    if (realColumn.length > 0) {
+      return realColumn;
+    }
+
+    return ""
+  }
+
   async query(q = null, fields = null, facets = null, range = null, page = null, sort = null, count = false, showDBColumnNames) {
+
+    if (this.labelToColumn.length === 0) {
+      const info = await this.getDatastoreInfo();
+      this.labelToColumn = info.columns
+    }
+
     if (sort === null) {
       sort = [];
     }
@@ -51,6 +94,7 @@ export class dkan extends Datastore {
     }
 
     new_q.map((v) => {
+      v.id = this.getRealColumnName(v.id);
       v.value = `%25${v.value}%25`;
       return v;
     });
