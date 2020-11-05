@@ -1,0 +1,61 @@
+@import url(~bootstrap/dist/css/bootstrap.min.css);
+.dc-menu ul {
+  list-style-type: none;
+  list-style: none;
+  padding: 0; }
+  .dc-menu ul li {
+    list-style-type: none; }
+
+.dc-menu.nav-horizontal li {
+  display: inline-block; }
+
+.dc-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 12;
+  background: white;
+  border-radius: 5px; }
+
+.dc-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid black; }
+  .dc-modal-header .dc-modal-header-title {
+    margin-right: 10px; }
+  .dc-modal-header .dc-modal-close-button {
+    color: #333333;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-size: 0;
+    color: white; }
+    .dc-modal-header .dc-modal-close-button:active, .dc-modal-header .dc-modal-close-button:focus {
+      background: transparent;
+      border: none;
+      box-shadow: none; }
+
+.dc-modal-body {
+  padding: 10px; }
+
+.dc-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-top: 1px solid black; }
+
+.dc-datatable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.dc-hero-block.left {
+  text-align: left; }
+
+.dc-hero-block.center {
+  text-align: center; }
+
+.dc-hero-block.right {
+  text-align: right; }
