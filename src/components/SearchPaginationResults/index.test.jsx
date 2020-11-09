@@ -25,6 +25,6 @@ describe('<SearchPaginationResults />', () => {
       />,
     );
     expect(screen.getByText(/datasets/).closest('div')).toHaveClass('custom');
-    expect(screen.getByText(/datasets/).closest('div')).toHaveTextContent('11-20 out of 500 datasets');
+    expect(screen.getByText(/datasets/).closest('div')).toHaveTextContent('11-20 of 500 datasets');
   });
 });
