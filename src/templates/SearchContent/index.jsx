@@ -47,7 +47,9 @@ const SearchContent = () => {
           >
             <ol>
               {items.map((item) => (
-                <SearchListItem key={item.identifier} item={item} />
+                <li>
+                  <SearchListItem key={item.identifier} item={item} />
+                </li>
               ))}
             </ol>
           </Loader>
