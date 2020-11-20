@@ -35,6 +35,7 @@ jobs:
       - run:
           name: Run cypress tests
           command: |
+            nvm install 10
             mkdir ~/sandbox
             cd ~/sandbox
             dktl init
