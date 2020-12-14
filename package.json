@@ -12,8 +12,8 @@
   "scripts": {
     "css:watch": "node-sass --omit-source-map-url src/theme/styles/index.scss dist/index.css -w",
     "lib:watch": "babel src -d lib --watch",
-    "lib": "npm run clean && babel src -d lib && node-sass --omit-source-map-url src/theme/styles/index.scss dist/index.css",
-    "clean": "rm -rf lib && mkdir lib",
+    "lib": "npm run clean && babel src -d lib && cp -R src/styles/scss dist/",
+    "clean": "rm -rf lib && mkdir lib && rm -rf dist && mkdir dist",
     "prepublish": "npm run lib",
     "storybook": "NODE_PATH=src start-storybook -p 6006",
     "deploy-storybook": "storybook-to-ghpages",
