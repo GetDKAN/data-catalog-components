@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
-import { Text } from '@civicactions/data-catalog-components';
+import Text from '../../components/Text';
 
 class BasicBlock extends React.PureComponent {
   render() {
