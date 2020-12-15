@@ -32,6 +32,7 @@ BasicBlock.propTypes = {
   title: PropTypes.string,
   content: PropTypes.string,
   image: PropTypes.string,
+  ref: PropTypes.string,
 };
 
 export default BasicBlock;
