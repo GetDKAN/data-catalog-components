@@ -1,38 +1,66 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
-import Text from '../../components/Text';
+import { Text } from '@civicactions/data-catalog-components';
 
 class BasicBlock extends React.PureComponent {
   render() {
     const { content } = this.props;
     const img = content.image ? <div><img alt="" src={content.image} /></div> : null;
 
-    return (
-      <div key={content.ref} className="basic-block">
-        <h2>
-          <Link to={content.ref}>
+    let block = '';
+
+    if (content.ref) {
+      block = (
+        <div key={content.ref} className="basic-block">
+          <h2>
+            <Link to={content.ref}>
+              {img}
+              {content.title}
+            </Link>
+          </h2>
+          <Text value={content.teaser} />
+        </div>
+      );
+    } else {
+      block = (
+        <div key={content.title} className="basic-block">
+          <h2>
             {img}
             {content.title}
-          </Link>
-        </h2>
-        <Text value={content.content} />
-      </div>
+          </h2>
+          <Text value={content.teaser} />
+        </div>
+      );
+    }
+
+    return (
+      <>
+        {block}
+      </>
     );
   }
 }
 
 BasicBlock.defaultProps = {
-  title: '',
-  content: '',
-  image: '',
+  content: [
+    {
+      title: '',
+      content: '',
+      image: '',
+      teaser: '',
+      ref: '',
+    },
+  ],
 };
 
 BasicBlock.propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.string,
-  image: PropTypes.string,
-  ref: PropTypes.string,
+  content: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    teaser: PropTypes.string,
+    image: PropTypes.string,
+    ref: PropTypes.string,
+  })),
 };
 
 export default BasicBlock;
