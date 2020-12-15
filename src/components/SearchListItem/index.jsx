@@ -53,10 +53,14 @@ const SearchListItem = ({
     if (!theme) {
       return null;
     } else {
-      return theme.map((topic) => {
+      return theme.map((topic, idx) => {
         return(
-          <div className="dc-item-theme">
-            {themes(theme)}
+          <div
+            className="dc-topic-wrapper"
+            key={idx}
+          >
+            <TopicIcon title={topic} height={16} width={16} />
+            {topic}
           </div>
         );
       })
