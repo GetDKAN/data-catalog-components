@@ -6,12 +6,16 @@ import Text from '../../components/Text';
 class BasicBlock extends React.PureComponent {
   render() {
     const { content } = this.props;
-    const img = content.image ? <Link to={content.ref}><img alt="" src={content.image} /></Link> : null;
+    const img = content.image ? <div><img alt="" src={content.image} /></div> : null;
 
     return (
       <div key={content.ref} className="basic-block">
-        {img}
-        <h2><Link to={content.ref}>{content.title}</Link></h2>
+        <h2>
+          <Link to={content.ref}>
+            {img}
+            {content.title}
+          </Link>
+        </h2>
         <Text value={content.content} />
       </div>
     );
