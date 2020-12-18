@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import excerpts from 'excerpts';
 import TopicIcon from '../../templates/TopicIcon';
-import TopicWrapper from '../../components/TopicWrapper';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
 import { Link } from '@reach/router';
@@ -54,9 +53,15 @@ const SearchListItem = ({
     if (!theme) {
       return null;
     } else {
-      return theme.map((topic) => {
+      return theme.map((topic, idx) => {
         return(
-          <TopicWrapper component={TopicIcon} topic={topic}/>
+          <div
+            className="dc-topic-wrapper"
+            key={idx}
+          >
+            <TopicIcon title={topic} height={16} width={16} />
+            {topic}
+          </div>
         );
       })
     }
