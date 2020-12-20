@@ -8,7 +8,7 @@ const TopicWrapper = ({ component, topic }) => {
     <Link
       className="dc-topic-wrapper"
       key={`dist-${topic}-${Math.random() * 10}`}
-      to={`search?theme=${topic}`}
+      to={`/search?theme=${topic}`}
     >
       <ComponentToRender title={topic} height="16" width="16" />
       {topic}
