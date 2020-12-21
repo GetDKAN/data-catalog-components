@@ -13,7 +13,7 @@ describe('<SearchPaginationResults />', () => {
       />,
     );
     expect(screen.getByText(/datasets/).closest('div')).toHaveClass('dataset-results-count');
-    expect(screen.getByText(/datasets/).closest('div')).toHaveTextContent('1-20 out of 100 datasets');
+    expect(screen.getByText(/datasets/).closest('div')).toHaveTextContent('1-20 of 100 datasets');
   });
   test('renders with custom class and correct message', () => {
     render(
@@ -25,6 +25,6 @@ describe('<SearchPaginationResults />', () => {
       />,
     );
     expect(screen.getByText(/datasets/).closest('div')).toHaveClass('custom');
-    expect(screen.getByText(/datasets/).closest('div')).toHaveTextContent('11-20 out of 500 datasets');
+    expect(screen.getByText(/datasets/).closest('div')).toHaveTextContent('11-20 of 500 datasets');
   });
 });
