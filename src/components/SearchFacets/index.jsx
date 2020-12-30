@@ -32,6 +32,7 @@ const SearchFacets = ({
           InputComponent={InputComponent}
           reset={facetInfo[1].reset}
           selectedFacets={selectedFacets}
+          inputType={facetInfo[1].inputType}
         />
       );
     },

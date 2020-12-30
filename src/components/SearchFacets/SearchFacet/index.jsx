@@ -4,7 +4,7 @@ import { Input, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { isEmpty } from 'lodash'
+import { isEmpty } from 'lodash';
 
 import { resetSelectedFacets } from '../../../services/search/search_functions';
 import ToggleBlock from '../../ToggleBlock';
@@ -22,9 +22,10 @@ const SearchFacet = ({
   InputComponent,
   reset: {
     active: resetActive,
-    icon: resetIcon
+    icon: resetIcon,
   },
   selectedFacets,
+  inputType,
 }) => {
   if (facets.length === 0) {
     return '';
@@ -58,6 +59,18 @@ const SearchFacet = ({
 
       const newFacet = [facetType, value];
 
+      if (inputType === 'radio') {
+        return dispatch({
+          type: 'RESET_FACETS',
+          data: {
+            selectedFacets: [
+              ...selectedFacets.filter(([type]) => type !== facetType),
+              newFacet,
+            ],
+          },
+        });
+      }
+
       dispatch({
         type: 'UPDATE_FACETS',
         data: {
@@ -72,7 +85,7 @@ const SearchFacet = ({
           key={key}
           checked={checked}
           name={facetType}
-          type="checkbox"
+          type={inputType}
           value={itemName}
           onChange={onChangeFunction}
         >
@@ -87,7 +100,7 @@ const SearchFacet = ({
           checked={checked}
           id={key}
           name={facetType}
-          type="checkbox"
+          type={inputType}
           value={itemName}
           onChange={onChangeFunction}
         />
@@ -141,6 +154,7 @@ SearchFacet.defaultProps = {
   toggleClasses: null,
   InputComponent: null,
   reset: { active: false },
+  inputType: 'checkbox'
 };
 
 SearchFacet.propTypes = {
@@ -152,7 +166,10 @@ SearchFacet.propTypes = {
   toggleClasses: PropTypes.string,
   InputComponent: PropTypes.func,
   selectedFacets: PropTypes.arrayOf(PropTypes.array),
-  reset: PropTypes.object,
+  reset: PropTypes.shape({
+    active: PropTypes.bool,
+    icon: PropTypes.func,
+  }),
 };
 
 export default SearchFacet;
