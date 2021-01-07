@@ -78,8 +78,8 @@ export async function queryResourceData(resourceData, showDBCols = false, includ
     resourceData.sort,
     includeCount,
     showDBCols,
-  )
-    .then((data) => data);
+  ).then((data) => data);
+
   // Make a second call to get the correct count.
   const count = await resourceData.store.query(
     resourceData.filters,
@@ -90,13 +90,20 @@ export async function queryResourceData(resourceData, showDBCols = false, includ
     resourceData.sort,
     true,
     showDBCols,
-  )
-    .then((data) => data);
+  ).then((data) => data);
+
+  let mycount = 0
+
+  if('data' in count && Array.isArray(count.data) && count.data.length > 0 &&
+      'expression' in count.data[0]) {
+    mycount = Number(count.data[0].expression)
+  }
+
   return {
     type: 'QUERY_STORE',
     data: {
       values: items.data,
-      count: Number(count.data[0].expression),
+      count: mycount,
     },
   };
 }
