@@ -10,3 +10,14 @@ export const getDatastoreInfo = async (rootUrl, id) => {
 
     return data
 }
+
+export const runSqlQuery = async (rootUrl, query) => {
+  const { data } = await axios({
+    method: 'GET',
+    operationId: 'runSqlQuery',
+    baseURL: rootUrl,
+    url: `/datastore/sql/?query=${query}`
+  })
+
+  return data
+}
