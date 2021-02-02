@@ -124,7 +124,8 @@ export class dkan extends Datastore {
     let sort_string = '';
 
     if (typeof (sort) === 'object') {
-      sort_string = `[ORDER BY ${sort.id}`;
+      const id = this.getRealColumnName(sort.id)
+      sort_string = `[ORDER BY ${id}`;
       if (sort.desc === false) {
         sort_string += ' ASC]';
       } else {
