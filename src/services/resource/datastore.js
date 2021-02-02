@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import axios from 'axios';
+import { getDatastoreInfo } from "./api";
 
 class Datastore {
   async query(query = null, fields = null, facets = null, range = null, page = null, sort = null) {}
@@ -23,20 +23,6 @@ export class dkan extends Datastore {
     this.labelToColumn = [];
   }
 
-  async getDatastoreInfo() {
-    return await axios.get(`${this.rootUrl}datastore/imports/${this.id}`)
-      .then((data) => {
-        if (data) {
-          return data.data;
-        }
-        return null;
-      })
-      .catch((error) => {
-      // handle error
-        console.log(error);
-      });
-  }
-
   async getColumns() {
     return new Promise((resolve, reject) => {
       resolve(this.columns);
@@ -46,7 +32,7 @@ export class dkan extends Datastore {
   /**
    * Translate a column to the 'real' column name.
    *
-   * The frontend could be displaying the real column namd or a label.
+   * The frontend could be displaying the real column name or a label.
    * This function returns the correct value needed for querying.
    *
    * If we can't determine what the real column name is, we return an empty
@@ -79,8 +65,13 @@ export class dkan extends Datastore {
 
   async query(q = null, fields = null, facets = null, range = null, page = null, sort = null, count = false, showDBColumnNames) {
 
+    // Get information about columns and labels if we do not have it yet.
     if (this.labelToColumn.length === 0) {
-      const info = await this.getDatastoreInfo();
+      const info = await getDatastoreInfo(this.rootUrl, this.id);
+
+      // If we could not get any information, abort.
+      return null
+
       this.labelToColumn = info.columns
     }
 
