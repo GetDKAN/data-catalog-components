@@ -88,6 +88,14 @@ export class dkan extends Datastore {
       sort = [];
     }
 
+    let sort_object = sort[0]
+
+    if (typeof (sort_object) === 'object') {
+      sort_object = JSON.parse(JSON.stringify(sort_object));
+      const id = this.getRealColumnName(sort_object.id)
+      sort_object.id = id
+    }
+
     let new_q = [];
     if (q !== null) {
       new_q = JSON.parse(JSON.stringify(q));
@@ -99,7 +107,7 @@ export class dkan extends Datastore {
       return v;
     });
 
-    return this._fetch(range, page * range, new_q, sort[0], count, showDBColumnNames);
+    return this._fetch(range, page * range, new_q, sort_object, count, showDBColumnNames);
   }
 
   async update() {}
