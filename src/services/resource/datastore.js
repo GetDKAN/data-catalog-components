@@ -20,7 +20,6 @@ export class dkan extends Datastore {
   }
 
   async query(q = null, fields = null, facets = null, range = null, page = null, sort = null, count = false, showDBColumnNames) {
-
     // Get information about column labels.
     const { columns } = await getDatastoreInfo(this.rootUrl, this.id);
     this.labelToColumns = columns
@@ -106,14 +105,14 @@ export class dkan extends Datastore {
    */
   getRealColumnName(column) {
 
-    const machineNames = Object.keys(this.labelToColumn);
+    const machineNames = Object.keys(this.labelToColumns);
 
     if (machineNames.includes(column)) {
       return column;
     }
 
     const realColumn = machineNames.reduce((accumulator, currentValue) => {
-      const info = this.labelToColumn[currentValue]
+      const info = this.labelToColumns[currentValue]
 
       if (info.hasOwnProperty('description') &&
         info.description === column) {
