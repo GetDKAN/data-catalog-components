@@ -9,7 +9,7 @@ import DataIcon from '../../components/DataIcon';
 const DataTableHeader = () => {
   const { reactTable, resourceState, dispatch } = React.useContext(ResourceDispatch);
 
-  if (!reactTable.data.length) {
+  if (!reactTable.columns.length) {
     return null;
   }
   return (

@@ -45,7 +45,7 @@ const DataTable = () => {
     }
   }, [resourceState.store, filters]);
 
-  if (!reactTable.data.length) {
+  if (!reactTable.columns.length) {
     return null;
   }
 
@@ -103,6 +103,12 @@ const DataTable = () => {
           ))}
         </div>
         <div {...getTableBodyProps()} className="dc-tbody">
+          {page.length <= 0
+            &&(
+            <div className="tr dc-tr" style={{textAlign: 'center'}}>
+              No results found.
+            </div>)
+          }
           {page.map((row) => {
             prepareRow(row);
             return (
