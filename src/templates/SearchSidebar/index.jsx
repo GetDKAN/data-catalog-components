@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Label, Input } from 'reactstrap';
 import SearchFacets from '../../components/SearchFacets';
 import { SearchDispatch } from '../../services/search/search_defaults';
+import { BulletList } from 'react-content-loader';
 
 const SearchSidebar = ({ sortOptions }) => {
   const { searchState, dispatch, defaultFacets } = useContext(SearchDispatch);
-  const { facetsResults } = searchState;
+  const { facetsResults, loading } = searchState;
 
   return (
     <div className="dc-search-sidebar col-md-4 col-sm-12">
@@ -31,7 +32,8 @@ const SearchSidebar = ({ sortOptions }) => {
         </Input>
       </div>
       <div className="dc-search-sidebar-options">
-        {facetsResults && facetsResults.length
+        {loading ? <BulletList / > :
+        facetsResults && facetsResults.length
           && (
             <SearchFacets
               facetsConfig={defaultFacets}
@@ -39,7 +41,8 @@ const SearchSidebar = ({ sortOptions }) => {
               selectedFacets={searchState.selectedFacets}
               dispatch={dispatch}
             />
-          )}
+          )
+        }
       </div>
     </div>
   );

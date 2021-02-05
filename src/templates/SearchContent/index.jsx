@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import Loader from 'react-loader-advanced';
-// import LoadingSpin from 'react-loading-spin';
 import Pagination from 'react-js-pagination';
 import SearchResultsMessage from '../../components/SearchResultsMessage';
 import SearchListItem from '../../components/SearchListItem';
@@ -8,6 +6,7 @@ import SearchInput from '../../components/SearchInput';
 import SearchPaginationResults from '../../components/SearchPaginationResults';
 import SearchPageSizer from '../../components/SearchPageSizer';
 import { SearchDispatch } from '../../services/search/search_defaults';
+import { List } from 'react-content-loader';
 
 const SearchContent = () => {
   const { searchState, dispatch, defaultFacets } = useContext(SearchDispatch);
@@ -38,21 +37,19 @@ const SearchContent = () => {
             facetDelimiter=", "
             facetSeparator=" &amp; "
           />
-          <Loader
-            hideContentOnLoad
-            backgroundStyle={{ backgroundColor: '#f9fafb' }}
-            foregroundStyle={{ backgroundColor: '#f9fafb' }}
-            show={loading}
-            message={<p>loading</p>} //<LoadingSpin width="3px" primaryColor="#007BBC" />
-          >
-            <ol>
-              {items.map((item) => (
-                <li key={item.identifier}>
-                  <SearchListItem item={item} />
-                </li>
-              ))}
-            </ol>
-          </Loader>
+
+          {loading ?
+           <div>
+             <List/>
+           </div>  :
+           <ol>
+             {items.map((item) => (
+               <li key={item.identifier}>
+                 <SearchListItem item={item} />
+               </li>
+             ))}
+           </ol>}
+
           <div className="dc-pagination-container">
             <SearchPaginationResults
               total={Number(totalItems)}
