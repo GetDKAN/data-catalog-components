@@ -27,9 +27,6 @@ const SearchFacet = ({
   selectedFacets,
   inputType,
 }) => {
-  if (facets.length === 0) {
-    return '';
-  }
 
   let myLabel = '';
   if (!label) {
@@ -153,8 +150,9 @@ SearchFacet.defaultProps = {
   selected: [],
   toggleClasses: null,
   InputComponent: null,
+  selectedFacets: [],
   reset: { active: false },
-  inputType: 'checkbox'
+  inputType: 'checkbox',
 };
 
 SearchFacet.propTypes = {
@@ -170,6 +168,7 @@ SearchFacet.propTypes = {
     active: PropTypes.bool,
     icon: PropTypes.func,
   }),
+  inputType: PropTypes.string,
 };
 
 export default SearchFacet;

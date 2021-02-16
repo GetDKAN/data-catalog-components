@@ -93,6 +93,7 @@
     "@testing-library/jest-dom": "^5.10.1",
     "@testing-library/react": "^10.2.1",
     "@testing-library/react-hooks": "^3.3.0",
+    "@testing-library/user-event": "^12.7.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
