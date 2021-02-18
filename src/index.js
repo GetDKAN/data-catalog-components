@@ -1,4 +1,5 @@
 export { default as ApiDocs } from './components/ApiDocs';
+export { default as Card } from './components/Card';
 export { default as DataIcon } from './components/DataIcon';
 export { default as DataTableDensity } from './components/DataTable/DataTableDensity';
 export { default as DataTablePageResults } from './components/DataTable/DataTablePageResults';
