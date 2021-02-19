@@ -112,7 +112,7 @@ Card.defaultProps = {
   mediaClassName: "usa-card__media",
   imageClassName: "usa-card__img",
   includeFooter: true,
-  buttonAction: () => ({}),
+  buttonAction: null,
 }
 
 Card.propTypes = {
@@ -175,7 +175,7 @@ Card.propTypes = {
   /**
    * If the cards are part of a collection, this will change the h2 to an h3.
    */
-  isCollection: PropTypes.string,
+  isCollection: PropTypes.bool,
   /**
    * The media content can be any React renderable node.
    */
