@@ -25,6 +25,7 @@ export { default as DataTable } from './templates/DataTable';
 export { default as Header } from './templates/Header';
 export { default as Hero } from './templates/Hero';
 export { default as Footer } from './templates/Footer';
+export { default as PublisherList } from './templates/PublisherList';
 export { default as StatBlock } from './templates/Blocks/StatBlock';
 export { default as StepsBlock } from './templates/Blocks/StepsBlock';
 export { default as TopicIcon } from './templates/TopicIcon';
