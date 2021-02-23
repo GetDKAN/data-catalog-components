@@ -45,10 +45,7 @@ function mergedFacets(state, action) {
       }
     });
   }
-  return {
-    ...state,
-    facetsResults: final,
-  };
+  return { ...state, facetsResults: final };
 }
 
 export default function searchReducer(state, action) {
