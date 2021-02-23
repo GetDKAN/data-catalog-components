@@ -11,6 +11,7 @@ jobs:
     environment:
       TEST_RESULTS: /tmp/test-results
       DKTL_VERSION: "4.2.0"
+      CC_TEST_REPORTER_ID: 7fb6eaf0ab35ac9e1e6889b9af53f766331175459bd25bfaee419c1bb1438027
     steps:
       - checkout
       - run:
@@ -20,48 +21,18 @@ jobs:
             echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
             echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
           name: Install Dependencies and Run Jest Tests
           command: |
             nvm install 10
             npm install
             npm rebuild node-sass
             node --version
-            npm run test
-      - run:
-          name: Install DKTL
-          command: |
-            git clone -b $DKTL_VERSION https://github.com/GetDKAN/dkan-tools.git ~/dkan-tools
-            echo "export PATH=~/dkan-tools/bin:$PATH" >> $BASH_ENV
-      - run:
-          name: Run cypress tests
-          command: |
-            nvm install 10
-            mkdir ~/sandbox
-            cd ~/sandbox
-            dktl init
-            dktl make
-            dktl install
-            dktl install:sample
-            dktl frontend:get
-            dktl frontend:install
-            git clone --single-branch -b $CIRCLE_BRANCH https://github.com/GetDKAN/data-catalog-components.git
-            cd ~/sandbox/data-catalog-components
-            npm install --unsafe-perms
-            npm pack --unsafe-perm
-            filename=`ls ./ | grep tgz`
-            echo $filename
-            cd ~/sandbox/src/frontend
-            npm install ../../data-catalog-components/$filename
-            npm rebuild node-sass
-            cat package.json
-            cat node_modules/@civicactions/data-catalog-components/package.json
-            dktl frontend:install
-            dktl frontend:build
-            dktl drush config-set frontend.config build_folder '/build' -y
-            dktl drush config-set frontend.config frontend_path '/frontend' -y
-            dktl drush cr
-            dktl frontend:test
-      - store_artifacts:
-          path: ~/sandbox/src/frontend/cypress/screenshots
-      - store_artifacts:
-          path: ~/sandbox/src/frontend/cypress/videos
+            ./cc-test-reporter before-build
+            npx jest --coverage
+            ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
+
