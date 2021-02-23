@@ -18,6 +18,39 @@ export function updateSelectedFacetsState(state, action) {
   };
 }
 
+function mergedFacets(state, action) {
+  if (typeof action.data !== 'object' || !Array.isArray(action.data.facetsResults)) {
+    return { ...state }
+  }
+
+  const original = state.facetsResults
+  const facets = action.data.facetsResults
+
+  let final = []
+  if (!Array.isArray(original)) {
+    final = facets
+  }
+  else {
+    final = [...original]
+    facets.forEach((facet) => {
+      const index = original.findIndex( (element) => {
+        return (element.type === facet.type && element.name === facet.name)
+      })
+
+      if (index === -1) {
+        final.push(facet)
+      }
+      else {
+        final[index] = facet
+      }
+    });
+  }
+  return {
+    ...state,
+    facetsResults: final,
+  };
+}
+
 export default function searchReducer(state, action) {
   switch (action.type) {
     case 'FETCH_DATA':
@@ -41,37 +74,7 @@ export default function searchReducer(state, action) {
         items: action.data.items,
       };
     case 'SET_FACETS_DATA':
-      if (typeof action.data !== 'object' || !Array.isArray(action.data.facetsResults)) {
-        return { ...state }
-      }
-
-      const original = state.facetsResults
-      const facets = action.data.facetsResults
-
-      let final = []
-      if (!Array.isArray(original)) {
-        final = facets
-      }
-      else {
-        final = [...original]
-        facets.forEach((facet) => {
-          const index = original.findIndex( (element) => {
-            return (element.type === facet.type && element.name === facet.name)
-          })
-
-          if (index === -1) {
-            final.push(facet)
-          }
-          else {
-            final[index] = facet
-          }
-        });
-      }
-
-      return {
-        ...state,
-        facetsResults: final,
-      };
+      return mergedFacets(state, action)
     case 'SET_SEARCH_PARAMETERS':
       return {
         ...state,
