@@ -1,5 +1,7 @@
 # Data Catalog Components
 
+[![GetDKAN](https://circleci.com/gh/GetDKAN/data-catalog-components/tree/master.svg?style=svg)](https://circleci.com/gh/GetDKAN/data-catalog-components/tree/master)
+
 A set of React components to facilitate the creation of Open Data Catalogs with React.
 
 ## Working locally
