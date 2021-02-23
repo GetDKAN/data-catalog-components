@@ -1,6 +1,7 @@
 # Data Catalog Components
 
 [![GetDKAN](https://circleci.com/gh/GetDKAN/data-catalog-components/tree/master.svg?style=svg)](https://circleci.com/gh/GetDKAN/data-catalog-components/tree/master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c790605d9099259ebda4/maintainability)](https://codeclimate.com/github/GetDKAN/data-catalog-components/maintainability)
 
 A set of React components to facilitate the creation of Open Data Catalogs with React.
 
