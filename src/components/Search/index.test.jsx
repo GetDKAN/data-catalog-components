@@ -6,6 +6,15 @@ import Search from './index';
 
 describe('<Search />', () => {
 
+  const base = {
+    "showAll": false,
+    "limit": 10,
+    "reset": {
+      "active": false,
+      "icon": <span></span>
+    }
+  }
+
   test('no facets', () => {
     render(
       <Search
@@ -15,32 +24,17 @@ describe('<Search />', () => {
           "theme": {
             "label": "Topics",
             "field": "theme.0.title",
-            "showAll": false,
-            "limit": 10,
-            "reset": {
-              "active": false,
-              "icon": <span></span>
-            },
+            ... base
           },
           "keyword": {
             "label": "Tags",
             "field": "keyword.*.title",
-            "showAll": false,
-            "limit": 10,
-            "reset": {
-              "active": false,
-              "icon": <span></span>
-            },
+            ... base
           },
           "publisher__name": {
             "label": "Publishers",
             "field": "publisher__name",
-            "showAll": false,
-            "limit": 10,
-            "reset": {
-              "active": false,
-              "icon": <span></span>
-            },
+            ... base
           }
         }}
         sortOptions={[
