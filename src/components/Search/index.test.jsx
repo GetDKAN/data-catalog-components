@@ -56,6 +56,7 @@ describe('<Search />', () => {
         </div>
       </Search>
     );
+    expect(screen.queryByRole('listitem')).toBeNull();
     expect('hello').toBeTruthy()
   });
 
