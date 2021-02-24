@@ -102,12 +102,12 @@ const SearchFacet = ({
           onChange={onChangeFunction}
         />
         <Label htmlFor={key}>
-          {/* <FontAwesomeIcon
+          <FontAwesomeIcon
             icon={['fas', checked ? 'check-square' : 'square']}
             size="1x"
             aria-hidden="true"
             role="presentation"
-          /> */}
+          />
           {`${itemName} (${itemTotal})`}
         </Label>
       </div>

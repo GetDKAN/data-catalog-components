@@ -16,7 +16,7 @@ describe('<Search />', () => {
   }
 
   test('no facets', () => {
-    const {debug} = render(
+    render(
       <Search
         location={{}}
         searchEndpoint=""
@@ -56,7 +56,6 @@ describe('<Search />', () => {
         </div>
       </Search>
     );
-    debug();
     expect(screen.queryByRole('listitem')).toBeNull();
     expect('hello').toBeTruthy()
   });
