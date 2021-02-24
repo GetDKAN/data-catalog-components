@@ -1,0 +1,35 @@
+---
+name: Search Facet
+menu: Components
+route: /components/search-facet
+---
+
+import { Playground, Props } from 'docz'
+import SearchFacet from './index'
+
+# Search Facet
+
+## Properties
+
+<Props of={SearchFacet} />
+
+## Basic usage
+
+<Playground>
+  {() => {
+    return <SearchFacet
+      facetType="animal"
+      label="Animal"
+      facets={[
+        {"type": "animal", "name": "Cat", "total": 0},
+        {"type": "animal", "name": "Dog", "total": 1},
+        {"type": "animal", "name": "Cow", "total": 2}
+      ]}
+      selected={['Cat']}
+      dispatch={() => null}
+      reset={{
+        "active": true
+      }}
+    />
+  }}
+</Playground>

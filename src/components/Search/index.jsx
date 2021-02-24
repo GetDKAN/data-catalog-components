@@ -82,7 +82,9 @@ const Search = ({
     // lets force a data fetch.
     if (!dispatched) {
       getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch);
-      getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch, true);
+      Object.keys(defaultFacets).forEach((facet) => {
+        getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch, facet);
+      })
     }
   }, []);
 
@@ -107,7 +109,9 @@ const Search = ({
       firstFetchFacet.current = false;
       return;
     }
-    getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch, true);
+    Object.keys(defaultFacets).forEach((facet) => {
+      getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch, facet);
+    })
   }, [
     searchState.sort,
     searchState.fulltext,

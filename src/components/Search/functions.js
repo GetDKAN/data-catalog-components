@@ -54,7 +54,7 @@ export default async function getData(
   defaultFacets,
   sortOptions,
   dispatch,
-  facets = false,
+  facet,
 ) {
   // Transition to loading state.
   dispatch({ type: 'FETCH_DATA' });
@@ -64,8 +64,8 @@ export default async function getData(
   let type = '';
   let data = {};
   // make the search api request
-  if (facets) {
-    const results = await axios.get(`${searchEndpoint}/facets?${apiParams}`);
+  if (facet) {
+    const results = await axios.get(`${searchEndpoint}/facets?${apiParams}&facets=${facet}`);
     type = 'SET_FACETS_DATA';
     data = {
       facetsResults: results.data.facets,
