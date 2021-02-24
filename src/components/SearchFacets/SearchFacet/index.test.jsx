@@ -14,7 +14,7 @@ describe('<SearchFacet />', () => {
         dispatch={() => ({})}
       />,
     );
-    expect(screen.getByRole('button', 'topic')).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: 'topic'})).toBeInTheDocument();
   });
 
   test('no facets', () => {
@@ -26,7 +26,7 @@ describe('<SearchFacet />', () => {
         dispatch={() => ({})}
       />,
     );
-    expect(screen.getByRole('button', 'TOPICSS')).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: 'TOPICSS'})).toBeInTheDocument();
   });
 
   test('renders a button', () => {
@@ -39,11 +39,11 @@ describe('<SearchFacet />', () => {
         dispatch={() => ({})}
       />,
     );
-    expect(screen.getByRole('button', 'topic')).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: 'topic'})).toBeInTheDocument();
   });
 
   test('renders a selected button', () => {
-    render(
+    const {debug} = render(
       <SearchFacet
         facetType="topic"
         facets={[
@@ -54,9 +54,13 @@ describe('<SearchFacet />', () => {
         selected={['react']}
       />,
     );
-    expect(screen.getByRole('button', 'topic')).toBeInTheDocument();
-    userEvent.click(screen.getByRole('checkbox', { name: 'react (2)' }));
-    userEvent.click(screen.getByRole('checkbox', { name: 'vue (1)' }));
-
+    
+    expect(screen.getByRole('button', {name: 'topic'})).toBeInTheDocument();
+    expect(screen.getByLabelText('react (2)')).toBeChecked();
+    expect(screen.getByLabelText('vue (1)')).not.toBeChecked();
+    userEvent.click(screen.getByLabelText('react (2)'));
+    userEvent.click(screen.getByLabelText('vue (1)'));
+    expect(screen.getByLabelText('react (2)').checked).toBeTruthy();
+    expect(screen.getByLabelText('vue (1)').checked).toBeFalsy();
   });
 });
