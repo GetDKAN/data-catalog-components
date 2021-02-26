@@ -1,0 +1,58 @@
+---
+name: Data Table
+menu: Components
+route: /components/data-table
+---
+
+import { Playground, Props } from 'docz'
+import DataTable from './index'
+
+# Data Table
+
+## Basic usage
+
+<Playground>
+  <DataTable
+    columns={[
+      {Header: "My Column Name", accessor: "my_column_name"},
+      {Header: "Twice the columns", accessor: "twice_columns"},
+      {Header: "Column x3", accessor: "column_3x"}
+    ]}
+    manualOptions={{
+      manualFilter: false,
+    }}
+    data={[
+      {
+        my_column_name: 1234,
+        twice_columns: "abcd",
+        column_3x: "qwerty"
+      },
+      {
+        my_column_name: 1234,
+        twice_columns: "abcd",
+        column_3x: "really really really long text"
+      },
+      {
+        my_column_name: 1234,
+        twice_columns: "abcd",
+        column_3x: "qwerty"
+      },
+      {
+        my_column_name: 1234,
+        twice_columns: "abcd",
+        column_3x: "qwerty"
+      },
+      {
+        my_column_name: 1234,
+        twice_columns: "abcd",
+        column_3x: "qwerty"
+      }
+    ]}
+    totalRows={0}
+    limit={20}
+  />
+</Playground>
+
+## Properties
+
+<Props of={DataTable} />

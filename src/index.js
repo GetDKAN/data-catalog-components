@@ -20,7 +20,7 @@ export { default as TopicWrapper } from './components/TopicWrapper';
 // TEMPLATES
 export { default as Blocks } from './templates/Blocks';
 export { default as BasicBlock } from './templates/Blocks/BasicBlock';
-export { default as DataTable } from './templates/DataTable';
+export { default as DataTable } from './components/DataTable';
 export { default as Header } from './templates/Header';
 export { default as Hero } from './templates/Hero';
 export { default as Footer } from './templates/Footer';
