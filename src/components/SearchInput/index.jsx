@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button, FormGroup, Label, Input,
-} from 'reactstrap';
+// import {
+//   Button, FormGroup, Label, Input,
+// } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SearchInput = ({
@@ -36,39 +36,40 @@ const SearchInput = ({
     return () => clearTimeout(timer);
   }, [searchQuery, onChangeFunction]);
 
-  const reset = (
-    <Button
-      type="reset"
-      id="inputReset"
-      onClick={() => { setSearchQuery(''); }}
-    >
-      <FontAwesomeIcon
-        icon={['fas', 'times' ]}
-        size="1x"
-        aria-hidden="true"
-        role="presentation"
-      />
-      <span className="reset-text">{resetContent}</span>
-    </Button>
-  );
+  // const reset = (
+  //   <Button
+  //     type="reset"
+  //     id="inputReset"
+  //     onClick={() => { setSearchQuery(''); }}
+  //   >
+  //     <FontAwesomeIcon
+  //       icon={['fas', 'times' ]}
+  //       size="1x"
+  //       aria-hidden="true"
+  //       role="presentation"
+  //     />
+  //     <span className="reset-text">{resetContent}</span>
+  //   </Button>
+  // );
   const labelClass = srOnly ? 'sr-only' : '';
 
   return (
-    <FormGroup className={`dc-search-input ${className}`}>
-      <Label for="inputSearch" className={`${labelClass} ${labelClassName}`}>{labelContent}</Label>
-      <Input
-        type="text"
-        name="inputSearch"
-        id="inputSearch"
-        placeholder={placeholder}
-        value={searchQuery}
-        onChange={(e) => { setSearchQuery(e.target.value); }}
-        bsSize={bsSize}
-      />
-      {searchQuery.length ? reset : null}
-      {showSubmit
-        && <Button type="submit" id="inputSubmit">{submitContent}</Button>}
-    </FormGroup>
+    <div>coming soon</div>
+    // <FormGroup className={`dc-search-input ${className}`}>
+    //   <Label for="inputSearch" className={`${labelClass} ${labelClassName}`}>{labelContent}</Label>
+    //   <Input
+    //     type="text"
+    //     name="inputSearch"
+    //     id="inputSearch"
+    //     placeholder={placeholder}
+    //     value={searchQuery}
+    //     onChange={(e) => { setSearchQuery(e.target.value); }}
+    //     bsSize={bsSize}
+    //   />
+    //   {searchQuery.length ? reset : null}
+    //   {showSubmit
+    //     && <Button type="submit" id="inputSubmit">{submitContent}</Button>}
+    // </FormGroup>
   );
 };
 
