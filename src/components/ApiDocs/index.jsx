@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SwaggerUI from 'swagger-ui-react';
-import 'swagger-ui-react/swagger-ui.css';
+// import 'swagger-ui-react/swagger-ui.css';
 
 const ApiDocs = ({ endpoint, uuid }) => {
   const url = uuid ? `${endpoint}/${uuid}` : endpoint;
