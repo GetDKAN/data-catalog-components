@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  Nav,
-  NavItem,
-} from 'reactstrap';
+// import {
+//   Collapse,
+//   Navbar,
+//   NavbarToggler,
+//   Nav,
+//   NavItem,
+// } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NavBar = ({
@@ -41,15 +41,16 @@ const NavBar = ({
         </Navbar>
       )}
       {!expand && (
-        <Navbar expand={false} className={customClasses}>
-          <ul>
-            {navItems.map((item, index) => (
-              <NavItem key={index}>
-                {item}
-              </NavItem>
-            ))}
-          </ul>
-        </Navbar>
+        <div>abc</div>
+        // <Navbar expand={false} className={customClasses}>
+        //   <ul>
+        //     {navItems.map((item, index) => (
+        //       <NavItem key={index}>
+        //         {item}
+        //       </NavItem>
+        //     ))}
+        //   </ul>
+        // </Navbar>
       )}
     </div>
   );

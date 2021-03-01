@@ -56,8 +56,16 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/plugin-transform-runtime": "^7.13.8",
+    "@babel/preset-env": "^7.13.8",
+    "@babel/preset-react": "^7.12.13",
     "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "@rollup/plugin-replace": "^2.4.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/react-hooks": "^5.0.3",
@@ -68,11 +76,10 @@
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2",
     "react-test-renderer": "^17.0.1",
-    "rollup": "^2.39.0",
-    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup": "^2.40.0",
     "rollup-plugin-delete": "^2.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4"
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.0"
   },
   "peerDependencies": {
     "react": "^17.0.1",
