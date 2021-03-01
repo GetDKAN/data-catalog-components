@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -80,22 +79,23 @@ const SearchFacet = ({
 
     if (InputComponent) {
       return (
-        <InputComponent
-          key={key}
-          checked={checked}
-          name={facetType}
-          type={inputType}
-          value={itemName}
-          onChange={onChangeFunction}
-        >
-          {`${itemName} (${itemTotal})`}
-        </InputComponent>
+        <div></div>
+        // <InputComponent
+        //   key={key}
+        //   checked={checked}
+        //   name={facetType}
+        //   type={inputType}
+        //   value={itemName}
+        //   onChange={onChangeFunction}
+        // >
+        //   {`${itemName} (${itemTotal})`}
+        // </InputComponent>
       );
     }
 
     return (
       <div className="dc-facet-option" key={key}>
-        <Input
+        {/* <Input
           checked={checked}
           id={key}
           name={facetType}
@@ -111,7 +111,7 @@ const SearchFacet = ({
             role="presentation"
           />
           {`${itemName} (${itemTotal})`}
-        </Label>
+        </Label> */}
       </div>
     );
   });

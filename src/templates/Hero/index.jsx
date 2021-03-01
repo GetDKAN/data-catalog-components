@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from '@reach/router';
-import { Input, Label, Button } from 'reactstrap';
+// import { Input, Label, Button } from 'reactstrap';
 
 const Hero = ({
   alignment,
@@ -32,7 +32,8 @@ const Hero = ({
         <h2 className="dc-hero-title">{title}</h2>
         <p>{intro}</p>
         <form onSubmit={(event) => handleSubmit(event)} className="dc-hero-search">
-          <Label className="sr-only" htmlFor="hero_search">Search</Label>
+          <div>coming soon</div>
+          {/* <Label className="sr-only" htmlFor="hero_search">Search</Label>
           <Input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
@@ -47,8 +48,8 @@ const Hero = ({
               onClick={() => setQuery('')}
             >
               {resetContent}
-            </Button>
-            )}
+            </Button> 
+            )}*/}
         </form>
       </div>
     </div>

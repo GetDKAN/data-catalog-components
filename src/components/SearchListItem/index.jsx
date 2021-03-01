@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import excerpts from 'excerpts';
+// import excerpts from 'excerpts';
 import TopicIcon from '../../templates/TopicIcon';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
@@ -73,7 +73,7 @@ const SearchListItem = ({
 
   return(
     <div className={className}>
-      <h2><Link to={ref}>{title}</Link></h2>
+      <h2>{title}</h2>
 
       {publisher !== 'undefined' &&
         <div className="dc-item-publisher">
@@ -90,7 +90,8 @@ const SearchListItem = ({
       { description &&
         <div className="dc-item-description">
           <Text>
-            {excerpts(description, {words: 35})}
+            {description}
+            {/* {excerpts(description, {words: 35})} */}
           </Text>
         </div>
       }
