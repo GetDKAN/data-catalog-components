@@ -24,7 +24,7 @@ yarn-error.log*
 
 
 package-lock.json
-# dist
+dist
 .idea
 .docz
 docs
