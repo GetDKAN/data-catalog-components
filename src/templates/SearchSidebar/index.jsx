@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Label, Input } from 'reactstrap';
+// import { Label, Input } from 'reactstrap';
 import SearchFacets from '../../components/SearchFacets';
 import { SearchDispatch } from '../../services/search/search_defaults';
 import { BulletList } from 'react-content-loader';
@@ -12,7 +12,7 @@ const SearchSidebar = ({ sortOptions }) => {
   return (
     <div className="dc-search-sidebar col-md-4 col-sm-12">
       <div className="dc-search-sidebar-options">
-        <Label for="dc-search-list-sort">Sort by:</Label>
+        {/* <Label for="dc-search-list-sort">Sort by:</Label>
         <Input
           type="select"
           name="dc-search-list-sort"
@@ -29,7 +29,7 @@ const SearchSidebar = ({ sortOptions }) => {
               {sortOpt.label}
             </option>
           ))}
-        </Input>
+        </Input> */}
       </div>
       <div className="dc-search-sidebar-options">
         {loading ? <BulletList / > :
