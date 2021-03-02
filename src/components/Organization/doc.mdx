@@ -9,12 +9,52 @@ import Organization from './index'
 
 # Organization
 
+## Card Usage
+
+<Playground>
+  <ul className="usa-card-group">
+    <Organization
+      isCard
+      org={{
+        name: "DKAN Org",
+        description: "Org description",
+        searchUrl: "/search/?publisher__name=DKAN_org"
+      }}
+      headingText="Group Name"
+      bodyText="Group Description."
+    />
+    <Organization
+      isCard
+      org={{
+        name: "Sample Org",
+        description: "Sample Org description",
+        searchUrl: "/search/?publisher__name=sample_org",
+        imageUrl: "https://dkan-default-content-files.s3.amazonaws.com/files/publishers/clipboard.png"
+      }}
+      headingText="Group Name"
+      bodyText="Group Description."
+      buttonText="Explore datasets by Sample Org"
+    />
+  </ul>
+  
+</Playground>
+
+## Single Use
+
+<Playground>
+  <div style={{width: '240px'}}>
+    <Organization
+      headingText="Group Name"
+      bodyText="Group Description."
+      org={{
+        name: "DKAN Org",
+        description: "Org description",
+        searchUrl: "/search/?publisher__name=DKAN_org"
+      }}
+    />
+  </div>
+</Playground>
+
 ## Properties
 
 <Props of={Organization} />
-
-## Basic usage
-
-<Playground>
-  <Organization name="Group Name" description="Group Description."/>
-</Playground>

@@ -1,14 +1,19 @@
 [
   {
-    "name": "CDC",
-    "key": "1"
+    "name": "DKAN",
+    "description": "Description for DKAN",
+    "searchUrl":"/search/?publisher__name=DKAN"
   },
   {
-    "name": "EPA",
-    "key": "2"
+    "name": "Clipboards",
+    "imageUrl": "https://dkan-default-content-files.s3.amazonaws.com/files/publishers/clipboard.png",
+    "description": "Description for Clipboards",
+    "searchUrl":"/search/?publisher__name=Clipboards"
   },
   {
-    "name": "USDA",
-    "key": "3"
+    "name": "Maps",
+    "imageUrl": "https://dkan-default-content-files.s3.amazonaws.com/files/publishers/map.png",
+    "description": "Description for maps",
+    "searchUrl":"/search/?publisher__name=Maps"
   }
 ]
