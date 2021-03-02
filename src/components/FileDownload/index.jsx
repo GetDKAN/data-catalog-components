@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormatIcon from '../FormatIcon';
-import Text from '../Text';
 
 const FileDownload = ({
   title, format, downloadURL, description,
@@ -14,7 +13,7 @@ const FileDownload = ({
         {label}
       </a>
       {description && (
-        <Text value={description} wrapper={{ tag: 'div', classes: 'dc-file-description' }} />
+        <div className="dc-file-description">{description}</div>
       )}
     </div>
   );
