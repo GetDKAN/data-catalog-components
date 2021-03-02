@@ -13,7 +13,6 @@ export { default as Menu } from "./components/Menu";
 export { default as Modal } from "./components/Modal";
 export { default as NavBar } from "./templates/NavBar";
 export { default as Organization } from "./components/Organization";
-export { default as PublisherList } from "./components/PublisherList";
 export { default as ShowMoreContainer } from "./components/ShowMoreContainer";
 export { default as Tags } from "./components/Tags";
 export { default as TopicWrapper } from "./components/TopicWrapper";

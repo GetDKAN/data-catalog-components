@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from '@reach/router';
-// import { Input, Label, Button } from 'reactstrap';
 
 const Hero = ({
   alignment,
@@ -28,19 +27,26 @@ const Hero = ({
 
   return (
     <div className="dc-hero" style={{ backgroundImage: background }}>
-      <div className={`dc-hero-block ${alignment}`}>
+      <div className={`dc-hero-block grid-container ${alignment}`}>
         <h2 className="dc-hero-title">{title}</h2>
         <p>{intro}</p>
-        <form onSubmit={(event) => handleSubmit(event)} className="dc-hero-search">
-          <div>coming soon</div>
-          {/* <Label className="sr-only" htmlFor="hero_search">Search</Label>
-          <Input
+        <form onSubmit={(event) => handleSubmit(event)} className="usa-form">
+          <label class="usa-label" htmlFor="input-hero-search">Search</label>
+          <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            id="hero_search"
+            class="usa-input"
+            id="input-hero-search"
+            name="input-hero-search"
+            type="text"
           />
-          <Button type="submit">{submitContent}</Button>
-          {(includeReset && query)
+          <button
+            className="usa-button usa-button--outline usa-button--inverse"
+            type="submit"
+          >
+            {submitContent}
+          </button>
+         {/*  {(includeReset && query)
             && (
             <Button
               className="dc-hero-reset"
