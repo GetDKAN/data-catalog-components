@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
-import Text from '../../components/Text';
 
 class BasicBlock extends React.PureComponent {
   render() {
@@ -19,7 +18,7 @@ class BasicBlock extends React.PureComponent {
               {content.title}
             </Link>
           </h2>
-          <Text value={content.teaser} />
+          <div>{content.teaser}</div>
         </div>
       );
     } else {
@@ -29,7 +28,7 @@ class BasicBlock extends React.PureComponent {
             {img}
             {content.title}
           </h2>
-          <Text value={content.teaser} />
+          <div>{content.teaser}</div>
         </div>
       );
     }

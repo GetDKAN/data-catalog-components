@@ -12,28 +12,12 @@ export { default as Menu } from './components/Menu';
 export { default as Modal } from './components/Modal';
 export { default as NavBar } from './templates/NavBar';
 export { default as Organization } from './components/Organization';
-export { default as PageHeader } from './components/PageHeader';
 export { default as PublisherList } from './components/PublisherList';
-// export { default as Resource } from './components/Resource';
-export { default as SearchFacets } from './components/SearchFacets';
-export { default as SearchInput } from './components/SearchInput';
-export { default as SearchList } from './components/SearchList';
-export { default as SearchListItem } from './components/SearchListItem';
-export { default as SearchPageSizer } from './components/SearchPageSizer';
-export { default as SearchPaginationResults } from './components/SearchPaginationResults';
-export { default as SearchResultsMessage } from './components/SearchResultsMessage';
-export { default as SearchSort } from './components/SearchSort';
 export { default as ShowMoreContainer } from './components/ShowMoreContainer';
-export { default as String } from './components/String';
-export { default as Table } from './components/Table';
 export { default as Tags } from './components/Tags';
-export { default as Text } from './components/Text';
-export { default as ToggleBlock } from './components/ToggleBlock';
 export { default as TopicWrapper } from './components/TopicWrapper';
-export { default as Search } from './components/Search';
 
 // TEMPLATES
-export { default as Announcement } from './templates/Announcement';
 export { default as Blocks } from './templates/Blocks';
 export { default as BasicBlock } from './templates/Blocks/BasicBlock';
 export { default as DataTable } from './templates/DataTable';
@@ -42,7 +26,11 @@ export { default as Hero } from './templates/Hero';
 export { default as Footer } from './templates/Footer';
 export { default as StatBlock } from './templates/Blocks/StatBlock';
 export { default as StepsBlock } from './templates/Blocks/StepsBlock';
-export { default as SearchSidebar } from './templates/SearchSidebar';
-// export { default as SearchContent } from './templates/SearchContent';
 export { default as TopicIcon } from './templates/TopicIcon';
 export { default as DataTableHeader } from './templates/DataTableHeader';
+
+
+export { default as DatasetSearchCards } from './components/DatasetSearch/DatasetSearchCards';
+export { default as DatasetSearchFulltext } from './components/DatasetSearch/DatasetSearchFulltext';
+export { default as DatasetSearchSort } from './components/DatasetSearch/DatasetSearchSort';
+export { default as DatasetSearchFacetBlock } from './components/DatasetSearch/DatasetSearchFacetBlock';

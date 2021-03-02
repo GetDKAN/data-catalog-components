@@ -14,18 +14,18 @@ const Header = ({
         </Link>
         <div className="dc-site-name">
           {site
-                && <Link to={link}>{site}</Link>}
+            && <Link to={link}>{site}</Link>}
           {slogan
-                && (
-                <div className="dc-slogan">
-                  {slogan}
-                </div>
-                )}
+            && (
+            <div className="dc-slogan">
+              {slogan}
+            </div>
+            )}
         </div>
       </div>
     </div>
     {navItems
-          && <NavBar navItems={navItems} className={customClasses} />}
+      && <NavBar navItems={navItems} className={customClasses} />}
   </div>
 );
 
