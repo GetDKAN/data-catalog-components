@@ -1,0 +1,122 @@
+---
+name: Card
+menu: Components
+route: /components/card
+---
+
+import { Playground, Props } from 'docz'
+import Card from './index'
+
+# Card Docs
+
+Cards are meant to be used as a group so their parent element will always be an `li`. You should make sure to wrap the Cards in an `ol` or `li` with the class `usa-card-group`.
+
+## Basic usage
+<Playground>
+  <div>
+    <ul className="usa-card-group">
+      <Card
+        headingText="Card Title"
+        bodyText="This is the card body."
+        buttonText="Click me"
+        media={<img src="https://s3.amazonaws.com/dkan-default-content-files/files/group.png" alt="default logo" />}
+        buttonAction={() => (console.log("Clicked"))}
+      />
+    </ul>
+  </div>
+</Playground>
+
+## Card Variants
+<Playground>
+  <div>
+    <ul className="usa-card-group">
+      <Card
+        headingText="Default Card"
+        bodyText="This is the card body."
+        buttonText="Click me"
+        media={<img src="https://s3.amazonaws.com/dkan-default-content-files/files/group.png" alt="default logo" />}
+        buttonAction={() => (console.log("Clicked"))}
+      />
+      <Card
+        cardVariant="header-first"
+        headingText="Header First card"
+        bodyText="This is the card body."
+        buttonText="Click me"
+        media={<img src="https://s3.amazonaws.com/dkan-default-content-files/files/group.png" alt="default logo" />}
+        buttonAction={() => (console.log("Clicked"))}
+      />
+      <Card
+        cardVariant="flag"
+        headingText="Flag Card"
+        bodyText="This is the card body."
+        buttonText="Click me"
+        media={<img src="https://s3.amazonaws.com/dkan-default-content-files/files/group.png" alt="default logo" />}
+        buttonAction={() => (console.log("Clicked"))}
+      />
+    </ul>
+  </div>
+</Playground>
+
+## Media Variants
+<Playground>
+  <div>
+    <ul className="usa-card-group">
+      <Card
+        mediaVariant="default"
+        headingText="Default media"
+        bodyText="This is the card body."
+        buttonText="Click me"
+        media={<img src="https://s3.amazonaws.com/dkan-default-content-files/files/group.png" alt="default logo" />}
+        buttonAction={() => (console.log("Clicked"))}
+      />
+      <Card
+        mediaVariant="exdent"
+        headingText="Exdent media"
+        bodyText="This is the card body."
+        buttonText="Click me"
+        media={<img src="https://s3.amazonaws.com/dkan-default-content-files/files/group.png" alt="default logo" />}
+        buttonAction={() => (console.log("Clicked"))}
+      />
+      <Card
+        mediaVariant="inset"
+        headingText="Inset media"
+        bodyText="This is the card body."
+        buttonText="Click me"
+        media={<img src="https://s3.amazonaws.com/dkan-default-content-files/files/group.png" alt="default logo" />}
+        buttonAction={() => (console.log("Clicked"))}
+      />
+    </ul>
+  </div>
+</Playground>
+
+## Usage in Collection
+If the cards have a title, using `isCollection` will change the default `h2` to an `h3`.
+<Playground>
+  <div>
+    <h2>This is my h2 collection title</h2>
+    <ul className="usa-card-group">
+      <Card
+        isCollection
+        headingText="I'm an h3"
+        bodyText="This is the card body."
+        buttonAction={() => (console.log("Clicked"))}
+        buttonText="Click me"
+      />
+      <Card
+        isCollection
+        headingText="No footer"
+        bodyText="This is the card body."
+        includeFooter={false}
+      />
+      <Card
+        isCollection
+        headingText="Just a title"
+        bodyText=""
+        includeFooter={false}
+      />
+    </ul>
+  </div>
+</Playground>
+
+## Properties
+<Props of={Card} />
