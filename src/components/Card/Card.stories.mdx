@@ -1,0 +1,20 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import Card from './index';
+
+<Meta title="USWDS/Card" component={Card} />
+
+# Card
+
+<Canvas>
+    <Story name="Basic">
+      <ul className="usa-card-group">
+        <Card
+          headingText="Card Title"
+          bodyText="This is the card body."
+          buttonText="Click me"
+          media={<img src="https://s3.amazonaws.com/dkan-default-content-files/files/group.png" alt="default logo" />}
+          buttonAction={() => (console.log("Clicked"))}
+        />
+      </ul>
+    </Story>
+</Canvas>
