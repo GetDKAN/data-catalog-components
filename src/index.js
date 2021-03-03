@@ -20,7 +20,6 @@ export { default as TopicWrapper } from './components/TopicWrapper';
 // TEMPLATES
 export { default as Blocks } from './templates/Blocks';
 export { default as BasicBlock } from './templates/Blocks/BasicBlock';
-export { default as DataTable } from './components/DataTable';
 export { default as Header } from './templates/Header';
 export { default as Hero } from './templates/Hero';
 export { default as Footer } from './templates/Footer';
@@ -29,6 +28,9 @@ export { default as StatBlock } from './templates/Blocks/StatBlock';
 export { default as StepsBlock } from './templates/Blocks/StepsBlock';
 export { default as TopicIcon } from './templates/TopicIcon';
 export { default as DataTableHeader } from './templates/DataTableHeader';
+
+
+export { default as DataTable } from './components/DataTable';
 
 
 export { default as DatasetSearchCards } from './components/DatasetSearch/DatasetSearchCards';
