@@ -303,6 +303,29 @@ DataTable.propTypes = {
     columnSort: PropTypes.bool,
     columnResize: PropTypes.bool,
   }),
+  columns: PropTypes.arrayOf(PropTypes.shape({
+    Header: PropTypes.string.isRequired,
+    accessor: PropTypes.string.isRequired,
+  })).isRequired,
+  setSort: PropTypes.func.isRequired,
+  setConditions: PropTypes.func.isRequired,
+  conditionsTransform: PropTypes.func.isRequired,
+  sortTransform: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
+  className: PropTypes.string,
+  filterTitle: PropTypes.string,
+  columns: PropTypes.number.isRequired,
+  totalRows: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
+  loading: PropTypes.bool,
+  columnDefaults: PropTypes.arrayOf(PropTypes.shape({
+    minWidth: PropTypes.number,
+    maxWidth: PropTypes.number,
+    width: PropTypes.number,
+  })),
+  customColumnFilter: PropTypes.func,
+  // tableClasses,
+  // cellTextClassName
 }
 
 export default DataTable;
