@@ -1,0 +1,38 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import PrimaryNav from './index';
+
+<Meta title="USWDS/PrimaryNav" component={PrimaryNav} />
+
+# Card
+<Canvas>
+    <Story name="Basic">
+  <PrimaryNav items={[
+        {
+          "label": "Home",
+          "url": "/",
+          "target": "_top"
+        },
+        {
+          "label": "Datasets",
+          "url": "/search",
+          "target": "_top"
+        },
+        {
+          "label": "Publishers",
+          "url": "/publishers",
+          "target": "_top"
+        },
+        {
+          "label": "About",
+          "url": "/about",
+          "target": "_top"
+        },
+        {
+          "label": "API",
+          "url": "/api",
+          "target": "_top"
+        },
+      ]
+  } />
+    </Story>
+</Canvas>
