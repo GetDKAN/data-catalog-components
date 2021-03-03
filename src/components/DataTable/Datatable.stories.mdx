@@ -1,0 +1,24 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import DataTable from './index';
+
+<Meta title="Data Table" component={DataTable} />
+
+# DataTable
+
+<Canvas>
+    <Story name="Default">
+      <DataTable
+        data={[
+          {header_1: 'foo', header_2: 'bar', header_3: 'fizz'},
+          {header_1: 'dkan', header_2: 'react', header_3: 'drupal'}
+        ]}
+        columns={[
+          {Header: 'Header 1', accessor: 'header_1'},
+          {Header: 'Header 2', accessor: 'header_2'},
+          {Header: 'Header 3', accessor: 'header_3'}
+        ]}
+        setSort={() => console.log('sort')}
+        setConditions={() => console.log('conditions')}
+      />
+    </Story>
+</Canvas>
