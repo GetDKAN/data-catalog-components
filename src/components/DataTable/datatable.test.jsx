@@ -18,7 +18,7 @@ describe('<DataTable />', () => {
   test('renders', () => {
     const setSort = jest.fn();
     const setConditions = jest.fn();
-    const {debug} = render(
+    render(
       <DataTable
         data={data1}
         columns={columns1}
@@ -31,7 +31,6 @@ describe('<DataTable />', () => {
         }}
       />,
     );
-    debug()
     expect(screen.getByRole('cell', {name: /foo/})).toBeInTheDocument();
     expect(screen.getByRole('cell', {name: /bar/})).toBeInTheDocument();
     expect(screen.getByRole('cell', {name: /fizz/})).toBeInTheDocument();

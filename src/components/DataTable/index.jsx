@@ -314,7 +314,6 @@ DataTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   className: PropTypes.string,
   filterTitle: PropTypes.string,
-  columns: PropTypes.number.isRequired,
   totalRows: PropTypes.number.isRequired,
   limit: PropTypes.number.isRequired,
   loading: PropTypes.bool,
