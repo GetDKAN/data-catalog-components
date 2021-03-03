@@ -43,7 +43,7 @@ describe('<SearchFacet />', () => {
   });
 
   test('renders a selected button', () => {
-    const {debug} = render(
+    render(
       <SearchFacet
         facetType="topic"
         facets={[

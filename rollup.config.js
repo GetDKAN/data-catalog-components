@@ -20,6 +20,7 @@ export default {
         extensions: ['.js', '.jsx']
       }),
       babel({
+        exclude: 'node_modules/**',
         babelHelpers: 'runtime',
         presets: [
           "@babel/preset-react"
@@ -38,6 +39,10 @@ export default {
       json(),
       del({ targets: ['dist/*'] })
     ],
+    moduleContext: {
+      './node_modules/react-table/dist/react-table.development.js': 'window',
+      './node_modules/react-table/dist/react-table.production.min.js': 'window'
+    },
     external: Object.keys(pkg.peerDependencies || {})
 };
 

@@ -2,38 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DataTablePageResults = ({
-  total,
-  pageSize,
-  currentPage,
-  className,
+  totalRows, limit, offset, className
 }) => {
-  // Add one to offset the 0 array index.
-  const page = currentPage + 1;
-  let displayTotal = total;
-  const currentLowestResult = total <= 0 ? 0 : 1 + ((pageSize * page) - pageSize);
-  let currentHighestResult = (pageSize * page);
-  if (total < 0) {
-    displayTotal = 0;
+  const ofTotal = () => {
+    if (limit >= totalRows) { return totalRows; }
+    if (offset === 0) { return limit; }
+    return (offset + limit);
   }
-  if (currentHighestResult > total) {
-    currentHighestResult = displayTotal;
-  }
+  const page = offset / limit;
+  const startTotal = () => (page * limit + 1)
   return (
-    <div className={className}>
-      <p>
-        <span className="low-result">{currentLowestResult}</span>
-        {' '}
-        -
-        {' '}
-        <span className="high-result">{currentHighestResult}</span>
-        {' '}
-        of
-        {' '}
-        <span className="total">{displayTotal}</span>
-        {' '}
-        rows
-      </p>
-    </div>
+    <p className={className}>{`${startTotal()} - ${ofTotal()} of ${totalRows} rows`}</p>
   );
 };
 
