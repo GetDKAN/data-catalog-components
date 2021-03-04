@@ -1,55 +1,28 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import DataTablePageResults from '.';
 
 describe('<DataTablePageResults />', () => {
-  const defaultWrapper = shallow(
-    <DataTablePageResults
-      totalRows={100}
+  test('renders correct initial results', () => {
+    render(
+      <DataTablePageResults
+        totalRows={100}
         limit={25}
         offset={0}
-    />,
-  );
-
-  const customWrapper = shallow(
-    <DataTablePageResults
-      total={100}
-      pageSize={10}
-      currentPage={4}
-    />,
-  );
-
-  it('renders correct initial results', () => {
-    expect(defaultWrapper.find('p').text()).toBe('1 - 10 of 100 rows');
+      />,
+    )
+    expect(screen.getByText(/1 - 25 of 100 rows/)).toBeInTheDocument();
   });
 
-  it('renders correct results on subsequent pages', () => {
-    expect(customWrapper.find('p').text()).toBe('41 - 50 of 100 rows');
+  test('renders correct results on subsequent pages', () => {
+    render(
+      <DataTablePageResults
+        totalRows={100}
+        limit={10}
+        offset={10}
+      />,
+    )
+    expect(screen.getByText(/11 - 20 of 100 rows/)).toBeInTheDocument();
   });
 });
-
-// describe('<DataTableRowDetails />', () => {
-//   test('Renders a default string with offset and currentPage at 0', () => {
-//     render(
-//       <DataTableRowDetails
-//         totalRows={100}
-//         limit={25}
-//         offset={0}
-//         currentPage={0}
-//       />,
-//     );
-//     expect(screen.getByText('1 - 25 of 100 rows')).toBeTruthy();
-//   });
-
-//   test('Renders a default string with offset and currentPage at 0', () => {
-//     render(
-//       <DataTableRowDetails
-//         totalRows={100}
-//         limit={10}
-//         offset={50}
-//         currentPage={5}
-//       />,
-//     );
-//     expect(screen.getByText('51 - 60 of 100 rows')).toBeTruthy();
-//   });
-// });
