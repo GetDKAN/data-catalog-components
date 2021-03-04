@@ -26,9 +26,9 @@ DataTablePageResults.defaultProps = {
 
 DataTablePageResults.propTypes = {
   className: PropTypes.string,
-  total: PropTypes.number.isRequired,
-  pageSize: PropTypes.number.isRequired,
-  currentPage: PropTypes.number.isRequired,
+  totalRows: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
+  offset: PropTypes.number.isRequired,
 };
 
 export default DataTablePageResults;

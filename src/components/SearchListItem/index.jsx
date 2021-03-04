@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // import excerpts from 'excerpts';
 import TopicIcon from '../../templates/TopicIcon';
 import DataIcon from '../DataIcon';
-import Text from '../Text';
 import { Link } from '@reach/router';
 import {countBy} from 'lodash';
 
@@ -89,10 +88,7 @@ const SearchListItem = ({
 
       { description &&
         <div className="dc-item-description">
-          <Text>
-            {description}
-            {/* {excerpts(description, {words: 35})} */}
-          </Text>
+          {description}
         </div>
       }
 

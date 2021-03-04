@@ -1,69 +1,20 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import DataTablePageResults from '.';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import DataTablePageResults from ".";
 
-describe('<DataTablePageResults />', () => {
-  const defaultWrapper = shallow(
-    <DataTablePageResults
-      totalRows={100}
-        limit={25}
-        offset={0}
-    />,
-  );
-
-  const customWrapper = shallow(
-    <DataTablePageResults
-      total={100}
-      pageSize={10}
-      currentPage={4}
-    />,
-  );
-
-  const viewingWrapper = shallow(
-    <DataTablePageResults
-      total={100}
-      pageSize={10}
-      currentPage={4}
-      viewing
-    />,
-  );
-
-  it('renders correct initial results', () => {
-    expect(defaultWrapper.find('p').text()).toBe('1 - 10 of 100 rows');
+describe("<DataTablePageResults />", () => {
+  test("renders correct initial results", () => {
+    render(<DataTablePageResults totalRows={100} limit={25} offset={0} />);
+    expect(screen.getByText(/1 - 25 of 100 rows/)).toBeInTheDocument();
   });
 
-  it('renders correct results on subsequent pages', () => {
-    expect(customWrapper.find('p').text()).toBe('41 - 50 of 100 rows');
+  test("renders correct results on subsequent pages", () => {
+    render(<DataTablePageResults totalRows={100} limit={10} offset={10} />);
+    expect(screen.getByText(/11 - 20 of 100 rows/)).toBeInTheDocument();
   });
 
-  it('Correctly displays appended viewing to results list', () => {
-    expect(viewingWrapper.find('p').text()).toBe('Viewing 41 - 50 of 100 rows');
-  })
-  
+  it("Correctly displays appended viewing to results list", () => {
+    expect(viewingWrapper.find("p").text()).toBe("Viewing 41 - 50 of 100 rows");
+  });
 });
-
-// describe('<DataTableRowDetails />', () => {
-//   test('Renders a default string with offset and currentPage at 0', () => {
-//     render(
-//       <DataTableRowDetails
-//         totalRows={100}
-//         limit={25}
-//         offset={0}
-//         currentPage={0}
-//       />,
-//     );
-//     expect(screen.getByText('1 - 25 of 100 rows')).toBeTruthy();
-//   });
-
-//   test('Renders a default string with offset and currentPage at 0', () => {
-//     render(
-//       <DataTableRowDetails
-//         totalRows={100}
-//         limit={10}
-//         offset={50}
-//         currentPage={5}
-//       />,
-//     );
-//     expect(screen.getByText('51 - 60 of 100 rows')).toBeTruthy();
-//   });
-// });
