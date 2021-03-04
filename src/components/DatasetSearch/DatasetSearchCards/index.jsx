@@ -7,7 +7,10 @@ const DatasetSearchCards = ({items}) => {
       {items.map((item) => {
         const {description, title, identifier, distribution, publisher, theme} = item;
         return (
-          <li className="grid-col-12 usa-card">
+          <li 
+            key={identifier}
+            className="grid-col-12 usa-card"
+          >
             <div className="usa-card__container">
               <header className="usa-card__header">
                 <Link to={`/dataset/${identifier}`}>
