@@ -8,7 +8,7 @@ const PrimaryNav = ({
   items
 }) => {
   return (
-    <nav className="usa-nav" title={name}>
+    <nav className="usa-nav float-none" title={name}>
         <NavList items={items} type="primary" />
     </nav>
   );
