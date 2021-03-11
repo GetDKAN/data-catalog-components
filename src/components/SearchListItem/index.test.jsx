@@ -6,13 +6,66 @@ import SearchListItem from './index';
 describe('<SearchListItem />', () => {
   test('renders an item', () => {
     render(<SearchListItem
-      item={
-        {
-          title: 'dkan',
-          ref: '/dkan-item',
-        }
-      }
-    />);
+             item={
+               {
+                 title: 'dkan',
+                 ref: '/dkan-item',
+               }
+             }
+           />);
     expect(screen.getByRole('heading', 'Welcome to DKAN')).toBeInTheDocument();
+  });
+
+  test('Return unique formatted items', () => {
+
+    const getUniqueFormats = (formats) => {
+      let unique = [];
+      return formats.reduce(
+        (a, b) => {
+          if (unique.indexOf(b[1].format) === -1) {
+            unique.push(b[1].format);
+            a.push(b[1]);
+          }
+          return a;
+        }, []);
+    };
+
+    const formats = [
+      [0,
+       {
+         "identifier": 1,
+         "format": "csv"
+       }],
+      [1,
+       { "identifier":2,
+         "format": "csv"
+       }],
+      [2,
+       { "identifier":3,
+         "format": "csv"
+       }],
+      [3,
+       { "identifier":4,
+         "format": "rdf"
+       }],
+      [4,
+       { "identifier":5,
+         "format": "xml"
+       }]
+    ];
+
+    expect(
+      getUniqueFormats(formats))
+      .toEqual([
+        {"format": "csv",
+         "identifier": 1
+        },
+        {"format": "rdf",
+         "identifier": 4
+        },
+        {"format": "xml",
+         "identifier": 5
+        }
+      ]);
   });
 });
