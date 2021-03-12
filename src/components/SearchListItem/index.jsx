@@ -17,37 +17,23 @@ const SearchListItem = ({
     if (!distribution) {
       return null;
     }
-    if(typeof distribution === 'object') {
-      distribution = Object.entries(distribution);
-      return distribution.map((dist) => {
-        const type = dist[1].mediaType ? dist[1].mediaType.split('/') :'';
-        const backup = type ? type[1] : 'data';
-        const format = (dist[1].format) ? dist[1].format : backup;
-        return (
-          <div title={`format: ${dist.format}`}
-            key={`dist-id-${identifier}-${Math.random() * 10}`}
-            className="label"
-            data-format={format}>{format}
-          </div>
-        );
-      })
-    }
-
-    if(Array.isArray(distribution)) {
-      return distribution.map((dist) => {
-        const type = dist.mediaType ? dist.mediaType.split("/") : '';
-        const backup = type ? type[1] : 'data';
+    if((typeof distribution === 'object') || (Array.isArray(distribution))) {
+      const distributionWithUniqueFormats = getUniqueFormats(Object.entries(distribution));
+      return distributionWithUniqueFormats.map((dist) => {
+        const type = dist.mediaType ? dist.mediaType.split('/') :'';
+        const backup = type ? type : 'data';
         const format = (dist.format) ? dist.format : backup;
         return (
           <div title={`format: ${dist.format}`}
-            key={`dist-id-${identifier}-${Math.random() * 10}`}
-            className="label"
-            data-format={format}>{format}
+               key={`dist-id-${identifier}-${Math.random() * 10}`}
+               className="label"
+               data-format={format}>{format}
           </div>
         );
       });
     }
-  }
+    return null;
+  };
 
   function themes(theme) {
     if (!theme) {
@@ -113,6 +99,18 @@ const SearchListItem = ({
     </div>
   );
 }
+
+export const getUniqueFormats = (formats) => {
+  let unique = [];
+  return formats.reduce(
+    (a, b) => {
+      if (unique.indexOf(b[1].format) === -1) {
+        unique.push(b[1].format);
+        a.push(b[1]);
+      }
+      return a;
+    }, []);
+};
 
 SearchListItem.defaultProps = {
   className: 'dc-search-list-item',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import SearchListItem from './index';
+import SearchListItem, {getUniqueFormats} from './index';
 
 describe('<SearchListItem />', () => {
   test('renders an item', () => {
@@ -16,19 +16,7 @@ describe('<SearchListItem />', () => {
     expect(screen.getByRole('heading', 'Welcome to DKAN')).toBeInTheDocument();
   });
 
-  test('Return unique formatted items', () => {
-
-    const getUniqueFormats = (formats) => {
-      let unique = [];
-      return formats.reduce(
-        (a, b) => {
-          if (unique.indexOf(b[1].format) === -1) {
-            unique.push(b[1].format);
-            a.push(b[1]);
-          }
-          return a;
-        }, []);
-    };
+  test('Return uniquely formatted items', () => {
 
     const formats = [
       [0,
