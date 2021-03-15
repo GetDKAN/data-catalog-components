@@ -6,19 +6,24 @@ import TopicIcon from '../../templates/TopicIcon';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
 import { Link } from '@reach/router';
+import {countBy} from 'lodash';
+
 
 const SearchListItem = ({
   className,
   item,
 }) => {
   const { ref, title, description, publisher, format, theme, identifier } = item;
-
   function formats(distribution) {
     if (!distribution) {
       return null;
     }
     if((typeof distribution === 'object') || (Array.isArray(distribution))) {
       const distributionWithUniqueFormats = getUniqueFormats(Object.entries(distribution));
+      const counted = countBy(distribution, (d) => {
+        return d.format;
+      });
+
       return distributionWithUniqueFormats.map((dist) => {
         const type = dist.mediaType ? dist.mediaType.split('/') :'';
         const backup = type ? type : 'data';
@@ -27,7 +32,7 @@ const SearchListItem = ({
           <div title={`format: ${dist.format}`}
                key={`dist-id-${identifier}-${Math.random() * 10}`}
                className="label"
-               data-format={format}>{format}
+               data-format={format}>{counted[format]}x {format}
           </div>
         );
       });
