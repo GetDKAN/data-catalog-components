@@ -6,48 +6,39 @@ import TopicIcon from '../../templates/TopicIcon';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
 import { Link } from '@reach/router';
+import {countBy} from 'lodash';
+
 
 const SearchListItem = ({
   className,
   item,
 }) => {
   const { ref, title, description, publisher, format, theme, identifier } = item;
-
   function formats(distribution) {
     if (!distribution) {
       return null;
     }
-    if(typeof distribution === 'object') {
-      distribution = Object.entries(distribution);
-      return distribution.map((dist) => {
-        const type = dist[1].mediaType ? dist[1].mediaType.split('/') :'';
-        const backup = type ? type[1] : 'data';
-        const format = (dist[1].format) ? dist[1].format : backup;
-        return (
-          <div title={`format: ${dist.format}`}
-            key={`dist-id-${identifier}-${Math.random() * 10}`}
-            className="label"
-            data-format={format}>{format}
-          </div>
-        );
-      })
-    }
+    if((typeof distribution === 'object') || (Array.isArray(distribution))) {
+      const distributionWithUniqueFormats = getUniqueFormats(Object.entries(distribution));
+      const counted = countBy(distribution, (d) => {
+        return d.format;
+      });
 
-    if(Array.isArray(distribution)) {
-      return distribution.map((dist) => {
-        const type = dist.mediaType ? dist.mediaType.split("/") : '';
-        const backup = type ? type[1] : 'data';
+      return distributionWithUniqueFormats.map((dist) => {
+        const type = dist.mediaType ? dist.mediaType.split('/') :'';
+        const backup = type ? type : 'data';
         const format = (dist.format) ? dist.format : backup;
         return (
           <div title={`format: ${dist.format}`}
-            key={`dist-id-${identifier}-${Math.random() * 10}`}
-            className="label"
-            data-format={format}>{format}
+               key={`dist-id-${identifier}-${Math.random() * 10}`}
+               className="label"
+               data-format={format}>{counted[format]}x {format}
           </div>
         );
       });
     }
-  }
+    return null;
+  };
 
   function themes(theme) {
     if (!theme) {
@@ -113,6 +104,18 @@ const SearchListItem = ({
     </div>
   );
 }
+
+export const getUniqueFormats = (formats) => {
+  let unique = [];
+  return formats.reduce(
+    (a, b) => {
+      if (unique.indexOf(b[1].format) === -1) {
+        unique.push(b[1].format);
+        a.push(b[1]);
+      }
+      return a;
+    }, []);
+};
 
 SearchListItem.defaultProps = {
   className: 'dc-search-list-item',
