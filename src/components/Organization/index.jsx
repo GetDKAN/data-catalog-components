@@ -5,17 +5,15 @@ import PublisherDatasetCountByName from "../PublisherDatasetCountByName";
 import axios from 'axios';
 
 function Organization(props) {
-  const { name, description, imageUrl, searchUrl, alignment, datasetCount } = props;
+  const { name, description, imageUrl, searchUrl, alignment} = props;
   const image = <img alt={name || 'Organization Image'} src={imageUrl} />;
   const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
-
-  const [posts, setPosts] = useState();
+  const [dataObj, setDataObj] = useState();
 
   const fetchData = async () => {
-    const { data } = await axios.get('http://demo.getdkan.org/data.json');
-    console.log(data);
-    console.log("Name", name);
-    setPosts(data);
+    axios.get('http://demo.getdkan.org/data.json')
+      .then(res => (setDataObj(res.data)))
+      .catch(err => (console.log("Error, check URL/Cors.", err)));
   };
 
   useEffect(() => {
@@ -36,21 +34,24 @@ function Organization(props) {
         </div>
       )}
 
-      {posts && posts.dataset !== 'undefined' ? countDatasetsByName("State Economic Council", posts.dataset) : null}
-
-      <PublisherDatasetCountByName datasetCount={datasetCount} />
+      {dataObj && dataObj.dataset !== 'undefined' ?
+       <PublisherDatasetCountByName
+         name={name}
+         datasetCount={
+           countDatasetsByName(name, dataObj.dataset)
+         } /> :
+       <PublisherDatasetCountByName name={name} />
+      }
     </div>
   );
 }
 
 export const countDatasetsByName = (publisher, datasets) =>  {
-  // console.log("datasets", datasets);
-  // return "foobar";
   const publishers = datasets.map((data, index, arr) => {return data.publisher; });
-  const result =  publishers.filter((p) => {return p.name === publisher;})
-   console.log("RES: ", result);
+  const result =  publishers.filter((p) => {return p.name === publisher;});
   if (typeof result !== 'undefined' && result.length) {
     return result.length;
+
   }
   return null;
 };
@@ -64,7 +65,6 @@ Organization.defaultProps = {
 
 Organization.propTypes = {
   alignment: PropTypes.string,
-  datasetCount: PropTypes.string,
   name: PropTypes.string,
   description: PropTypes.string,
   imageUrl: PropTypes.string,
