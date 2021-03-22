@@ -18,7 +18,6 @@ const PublisherDatasetCountByName = (props) => {
   );
 };
 
-
 export default PublisherDatasetCountByName;
 
 PublisherDatasetCountByName.propTypes = {

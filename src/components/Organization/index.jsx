@@ -5,15 +5,26 @@ import PublisherDatasetCountByName from "../PublisherDatasetCountByName";
 import axios from 'axios';
 
 function Organization(props) {
-  const { name, description, imageUrl, searchUrl, alignment} = props;
+  const { name,
+          description,
+          imageUrl,
+          searchUrl,
+          alignment,
+          organizationEndpoint} = props;
+
   const image = <img alt={name || 'Organization Image'} src={imageUrl} />;
   const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
   const [dataObj, setDataObj] = useState();
 
   const fetchData = async () => {
-    axios.get('http://demo.getdkan.org/data.json')
-      .then(res => (setDataObj(res.data)))
-      .catch(err => (console.log("Error, check URL/Cors.", err)));
+    const endpoint = organizationEndpoint ? organizationEndpoint.replace("api/1", "data.json") : null;
+    if (endpoint) {
+      axios.get(endpoint)
+        .then(res => (setDataObj(res.data)))
+        .catch(err => (console.log("Error, check URL/Cors.", err)));
+    } else {
+      console.log("No search endpoint defined for Organization/s, so no dataset info available.");
+    }
   };
 
   useEffect(() => {
@@ -69,6 +80,7 @@ Organization.propTypes = {
   description: PropTypes.string,
   imageUrl: PropTypes.string,
   searchUrl: PropTypes.string,
+  organizationEndpoint: PropTypes.string,
 };
 
 export default Organization;
