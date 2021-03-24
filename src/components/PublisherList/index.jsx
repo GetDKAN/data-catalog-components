@@ -4,7 +4,7 @@ import Organization from '../Organization';
 
 function PublisherList(props) {
   const {
-    items, className,
+    items, className, organizationEndpoint
   } = props;
   let content = (<div />);
 
@@ -15,6 +15,7 @@ function PublisherList(props) {
         key={item.identifier}
         imageUrl={item.imageUrl}
         description={item.description}
+        organizationEndpoint={organizationEndpoint}
         searchUrl={item.searchUrl}
         alignment={item.alignment}
       />
@@ -40,6 +41,7 @@ PublisherList.propTypes = {
     identifier: PropTypes.string,
     imageUrl: PropTypes.string,
     searchUrl: PropTypes.string,
+    organizationEndpoint: PropTypes.string,
   })).isRequired,
   className: PropTypes.string,
 };

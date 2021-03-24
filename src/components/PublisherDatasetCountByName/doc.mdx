@@ -1,0 +1,38 @@
+---
+name: Publisher Dataset Count (by name).
+menu: Components
+route: /components/publisher-dataset-count-by-name
+---
+
+import { Playground, Props } from 'docz'
+import PublisherDatasetCountByName from './index'
+
+# Publisher dataset count (by name).
+
+## Properties
+
+<Props of={PublisherDatasetCountByName} />
+
+### With no datasetCount.
+<Playground>
+  <PublisherDatasetCountByName
+      name="State Economic Council"
+  />
+</Playground>
+
+## Basic usage
+### With a count of 1.
+<Playground>
+  <PublisherDatasetCountByName
+      datasetCount="1"
+      name="State Economic Council"
+  />
+</Playground>
+
+With a count of more than 1.
+<Playground>
+    <PublisherDatasetCountByName
+      datasetCount="3"
+      name="State Economic Council"
+  />
+</Playground>
