@@ -4,7 +4,7 @@ import { Link } from "@reach/router";
 
 const PublisherDatasetCountByName = (props) => {
   const { name, searchUrl, datasetCount} = props;
-  const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
+  const link = searchUrl ? searchUrl : `/search/?publisher__name=${name}`;
   let str;
   if (datasetCount) {
     str = (datasetCount === 1) ? '1 dataset' : `${datasetCount}x datasets`;
