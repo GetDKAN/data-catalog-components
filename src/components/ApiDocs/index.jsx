@@ -3,20 +3,29 @@ import PropTypes from 'prop-types';
 import SwaggerUI from 'swagger-ui-react';
 // import 'swagger-ui-react/swagger-ui.css';
 
-const ApiDocs = ({ endpoint, uuid }) => {
-  const url = uuid ? `${endpoint}/${uuid}` : endpoint;
+const ApiDocs = ({ endpoint, datasetID, authentication, expansion }) => {
+
+  let url = `${endpoint}?authentication=${authentication}`
+  if(datasetID) {
+    url = `${endpoint}/metastore/schemas/dataset/items/${datasetID}/docs`
+  }
+
   return typeof window === 'undefined'
     ? null
-    : <SwaggerUI url={url} docExpansion="list" />;
+    : <SwaggerUI url={url} docExpansion={expansion} />;
 };
 
 ApiDocs.defaultProps = {
-  uuid: '',
+  datasetID: '',
+  authentication: false,
+  expansion: 'list',
 };
 
 ApiDocs.propTypes = {
   endpoint: PropTypes.string.isRequired,
-  uuid: PropTypes.string,
+  authentication: PropTypes.bool,
+  datasetID: PropTypes.string,
+  expansion: PropTypes.oneOf['list', 'full', 'none'],
 };
 
 export default ApiDocs;
