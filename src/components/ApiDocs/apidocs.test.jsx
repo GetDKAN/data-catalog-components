@@ -18,7 +18,6 @@ describe('<ApiDocs />', () => {
         url: 'http://dkan.org?authentication=false',
       }),
     )
-    expect(window.fetch).toHaveBeenCalledTimes(1)
   })
 
   test('builds base url correctly with authentication', async () => {
@@ -30,7 +29,6 @@ describe('<ApiDocs />', () => {
         url: 'http://dkan.org?authentication=true',
       }),
     )
-    expect(window.fetch).toHaveBeenCalledTimes(1)
   })
 
   test('builds dataset url correctly', async () => {
@@ -42,6 +40,5 @@ describe('<ApiDocs />', () => {
         url: 'http://dkan.org/metastore/schemas/dataset/items/12345/docs',
       }),
     )
-    expect(window.fetch).toHaveBeenCalledTimes(1)
   })
 });
