@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SwaggerUI from 'swagger-ui-react';
-// import 'swagger-ui-react/swagger-ui.css';
 
 const ApiDocs = ({ endpoint, datasetID, authentication, expansion }) => {
 
@@ -10,9 +9,7 @@ const ApiDocs = ({ endpoint, datasetID, authentication, expansion }) => {
     url = `${endpoint}/metastore/schemas/dataset/items/${datasetID}/docs`
   }
 
-  return typeof window === 'undefined'
-    ? null
-    : <SwaggerUI url={url} docExpansion={expansion} />;
+  return <SwaggerUI url={url} docExpansion={expansion} />;
 };
 
 ApiDocs.defaultProps = {
@@ -25,7 +22,7 @@ ApiDocs.propTypes = {
   endpoint: PropTypes.string.isRequired,
   authentication: PropTypes.bool,
   datasetID: PropTypes.string,
-  expansion: PropTypes.oneOf['list', 'full', 'none'],
+  expansion: PropTypes.oneOf(['list', 'full', 'none']),
 };
 
 export default ApiDocs;
