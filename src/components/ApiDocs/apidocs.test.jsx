@@ -32,7 +32,7 @@ describe('<ApiDocs />', () => {
   })
 
   test('builds dataset url correctly', async () => {
-    render(<ApiDocs endpoint="http://dkan.org" datasetID={12345} />);
+    render(<ApiDocs endpoint="http://dkan.org" datasetID={'12345'} />);
     await act(async () => {  });
     expect(window.fetch).toHaveBeenCalledWith(
       'http://dkan.org/metastore/schemas/dataset/items/12345/docs',
