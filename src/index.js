@@ -4,6 +4,7 @@ export { default as DataIcon } from './components/DataIcon';
 export { default as DataTableDensity } from './components/DataTable/DataTableDensity';
 export { default as DataTablePageResults } from './components/DataTable/DataTablePageResults';
 export { default as DataTablePageSizer } from './components/DataTable/DataTablePageSizer';
+export { default as DynamicLink } from './components/DynamicLink';
 export { default as IconList } from './components/IconList';
 export { default as IconListItem } from './components/IconListItem';
 export { default as FileDownload } from './components/FileDownload';

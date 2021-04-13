@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
 import validator from 'validator';
 
-const DynamicLink = ({url, content, cue}) => {
+const DynamicLink = ({url, content, cue, className}) => {
   if(validator.isURL(url, { require_protocol: true })) {
     return (
       <a
-        className={''}
+        className={className}
         href={url}
       >
         {content}
@@ -21,7 +21,7 @@ const DynamicLink = ({url, content, cue}) => {
   }
   return(
     <Link
-      className={''}
+      className={className}
       to={url}
     >
       {content}
@@ -31,12 +31,14 @@ const DynamicLink = ({url, content, cue}) => {
 
 DynamicLink.defaultProps = {
   cue: undefined,
+  className: '',
 }
 
 DynamicLink.propTypes = {
   url: PropTypes.string.isRequired,
   content: PropTypes.node.isRequired,
   cue: PropTypes.node,
+  className: PropTypes.string,
 }
 
 export default DynamicLink;
