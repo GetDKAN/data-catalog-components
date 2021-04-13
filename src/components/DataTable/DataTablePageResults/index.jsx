@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 const DataTablePageResults = ({
   totalRows, limit, offset, className
 }) => {
+  const numTotalRows = parseInt(totalRows)
   const ofTotal = () => {
-    if (limit >= totalRows) { return totalRows; }
+    if (limit >= numTotalRows) { return numTotalRows; }
     if (offset === 0) { return limit; }
     return (offset + limit);
   }
   const page = offset / limit;
   const startTotal = () => (page * limit + 1)
   return (
-    <p className={className}>{`${startTotal()} - ${ofTotal()} of ${totalRows} rows`}</p>
+    <p className={className}>{`${startTotal()} - ${ofTotal()} of ${numTotalRows.toLocaleString()} rows`}</p>
   );
 };
 

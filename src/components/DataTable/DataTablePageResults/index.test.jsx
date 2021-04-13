@@ -25,4 +25,15 @@ describe('<DataTablePageResults />', () => {
     )
     expect(screen.getByText(/11 - 20 of 100 rows/)).toBeInTheDocument();
   });
+
+  test('renders correct results with commas', () => {
+    render(
+      <DataTablePageResults
+        totalRows={1500250}
+        limit={25}
+        offset={0}
+      />,
+    )
+    expect(screen.getByText(/1 - 25 of 1,500,250 rows/)).toBeInTheDocument();
+  });
 });
