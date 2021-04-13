@@ -14,7 +14,8 @@ describe("<DataTablePageResults />", () => {
     expect(screen.getByText(/11 - 20 of 100 rows/)).toBeInTheDocument();
   });
 
-  it("Correctly displays appended viewing to results list", () => {
-    expect(viewingWrapper.find("p").text()).toBe("Viewing 41 - 50 of 100 rows");
+  test("renders correct results with commas", () => {
+    render(<DataTablePageResults totalRows={1500250} limit={25} offset={0} />);
+    expect(screen.getByText(/1 - 25 of 1,500,250 rows/)).toBeInTheDocument();
   });
 });

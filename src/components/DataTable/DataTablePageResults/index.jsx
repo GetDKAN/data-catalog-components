@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const DataTablePageResults = ({ totalRows, limit, offset, className }) => {
+  const numTotalRows = parseInt(totalRows);
   const ofTotal = () => {
-    if (limit >= totalRows) {
-      return totalRows;
+    if (limit >= numTotalRows) {
+      return numTotalRows;
     }
     if (offset === 0) {
       return limit;
@@ -16,7 +17,7 @@ const DataTablePageResults = ({ totalRows, limit, offset, className }) => {
   return (
     <p
       className={className}
-    >{`${startTotal()} - ${ofTotal()} of ${totalRows} rows`}</p>
+    >{`${startTotal()} - ${ofTotal()} of ${numTotalRows.toLocaleString()} rows`}</p>
   );
 };
 
