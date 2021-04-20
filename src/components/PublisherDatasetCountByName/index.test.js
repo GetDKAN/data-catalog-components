@@ -12,7 +12,7 @@ describe('<PublisherDatasetCountByName />', () => {
 
   test('If there is a publisher with datasets render the dataset count.',() => {
     render(<PublisherDatasetCountByName name="State Economic Council" datasetCount="3" />);
-    expect(screen.getByText('3x datasets')).toBeInTheDocument();
+    expect(screen.getByText('3 datasets')).toBeInTheDocument();
   });
 
   test('Dataset count with just one item.',() => {
