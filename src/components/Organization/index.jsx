@@ -13,7 +13,7 @@ function Organization(props) {
           organizationEndpoint} = props;
 
   const image = <img alt={name || 'Organization Image'} src={imageUrl} />;
-  const link = searchUrl ? searchUrl : `search/?publisher__name=${name}`;
+  const link = searchUrl ? searchUrl : `/search/?publisher__name=${name}`;
   const [dataObj, setDataObj] = useState();
 
   const fetchData = async () => {
