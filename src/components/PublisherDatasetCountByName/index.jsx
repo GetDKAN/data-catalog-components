@@ -7,7 +7,7 @@ const PublisherDatasetCountByName = (props) => {
   const link = searchUrl ? searchUrl : `/search/?publisher__name=${name}`;
   let str;
   if (datasetCount) {
-    str = (datasetCount === 1) ? '1 dataset' : `${datasetCount}x datasets`;
+    str = (datasetCount === 1) ? '1 dataset' : `${datasetCount} datasets`;
   } else {
     str = 'datasets';
   }
