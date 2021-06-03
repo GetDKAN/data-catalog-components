@@ -10,6 +10,8 @@ const SearchFacets = ({
   className,
   toggleClasses,
   InputComponent,
+  onMore,
+  onLess
 }) => {
   const facetList = Object.entries(facetsConfig);
   const facetComponents = facetList.map(
@@ -33,6 +35,8 @@ const SearchFacets = ({
           reset={facetInfo[1].reset}
           selectedFacets={selectedFacets}
           inputType={facetInfo[1].inputType}
+          onMore={onMore}
+          onLess={onLess}
         />
       );
     },
@@ -60,6 +64,8 @@ SearchFacets.propTypes = {
   className: PropTypes.string,
   toggleClasses: PropTypes.string,
   InputComponent: PropTypes.func,
+  onMore: PropTypes.func,
+  onLess: PropTypes.func
 };
 
 export default SearchFacets;

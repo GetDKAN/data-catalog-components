@@ -26,6 +26,8 @@ const SearchFacet = ({
   },
   selectedFacets,
   inputType,
+  onMore,
+  onLess
 }) => {
 
   let myLabel = '';
@@ -139,6 +141,8 @@ const SearchFacet = ({
           container="div"
           items={choices}
           limit={10}
+          onMore={onMore}
+          onLess={onLess}
         />
       </ToggleBlock>
     </div>
@@ -169,6 +173,8 @@ SearchFacet.propTypes = {
     icon: PropTypes.func,
   }),
   inputType: PropTypes.string,
+  onMore: PropTypes.func,
+  onLess: PropTypes.func
 };
 
 export default SearchFacet;
