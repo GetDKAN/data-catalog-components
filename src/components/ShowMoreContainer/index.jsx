@@ -9,6 +9,8 @@ export default function ShowMoreContainer({
   btnClosedText,
   containerClasses,
   wrapperClasses,
+  onMore,
+  onLess
 }) {
   const [showMore, toggleShowMore] = useState(false);
 
@@ -16,7 +18,12 @@ export default function ShowMoreContainer({
     <button
       type="button"
       className="showmore-button"
-      onClick={() => toggleShowMore(!showMore)}
+      onClick={() => {
+        if (onLess){
+          onLess()
+        }
+        toggleShowMore(!showMore)
+      }}
     >
       {btnOpenText || 'Show less'}
     </button>
@@ -35,7 +42,12 @@ export default function ShowMoreContainer({
       <button
         type="button"
         className="showmore-button"
-        onClick={() => toggleShowMore(!showMore)}
+        onClick={() => {
+          if (onMore){
+            onMore()
+          }
+          toggleShowMore(!showMore)
+        }}
       >
         {btnText}
       </button>
