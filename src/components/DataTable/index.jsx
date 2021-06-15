@@ -157,42 +157,37 @@ const DataTable = ({
           >
             {headerGroup.headers.map(column => (
               <div
-                {...column.getHeaderProps()}
-              > 
-                <div
-                  className={headerCellClassName}
-                  {...column.getHeaderProps(columnSort ? column.getSortByToggleProps() : undefined)}
-                >
-                  <span className={headerCellTextClassName}>
-                    {column.render('Header')}
-                  </span>
-                  {columnSort
-                      && (
-                        <span
-                          className={
-                            column.isSorted
-                            ? column.isSortedDesc
-                              ? columnIsSortedDecClassName
-                              : columnIsSortedAscClassName
-                            : columnIsSortedClassName
-                          }
-                        />
-                      )
-                    }
-                </div>
-                {columnResize
-                  &&(
-                    <div
-                      {...column.getResizerProps()}
-                      className={`${tableColumnResizer} ${
-                        column.isResizing ? tableColumnIsResizing : ''
-                      }`}
+                className={headerCellClassName}
+                {...column.getHeaderProps(columnSort ? column.getSortByToggleProps() : undefined)}
+              >
+                <span className={headerCellTextClassName}>
+                  {column.render('Header')}
+                </span>
+                {columnSort
+                  && (
+                    <span
+                      className={
+                        column.isSorted
+                        ? column.isSortedDesc
+                          ? columnIsSortedDecClassName
+                          : columnIsSortedAscClassName
+                        : columnIsSortedClassName
+                      }
                     />
                   )
                 }
+                {columnResize
+                &&(
+                  <div
+                    {...column.getResizerProps()}
+                    className={`${tableColumnResizer} ${
+                      column.isResizing ? tableColumnIsResizing : ''
+                    }`}
+                  />
+                )
+              }
               </div>
-            ))}
-            
+            ))} 
           </div>
         ))}
         {columnFilter
