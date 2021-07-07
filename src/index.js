@@ -16,6 +16,7 @@ export { default as PageHeader } from './components/PageHeader';
 export { default as PublisherList } from './components/PublisherList';
 export { default as Resource } from './components/Resource';
 export { default as SearchFacets } from './components/SearchFacets';
+export { default as SearchFacet } from './components/SearchFacets/SearchFacet'
 export { default as SearchInput } from './components/SearchInput';
 export { default as SearchList } from './components/SearchList';
 export { default as SearchListItem } from './components/SearchListItem';
