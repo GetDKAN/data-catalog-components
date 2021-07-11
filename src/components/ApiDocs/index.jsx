@@ -7,7 +7,7 @@ const ApiDocs = ({ endpoint, uuid }) => {
   const url = uuid ? `${endpoint}/${uuid}` : endpoint;
   return typeof window === 'undefined'
     ? null
-    : <SwaggerUI url={url} docExpansion="list" />;
+    : <SwaggerUI url={url} docExpansion="list" defaultModelsExpandDepth="-1" />;
 };
 
 ApiDocs.defaultProps = {
