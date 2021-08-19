@@ -21,6 +21,8 @@ const DataTablePageResults = ({
   return (
     <div className={className}>
       <p>
+        Viewing
+        {' '}
         <span className="low-result">{currentLowestResult}</span>
         {' '}
         -
