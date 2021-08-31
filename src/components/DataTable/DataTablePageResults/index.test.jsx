@@ -19,11 +19,25 @@ describe('<DataTablePageResults />', () => {
     />,
   );
 
+  const viewingWrapper = shallow(
+    <DataTablePageResults
+      total={100}
+      pageSize={10}
+      currentPage={4}
+      viewing
+    />,
+  );
+
   it('renders correct initial results', () => {
-    expect(defaultWrapper.find('p').text()).toBe('Viewing 1 - 10 of 100 rows');
+    expect(defaultWrapper.find('p').text()).toBe('1 - 10 of 100 rows');
   });
 
   it('renders correct results on subsequent pages', () => {
-    expect(customWrapper.find('p').text()).toBe('Viewing 41 - 50 of 100 rows');
+    expect(customWrapper.find('p').text()).toBe('41 - 50 of 100 rows');
   });
+
+  it('Correctly displays appended viewing to results list', () => {
+    expect(viewingWrapper.find('p').text()).toBe('Viewing 41 - 50 of 100 rows');
+  })
+  
 });
