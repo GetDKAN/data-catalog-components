@@ -6,6 +6,7 @@ const DataTablePageResults = ({
   pageSize,
   currentPage,
   className,
+  viewing = false
 }) => {
   // Add one to offset the 0 array index.
   const page = currentPage + 1;
@@ -21,8 +22,9 @@ const DataTablePageResults = ({
   return (
     <div className={className}>
       <p>
-        Viewing
-        {' '}
+        {viewing && (
+          'Viewing '
+        )}
         <span className="low-result">{currentLowestResult}</span>
         {' '}
         -
