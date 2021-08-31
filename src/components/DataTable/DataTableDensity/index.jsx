@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import DataIcon from '../../DataIcon';
 
 const DataTableDensity = ({
+  active,
   items,
   densityChange,
   className,
@@ -23,6 +24,7 @@ const DataTableDensity = ({
             key={item.text}
             onClick={() => densityChange(item.value)}
             title={item.text}
+            className={active === item.text ? 'active' : ''}
           >
             {item.icon
               && (
@@ -50,6 +52,7 @@ DataTableDensity.defaultProps = {
 };
 
 DataTableDensity.propTypes = {
+  active: PropTypes.string,
   densityChange: PropTypes.func.isRequired,
   screenReaderClass: PropTypes.string,
   className: PropTypes.string,
