@@ -18,7 +18,9 @@ const DataTable = ({
   className,
   tableClasses,
   customColumnFilter,
-  cellTextClassName
+  cellTextClassName, 
+  CustomLoadingComponent,
+  CustomNoResults,
 }) => {
   const { layout, columnFilter, columnSort, columnResize } = options;
   const { minWidth, maxWidth, width } = columnDefaults
@@ -227,33 +229,43 @@ const DataTable = ({
           )}
       </div>
       <div className="tbody">
-        {rows.map((row, index) => {
-          const even = (index + 1) % 2 === 0;
-          prepareRow(row)
-          let classList = cellClassName
-          if (index === 0 && cellFirstRowClassName) {
-            classList = cellFirstRowClassName
-          }
-          if (even) {
-            classList += ` ${cellEvenRowClassName}`
-          }
-          if (!even) {
-            classList += ` ${cellOddRowClassName}`
-          }
-          return (
-            <div {...row.getRowProps()} className="tr">
-              {row.cells.map((cell) => {
-                return (
-                  <div {...cell.getCellProps()} className={classList}>
-                    <span className={cellTextClassName}>
-                      {cell.render('Cell')}
-                    </span>
-                  </div>
-                )
-              })}
-            </div>
+        {loading
+          ? (CustomLoadingComponent ? CustomLoadingComponent : <p>Loading...</p>)
+          : (
+            rows.length
+              ? (
+                rows.map((row, index) => {
+                  const even = (index + 1) % 2 === 0;
+                  prepareRow(row)
+                  let classList = cellClassName
+                  if (index === 0 && cellFirstRowClassName) {
+                    classList = cellFirstRowClassName
+                  }
+                  if (even) {
+                    classList += ` ${cellEvenRowClassName}`
+                  }
+                  if (!even) {
+                    classList += ` ${cellOddRowClassName}`
+                  }
+                  return (
+                    <div {...row.getRowProps()} className="tr">
+                      {row.cells.map((cell) => {
+                        return (
+                          <div {...cell.getCellProps()} className={classList}>
+                            <span className={cellTextClassName}>
+                              {cell.render('Cell')}
+                            </span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )
+                })
+              ) : (
+                CustomNoResults ? CustomNoResults : <p>No results found.</p>
+              )
           )
-        })}
+        }
       </div>
     </div>
   )
