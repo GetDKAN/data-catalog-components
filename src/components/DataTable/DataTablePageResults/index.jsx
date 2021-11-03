@@ -17,7 +17,7 @@ const DataTablePageResults = ({
   const page = offset / limit;
   const startTotal = () => (page * limit + 1)
   return (
-    <p className={className}>{`${startTotal()} - ${ofTotal()} of ${numTotalRows.toLocaleString()} rows`}</p>
+    <p className={className}>{`${startTotal().toLocaleString()} - ${ofTotal().toLocaleString()} of ${numTotalRows.toLocaleString()} rows`}</p>
   );
 };
 
