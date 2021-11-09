@@ -3,8 +3,14 @@ import PropTypes from "prop-types";
 
 const DataTablePageResults = ({ totalRows, limit, offset, className }) => {
   const numTotalRows = parseInt(totalRows);
+  if (numTotalRows === 0) {
+    return <p className={className}>{`0 - 0 of 0 rows`}</p>;
+  }
   const ofTotal = () => {
     if (limit >= numTotalRows) {
+      return numTotalRows;
+    }
+    if (limit + offset >= numTotalRows) {
       return numTotalRows;
     }
     if (offset === 0) {
@@ -17,7 +23,7 @@ const DataTablePageResults = ({ totalRows, limit, offset, className }) => {
   return (
     <p
       className={className}
-    >{`${startTotal()} - ${ofTotal()} of ${numTotalRows.toLocaleString()} rows`}</p>
+    >{`${startTotal().toLocaleString()} - ${ofTotal().toLocaleString()} of ${numTotalRows.toLocaleString()} rows`}</p>
   );
 };
 
