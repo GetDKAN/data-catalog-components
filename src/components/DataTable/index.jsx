@@ -158,9 +158,7 @@ const DataTable = ({
             className={headerGroupClassName}
           >
             {headerGroup.headers.map(column => (
-              <div
-                {...column.getHeaderProps()}
-              > 
+              <> 
                 <div
                   className={headerCellClassName}
                   {...column.getHeaderProps(columnSort ? column.getSortByToggleProps() : undefined)}
@@ -192,7 +190,7 @@ const DataTable = ({
                     />
                   )
                 }
-              </div>
+              </>
             ))}
             
           </div>
