@@ -9,10 +9,9 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import SearchList from '../src/components/SearchList';
 import SearchListItem from '../src/components/SearchListItem';
-import InputLarge from '../src/components/InputLarge';
 import SearchInput from '../src/components/SearchInput';
 import SearchResultsMessage from '../src/components/SearchResultsMessage';
-import "../src/theme/styles/index.scss";
+import '../src/theme/styles/index.scss';
 import search from './data/search.json';
 
 const { query, items } = search;
@@ -59,7 +58,7 @@ storiesOf('Search', module)
       facetTypes={['Themes', 'Keywords']}
       showQuery={boolean('Show Query', true)}
       showFacets={boolean('Show Facets', true)}
-      defaultFacets={{ Themes: {label: 'Themes'}, Keywords: {label: 'Keywords'}}}
+      defaultFacets={{ Themes: { label: 'Themes' }, Keywords: { label: 'Keywords' } }}
     />
 ));
 
@@ -72,14 +71,14 @@ function getSearchListItems() {
 }
 
 function getSelectedFacetOptions($index) {
-  if ($index == 1) {
+  if ($index === 1) {
     return [
       ['Themes', 'Foo'],
       ['Keywords', 'Bar'],
       ['Keywords', 'Run'],
     ];
   }
-  
+
   return [
     ['Themes', 'Foo'],
     ['Keywords', 'Bar'],
