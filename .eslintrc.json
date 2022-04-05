@@ -1,4 +1,4 @@
-module.exports = {
+{
     "extends": [
         "eslint:recommended",
         "plugin:storybook/recommended",
@@ -8,9 +8,9 @@ module.exports = {
     "plugins": ["testing-library"],
     "env": {
         "jest": true,
-        "browser": true,
+        "browser": true
     },
     "rules": {
-        "react/jsx-curly-spacing": [2, "never", { "allowMultiline": true }],
+        "react/jsx-curly-spacing": [2, "never", { "allowMultiline": true }]
     }
-};
+}
