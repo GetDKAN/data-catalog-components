@@ -14,22 +14,22 @@ import {
   useResizeColumns,
   useColumnOrder,
 } from 'react-table'
-import FormatIcon from '../src/components/FormatIcon';
-import FileDownload from '../src/components/FileDownload';
-import Organization from '../src/components/Organization';
-import Text from '../src/components/Text';
-import Table from '../src/components/Table';
-import Tags from '../src/components/Tags';
-import DataIcon from '../src/components/DataIcon';
-import DataTableDensity from '../src/components/DataTable/DataTableDensity';
-import DataTablePageResults from '../src/components/DataTable/DataTablePageResults';
+import FormatIcon from '../components/FormatIcon';
+import FileDownload from '../components/FileDownload';
+import Organization from '../components/Organization';
+import Text from '../components/Text';
+import Table from '../components/Table';
+import Tags from '../components/Tags';
+import DataIcon from '../components/DataIcon';
+import DataTableDensity from '../components/DataTable/DataTableDensity';
+import DataTablePageResults from '../components/DataTable/DataTablePageResults';
 import data from './data/data.json';
 import tables from './data/tables.json';
-import '../src/theme/styles/index.scss';
-import TopicIcon from '../src/templates/TopicIcon';
-import TopicWrapper from '../src/components/TopicWrapper';
-import { ResourceDispatch } from '../src/services/resource/resource_defaults';
-import DataTable from '../src/templates/DataTable';
+import '../theme/styles/index.scss';
+import TopicIcon from '../templates/TopicIcon';
+import TopicWrapper from '../components/TopicWrapper';
+import { ResourceDispatch } from '../services/resource/resource_defaults';
+import DataTable from '../templates/DataTable';
 import { resourceData } from './data/resourceData';
 
 storiesOf('Dataset', module)

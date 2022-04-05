@@ -7,11 +7,11 @@ import {
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 
-import SearchList from '../src/components/SearchList';
-import SearchListItem from '../src/components/SearchListItem';
-import SearchInput from '../src/components/SearchInput';
-import SearchResultsMessage from '../src/components/SearchResultsMessage';
-import '../src/theme/styles/index.scss';
+import SearchList from '../components/SearchList';
+import SearchListItem from '../components/SearchListItem';
+import SearchInput from '../components/SearchInput';
+import SearchResultsMessage from '../components/SearchResultsMessage';
+import '../theme/styles/index.scss';
 import search from './data/search.json';
 
 const { query, items } = search;

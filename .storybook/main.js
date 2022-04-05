@@ -2,8 +2,6 @@ const path = require('path')
 
 module.exports = {
     stories: [
-        '../stories/**/*.stories.mdx',
-        '../stories/**/*.stories.@(js|jsx|ts|tsx)',
         '../src/**/*.stories.mdx',
         '../src/**/*.stories.@(js|jsx|ts|tsx)'
     ],
@@ -12,6 +10,7 @@ module.exports = {
         '@storybook/addon-essentials',
         '@storybook/addon-interactions',
         '@storybook/addon-a11y',
+        '@storybook/preset-scss',
         {
             /**
              * Fix Storybook issue with PostCSS@8
@@ -41,12 +40,6 @@ module.exports = {
                 path.resolve(__dirname, '../')
             ],
         }
-
-        config.module.rules.push({
-            test: /\.scss$/,
-            use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
-            include: path.resolve(__dirname, '../'),
-        });
 
         return config;
     },
