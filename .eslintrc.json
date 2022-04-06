@@ -1,16 +1,24 @@
 {
     "extends": [
         "eslint:recommended",
+        "plugin:react/recommended",
         "plugin:storybook/recommended",
         "plugin:prettier/recommended"
     ],
     "parser": "@babel/eslint-parser",
-    "plugins": ["testing-library"],
+    "plugins": ["@babel", "testing-library"],
     "env": {
         "jest": true,
         "browser": true
     },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "rules": {
-        "react/jsx-curly-spacing": [2, "never", { "allowMultiline": true }]
+        "react/jsx-key": "off",
+        "react/jsx-curly-spacing": [2, "never", { "allowMultiline": true }],
+        "prettier/prettier": ["error", {}, { "usePrettierrc": true }]
     }
 }
