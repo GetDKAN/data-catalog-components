@@ -57,6 +57,11 @@
         "absoluteImports": "core-js",
         "version": "3.18.3"
       }
+    ],
+    ["@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
     ]
   ]
 }
