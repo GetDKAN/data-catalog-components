@@ -38,6 +38,7 @@
     "@reach/router": "^1.3.3",
     "axios": "^0.21.1",
     "bootstrap": "^4.2.1",
+    "buffer": "^6.0.3",
     "excerpts": "0.0.3",
     "html-to-react": "^1.3.4",
     "immutability-helper": "^3.0.2",
@@ -90,7 +91,6 @@
     "babel-plugin-styled-components": "^1.10.6",
     "core-js": "3.18.3",
     "css-loader": "^6.7.1",
-    "docz": "^2.3.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^8.12.0",
@@ -99,7 +99,6 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-storybook": "^0.5.7",
     "eslint-plugin-testing-library": "^5.0.5",
-    "gatsby-plugin-sass": "^2.3.1",
     "gh-pages": "^2.2.0",
     "jest": "^24.9.0",
     "mini-css-extract-plugin": "^2.6.0",
@@ -107,18 +106,17 @@
     "postcss-cli": "^9.1.0",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.5.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-router-dom": "^4.3.1",
     "react-test-renderer": "^16.9.0",
     "sass": "^1.49.11",
     "sass-loader": "^12.6.0",
-    "style-loader": "^3.3.1",
-    "url-loader": "^1.1.2"
+    "style-loader": "^3.3.1"
   },
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "files": [
     "lib",
