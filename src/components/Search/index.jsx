@@ -7,6 +7,13 @@ import searchReducer from '../../services/search/search_reducer';
 import { SearchDispatch, defaultSearchState } from '../../services/search/search_defaults';
 import getData from './functions';
 
+/**
+ * The Search component is meant to be a wrapper around the search components of your app.
+ *
+ * The component returns a through React Provider, so it can easily be accessed by any child component using the React useContext hook.
+ *
+ * The state in the component is managed with React's useReducer hook. All interactions to Search children should return on of the dispatches <a href="http://localhost:6006/?path=/docs/services-search-services-reducers--page">here</a>.
+ */
 const Search = ({
   initialSearchState,
   searchEndpoint,

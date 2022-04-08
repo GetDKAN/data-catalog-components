@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * This component allows the user to select how many rows of data to display at a time. The max value is 100 to keep large data files from crashing the website.
+ */
 const DataTablePageSizer = ({
   label,
   pageSizeChange,

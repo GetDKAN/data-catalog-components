@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * This icon component contains the following icons: density-1, density-2, density-3, group, select, and times.
+ */
+
 class DataIcon extends React.PureComponent {
   render() {
     const {

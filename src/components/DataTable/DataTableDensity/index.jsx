@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DataIcon from '../../DataIcon';
 
+/**
+ * This component is the 'density' option selector for allowing the user to adjust the vertical spacing between the rows of data.
+ */
 const DataTableDensity = ({
   active,
   items,
