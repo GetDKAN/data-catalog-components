@@ -1,7 +1,6 @@
 import React from 'react';
 
 import DataTableDensity from '../../components/DataTable/DataTableDensity';
-import { text } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components/DataTableDensity',
@@ -22,15 +21,15 @@ Other.args = {
   items: [
     {
       icon: null,
-      text: text('Density Button 1', 'Expanded'),
+      text: 'Expanded',
       value: 'density-1',
     },
     {
       icon: null,
-      text: text('Density Button 2', 'Normal'),
+      text: 'Normal',
       value: 'density-2',
     },
-    { icon: null, text: text('Density Button 3', 'Tight'), value: 'density-3' },
+    { icon: null, text: 'Tight', value: 'density-3' },
   ],
   densityChange: '{() => ({})}',
 };
