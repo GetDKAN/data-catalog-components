@@ -3,7 +3,7 @@ import React from 'react';
 import ApiDocs from '../../components/ApiDocs';
 
 export default {
-  title: 'Components/ApiDocs',
+  title: 'WIP/ApiDocs',
   component: ApiDocs,
 };
 
