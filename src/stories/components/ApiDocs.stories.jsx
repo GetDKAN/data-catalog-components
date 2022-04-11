@@ -11,6 +11,6 @@ const Template = (args) => <ApiDocs {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  endpoint: 'https://dkan.cadiz.local.ddev.site/api/1',
+  endpoint: 'https://demo.getdkan.org/api/1',
   uuid: '',
 };
