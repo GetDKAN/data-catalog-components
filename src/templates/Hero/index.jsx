@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { navigate } from '@reach/router';
+import { useNavigate } from 'react-router-dom';
 import { Input, Label, Button } from 'reactstrap';
 
 const Hero = ({
@@ -14,6 +14,7 @@ const Hero = ({
   gradient,
 }) => {
   const [query, setQuery] = useState('');
+  const navigate = useNavigate();
   const background = image
     ? `url(${image})`
     : `linear-gradient(${gradient})`;
