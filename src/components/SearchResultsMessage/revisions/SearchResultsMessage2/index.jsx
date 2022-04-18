@@ -1,7 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import '../../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 const SearchResultsMessage2 = ({ className, total, searchTerm, searchClass, facets, facetTitleClass, facetListClass, facetDelimiter, facetTypeDelimiter, facetLimit }) => {
+  const { t, i18n } = useTranslation();
 
   const totalInfo = getTotalInfo(total);
   const searchInfo = getSearchInfo(searchTerm, searchClass);
@@ -20,8 +23,8 @@ const SearchResultsMessage2 = ({ className, total, searchTerm, searchClass, face
   function getTotalInfo(total) {
     let text = []
     text.push(total.toLocaleString('en'));
-    text.push(total !== 1 ? 'datasets' : 'dataset');
-    text.push('found');
+    text.push(total !== 1 ? t('datasets') : t('dataset'));
+    text.push(t('found'));
     return text.join(" ");
   }
 

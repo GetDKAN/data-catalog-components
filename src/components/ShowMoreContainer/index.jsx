@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import '../../i18n';
+import { useTranslation } from 'react-i18next';
 
 export default function ShowMoreContainer({
   container,
@@ -13,6 +15,7 @@ export default function ShowMoreContainer({
   onLess
 }) {
   const [showMore, toggleShowMore] = useState(false);
+  const { t, i18n } = useTranslation();
 
   let showMoreButton = (
     <button
@@ -36,7 +39,7 @@ export default function ShowMoreContainer({
     }
     return item;
   });
-  const btnText = btnClosedText || `Show ${totalItems - visibleItems.length} more`;
+  const btnText = btnClosedText || `${t('show')} ${totalItems - visibleItems.length} ${t('more')}`;
   if (!showMore) {
     showMoreButton = (
       <button
