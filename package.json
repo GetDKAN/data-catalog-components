@@ -20,11 +20,7 @@
     "lint": "eslint ./src",
     "test": "jest --verbose",
     "test:watch": "npm run test -- --watch",
-    "test:coverage": "npm run test -- --coverage",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build",
-    "docz:serve": "docz build && docz serve",
-    "docz:publish": "docz build && gh-pages -d ./docs"
+    "test:coverage": "npm run test -- --coverage"
   },
   "keywords": [
     "react",
