@@ -8,7 +8,9 @@ import Text from '../Text';
 import { Link } from '@reach/router';
 import {countBy} from 'lodash';
 
-
+/**
+ * This is the dataset teaser for display on the search results page and will link to the full dataset page.
+ */
 const SearchListItem = ({
   className,
   item,

@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Services/Search Services/Reducers" />
+
+<style>{`
+  .code {
+    color: #e83e8c;
+  }
+`}</style>
+
+# Reducers
+Below is the list of possible reducers available in the Search component.
+
+<ol>
+  <li><strong>FETCH_DATA:</strong> Sets loading state to <span className={"code"}>true.</span></li>
+  <li><strong>GET_SEARCH_ENGINE:</strong> Sets loading to <span className={"code"}>false</span>, searchEngine to the value passed through <span className={"code"}>action.data.searchEngine</span>, searchType to the value passed through <span className={"code"}>action.data.searchType</span>, and facets to the value passed through <span className={"code"}>action.data.facets</span>.</li>
+  <li><strong>GET_SEARCH_DATA:</strong> Sets loading to <span className={"code"}>false</span>, totalItems to the value passed through <span className={"code"}>action.data.totalItems</span>, items to the value passed through action.data.items, and facetsResults to the value passed through <span className={"code"}>action.data.facetsResults.</span></li>
+  <li><strong>SET_SEARCH_PARAMETERS:</strong> Sets searchURL to the value passed through <span className={"code"}>action.data.searchURL</span>.</li>
+  <li><strong>UPDATE_SORT:</strong> Sets sort to the value passed through action.data.sort and sets sort-order to the value passed through <span className={"code"}>action.data['sort-order']</span>.</li>
+  <li><strong>UPDATE_FULLTEXT:</strong> Sets fulltext to the value passed through <span className={"code"}>action.data.fulltext</span>.</li>
+  <li><strong>UPDATE_PAGE_SIZE:</strong> Sets page-size to the value passed through <span className={"code"}>action.data['page-size']</span> and resets page to <span className={"code"}>1.</span></li>
+  <li><strong>UPDATE_CURRENT_PAGE:</strong> Sets page to the value passed through <span className={"code"}>action.data.page</span>.</li>
+  <li><strong>UPDATE_FACETS:</strong> Sets selectedFacets to the facets passed in through <span className={"code"}>action.data.selectedFacets</span> and sets *page to <span className={"code"}>1</span>.</li>
+  <li><strong>RESET_FULLTEXT:</strong> Sets fulltext to <span className={"code"}>''</span>.</li>
+  <li><strong>RESET_FACETS:</strong> Sets selectedFacets to the facets passed in through <span className={"code"}>action.data.selectedFacets</span> and sets *page to <span className={"code"}>1</span>.</li>
+  <li><strong>RESET_ALL:</strong> Sets fulltext to <span className={"code"}>''</span> and selectedFacets to <span className={"code"}>[]</span>.</li>
+</ol>

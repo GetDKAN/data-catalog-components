@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * This component provides general theme icons (Health, Education, Economy, Public Safety, Transportation, Environment, Agriculture, Government, City Planning).
+ */
 function TopicIcon({
   title, size, fill,
 }) {

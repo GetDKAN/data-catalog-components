@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faFacebook,
+  faSlack,
+  faGithub,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import Menu from '../../components/Menu';
 
-function Footer({
-  links, customClasses,
-}) {
+library.add(faFacebook, faGithub, faTwitter, faSlack);
+
+function Footer({ links, customClasses }) {
   const menu1 = links ? <Menu items={links.footer1} menuId="leftnav" /> : null;
   const menu2 = links ? <Menu items={links.footer2} menuId="rightnav" /> : null;
 
@@ -15,8 +22,9 @@ function Footer({
         <div className="branding">
           <h2>Open Source Open Data</h2>
           <p>
-            We can only realize the full power of open data when the tools used for its collection,
-            publishing and analysis are also open and transparent.
+            We can only realize the full power of open data when the tools used
+            for its collection, publishing and analysis are also open and
+            transparent.
           </p>
           <p>
             Powered by <a href="http://getdkan.com">DKAN</a>
@@ -74,10 +82,14 @@ Footer.defaultProps = {
 
 Footer.propTypes = {
   customClasses: PropTypes.string,
-  links: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
-    url: PropTypes.string,
-  })),
+  links: PropTypes.objectOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        url: PropTypes.string,
+      })
+    )
+  ),
 };
 
 export default Footer;

@@ -5,7 +5,7 @@ import IconList from './index';
 
 describe('<IconList />', () => {
   test('renders a default title', () => {
-    render(<IconList component={() => (<p>text here</p>)} paneTitle="Icon List" />);
+    render(<IconList items={[]} component={() => (<p>text here</p>)} paneTitle="Icon List" />);
     expect(screen.getByRole('heading', 'Icon List')).toBeInTheDocument();
   });
 });

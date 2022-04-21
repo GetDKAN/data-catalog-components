@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "@reach/router";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faTimesCircle);
 
 const PublisherDatasetCountByName = (props) => {
   const { name, searchUrl, datasetCount} = props;

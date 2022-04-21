@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Works in array indexing, so current page of 0 is page 1.
+ */
 const DataTablePageResults = ({
   total,
   pageSize,
   currentPage,
   className,
-  viewing = false
+  viewing = false,
 }) => {
   // Add one to offset the 0 array index.
   const page = currentPage + 1;

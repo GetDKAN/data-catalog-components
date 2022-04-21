@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// Icons made by Freepik https://www.flaticon.com/authors/freepik
+
+/**
+ * Icons made by Freepik https://www.flaticon.com/authors/freepik
+ */
 
 class FormatIcon extends React.PureComponent {
   render() {
