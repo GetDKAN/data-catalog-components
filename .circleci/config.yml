@@ -1,38 +1,22 @@
-version: 2.1
+version: 2
 jobs:
   build:
-    parameters:
-      pr-version:
-        type: string
-        default: "1.2.0"
     parallelism: 1
-    machine:
-      image: circleci/classic:latest
+    docker:
+      - image: cimg/node:16.14.2
     environment:
       TEST_RESULTS: /tmp/test-results
-      DKTL_VERSION: "4.2.0"
-      CC_TEST_REPORTER_ID: 7fb6eaf0ab35ac9e1e6889b9af53f766331175459bd25bfaee419c1bb1438027
+      DRUPAL_VERSION: V8
     steps:
       - checkout
+      - run: node --version
       - run:
           name: "Setup variables"
           command: |
             echo $CIRCLE_BRANCH
-            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
-            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
-          name: Setup Code Climate test-reporter
-          command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
+          name: Install Dependencies
+          command: npm install
       - run:
-          name: Install Dependencies and Run Jest Tests
-          command: |
-            nvm install 10
-            npm install
-            npm rebuild node-sass
-            node --version
-            ./cc-test-reporter before-build
-            npx jest --coverage
-            ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
-
+          name: Run Jest Tests
+          command: npm test
