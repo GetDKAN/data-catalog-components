@@ -1,0 +1,12 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import DataTablePageResults from "./index";
+
+<Meta title="DataTablePageResults" component={DataTablePageResults} />
+
+# Datatable Page Results
+
+<Canvas>
+  <Story name="Basic">
+    <DataTablePageResults totalRows={2000} limit={25} offset={0} />
+  </Story>
+</Canvas>
