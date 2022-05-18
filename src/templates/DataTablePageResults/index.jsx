@@ -15,9 +15,9 @@ const DataTablePageResults = ({ totalRows, limit, offset, className }) => {
     true
   );
   return (
-    <p
-      className={className}
-    >{`${startTotal} - ${ofTotal} of ${numTotalRows} rows`}</p>
+    <p className={className}>
+      {`${startTotal} - ${ofTotal} of ${numTotalRows} rows`}
+    </p>
   );
 };
 
