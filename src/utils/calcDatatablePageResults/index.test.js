@@ -1,4 +1,4 @@
-import { datatablePageResults } from "./index";
+import { calcDatatablePageResults } from "./index";
 
 describe("datatablePageResults", () => {
   test("return 0", () => {

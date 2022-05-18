@@ -14,7 +14,7 @@ function calculateOfTotal(limit, numTotalRows, offset) {
   }
 }
 
-export function datatablePageResults(totalRows, limit, offset, toLocale) {
+function calcDatatablePageResults(totalRows, limit, offset, toLocale) {
   const page = offset / limit;
   let startTotal = 0;
   const numTotal = parseInt(totalRows);
@@ -38,3 +38,5 @@ export function datatablePageResults(totalRows, limit, offset, toLocale) {
     };
   }
 }
+
+export default calcDatatablePageResults;
