@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { calcDatatablePageResults } from "../../utils/calcDatatablePageResults";
+import calcDatatablePageResults from "../../utils/calcDatatablePageResults";
 
 const DataTablePageResults = ({ totalRows, limit, offset, className }) => {
   // If there are no totalRows, just show 0s and skip the function overhead.
