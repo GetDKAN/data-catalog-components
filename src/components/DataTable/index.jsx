@@ -19,6 +19,7 @@ const DataTable = ({
   loading,
   options,
   columnDefaults,
+  sortDefaults,
   setSort,
   setConditions,
   conditionsTransform,
@@ -122,7 +123,9 @@ const DataTable = ({
       columns,
       data,
       filterTypes,
-      initialState: {},
+      initialState: {
+        sortBy: sortDefaults
+      },
       manualPagination: true,
       manualFilters: true,
       manualSortBy: true,
@@ -136,7 +139,6 @@ const DataTable = ({
     usePagination,
     layout === "block" ? useBlockLayout : useFlexLayout
   );
-
   useEffect(() => {
     if (columnSort) {
       const normalizedSort = sortTransform ? sortTransform(sortBy) : filters;
@@ -317,6 +319,7 @@ DataTable.propTypes = {
     columnSort: PropTypes.bool,
     columnResize: PropTypes.bool,
   }),
+  sortDefaults: [],
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       Header: PropTypes.string.isRequired,
