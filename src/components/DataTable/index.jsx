@@ -162,9 +162,8 @@ const DataTable = ({
     <div {...getTableProps()} className={className} tabIndex="0">
       <div className={tableContainerClassName}>
         {headerGroups.map((headerGroup) => {
-          const { key } = headerGroup.getHeaderGroupProps()
           return(
-            <div key={key}
+            <div
               {...headerGroup.getHeaderGroupProps()}
               className={headerGroupClassName}
             >
