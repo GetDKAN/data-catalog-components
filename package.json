@@ -17,7 +17,7 @@
     "build": "rollup -c",
     "build-watch": "rollup -c -w",
     "test": "jest",
-    "test:coverage": "jest -- --coverage",
+    "test:coverage": "jest --coverage",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
