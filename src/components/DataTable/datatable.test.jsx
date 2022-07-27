@@ -16,12 +16,14 @@ const data1 = [
 
 describe('<DataTable />', () => {
   test('renders', () => {
-    const setSort = jest.fn();
+    const setSort = jest.fn(() => null);
     const setConditions = jest.fn();
     render(
       <DataTable
         data={data1}
         columns={columns1}
+        limit={10}
+        totalRows={100}
         setSort={setSort}
         setConditions={setConditions}
         tableClasses={{
@@ -40,18 +42,19 @@ describe('<DataTable />', () => {
     expect(screen.getByRole('cell', {name: /fizz/})).toHaveClass('odd');
     expect(screen.getByRole('cell', {name: /drupal/})).toHaveClass('even');
   });
-  test('renders laoding if no columns', () => {
+  test('renders loading if no columns', () => {
     const setSort = jest.fn();
     const setConditions = jest.fn();
     const {debug} = render(
       <DataTable
         data={data1}
         columns={[]}
+        limit={10}
+        totalRows={100}
         setSort={setSort}
         setConditions={setConditions}
       />,
     );
-    debug()
     expect(screen.getByText(/Loading/)).toBeInTheDocument();
   });
 });

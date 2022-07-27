@@ -161,48 +161,51 @@ const DataTable = ({
   return (
     <div {...getTableProps()} className={className} tabIndex="0">
       <div className={tableContainerClassName}>
-        {headerGroups.map((headerGroup) => (
-          <div
-            {...headerGroup.getHeaderGroupProps()}
-            className={headerGroupClassName}
-          >
-            {headerGroup.headers.map((column) => {
-              return(
-                <>
-                  <div
-                    className={headerCellClassName}
-                    {...column.getHeaderProps(
-                      columnSort ? column.getSortByToggleProps((props) => ({...props, title: `Sort by ${column.Header}`})) : undefined
-                    )}
-                  >
-                    <span className={headerCellTextClassName}>
-                      {column.render("Header")}
-                    </span>
-                    {columnSort && (
-                      <span
-                        className={
-                          column.isSorted
-                            ? column.isSortedDesc
-                              ? columnIsSortedDecClassName
-                              : columnIsSortedAscClassName
-                            : columnIsSortedClassName
-                        }
+        {headerGroups.map((headerGroup) => {
+          const { key } = headerGroup.getHeaderGroupProps()
+          return(
+            <div key={key}
+              {...headerGroup.getHeaderGroupProps()}
+              className={headerGroupClassName}
+            >
+              {headerGroup.headers.map((column) => {
+                return(
+                  <div key={column.id}>
+                    <div
+                      className={headerCellClassName}
+                      {...column.getHeaderProps(
+                        columnSort ? column.getSortByToggleProps((props) => ({...props, title: `Sort by ${column.Header}`})) : undefined
+                      )}
+                    >
+                      <span className={headerCellTextClassName}>
+                        {column.render("Header")}
+                      </span>
+                      {columnSort && (
+                        <span
+                          className={
+                            column.isSorted
+                              ? column.isSortedDesc
+                                ? columnIsSortedDecClassName
+                                : columnIsSortedAscClassName
+                              : columnIsSortedClassName
+                          }
+                        />
+                      )}
+                    </div>
+                    {columnResize && (
+                      <div
+                        {...column.getResizerProps()}
+                        className={`${tableColumnResizer} ${
+                          column.isResizing ? tableColumnIsResizing : ""
+                        }`}
                       />
                     )}
                   </div>
-                  {columnResize && (
-                    <div
-                      {...column.getResizerProps()}
-                      className={`${tableColumnResizer} ${
-                        column.isResizing ? tableColumnIsResizing : ""
-                      }`}
-                    />
-                  )}
-                </>
-              )
-            })}
-          </div>
-        ))}
+                )
+              })}
+            </div>
+          )
+        })}
         {columnFilter && (
           <div className={headerFilterClassName}>
             {filterTitle && (
@@ -312,6 +315,7 @@ DataTable.defaultProps = {
     width: 150,
   },
   customColumnFilter: undefined,
+  sortDefaults: []
 };
 
 DataTable.propTypes = {
@@ -321,7 +325,12 @@ DataTable.propTypes = {
     columnSort: PropTypes.bool,
     columnResize: PropTypes.bool,
   }),
-  sortDefaults: [],
+  sortDefaults: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      desc: PropTypes.bool,
+    })
+  ),
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       Header: PropTypes.string.isRequired,
@@ -330,21 +339,19 @@ DataTable.propTypes = {
   ).isRequired,
   setSort: PropTypes.func.isRequired,
   setConditions: PropTypes.func.isRequired,
-  conditionsTransform: PropTypes.func.isRequired,
-  sortTransform: PropTypes.func.isRequired,
+  conditionsTransform: PropTypes.func,
+  sortTransform: PropTypes.func,
   data: PropTypes.arrayOf(PropTypes.object),
   className: PropTypes.string,
   filterTitle: PropTypes.string,
   totalRows: PropTypes.number.isRequired,
   limit: PropTypes.number.isRequired,
   loading: PropTypes.bool,
-  columnDefaults: PropTypes.arrayOf(
-    PropTypes.shape({
-      minWidth: PropTypes.number,
-      maxWidth: PropTypes.number,
-      width: PropTypes.number,
-    })
-  ),
+  columnDefaults: PropTypes.shape({
+    minWidth: PropTypes.number,
+    maxWidth: PropTypes.number,
+    width: PropTypes.number,
+  }),
   customColumnFilter: PropTypes.func,
   // tableClasses,
   // cellTextClassName
