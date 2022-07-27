@@ -16,7 +16,7 @@ const data1 = [
 
 describe('<DataTable />', () => {
   test('renders', () => {
-    const setSort = jest.fn(() => null);
+    const setSort = jest.fn();
     const setConditions = jest.fn();
     render(
       <DataTable
