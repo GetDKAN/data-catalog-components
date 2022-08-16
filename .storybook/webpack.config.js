@@ -8,7 +8,7 @@ module.exports = async ({ config }) => {
 
   // Make whatever fine-grained changes you need
   config.module.rules.push({
-    test: /\.scss$/,
+    test: /\.s[ac]ss$/i,
     use: ['style-loader', 'css-loader', 'sass-loader'],
     include: path.resolve(__dirname, '../'),
   });
