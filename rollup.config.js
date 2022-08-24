@@ -2,6 +2,7 @@ import babel from "@rollup/plugin-babel";
 import external from "rollup-plugin-peer-deps-external";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import typescript from '@rollup/plugin-typescript';
 import del from "rollup-plugin-delete";
 import json from "@rollup/plugin-json";
 import pkg from "./package.json";
@@ -15,8 +16,9 @@ export default {
   plugins: [
     external(),
     nodeResolve({
-      extensions: [".js", ".jsx"],
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
     }),
+    typescript(),
     babel({
       exclude: "node_modules/**",
       babelHelpers: "runtime",

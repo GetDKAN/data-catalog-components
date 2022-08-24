@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { DataTablePageResultsType } from './DataTablePageResults.types';
 
 const DataTablePageResults = ({
   totalRows, limit, offset, className
-}) => {
-  const numTotalRows = parseInt(totalRows);
+}: DataTablePageResultsType) => {
+  const numTotalRows = totalRows;
   if (numTotalRows === 0) {
     return <p className={className}>{`0 - 0 of 0 rows`}</p>
   }
