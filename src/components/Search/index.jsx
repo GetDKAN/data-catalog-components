@@ -97,6 +97,7 @@ const Search = ({
     getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch);
   }, [
     searchState.sort,
+    searchState['sort-order'],
     searchState.fulltext,
     searchState['page-size'],
     searchState.page,
@@ -114,6 +115,7 @@ const Search = ({
     })
   }, [
     searchState.sort,
+    searchState['sort-order'],
     searchState.fulltext,
     searchState['page-size'],
     searchState.page,
