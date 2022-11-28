@@ -12,7 +12,7 @@
   "scripts": {
     "css:watch": "node-sass --omit-source-map-url src/theme/styles/index.scss dist/index.css -w",
     "lib:watch": "babel src -d lib --watch",
-    "lib": "npm run clean && babel src -d lib && node-sass --omit-source-map-url src/theme/styles/index.scss dist/index.css && cp -R src/styles/scss dist/",
+    "lib": "npm run clean && babel src -d lib && sass src/theme/styles/index.scss dist/index.css && cp -R src/styles/scss dist/",
     "clean": "rm -rf lib && mkdir lib && rm -rf dist && mkdir dist",
     "prepublish": "npm run lib",
     "storybook": "NODE_PATH=src start-storybook -p 6006",
@@ -118,10 +118,10 @@
     "gatsby-plugin-sass": "^2.3.1",
     "gh-pages": "^2.2.0",
     "jest": "^24.9.0",
-    "node-sass": "^4.13.1",
     "prettier": "^1.16.0",
     "react-router-dom": "^4.3.1",
     "react-test-renderer": "^16.9.0",
+    "sass": "^1.56.1",
     "sass-loader": "^7.1.0",
     "url-loader": "^1.1.2"
   },
