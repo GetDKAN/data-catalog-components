@@ -55,7 +55,7 @@
     "reactstrap": "^7.1.0",
     "styled-components": "^5.0.1",
     "swagger-ui-react": "3.25.0",
-    "validator": "^12.2.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
