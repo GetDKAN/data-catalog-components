@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { isEmpty } from 'lodash';
+import '../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 import { resetSelectedFacets } from '../../../services/search/search_functions';
 import ToggleBlock from '../../ToggleBlock';
@@ -29,6 +31,7 @@ const SearchFacet = ({
   onMore,
   onLess
 }) => {
+  const { t, i18n } = useTranslation();
 
   let myLabel = '';
   if (!label) {
@@ -123,7 +126,7 @@ const SearchFacet = ({
           {(resetIcon) && (
             <span className="undo-icon">{resetIcon}</span>
           )}
-          Reset
+          {t('reset')}
         </button>
       ) : null}
       <ToggleBlock

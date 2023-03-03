@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 const DataTablePageResults = ({
   total,
@@ -8,6 +10,7 @@ const DataTablePageResults = ({
   className,
   viewing = false
 }) => {
+  const { t, i18n } = useTranslation();
   // Add one to offset the 0 array index.
   const page = currentPage + 1;
   let displayTotal = total;
@@ -31,11 +34,11 @@ const DataTablePageResults = ({
         {' '}
         <span className="high-result">{currentHighestResult}</span>
         {' '}
-        of
+        {t('of')}
         {' '}
         <span className="total">{displayTotal}</span>
         {' '}
-        rows
+        {t('rows')}
       </p>
     </div>
   );
