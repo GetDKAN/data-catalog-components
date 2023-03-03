@@ -17,7 +17,7 @@ export default function ToggleBlock({
   if (allowToggle) {
     toggleBlockHeading = (
       <h2 className={headingClasses}>
-        <button type="button" onClick={() => toggleShow(!show)}>
+        <button type="button" onClick={() => toggleShow(!show)} aria-expanded={show}>
           <FontAwesomeIcon
               icon={['fas', show ? 'chevron-down' : 'chevron-right' ]}
               size="1x"
