@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+
 import Menu from '../../components/Menu';
+
+library.add(fab);
 
 function Footer({
   links, customClasses,
@@ -72,12 +77,19 @@ Footer.defaultProps = {
   links: null,
 };
 
+const footerPropType = PropTypes.arrayOf(PropTypes.shape({
+  label: PropTypes.string,
+  url: PropTypes.string,
+  target: PropTypes.string,
+}));
+
 Footer.propTypes = {
   customClasses: PropTypes.string,
-  links: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
-    url: PropTypes.string,
-  })),
+  links: PropTypes.shape({
+    main: footerPropType,
+    footer1: footerPropType,
+    footer2: footerPropType
+  })
 };
 
 export default Footer;
