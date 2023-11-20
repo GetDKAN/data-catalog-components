@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { DndProvider } from 'react-dnd';
-import Backend from 'react-dnd-html5-backend';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import Card from './Card';
 
@@ -64,7 +64,7 @@ const ManageColumns = ({
         nodeId="___gatsby"
         openText="Manage Columns"
       >
-        <DndProvider backend={Backend}>
+        <DndProvider backend={HTML5Backend}>
           {reactTable.allColumns
             && reactTable.allColumns.map((column, i) => renderCard(column, i, moveCard))}
         </DndProvider>
