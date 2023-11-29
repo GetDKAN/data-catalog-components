@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { navigate } from '@reach/router';
+import { useNavigate } from 'react-router-dom';
 import { Input, Label, Button } from 'reactstrap';
 
 const Hero = ({
@@ -23,7 +23,7 @@ const Hero = ({
     if (query) {
       searchParams = `/search/?fulltext=${query}`;
     }
-    await navigate(searchParams);
+    useNavigate(searchParams);
   }
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 
 const Logo = ({ image }) => (
   <Link to="/" className="dc-logo">

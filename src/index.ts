@@ -76,3 +76,6 @@ export { default as SearchSidebar } from './templates/SearchSidebar';
 export { default as SearchContent } from './templates/SearchContent';
 export { default as TopicIcon } from './templates/TopicIcon';
 export { default as DataTableHeader } from './templates/DataTableHeader';
+
+import "./theme/styles/index.scss";
+import 'bootstrap/dist/css/bootstrap.css';

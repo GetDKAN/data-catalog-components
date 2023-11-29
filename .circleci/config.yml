@@ -7,7 +7,8 @@ jobs:
         default: "1.2.0"
     parallelism: 1
     machine:
-      image: circleci/classic:latest
+      image: ubuntu-2004:current
+    resource_class: medium
     environment:
       TEST_RESULTS: /tmp/test-results
       DKTL_VERSION: "4.2.0"
