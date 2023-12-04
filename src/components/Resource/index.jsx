@@ -1,20 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
-import {
-  useTable,
-  usePagination,
-  useFilters,
-  useSortBy,
-  useFlexLayout,
-  useResizeColumns,
-  useColumnOrder,
-} from 'react-table';
-
-import {
-  ResourceDispatch,
-  defaultResourceState,
-} from '../../services/resource/resource_defaults';
+import FileDownload from "../FileDownload";
+import DataTable from '../../templates/DataTable';
 
 import resourceReducer from '../../services/resource/resource_reducer';
 
@@ -22,13 +9,21 @@ import {
   queryResourceData,
   getDKANDatastore,
 } from '../../services/resource/resource_functions';
+import useDatastore from '../../services/useDatastore';
+
+import {
+  ResourceDispatch,
+  defaultResourceState,
+} from '../../services/resource/resource_defaults';
 
 const Resource = ({
   apiURL,
-  children,
-  resource,
+  id,
   showDBColumnNames,
   transformQueryData: handleTransformQueryData,
+  format,
+  downloadURL,
+  accessURL
 }) => {
   const [resourceState, dispatch] = useReducer(
     resourceReducer,
@@ -39,21 +34,15 @@ const Resource = ({
     dispatch({ type: 'GET_STORE' });
     async function getStore() {
       if (resourceState.store === null) {
-        dispatch(await getDKANDatastore(apiURL, resource, resourceState.pageSize, showDBColumnNames));
+        dispatch(await getDKANDatastore(apiURL, id, resourceState.pageSize, showDBColumnNames));
       }
     }
     getStore();
   }, []);
 
-
   useEffect(() => {
     dispatch({ type: 'GET_STORE' });
 
-    // async function getStore() {
-    //   if (resourceState.store === null) {
-    //     dispatch(await getDKANDatastore(apiURL, resource, resourceState.pageSize, true));
-    //   }
-    // }
     async function queryStore() {
       let resourceData;
 
@@ -70,12 +59,7 @@ const Resource = ({
     if (resourceState.updateQuery) {
       queryStore();
     }
-   
-    // if (resourceState.store !== null) {
-      
-    // } else {
-      // getStore();
-    // }
+  
   }, [
     resourceState.updateQuery,
     resourceState.currentPage,
@@ -84,7 +68,7 @@ const Resource = ({
     resourceState.sort,
   ]);
 
-  const { columns, currentPage } = resourceState;
+  const { columns } = resourceState;
   const data = resourceState.values;
 
   // Define a default UI for filtering
@@ -126,43 +110,24 @@ const Resource = ({
     [],
   );
 
-
-  const defaultColumn = React.useMemo(
-    () => ({
-      // Let's set up our default Filter UI
-      Filter: DefaultColumnFilter,
-      minWidth: 30,
-      // width: 150,
-      maxWidth: 400,
-    }),
-    [],
-  );
-
-
-  const reactTable = useTable(
-    {
-      columns,
-      data,
-      initialState: { pageIndex: currentPage },
-      manualPagination: true,
-      manualSortBy: true,
-      manualFilters: true,
-      pageCount: Number(Math.ceil(resourceState.rowsTotal / resourceState.pageSize)),
-      defaultColumn,
-      filterTypes,
-    },
-    useFilters,
-    useFlexLayout,
-    useResizeColumns,
-    useColumnOrder,
-    useSortBy,
-    usePagination,
-  );
-
   return (
-    <ResourceDispatch.Provider value={{ resourceState, dispatch, reactTable }}>
-      { children }
-    </ResourceDispatch.Provider>
+    <div id="resource">
+      {data.length ? (
+        <div>
+          <FileDownload
+            title={"test"}
+            label={downloadURL}
+            format={format}
+            downloadURL={downloadURL ? downloadURL : accessURL}
+          />
+          <DataTable
+            resource={resourceState}
+          />
+        </div>
+      ) : ('')
+    }
+
+    </div>
   );
 };
 
