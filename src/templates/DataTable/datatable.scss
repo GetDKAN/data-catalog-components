@@ -1,0 +1,88 @@
+.dc-datatable {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-spacing: 0px;
+  border: 1px solid rgba(0,0,0, .1);
+  overflow: auto;
+  th {
+    position: relative;
+    text-align: left;
+    padding: 1rem;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black
+  }
+  thead th div {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.dc-c-resize-handle {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  background-color: #{var(--gray)};
+  width: 10px;
+  cursor: col-resize;
+  min-width: 10px;
+  display: block;
+  margin-left: -10px;
+  z-index: 1;
+  &.isResizing,
+  &:hover {
+    background-color: #{var(--gray-dark)};
+  }
+}
+
+.dc-thead {
+  th .dc-sort span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    padding-right: 1rem;
+  }
+}
+
+.dc-c-datatable--even-row td {
+  background-color: #{var(--table-striped__background-color)};
+}
+
+.dc-c-sort--default,
+.dc-c-sort--asc,
+.dc-c-sort--desc {
+  padding-left: 8px;
+  padding-right: 16px;
+  &::after {
+    font-family: "Font Awesome 6 Free";
+    display: inline;
+    padding-left: 8px;
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+  }
+}
+
+.dc-c-sort--default::after {
+  content: '\f0dc';
+}
+.dc-c-sort--asc::after {
+  content: '\f0de';
+}
+.dc-c-sort--desc::after {
+  content: '\f0dd';
+}
+
+
+// @media (hover: hover) {
+//   .resizer {
+//     opacity: 0;
+//   }
+
+//   *:hover > .resizer {
+//     opacity: 1;
+//   }
+// }

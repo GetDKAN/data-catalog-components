@@ -16,6 +16,15 @@ import {
   defaultResourceState,
 } from '../../services/resource/resource_defaults';
 
+import {
+  useReactTable,
+  flexRender,
+  getCoreRowModel,
+  createColumnHelper,
+  getSortedRowModel,
+  getPaginationRowModel
+} from '@tanstack/react-table';
+
 const Resource = ({
   apiURL,
   id,
@@ -29,6 +38,8 @@ const Resource = ({
     resourceReducer,
     defaultResourceState,
   );
+
+  const columnHelper = createColumnHelper();
 
   useEffect(() => {
     dispatch({ type: 'GET_STORE' });
@@ -71,24 +82,6 @@ const Resource = ({
   const { columns } = resourceState;
   const data = resourceState.values;
 
-  // Define a default UI for filtering
-  function DefaultColumnFilter({
-    column: { filterValue, preFilteredRows, setFilter, Header },
-  }) {
-    const count = preFilteredRows ? preFilteredRows.length : 0;
-
-    return (
-      <input
-        aria-label={Header}
-        value={filterValue || ''}
-        onChange={(e) => {
-          setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-        }}
-        placeholder={`Search ${count} records...`}
-      />
-    );
-  }
-
 
   const filterTypes = React.useMemo(
     () => ({
@@ -110,20 +103,56 @@ const Resource = ({
     [],
   );
 
+  const table_columns = columns.map((col) => {
+    if (col.cell) {
+      return (
+        columnHelper.accessor(col.accessor, {
+          header: col.header,
+          cell: col.cell,
+          minSize: 215
+        })
+      )
+    }
+    return (
+      columnHelper.accessor(col.accessor, {
+        header: col.header,
+        minSize: 215
+      })
+    )
+  });
+
+  const reactTable = useReactTable(
+    {
+      data: data,
+      columns: table_columns,
+      manualSorting: true,
+      manualFiltering: true,
+      columnResizeMode: 'onChange',
+      initialState: {
+        pagination: {
+          pageSize: 20,
+        },
+      },
+      pageCount: Number(Math.ceil(resourceState.rowsTotal / resourceState.pageSize)),
+      getCoreRowModel: getCoreRowModel(),
+      getSortedRowModel: getSortedRowModel(),
+      debugTable: false,
+      autoResetPageIndex: false,
+    }
+  );
+
   return (
     <div id="resource">
       {data.length ? (
-        <div>
+        <ResourceDispatch.Provider value={{dispatch, reactTable, resourceState}}>
           <FileDownload
             title={"test"}
             label={downloadURL}
             format={format}
             downloadURL={downloadURL ? downloadURL : accessURL}
           />
-          <DataTable
-            resource={resourceState}
-          />
-        </div>
+          <DataTable />
+        </ResourceDispatch.Provider>
       ) : ('')
     }
 
