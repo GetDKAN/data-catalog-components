@@ -29,7 +29,6 @@
     "bootstrap": "^4.2.1",
     "excerpts": "0.0.3",
     "html-to-react": "^1.7.0",
-    "immutability-helper": "^3.0.2",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "qs": "^6.11.2",

@@ -9,8 +9,6 @@ import DataIcon from '../../components/DataIcon';
 const DataTableHeader = () => {
   const { reactTable, resourceState, dispatch } = React.useContext(ResourceDispatch);
 
-  console.log(reactTable.getHeaderGroups());
-  return ""
   return (
     <div className="dc-datatable-header">
       {resourceState.store
@@ -73,7 +71,7 @@ const DataTableHeader = () => {
               },
             ]}
           />
-          {reactTable.allColumns
+          {reactTable.getAllColumns()
             && <ManageColumns /> }
         </>
         )}

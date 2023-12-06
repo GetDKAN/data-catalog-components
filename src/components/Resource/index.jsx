@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FileDownload from "../FileDownload";
 import DataTable from '../../templates/DataTable';
@@ -24,6 +24,7 @@ import {
   getSortedRowModel,
   getPaginationRowModel
 } from '@tanstack/react-table';
+import DataTableHeader from '../../templates/DataTableHeader';
 
 const Resource = ({
   apiURL,
@@ -38,6 +39,7 @@ const Resource = ({
     resourceReducer,
     defaultResourceState,
   );
+  const [columnOrder, setColumnOrder] = useState([]);
 
   const columnHelper = createColumnHelper();
 
@@ -82,27 +84,6 @@ const Resource = ({
   const { columns } = resourceState;
   const data = resourceState.values;
 
-
-  const filterTypes = React.useMemo(
-    () => ({
-      // Add a new fuzzyTextFilterFn filter type.
-      // fuzzyText: fuzzyTextFilterFn,
-      // Or, override the default text filter to use
-      // "startWith"
-      text: (rows, id, filterValue) => (
-        rows.filter((row) => {
-          const rowValue = row.values[id];
-          return rowValue !== undefined
-            ? String(rowValue)
-              .toLowerCase()
-              .startsWith(String(filterValue).toLowerCase())
-            : true;
-        })
-      ),
-    }),
-    [],
-  );
-
   const table_columns = columns.map((col) => {
     if (col.cell) {
       return (
@@ -128,10 +109,14 @@ const Resource = ({
       manualSorting: true,
       manualFiltering: true,
       columnResizeMode: 'onChange',
+      onColumnOrderChange: setColumnOrder,
       initialState: {
         pagination: {
           pageSize: 20,
         },
+      },
+      state: {
+        columnOrder: columnOrder
       },
       pageCount: Number(Math.ceil(resourceState.rowsTotal / resourceState.pageSize)),
       getCoreRowModel: getCoreRowModel(),
@@ -151,6 +136,7 @@ const Resource = ({
             format={format}
             downloadURL={downloadURL ? downloadURL : accessURL}
           />
+          <DataTableHeader />
           <DataTable />
         </ResourceDispatch.Provider>
       ) : ('')
