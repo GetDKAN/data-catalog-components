@@ -14,6 +14,8 @@ import {
 
 const DataTable = () => {
   const { resourceState, dispatch, reactTable } = useContext(ResourceDispatch);
+  const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
+  const [columnResizing, setColumnResizing] = useState('');
   const columns = resourceState.columns;
   const density = resourceState.density ? `${resourceState.density} -striped -highlight` : '-striped -highlight';
 
@@ -96,20 +98,67 @@ const DataTable = () => {
                     <FontAwesomeIcon icon={["fas", sortIcon((header.column.getIsSorted()))]} />
                   </button>
                 </div>
-                <button
-                  {...{
-                    onMouseDown: header.getResizeHandler(),
-                    onTouchStart: header.getResizeHandler(),
-                    className: `dc-c-resize-handle ${
-                      header.column.getIsResizing() ? 'isResizing' : ''
-                    }`,
-                  }}
-                />
                 {header.column.getCanFilter() ? (
                   <div className="dc-filter">
                     <ColumnFilter column={header.column} resourceState={resourceState} />
                   </div>
                 ) : null}
+                <button
+                  {...{
+                    onMouseDown: header.getResizeHandler(),
+                    onTouchStart: header.getResizeHandler(),
+                    className: `dc-c-resize-handle ${
+                      header.column.getIsResizing() || header.column.id == columnResizing ? 'isResizing' : ''
+                    }`,
+                  }}
+                  onKeyDown={(e) => {
+                    const columnSizingObject = reactTable.getState().columnSizing;
+                    switch (e.key) {
+                      case 'Enter':
+                      case ' ':
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (columnResizing) {
+                          // end resizing
+                          setColumnResizing('')
+                          setAriaLiveFeedback(`${header.column.columnDef.header} dropped.`)
+                        } else {
+                          // start resizing
+                          setColumnResizing(header.column.id)
+                          setAriaLiveFeedback(`${header.column.columnDef.header} grabbed.`)
+                        }
+                        break;
+
+                      case 'Escape':
+                        if (columnResizing) {
+                          setColumnResizing('')
+                          setAriaLiveFeedback(`${header.column.columnDef.header} dropped.`)
+                        }
+                        break;
+                      case 'ArrowRight':
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (columnResizing) {
+                          columnSizingObject[header.column.id] = header.getSize() + 10;
+                          reactTable.setColumnSizing(columnSizingObject);
+                          setAriaLiveFeedback(`${header.column.columnDef.header} has been resized. The new width is ${header.getSize()} pixels.`);
+                        }
+                        break;
+                      case 'ArrowLeft':
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (columnResizing) {
+                          columnSizingObject[header.column.id] = header.getSize() - 10;
+                          reactTable.setColumnSizing(columnSizingObject);
+                          setAriaLiveFeedback(`${header.column.columnDef.header} has been resized. The new width is ${header.getSize()} pixels.`)
+                        }
+                        break;
+                    }
+                  }}
+                  onBlur={() => {
+                    setColumnResizing('')
+                  }}
+                />
               </th>
             ))}
           </tr>
@@ -141,6 +190,7 @@ const DataTable = () => {
           })}
       </tbody>
     </table>
+    <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
     <div className="pagination-bottom">
       <div className="-pagination">
         <div className="-previous">
