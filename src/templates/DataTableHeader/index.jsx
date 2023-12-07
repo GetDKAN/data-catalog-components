@@ -20,10 +20,13 @@ const DataTableHeader = () => {
             currentPage={resourceState.currentPage}
           />
           <DataTablePageSizer
-            pageSizeChange={(value) => dispatch({
-              type: 'UPDATE_PAGE_SIZE',
-              data: { pageSize: value },
-            })}
+            pageSizeChange={(value) => {
+                dispatch({
+                type: 'UPDATE_PAGE_SIZE',
+                data: { pageSize: value },
+              });
+              reactTable.resetPagination();
+            }}
             id={resourceState.store.id}
             initSize={resourceState.pageSize}
           />

@@ -14,7 +14,7 @@
           e.stopPropagation();
           setFilterValue(e.target.value || undefined); // Set undefined to remove the filter entirely
         }}
-        placeholder={`Search ${resourceState.rowsTotal} records...`}
+        placeholder={`Search ${resourceState.count} records...`}
       />
     );
   };

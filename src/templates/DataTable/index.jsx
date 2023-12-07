@@ -54,8 +54,15 @@ const DataTable = () => {
   }
 
   return (
-    <>
-    <table className={`dc-datatable -striped -highlight ${density}`}>
+    <div className="dc-overflow">
+    <table
+      className={`dc-datatable -striped -highlight ${density}`}
+      {...{
+        style: {
+          width: reactTable.getCenterTotalSize(),
+        },
+      }}
+    >
       <thead className="dc-thead -header">
         {columns.length && headerGroups.map((headerGroup) => (
           <tr
@@ -89,7 +96,7 @@ const DataTable = () => {
                     <FontAwesomeIcon icon={["fas", sortIcon((header.column.getIsSorted()))]} />
                   </button>
                 </div>
-                <span
+                <button
                   {...{
                     onMouseDown: header.getResizeHandler(),
                     onTouchStart: header.getResizeHandler(),
@@ -120,7 +127,7 @@ const DataTable = () => {
                     {...{
                       key: cell.id,
                       style: {
-                        width: cell.column.getSize(),
+                        maxWidth: cell.column.getSize(),
                       },
                     }}
                     className={`td dc-td`}
@@ -171,7 +178,7 @@ const DataTable = () => {
         </div>
       </div>
     </div>
-    </>
+    </div>
   );
 };
 

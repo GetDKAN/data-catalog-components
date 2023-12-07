@@ -19,6 +19,8 @@ const defaultCard = (card, index, moveCard) => (
       <input
         id={card.id}
         type="checkbox"
+        defaultChecked={card.getIsVisible()}
+        onChange={() => card.toggleVisibility()}
       />
       {' '}
       {card.columnDef.header}
@@ -50,7 +52,7 @@ const ManageColumns = ({
     }
   }, [cards]);
 
-  return (
+  return (cards && cards.length) && (
     <div>
       <Modal
         title="Manage Columns"

@@ -112,13 +112,13 @@ const Resource = ({
       onColumnOrderChange: setColumnOrder,
       initialState: {
         pagination: {
-          pageSize: 20,
+          pageSize: resourceState.pageSize,
         },
       },
       state: {
         columnOrder: columnOrder
       },
-      pageCount: Number(Math.ceil(resourceState.rowsTotal / resourceState.pageSize)),
+      pageCount: Number(Math.ceil(resourceState.count / resourceState.pageSize)),
       getCoreRowModel: getCoreRowModel(),
       getSortedRowModel: getSortedRowModel(),
       debugTable: false,
@@ -141,7 +141,6 @@ const Resource = ({
         </ResourceDispatch.Provider>
       ) : ('')
     }
-
     </div>
   );
 };
