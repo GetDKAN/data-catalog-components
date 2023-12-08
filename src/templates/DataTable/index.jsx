@@ -111,6 +111,7 @@ const DataTable = () => {
                       header.column.getIsResizing() || header.column.id == columnResizing ? 'isResizing' : ''
                     }`,
                   }}
+                  aria-label={`Resize ${header.column.columnDef.header} column`}
                   onKeyDown={(e) => {
                     const columnSizingObject = reactTable.getState().columnSizing;
                     switch (e.key) {
