@@ -9,9 +9,6 @@ import DataIcon from '../../components/DataIcon';
 const DataTableHeader = () => {
   const { reactTable, resourceState, dispatch } = React.useContext(ResourceDispatch);
 
-  if (!reactTable.columns.length) {
-    return null;
-  }
   return (
     <div className="dc-datatable-header">
       {resourceState.store
@@ -23,10 +20,13 @@ const DataTableHeader = () => {
             currentPage={resourceState.currentPage}
           />
           <DataTablePageSizer
-            pageSizeChange={(value) => dispatch({
-              type: 'UPDATE_PAGE_SIZE',
-              data: { pageSize: value },
-            })}
+            pageSizeChange={(value) => {
+                dispatch({
+                type: 'UPDATE_PAGE_SIZE',
+                data: { pageSize: value },
+              });
+              reactTable.resetPagination();
+            }}
             id={resourceState.store.id}
             initSize={resourceState.pageSize}
           />
@@ -74,7 +74,7 @@ const DataTableHeader = () => {
               },
             ]}
           />
-          {reactTable.allColumns
+          {reactTable.getAllColumns()
             && <ManageColumns /> }
         </>
         )}

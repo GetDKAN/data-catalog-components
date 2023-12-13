@@ -4,7 +4,8 @@ import datastore from './datastore';
 // Build columns in correct structure for Datatable component.
 export function prepareColumns(columns) {
   return columns.map((column) => ({
-    Header: column,
+    header: column,
+    id: column,
     accessor: column,
   }));
 }
@@ -34,8 +35,7 @@ export function advancedColumns(columns = [], updatedColumns = [], excludedColum
 }
 
 // Create a new datastore using the DKAN datastore.
-export async function getDKANDatastore(rootURL, resource, initLimit = 20, showDBCols = false) {
-  const { identifier } = resource;
+export async function getDKANDatastore(rootURL, identifier, initLimit = 20, showDBCols = false) {
   const checkForDatastore = await axios.get(`${rootURL}datastore/sql/?query=[SELECT COUNT(*) FROM ${identifier}]${showDBCols ? '&show-db-columns' : ''}`)
     .then((res) => res.data)
     .catch((e) => {

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import update from 'immutability-helper';
 import Card from './Card';
 
 import { ResourceDispatch } from '../../../services/resource/resource_defaults';
@@ -20,10 +19,11 @@ const defaultCard = (card, index, moveCard) => (
       <input
         id={card.id}
         type="checkbox"
-        {...card.getToggleHiddenProps()}
+        defaultChecked={card.getIsVisible()}
+        onChange={() => card.toggleVisibility()}
       />
       {' '}
-      {card.Header}
+      {card.columnDef.header}
     </label>
   </Card>
 );
@@ -34,22 +34,17 @@ const ManageColumns = ({
   const { reactTable } = useContext(ResourceDispatch);
   const [cards, setCards] = useState(null);
   React.useEffect(() => {
-    if (reactTable.allColumns.length && cards === null) {
-      setCards(reactTable.allColumns);
+    if (reactTable.getAllColumns().length && cards === null) {
+      setCards(reactTable.getAllColumns());
     }
-  }, [reactTable.allColumns]);
+  }, [reactTable.getAllColumns()]);
   const moveCard = React.useCallback(
     (dragIndex, hoverIndex) => {
-      const dragCard = reactTable.allColumns[dragIndex];
+      const newCards = cards.toSpliced(hoverIndex, 0, cards.splice(dragIndex,1)[0]);
 
-      setCards(update(cards, {
-        $splice: [
-          [dragIndex, 1],
-          [hoverIndex, 0, dragCard],
-        ],
-      }));
+      setCards(newCards);
     },
-    [cards, reactTable.allColumns],
+    [cards, reactTable.getAllColumns()],
   );
   useEffect(() => {
     if (cards) {
@@ -57,7 +52,7 @@ const ManageColumns = ({
     }
   }, [cards]);
 
-  return (
+  return (cards && cards.length) && (
     <div>
       <Modal
         title="Manage Columns"
@@ -65,8 +60,8 @@ const ManageColumns = ({
         openText="Manage Columns"
       >
         <DndProvider backend={HTML5Backend}>
-          {reactTable.allColumns
-            && reactTable.allColumns.map((column, i) => renderCard(column, i, moveCard))}
+          {cards
+            && cards.map((column, i) => renderCard(column, i, moveCard))}
         </DndProvider>
       </Modal>
     </div>

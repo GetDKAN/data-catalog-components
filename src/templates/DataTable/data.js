@@ -115,7 +115,6 @@ const MockResource = ({ children }) => {
     {
       columns,
       data,
-      initialState: { pageIndex: resourceState.currentPage },
       manualPagination: true,
       manualSortBy: true,
       manualFilters: true,

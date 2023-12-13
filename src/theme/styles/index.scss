@@ -1,3 +1,5 @@
+@import "../variables/variables.scss";
+
 // Component styles.
 @import "../../components/DataTable/ManageColumns/card.scss";
 @import "../../components/Menu/menu.scss";
@@ -5,4 +7,5 @@
 
 // Template styles.
 @import "../../templates/DataTableHeader/datatableheader.scss";
+@import "../../templates/DataTable/datatable.scss";
 @import "../../templates/Hero/hero.scss";

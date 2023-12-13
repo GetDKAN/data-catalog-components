@@ -40,7 +40,7 @@ export default function resourceReducer(state, action) {
     case 'UPDATE_FILTERS':
       return {
         ...state,
-        filters: action.data.filters,
+        filters: action.data.columnFilters,
         currentPage: 0,
         updateQuery: true,
       };
