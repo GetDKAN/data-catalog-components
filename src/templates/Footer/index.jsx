@@ -13,7 +13,6 @@ function Footer({
 }) {
   const menu1 = links ? <Menu items={links.footer1} menuId="leftnav" /> : null;
   const menu2 = links ? <Menu items={links.footer2} menuId="rightnav" /> : null;
-  console.log("hello")
   return (
     <div className="dc-footer">
       <div className={`${customClasses} page-footer`}>
