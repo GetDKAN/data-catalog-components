@@ -4,9 +4,9 @@ const columns = ['foo', 'bar', 'react', 'dkan'];
 
 test('prepareColumns returns an array of objects', () => {
   expect(prepareColumns(columns)).toEqual([
-    { Header: 'foo', accessor: 'foo' },
-    { Header: 'bar', accessor: 'bar' },
-    { Header: 'react', accessor: 'react' },
-    { Header: 'dkan', accessor: 'dkan' },
+    { header: 'foo', id: 'foo', accessor: 'foo' },
+    { header: 'bar', id: 'bar', accessor: 'bar' },
+    { header: 'react', id: 'react', accessor: 'react' },
+    { header: 'dkan', id: 'dkan', accessor: 'dkan' },
   ]);
 });

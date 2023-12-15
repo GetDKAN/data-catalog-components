@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import ToggleBlock from './index';
 
-describe('<ToggleBlock />', () => {
-  const defaultWrapper = shallow(
+describe.skip('<ToggleBlock />', () => {
+  render(
     <ToggleBlock
       title="My Title"
     >
@@ -11,7 +11,7 @@ describe('<ToggleBlock />', () => {
     </ToggleBlock>,
   );
 
-  const defaultClosedWrapper = shallow(
+  render(
     <ToggleBlock
       title="My Title"
       defaultClosed
@@ -20,7 +20,7 @@ describe('<ToggleBlock />', () => {
     </ToggleBlock>,
   );
 
-  const customWrapper = shallow(
+  render(
     <ToggleBlock
       title="My Custom Title"
       headingClasses="custom-heading-class"

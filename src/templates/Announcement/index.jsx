@@ -14,7 +14,7 @@ const Announcement = ({
       icon = 'exclamation-circle';
       break;
     case 'error':
-      icon = 'times-circle';
+      icon = 'circle-xmark';
       break;
     case 'info':
       icon = 'info-circle';

@@ -1,22 +1,35 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import PublisherDatasetCountByName from './index';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('<PublisherDatasetCountByName />', () => {
 
   test('If no dataset renders, just a link to the page.', () => {
-    render(<PublisherDatasetCountByName name="Non matching organization." />);
+    render(
+      <BrowserRouter>
+        <PublisherDatasetCountByName name="Non matching organization." />
+      </BrowserRouter>
+    );
     expect(screen.getByText('datasets')).toBeInTheDocument();
   });
 
   test('If there is a publisher with datasets render the dataset count.',() => {
-    render(<PublisherDatasetCountByName name="State Economic Council" datasetCount="3" />);
+    render(
+      <BrowserRouter>
+        <PublisherDatasetCountByName name="State Economic Council" datasetCount="3" />
+      </BrowserRouter>
+    );
     expect(screen.getByText('3 datasets')).toBeInTheDocument();
   });
 
   test('Dataset count with just one item.',() => {
-    render(<PublisherDatasetCountByName name="State Economic Council" datasetCount="1" />);
+    render(
+      <BrowserRouter>
+        <PublisherDatasetCountByName name="State Economic Council" datasetCount="1" />
+      </BrowserRouter>
+    );
   });
 
 });
