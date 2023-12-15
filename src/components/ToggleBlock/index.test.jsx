@@ -1,75 +1,80 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import ToggleBlock from './index';
 
-describe.skip('<ToggleBlock />', () => {
-  render(
-    <ToggleBlock
-      title="My Title"
-    >
-      <p>Child Element</p>
-    </ToggleBlock>,
-  );
+describe('<ToggleBlock />', () => {
+  describe('default', () => {
+    beforeEach(() => {
+      render(
+        <ToggleBlock
+          title="My Title"
+        >
+          <p>Child Element</p>
+        </ToggleBlock>,
+      );
+    });
+    it('renders as default h2 with button title', () => {
+      expect(screen.getByText('My Title')).toBeInTheDocument();
+    });
+  
+    it('renders with default classes', () => {
+      expect(screen.getByRole('heading')).toHaveClass('toggle-block-title');
+      expect(screen.getByTestId('toggle-inner')).toHaveClass('toggle-block-inner');
+    });
 
-  render(
-    <ToggleBlock
-      title="My Title"
-      defaultClosed
-    >
-      <p>Child Element</p>
-    </ToggleBlock>,
-  );
-
-  render(
-    <ToggleBlock
-      title="My Custom Title"
-      headingClasses="custom-heading-class"
-      innerClasses="custom-inner-class"
-      allowToggle={false}
-    >
-      <p>Child Element</p>
-    </ToggleBlock>,
-  );
-
-  it('renders as default h2 with button title', () => {
-    expect(defaultWrapper.find('h2 button').text()).toBe('<FontAwesomeIcon />My Title');
+    it('toggles render of children', async () => {
+      expect(screen.getByTestId('toggle-wrapper')).toHaveClass('open');
+      expect(screen.getByTestId('toggle-wrapper')).not.toHaveClass('closed');
+      await userEvent.click(screen.getByRole('button'));
+      expect(screen.queryByTestId('toggle-inner')).not.toBeInTheDocument();
+      expect(screen.getByTestId('toggle-wrapper')).not.toHaveClass('open');
+      expect(screen.getByTestId('toggle-wrapper')).toHaveClass('closed');
+      await userEvent.click(screen.getByRole('button'));
+      expect(screen.queryByTestId('toggle-inner')).toBeInTheDocument();
+      expect(screen.getByTestId('toggle-wrapper')).toHaveClass('open');
+      expect(screen.getByTestId('toggle-wrapper')).not.toHaveClass('closed');
+    });
   });
 
-  it('renders with default classes', () => {
-    expect(defaultWrapper.exists('h2.toggle-block-title')).toBe(true);
-    expect(defaultWrapper.exists('div.toggle-block-inner')).toBe(true);
-  });
+  describe('custom', () => {
+    beforeEach(() => {
+      render(
+        <ToggleBlock
+          title="My Custom Title"
+          headingClasses="custom-heading-class"
+          innerClasses="custom-inner-class"
+          allowToggle={false}
+        >
+          <p>Child Element</p>
+        </ToggleBlock>,
+      );
+    });
+    it('renders without button title', () => {
+      expect(screen.getByText('My Custom Title')).toBeInTheDocument()
+      expect(screen.queryByRole('button')).not.toBeInTheDocument
+    });
+  
+    it('renders with custom classes', () => {
+      expect(screen.getByRole('heading')).toHaveClass('custom-heading-class');
+      expect(screen.getByRole('heading')).not.toHaveClass('toggle-block-title');
+      
+      expect(screen.getByTestId('toggle-inner')).toHaveClass('custom-inner-class');
+      expect(screen.getByTestId('toggle-inner')).not.toHaveClass('toggle-block-inner');
+    });
 
-  it('renders without button title', () => {
-    expect(customWrapper.find('h2').text()).toBe('My Custom Title');
-    expect(customWrapper.find('h2 button').exists()).toBe(false);
-  });
-
-  it('renders with custom headingClasses', () => {
-    expect(customWrapper.exists('h2.custom-heading-class')).toBe(true);
-    expect(customWrapper.find('h2.toggle-block-title').exists()).toBe(false);
-  });
-
-  it('renders with custom innerClasses', () => {
-    expect(customWrapper.exists('div.custom-inner-class')).toBe(true);
-    expect(customWrapper.find('div.toggle-block-inner').exists()).toBe(false);
   });
 
   it('renders in the closed state', () => {
-    expect(defaultClosedWrapper.find('div.toggle-block-inner').exists()).toBe(false);
-    expect(defaultClosedWrapper.exists('div.closed')).toBe(true);
-  });
-
-  it('toggles render of children', () => {
-    expect(defaultWrapper.exists('div.open')).toBe(true);
-    expect(defaultWrapper.exists('div.closed')).toBe(false);
-    defaultWrapper.find('h2 button').simulate('click');
-    expect(defaultWrapper.find('div.toggle-block-inner').exists()).toBe(false);
-    expect(defaultWrapper.exists('div.closed')).toBe(true);
-    expect(defaultWrapper.exists('div.open')).toBe(false);
-    defaultWrapper.find('h2 button').simulate('click');
-    expect(defaultWrapper.exists('div.toggle-block-inner'));
-    expect(defaultWrapper.exists('div.open')).toBe(true);
-    expect(defaultWrapper.exists('div.closed')).toBe(false);
+    render(
+      <ToggleBlock
+        title="My Title"
+        defaultClosed
+      >
+        <p>Child Element</p>
+      </ToggleBlock>,
+    );
+    expect(screen.queryByTestId('toggle-inner')).not.toBeInTheDocument();
+    expect(screen.getByTestId('toggle-wrapper')).toHaveClass('closed');
   });
 });

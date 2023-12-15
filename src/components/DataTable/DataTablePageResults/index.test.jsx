@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import DataTablePageResults from '.';
+import { getByTextContent } from '../../../tests/utils';
 
 describe('<DataTablePageResults />', () => {
-  it.skip('renders correct initial results', () => {
+  it('renders correct initial results', () => {
     render(
       <DataTablePageResults
         total={100}
@@ -11,10 +12,10 @@ describe('<DataTablePageResults />', () => {
         currentPage={0}
       />,
     );
-    expect(screen.getByText('1 - 10 of 100 rows')).toBeInTheDocument();
+    expect(getByTextContent('1 - 10 of 100 rows')).toBeInTheDocument();
   });
 
-  it.skip('renders correct results on subsequent pages', () => {
+  it('renders correct results on subsequent pages', () => {
     render(
       <DataTablePageResults
         total={100}
@@ -22,10 +23,10 @@ describe('<DataTablePageResults />', () => {
         currentPage={4}
       />,
     );
-    expect(screen.getByText('41 - 50 of 100 rows')).toBeInTheDocument();
+    expect(getByTextContent('41 - 50 of 100 rows')).toBeInTheDocument();
   });
 
-  it.skip('Correctly displays appended viewing to results list', () => {
+  it('Correctly displays appended viewing to results list', () => {
     render(
       <DataTablePageResults
         total={100}
@@ -34,7 +35,7 @@ describe('<DataTablePageResults />', () => {
         viewing
       />,
     );
-    expect(screen.getByText('Viewing 41 - 50 of 100 rows')).toBeInTheDocument();
+    expect(getByTextContent('Viewing 41 - 50 of 100 rows')).toBeInTheDocument();
   })
   
 });

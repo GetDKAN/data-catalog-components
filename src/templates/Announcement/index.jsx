@@ -1,27 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { icon } from '@fortawesome/fontawesome-svg-core';
 
 const Announcement = ({
   heading, children, role, variation,
 }) => {
-  let icon;
+  let iconCode;
   switch (variation) {
     case 'success':
-      icon = 'check-circle';
+      iconCode = 'check-circle';
       break;
     case 'warn':
-      icon = 'exclamation-circle';
+      iconCode = 'exclamation-circle';
       break;
     case 'error':
-      icon = 'circle-xmark';
+      iconCode = 'circle-xmark';
       break;
     case 'info':
-      icon = 'info-circle';
+      iconCode = 'info-circle';
       break;
     default:
-      icon = 'info-circle';
+      iconCode = 'info-circle';
   }
+  console.log(variation)
   return (
     <div
       className={`dc-alert dc-alert--${variation}`}
@@ -31,7 +33,7 @@ const Announcement = ({
         && (
         <h3>
           <FontAwesomeIcon
-            icon={['fas', `${icon}`]}
+            icon={icon({name: iconCode})}
             size="1x"
             aria-hidden="true"
             role="presentation"

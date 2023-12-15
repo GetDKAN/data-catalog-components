@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import SearchResultsMessage from '.';
+import { getByTextContent } from '../../tests/utils';
 
 const defaultFacets = {
   Theme: {
@@ -25,7 +26,7 @@ const defaultFacets = {
   },
 };
 
-describe.skip('<SearchResultMessage />', () => {
+describe('<SearchResultMessage />', () => {
   it('renders with default message', () => {
     render(
       <SearchResultsMessage
@@ -36,7 +37,7 @@ describe.skip('<SearchResultMessage />', () => {
         defaultFacets={defaultFacets}
       />,
     );
-    expect(screen.getByText('10 datasets found')).toBeInTheDocument();
+    expect(getByTextContent('10 datasets found')).toBeInTheDocument();
   });
   it('renders with default single message', () => {
     render(
@@ -48,7 +49,7 @@ describe.skip('<SearchResultMessage />', () => {
         defaultFacets={defaultFacets}
       />,
     );
-    expect(screen.getByText('1 datasets found')).toBeInTheDocument();
+    expect(screen.getByText('1 dataset found')).toBeInTheDocument();
   });
 
   it('renders complete message', () => {
@@ -65,7 +66,7 @@ describe.skip('<SearchResultMessage />', () => {
         defaultFacets={defaultFacets}
       />,
     );
-    expect(screen.getByText('10 datasets found for "foobar" in Topics: Foo | Tags: Bar or Run')).toBeInTheDocument();
+    expect(getByTextContent('10 datasets found for "foobar" in Topics: Foo | Tags: Bar or Run')).toBeInTheDocument();
   });
 
   it('renders a condensed facets message', () => {
@@ -83,7 +84,7 @@ describe.skip('<SearchResultMessage />', () => {
         defaultFacets={defaultFacets}
       />,
     );
-    expect(screen.getByText('10 datasets found for "foobar" in Topics: Foo | Tags: 3 selected Tags')).toBeInTheDocument();
+    expect(getByTextContent('10 datasets found for "foobar" in Topics: Foo | Tags: 3 selected Tags')).toBeInTheDocument();
   });
 
   it('renders a message with no query or facets', () => {
@@ -102,7 +103,7 @@ describe.skip('<SearchResultMessage />', () => {
         defaultFacets={defaultFacets}
       />,
     );
-    expect(screen.getByText('10 datasets found')).toBeInTheDocument();
+    expect(getByTextContent('10 datasets found')).toBeInTheDocument();
   });
 
   it('renders facets with correct delimiter', () => {
@@ -121,6 +122,6 @@ describe.skip('<SearchResultMessage />', () => {
         defaultFacets={defaultFacets}
       />,
     );
-    expect(screen.getByText('10 datasets found for "foobar" in Topics: Foo & Tags: Bar, Run')).toBeInTheDocument();
+    expect(getByTextContent('10 datasets found for "foobar" in Topics: Foo & Tags: Bar, Run')).toBeInTheDocument();
   });
 });
