@@ -65,10 +65,7 @@ NavBar.propTypes = {
   customClasses: PropTypes.string,
   defaultStyling: PropTypes.bool,
   expand: PropTypes.bool,
-  navItems: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
-    url: PropTypes.string,
-  })).isRequired,
+  navItems: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default NavBar;

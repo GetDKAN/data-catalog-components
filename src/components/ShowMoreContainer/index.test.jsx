@@ -51,37 +51,33 @@ describe('<ShowMoreContainer />', () => {
     expect(screen.queryAllByRole('listitem')).toHaveLength(10);
   });
 
-  it.skip('renders correct container types', () => {
-    render(
-      <ShowMoreContainer
-        items={renderedDivItems}
-      />,
-    );
-
-    render(
-      <ShowMoreContainer
-        items={renderedListItems}
-        container="ol"
-      />,
-    );
-
-    render(
-      <ShowMoreContainer
-        items={renderedListItems}
-        container="ul"
-      />,
-    );
-
-    render(
-      <ShowMoreContainer
-        items={renderedDivItems}
-        container="div"
-      />,
-    );
-
-    expect(screen.exists('div.show-more-container')).toBe(true);
-    expect(divWrapper.exists('div.show-more-container')).toBe(true);
-    expect(screen.getByRole('list')).toHaveClass('show-more-container');
+  describe('it renders correct container types', () => {
+    it('renders as a div', () => {
+      render(
+        <ShowMoreContainer
+          items={renderedDivItems}
+        />,
+      );
+      expect(screen.queryByRole('list')).not.toBeInTheDocument();
+    });
+    it('renders as an ul', () => {
+      render(
+        <ShowMoreContainer
+          items={renderedListItems}
+          container="ul"
+        />,
+      );
+      expect(screen.getByRole('list')).toHaveClass('show-more-container');
+    });
+    it('renders as an ol', () => {
+      render(
+        <ShowMoreContainer
+          items={renderedDivItems}
+          container="ol"
+        />,
+      );
+      expect(screen.getByRole('list')).toHaveClass('show-more-container');
+    })
   });
 
   it('renders correct amount when specific limit is set', async () => {

@@ -11,16 +11,16 @@ describe('<PublisherList />', () => {
         <PublisherList
           items={[
             {
-              name: 'dkan', identifier: 1, imageUrl: '', description: 'react',
+              name: 'dkan', identifier: "1", imageUrl: '', description: 'react',
             },
             {
-              name: 'open', identifier: 2, imageUrl: '', description: 'jest',
+              name: 'open', identifier: "2", imageUrl: '', description: 'jest',
             },
             {
-              name: 'data', identifier: 3, imageUrl: '', description: 'testing',
+              name: 'data', identifier: "3", imageUrl: '', description: 'testing',
             },
             {
-              name: 'foss', identifier: 4, imageUrl: '', description: 'css',
+              name: 'foss', identifier: "4", imageUrl: '', description: 'css',
             },
           ]}
           className="custom"

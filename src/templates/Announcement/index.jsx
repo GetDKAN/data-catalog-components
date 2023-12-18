@@ -23,7 +23,6 @@ const Announcement = ({
     default:
       iconCode = 'info-circle';
   }
-  console.log(variation)
   return (
     <div
       className={`dc-alert dc-alert--${variation}`}

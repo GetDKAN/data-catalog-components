@@ -1,7 +1,17 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Search from './index';
+import * as axios from "axios";
+
+jest.mock("axios");
+axios.get.mockImplementation(() => {
+  return Promise.resolve({
+    data: {
+      total: 0
+    }
+  })
+})
 
 describe('<Search />', () => {
 
@@ -14,47 +24,49 @@ describe('<Search />', () => {
     }
   }
 
-  test.skip('no facets', () => {
-    render(
-      <Search
-        location={{}}
-        searchEndpoint=""
-        defaultFacets={{
-          "theme": {
-            "label": "Topics",
-            "field": "theme.0.title",
-            ... base
-          },
-          "keyword": {
-            "label": "Tags",
-            "field": "keyword.*.title",
-            ... base
-          },
-          "publisher__name": {
-            "label": "Publishers",
-            "field": "publisher__name",
-            ... base
-          }
-        }}
-        sortOptions={[
-          {
-            field: 'modified',
-            order: 'desc',
-            label: 'Date'
-          },
-          {
-            field: 'title',
-            order: 'asc',
-            label: 'Alphabetical'
-          }
-        ]}
-        path="/components/search"
-      >
-        <div>
-          <p>search</p>
-        </div>
-      </Search>
-    );
+  test('no facets', async() => {
+    await act(async () => {
+      render(
+        <Search
+          location={{}}
+          searchEndpoint=""
+          defaultFacets={{
+            "theme": {
+              "label": "Topics",
+              "field": "theme.0.title",
+              ... base
+            },
+            "keyword": {
+              "label": "Tags",
+              "field": "keyword.*.title",
+              ... base
+            },
+            "publisher__name": {
+              "label": "Publishers",
+              "field": "publisher__name",
+              ... base
+            }
+          }}
+          sortOptions={[
+            {
+              field: 'modified',
+              order: 'desc',
+              label: 'Date'
+            },
+            {
+              field: 'title',
+              order: 'asc',
+              label: 'Alphabetical'
+            }
+          ]}
+          path="/components/search"
+        >
+          <div>
+            <p>search</p>
+          </div>
+        </Search>
+      );
+    });
     expect(screen.queryByRole('listitem')).toBeNull();
     expect('hello').toBeTruthy()
   });

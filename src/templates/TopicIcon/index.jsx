@@ -174,7 +174,7 @@ TopicIcon.defaultProps = {
 
 TopicIcon.propTypes = {
   title: PropTypes.string,
-  size: PropTypes.number || PropTypes.string,
+  size: PropTypes.oneOfType([PropTypes.number,PropTypes.string]),
   fill: PropTypes.string,
 };
 
