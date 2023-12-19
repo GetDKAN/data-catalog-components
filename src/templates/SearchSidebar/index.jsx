@@ -1,35 +1,45 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Label, Input } from 'reactstrap';
+import { Label, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 import SearchFacets from '../../components/SearchFacets';
 import { SearchDispatch } from '../../services/search/search_defaults';
 import { BulletList } from 'react-content-loader';
 
-const SearchSidebar = ({ sortOptions }) => {
+const SearchSidebar = ({ sortOptions, facetsResults }) => {
   const { searchState, dispatch, defaultFacets } = useContext(SearchDispatch);
-  const { facetsResults, loading } = searchState;
-
+  const { loading, sort } = searchState;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  
+  const label = sortOptions.filter((s) => {
+    return s.field == sort;
+  })[0].label
+  
   return (
     <div className="dc-search-sidebar col-md-4 col-sm-12">
       <div className="dc-search-sidebar-options">
         <Label for="dc-search-list-sort">Sort by:</Label>
-        <Input
-          type="select"
+        <Dropdown
           name="dc-search-list-sort"
           id="dc-search-list-sort"
-          onChange={(e) => {
-            dispatch({ type: 'UPDATE_SORT', data: { sort: e.target.value } });
-          }}
+          toggle={toggle}
+          isOpen={dropdownOpen}
         >
-          {sortOptions.map((sortOpt) => (
-            <option
-              key={sortOpt.field}
-              value={sortOpt.field}
-            >
-              {sortOpt.label}
-            </option>
-          ))}
-        </Input>
+          <DropdownToggle caret>{label}</DropdownToggle>
+          <DropdownMenu>
+            {sortOptions.map((sortOpt) => (
+              <DropdownItem
+                key={sortOpt.field}
+                value={sortOpt.field}
+                onClick={(e) => {
+                  dispatch({ type: 'UPDATE_SORT', data: { sort: sortOpt.field, "sort-order": sortOpt.order } });
+                }}
+              >
+                {sortOpt.label}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
       </div>
       <div className="dc-search-sidebar-options">
         {loading ? <BulletList / > :

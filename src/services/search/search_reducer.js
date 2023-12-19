@@ -18,43 +18,8 @@ export function updateSelectedFacetsState(state, action) {
   };
 }
 
-function mergedFacets(state, action) {
-  if (typeof action.data !== 'object' || !Array.isArray(action.data.facetsResults)) {
-    return { ...state }
-  }
-
-  const original = state.facetsResults
-  const facets = action.data.facetsResults
-
-  let final = []
-  if (!Array.isArray(original)) {
-    final = facets
-  }
-  else {
-    final = [...original]
-    facets.forEach((facet) => {
-      const index = original.findIndex( (element) => {
-        return (element.type === facet.type && element.name === facet.name)
-      })
-
-      if (index === -1) {
-        final.push(facet)
-      }
-      else {
-        final[index] = facet
-      }
-    });
-  }
-  return { ...state, facetsResults: final };
-}
-
 export default function searchReducer(state, action) {
   switch (action.type) {
-    case 'FETCH_DATA':
-      return {
-        ...state,
-        loading: true,
-      };
     case 'GET_SEARCH_ENGINE':
       return {
         ...state,
@@ -63,15 +28,6 @@ export default function searchReducer(state, action) {
         searchType: action.data.searchType,
         facets: action.data.facets,
       };
-    case 'SET_SEARCH_DATA':
-      return {
-        ...state,
-        loading: false,
-        totalItems: action.data.totalItems,
-        items: action.data.items,
-      };
-    case 'SET_FACETS_DATA':
-      return mergedFacets(state, action)
     case 'SET_SEARCH_PARAMETERS':
       return {
         ...state,

@@ -1,40 +1,43 @@
-import React, {
-  useEffect, useState, useReducer, useRef,
-} from 'react';
+import React, { useEffect,useReducer } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import searchReducer from '../../services/search/search_reducer';
 import { SearchDispatch, defaultSearchState } from '../../services/search/search_defaults';
-import getData from './functions';
+
+import { useQuery } from '@tanstack/react-query';
+import SearchContent from "../../templates/SearchContent";
+import SearchSidebar from '../../templates/SearchSidebar';
+import { getApiSearchParams, normalizeItems } from './functions';
+
+const getSearchData = (apiParams, searchEndpoint) => {
+  const { isPending, error, data } = useQuery({
+    queryKey: ['searchData', apiParams],
+    queryFn: () => {
+      return fetch(`${searchEndpoint}?${apiParams}&facets=0`).then(
+        (res) => res.json(),
+      )
+    }
+  });
+  return {loading: isPending, data};
+};
 
 const Search = ({
   initialSearchState,
   searchEndpoint,
-  children,
   defaultFacets,
   sortOptions,
   setSearchUrl,
-  path,
-  location,
-  normalize,
-  trailingSlashInUrl,
+  path
 }) => {
   const defaultState = {
     ...defaultSearchState,
     ...initialSearchState,
   };
 
-  const [hasWindow, setHasWindow] = useState(false);
   const [searchState, dispatch] = useReducer(searchReducer, defaultState);
-
-  const firstUrl = useRef(true);
-  const firstFetchSearch = useRef(true);
-  const firstFetchFacet = useRef(true);
 
   // On Mount: Synchronize url params with search state.
   useEffect(() => {
-    setHasWindow(true);
-
     // Set the state from query parameters.
     const params = queryString.parse(window.location.search);
 
@@ -76,59 +79,10 @@ const Search = ({
         });
       }
     });
-
-    // We are relying on a state change to trigger a data fetch.
-    // If we have no parameters to trigger the state change and dispatch,
-    // lets force a data fetch.
-    if (!dispatched) {
-      getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch);
-      Object.keys(defaultFacets).forEach((facet) => {
-        getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch, facet);
-      })
-    }
   }, []);
-
-  // Fetch Search Data.
-  useEffect(() => {
-    if (firstFetchSearch.current) {
-      firstFetchSearch.current = false;
-      return;
-    }
-    getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch);
-  }, [
-    searchState.sort,
-    searchState['sort-order'],
-    searchState.fulltext,
-    searchState['page-size'],
-    searchState.page,
-    searchState.selectedFacets,
-  ]);
-
-  // Fetch Facet Data.
-  useEffect(() => {
-    if (firstFetchFacet.current) {
-      firstFetchFacet.current = false;
-      return;
-    }
-    Object.keys(defaultFacets).forEach((facet) => {
-      getData(searchEndpoint, normalize, searchState, defaultFacets, sortOptions, dispatch, facet);
-    })
-  }, [
-    searchState.sort,
-    searchState['sort-order'],
-    searchState.fulltext,
-    searchState['page-size'],
-    searchState.page,
-    searchState.selectedFacets,
-  ]);
 
   // Update URL.
   useEffect(() => {
-    if (firstUrl.current) {
-      firstUrl.current = false;
-      return;
-    }
-
     const searchParams = {};
     const facetKeys = Object.keys(defaultFacets);
     const state = { ...searchState };
@@ -163,12 +117,8 @@ const Search = ({
     if (setSearchUrl) {
       const loc = window.location;
       let searchUrl = '';
-      if (trailingSlashInUrl) {
-        searchUrl = Object.keys(params).length ? `${path}/?${params}` : `${path}/`;
-      }
-      else {
-        searchUrl = Object.keys(params).length ? `${path}?${params}` : `${path}`;
-      }
+      
+      searchUrl = Object.keys(params).length ? `${path}?${params}` : `${path}`;
       const currentUrl = `${loc.pathname}${loc.search}`;
 
       if (window !== undefined && searchUrl !== currentUrl) {
@@ -176,9 +126,34 @@ const Search = ({
       }
     }
   }, [
-    searchState.items,
-    searchState.facetsResults,
+    searchState.sort,
+    searchState['sort-order'],
+    searchState.fulltext,
+    searchState['page-size'],
+    searchState.page,
+    searchState.selectedFacets,
   ]);
+
+  const apiParams = getApiSearchParams(searchState, defaultFacets, sortOptions);
+  const {loading, data} = getSearchData(apiParams, searchEndpoint);
+
+  // facets
+  let facets = []
+  Object.keys(defaultFacets).forEach((facet) => {
+    const { isPending, error, data } = useQuery({
+      queryKey: ['getFacets', facet + apiParams],
+      queryFn: () => {
+        return fetch(`${searchEndpoint}?${apiParams}&facets=${facet}`).then(
+          (res) => res.json(),
+        )
+      }
+    });
+    if(data) {
+      data.facets.map((facet) => {
+        facets.push(facet)
+      })
+    }
+  });
 
   return (
     <SearchDispatch.Provider
@@ -186,8 +161,15 @@ const Search = ({
         searchState, dispatch, defaultFacets,
       }}
     >
-      { hasWindow
-      && children }
+      { data && (
+        <div className="row">
+          <SearchContent
+            loading={loading}
+            data={data}
+          />
+          <SearchSidebar facetsResults={facets} sortOptions={sortOptions} />
+        </div>
+      )}
     </SearchDispatch.Provider>
   );
 };
@@ -196,20 +178,15 @@ Search.defaultProps = {
   setSearchUrl: true,
   normalize: null,
   initialSearchState: {},
-  trailingSlashInUrl: true,
 };
 
 Search.propTypes = {
   initialSearchState: PropTypes.objectOf(PropTypes.object),
   searchEndpoint: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
   defaultFacets: PropTypes.objectOf(PropTypes.object).isRequired,
   sortOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   setSearchUrl: PropTypes.bool,
   path: PropTypes.string.isRequired,
-  location: PropTypes.objectOf(PropTypes.any).isRequired,
-  normalize: PropTypes.func,
-  trailingSlashInUrl: PropTypes.bool,
 };
 
 export default Search;

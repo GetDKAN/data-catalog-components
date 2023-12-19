@@ -5,18 +5,18 @@ import SearchListItem from '../../components/SearchListItem';
 import SearchInput from '../../components/SearchInput';
 import SearchPaginationResults from '../../components/SearchPaginationResults';
 import SearchPageSizer from '../../components/SearchPageSizer';
-import { SearchDispatch } from '../../services/search/search_defaults';
 import { List } from 'react-content-loader';
+import { normalizeItems } from "../../components/Search/functions";
+import { SearchDispatch } from '../../services/search/search_defaults';
 
-const SearchContent = () => {
+const SearchContent = ({loading, data}) => {
   const { searchState, dispatch, defaultFacets } = useContext(SearchDispatch);
-  const { items, fulltext, totalItems, selectedFacets, loading } = searchState;
+  const { fulltext, selectedFacets } = searchState;
   const facetTypes = Object.keys(defaultFacets);
-
+  const items = normalizeItems(data.results);
   return (
     <div className="dc-results-list col-md-8 col-sm-12">
-      {items
-      && (
+      {items && (
         <div>
           <SearchInput
             placeholder="Type your search term here"
@@ -29,7 +29,7 @@ const SearchContent = () => {
           />
           <SearchResultsMessage
             searchTerm={fulltext}
-            total={parseInt(totalItems, 10)}
+            total={parseInt(data.total, 10)}
             selectedFacets={selectedFacets}
             facetTypes={facetTypes}
             defaultFacets={defaultFacets}
@@ -38,7 +38,7 @@ const SearchContent = () => {
             facetSeparator=" &amp; "
           />
 
-          {loading ?
+          {loading && !items ?
            <div>
              <List/>
            </div>  :
@@ -52,7 +52,7 @@ const SearchContent = () => {
 
           <div className="dc-pagination-container">
             <SearchPaginationResults
-              total={Number(totalItems)}
+              total={Number(data.total)}
               pageSize={Number(searchState['page-size'])}
               currentPage={Number(searchState.page)}
             />
@@ -67,7 +67,7 @@ const SearchContent = () => {
               hideDisabled
               activePage={searchState.page}
               itemsCountPerPage={Number(searchState['page-size'])}
-              totalItemsCount={Number(totalItems)}
+              totalItemsCount={Number(data.total)}
               pageRangeDisplayed={5}
               onChange={(e) => dispatch({
                 type: 'UPDATE_CURRENT_PAGE',
