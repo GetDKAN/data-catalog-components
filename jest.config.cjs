@@ -13,4 +13,5 @@ module.exports = {
     '^react-dnd-test-backend$': 'react-dnd-test-backend/dist/cjs',
     '^react-dnd-test-utils$': 'react-dnd-test-utils/dist/cjs',
   },
+  testEnvironment: "jsdom",
 };

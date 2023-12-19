@@ -1,10 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import Blocks from './index';
 import BasicBlock from './BasicBlock';
 import StatBlock from './StatBlock';
 import StepsBlock from './StepsBlock';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('<Blocks />', () => {
   test('renders a heading by default', () => {
@@ -15,7 +16,11 @@ describe('<Blocks />', () => {
 
 describe('<BasicBlock />', () => {
   test('renders a heading by default', () => {
-    render(<BasicBlock content={{ title: 'Welcome to DKAN', ref: '/dkan' }} />);
+    render(
+      <BrowserRouter>
+        <BasicBlock content={{ title: 'Welcome to DKAN', ref: '/dkan' }} />
+      </BrowserRouter>
+    );
     expect(screen.getByRole('heading', 'Welcome to DKAN')).toBeInTheDocument();
   });
 });

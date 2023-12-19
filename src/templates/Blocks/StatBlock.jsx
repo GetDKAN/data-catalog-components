@@ -7,12 +7,14 @@ class StatBlock extends React.PureComponent {
     const { content } = this.props;
     return (
       <div key={content.ref} className="stat-block">
-        <FontAwesomeIcon
-          icon={content.icon}
-          size="4x"
-          aria-hidden="true"
-          role="presentation"
-        />
+        {content.icon && (
+          <FontAwesomeIcon
+            icon={content.icon}
+            size="4x"
+            aria-hidden="true"
+            role="presentation"
+          />
+        )}
         <h2>{content.title}</h2>
         <p>{content.content}</p>
       </div>

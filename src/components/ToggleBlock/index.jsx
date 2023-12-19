@@ -30,11 +30,11 @@ export default function ToggleBlock({
     );
   }
   return (
-    <div id={customId} className={`${className} ${show ? 'open' : 'closed'}`}>
+    <div id={customId} className={`${className} ${show ? 'open' : 'closed'}`} data-testid="toggle-wrapper">
       {toggleBlockHeading}
       {show
         && (
-          <div className={innerClasses}>
+          <div className={innerClasses} data-testid="toggle-inner">
             {children}
           </div>
         )}

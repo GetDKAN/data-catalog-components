@@ -1,43 +1,41 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import DataTablePageResults from '.';
+import { getByTextContent } from '../../../tests/utils';
 
 describe('<DataTablePageResults />', () => {
-  const defaultWrapper = shallow(
-    <DataTablePageResults
-      total={100}
-      pageSize={10}
-      currentPage={0}
-    />,
-  );
-
-  const customWrapper = shallow(
-    <DataTablePageResults
-      total={100}
-      pageSize={10}
-      currentPage={4}
-    />,
-  );
-
-  const viewingWrapper = shallow(
-    <DataTablePageResults
-      total={100}
-      pageSize={10}
-      currentPage={4}
-      viewing
-    />,
-  );
-
   it('renders correct initial results', () => {
-    expect(defaultWrapper.find('p').text()).toBe('1 - 10 of 100 rows');
+    render(
+      <DataTablePageResults
+        total={100}
+        pageSize={10}
+        currentPage={0}
+      />,
+    );
+    expect(getByTextContent('1 - 10 of 100 rows')).toBeInTheDocument();
   });
 
   it('renders correct results on subsequent pages', () => {
-    expect(customWrapper.find('p').text()).toBe('41 - 50 of 100 rows');
+    render(
+      <DataTablePageResults
+        total={100}
+        pageSize={10}
+        currentPage={4}
+      />,
+    );
+    expect(getByTextContent('41 - 50 of 100 rows')).toBeInTheDocument();
   });
 
   it('Correctly displays appended viewing to results list', () => {
-    expect(viewingWrapper.find('p').text()).toBe('Viewing 41 - 50 of 100 rows');
+    render(
+      <DataTablePageResults
+        total={100}
+        pageSize={10}
+        currentPage={4}
+        viewing
+      />,
+    );
+    expect(getByTextContent('Viewing 41 - 50 of 100 rows')).toBeInTheDocument();
   })
   
 });

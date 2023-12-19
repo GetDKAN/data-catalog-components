@@ -43,7 +43,7 @@ const SearchInput = ({
       onClick={() => { setSearchQuery(''); }}
     >
       <FontAwesomeIcon
-        icon={['fas', 'times' ]}
+        icon="fa-xmark"
         size="1x"
         aria-hidden="true"
         role="presentation"

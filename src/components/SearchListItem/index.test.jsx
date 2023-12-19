@@ -1,20 +1,25 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import SearchListItem, {getUniqueFormats} from './index';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('<SearchListItem />', () => {
 
   test('renders an item', () => {
 
-    render(<SearchListItem
-             item={
-               {
-                 title: 'dkan',
-                 ref: '/dkan-item',
-               }
-             }
-           />);
+    render(
+      <BrowserRouter>
+        <SearchListItem
+          item={
+            {
+              title: 'dkan',
+              ref: '/dkan-item',
+            }
+          }
+        />
+      </BrowserRouter>
+    );
     expect(screen.getByRole('heading', 'Welcome to DKAN')).toBeInTheDocument();
   });
 
@@ -61,36 +66,39 @@ describe('<SearchListItem />', () => {
 
   test('Return formats with count.',() => {
     render(
-      <SearchListItem
-        item={
-          {
-            title: 'dkan',
-            ref: '/dkan-item',
-            format: [
-              {"format": "csv",
-               "identifier": 1
-              },
-              {"format": "csv",
-               "identifier": 2
-              },
-              {"format": "csv",
-               "identifier": 3
-              },
-              {"format": "rdf",
-               "identifier": 4
-              },
-              {"format": "xml",
-               "identifier": 5
-              }
-            ],
-            theme: ['category'],
-            identifier: '123',
-            ref: '/',
-            description: 'This is the description.',
-            publisher: 'Data Provider Name',
+      <BrowserRouter>
+        <SearchListItem
+          item={
+            {
+              title: 'dkan',
+              ref: '/dkan-item',
+              format: [
+                {"format": "csv",
+                "identifier": 1
+                },
+                {"format": "csv",
+                "identifier": 2
+                },
+                {"format": "csv",
+                "identifier": 3
+                },
+                {"format": "rdf",
+                "identifier": 4
+                },
+                {"format": "xml",
+                "identifier": 5
+                }
+              ],
+              theme: ['category'],
+              identifier: '123',
+              ref: '/',
+              description: 'This is the description.',
+              publisher: 'Data Provider Name',
+            }
           }
-        }
-      />);
+        />
+      </BrowserRouter>
+    );
 
     expect(screen.getByText('1x rdf')).toBeInTheDocument();
     expect(screen.getByText('1x xml')).toBeInTheDocument();
