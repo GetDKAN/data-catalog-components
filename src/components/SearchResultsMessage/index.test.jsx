@@ -1,6 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import SearchResultsMessage from '.';
+import { getByTextContent } from '../../tests/utils';
 
 const defaultFacets = {
   Theme: {
@@ -26,107 +27,101 @@ const defaultFacets = {
 };
 
 describe('<SearchResultMessage />', () => {
-    
-  const defaultWrapper = mount(
-    <SearchResultsMessage
-      searchTerm=""
-      selectedFacets={[]}
-      facetTypes={['Theme', 'Keyword']}
-      total={10}
-      defaultFacets={defaultFacets}
-    />,
-  );
   it('renders with default message', () => {
-    let ps = defaultWrapper.find('div p');
-    expect(defaultWrapper.find('div p').text()).toBe('10 datasets found');
+    render(
+      <SearchResultsMessage
+        searchTerm=""
+        selectedFacets={[]}
+        facetTypes={['Theme', 'Keyword']}
+        total={10}
+        defaultFacets={defaultFacets}
+      />,
+    );
+    expect(getByTextContent('10 datasets found')).toBeInTheDocument();
   });
-
-  const singleItemWrapper = mount(
-    <SearchResultsMessage
-      searchTerm=""
-      selectedFacets={[]}
-      facetTypes={['Theme', 'Keyword']}
-      total={1}
-      defaultFacets={defaultFacets}
-    />,
-  );
   it('renders with default single message', () => {
-    expect(singleItemWrapper.find('p').text()).toBe('1 dataset found');
+    render(
+      <SearchResultsMessage
+        searchTerm=""
+        selectedFacets={[]}
+        facetTypes={['Theme', 'Keyword']}
+        total={1}
+        defaultFacets={defaultFacets}
+      />,
+    );
+    expect(screen.getByText('1 dataset found')).toBeInTheDocument();
   });
 
-  const customWrapper = mount(
-    <SearchResultsMessage
-      searchTerm="foobar"
-      selectedFacets={[
-        ['Theme', 'Foo'],
-        ['Keyword', 'Bar'],
-        ['Keyword', 'Run'],
-      ]}
-      facetTypes={['Theme', 'Keyword']}
-      total={10}
-      defaultFacets={defaultFacets}
-    />,
-  );
-  const completeMessage = '10 datasets found for "foobar" in Topics: Foo | Tags: Bar or Run';
   it('renders complete message', () => {
-    expect(customWrapper.find('p').text()).toBe(completeMessage);
+    render(
+      <SearchResultsMessage
+        searchTerm="foobar"
+        selectedFacets={[
+          ['Theme', 'Foo'],
+          ['Keyword', 'Bar'],
+          ['Keyword', 'Run'],
+        ]}
+        facetTypes={['Theme', 'Keyword']}
+        total={10}
+        defaultFacets={defaultFacets}
+      />,
+    );
+    expect(getByTextContent('10 datasets found for "foobar" in Topics: Foo | Tags: Bar or Run')).toBeInTheDocument();
   });
 
-  const condensedWrapper = mount(
-    <SearchResultsMessage
-      searchTerm="foobar"
-      selectedFacets={[
-        ['Theme', 'Foo'],
-        ['Keyword', 'Bar'],
-        ['Keyword', 'Run'],
-        ['Keyword', 'Fun'],
-      ]}
-      facetTypes={['Theme', 'Keyword']}
-      total={10}
-      defaultFacets={defaultFacets}
-    />,
-  );
-  const condensedMessage = '10 datasets found for "foobar" in Topics: Foo | Tags: 3 selected Tags';
   it('renders a condensed facets message', () => {
-    expect(condensedWrapper.find('p').text()).toBe(condensedMessage);
+    render(
+      <SearchResultsMessage
+        searchTerm="foobar"
+        selectedFacets={[
+          ['Theme', 'Foo'],
+          ['Keyword', 'Bar'],
+          ['Keyword', 'Run'],
+          ['Keyword', 'Fun'],
+        ]}
+        facetTypes={['Theme', 'Keyword']}
+        total={10}
+        defaultFacets={defaultFacets}
+      />,
+    );
+    expect(getByTextContent('10 datasets found for "foobar" in Topics: Foo | Tags: 3 selected Tags')).toBeInTheDocument();
   });
 
-  const noShowWrapper = mount(
-    <SearchResultsMessage
-      searchTerm="foobar"
-      selectedFacets={[
-        ['Theme', 'Foo'],
-        ['Keyword', 'Bar'],
-        ['Keyword', 'Run'],
-      ]}
-      facetTypes={['Theme', 'Keyword']}
-      total={10}
-      showQuery={false}
-      showFacets={false}
-      defaultFacets={defaultFacets}
-    />,
-  );
   it('renders a message with no query or facets', () => {
-    expect(noShowWrapper.find('p').text()).toBe('10 datasets found');
+    render(
+      <SearchResultsMessage
+        searchTerm="foobar"
+        selectedFacets={[
+          ['Theme', 'Foo'],
+          ['Keyword', 'Bar'],
+          ['Keyword', 'Run'],
+        ]}
+        facetTypes={['Theme', 'Keyword']}
+        total={10}
+        showQuery={false}
+        showFacets={false}
+        defaultFacets={defaultFacets}
+      />,
+    );
+    expect(getByTextContent('10 datasets found')).toBeInTheDocument();
   });
 
-  const delimiterWrapper = mount(
-    <SearchResultsMessage
-      searchTerm="foobar"
-      selectedFacets={[
-        ['Theme', 'Foo'],
-        ['Keyword', 'Bar'],
-        ['Keyword', 'Run'],
-      ]}
-      facetTypes={['Theme', 'Keyword']}
-      total={10}
-      facetDelimiter=", "
-      facetSeparator=" &amp; "
-      defaultFacets={defaultFacets}
-    />,
-  );
-  const customDelimiterMessage = '10 datasets found for "foobar" in Topics: Foo & Tags: Bar, Run';
   it('renders facets with correct delimiter', () => {
-    expect(delimiterWrapper.find('p').text()).toBe(customDelimiterMessage);
+    render(
+      <SearchResultsMessage
+        searchTerm="foobar"
+        selectedFacets={[
+          ['Theme', 'Foo'],
+          ['Keyword', 'Bar'],
+          ['Keyword', 'Run'],
+        ]}
+        facetTypes={['Theme', 'Keyword']}
+        total={10}
+        facetDelimiter=", "
+        facetSeparator=" &amp; "
+        defaultFacets={defaultFacets}
+      />,
+    );
+    expect(getByTextContent('10 datasets found for "foobar" in Topics: Foo & Tags: Bar, Run')).toBeInTheDocument();
   });
 });

@@ -55,12 +55,12 @@ BasicBlock.defaultProps = {
 };
 
 BasicBlock.propTypes = {
-  content: PropTypes.arrayOf(PropTypes.shape({
+  content: PropTypes.shape({
     title: PropTypes.string,
     teaser: PropTypes.string,
     image: PropTypes.string,
     ref: PropTypes.string,
-  })),
+  }),
 };
 
 export default BasicBlock;

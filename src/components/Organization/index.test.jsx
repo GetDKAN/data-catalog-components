@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import Organization, {countDatasetsByName} from './index';
-import PublisherDatasetCountByName from '../PublisherDatasetCountByName';
+import { BrowserRouter } from 'react-router-dom';
 
 const data =
       [{"publisher": {
@@ -17,7 +17,11 @@ const data =
 
 describe('<Organization />', () => {
   test('renders a heading', () => {
-    render(<Organization name="DKAN" />);
+    render(
+      <BrowserRouter>
+        <Organization name="DKAN" />
+      </BrowserRouter>
+    );
     expect(screen.getByRole('heading', 'DKAN')).toBeInTheDocument();
   });
 
@@ -26,7 +30,11 @@ describe('<Organization />', () => {
   });
 
   test('renders with a dataset link with no count', () => {
-    render(<Organization name="DKAN" />);
+    render(
+      <BrowserRouter>
+        <Organization name="DKAN" />
+      </BrowserRouter>
+    );
     expect(screen.getByText('datasets')).toBeInTheDocument();
   });
 
