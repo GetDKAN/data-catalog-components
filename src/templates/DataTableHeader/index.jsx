@@ -1,37 +1,33 @@
 import React from 'react';
-import { ResourceDispatch } from '../../services/resource/resource_defaults';
 import ManageColumns from '../../components/DataTable/ManageColumns';
 import DataTablePageResults from '../../components/DataTable/DataTablePageResults';
 import DataTableDensity from '../../components/DataTable/DataTableDensity';
 import DataTablePageSizer from '../../components/DataTable/DataTablePageSizer';
 import DataIcon from '../../components/DataIcon';
 
-const DataTableHeader = () => {
-  const { reactTable, resourceState, dispatch } = React.useContext(ResourceDispatch);
+const DataTableHeader = ({reactTable, total, setDensity}) => {
+  const columns = reactTable.getAllColumns();
 
   return (
     <div className="dc-datatable-header">
-      {resourceState.store
+      {reactTable
         && (
         <>
           <DataTablePageResults
-            total={resourceState.count}
-            pageSize={resourceState.pageSize}
-            currentPage={resourceState.currentPage}
+            total={total}
+            pageSize={reactTable.getState().pagination.pageSize}
+            currentPage={reactTable.getState().pagination.pageIndex}
           />
           <DataTablePageSizer
             pageSizeChange={(value) => {
-                dispatch({
-                type: 'UPDATE_PAGE_SIZE',
-                data: { pageSize: value },
-              });
-              reactTable.resetPagination();
+              reactTable.setPageSize(value);
+              reactTable.resetPageIndex();
             }}
-            id={resourceState.store.id}
-            initSize={resourceState.pageSize}
+            id={""} //todo
+            initSize={reactTable.getS}
           />
           <DataTableDensity
-            densityChange={(density) => dispatch({ type: 'UPDATE_DENSITY', data: { density } })}
+            densityChange={(density) => setDensity(density)}
             items={[
               {
                 icon: (
@@ -74,8 +70,8 @@ const DataTableHeader = () => {
               },
             ]}
           />
-          {reactTable.getAllColumns()
-            && <ManageColumns /> }
+          {columns ? 
+             <ManageColumns reactTable={reactTable} />: ""}
         </>
         )}
     </div>

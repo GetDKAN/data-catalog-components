@@ -25,7 +25,7 @@ const SearchSidebar = ({ sortOptions, facetsResults }) => {
           toggle={toggle}
           isOpen={dropdownOpen}
         >
-          <DropdownToggle caret>{label}</DropdownToggle>
+          <DropdownToggle caret><span>{label}</span></DropdownToggle>
           <DropdownMenu>
             {sortOptions.map((sortOpt) => (
               <DropdownItem

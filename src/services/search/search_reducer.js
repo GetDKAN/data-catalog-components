@@ -20,19 +20,6 @@ export function updateSelectedFacetsState(state, action) {
 
 export default function searchReducer(state, action) {
   switch (action.type) {
-    case 'GET_SEARCH_ENGINE':
-      return {
-        ...state,
-        loading: false,
-        searchEngine: action.data.searchEngine,
-        searchType: action.data.searchType,
-        facets: action.data.facets,
-      };
-    case 'SET_SEARCH_PARAMETERS':
-      return {
-        ...state,
-        searchURL: action.data.searchURL,
-      };
     case 'UPDATE_SORT':
       return {
         ...state,
