@@ -28,7 +28,6 @@ import tables from './data/tables.json';
 import '../src/theme/styles/index.scss';
 import TopicIcon from '../src/templates/TopicIcon';
 import TopicWrapper from '../src/components/TopicWrapper';
-import { ResourceDispatch } from '../src/services/resource/resource_defaults';
 import DataTable from '../src/templates/DataTable';
 import { resourceData } from './data/resourceData';
 
@@ -179,11 +178,5 @@ storiesOf('Dataset', module)
       useSortBy,
       usePagination,
     );
-    return (
-      <ResourceDispatch.Provider
-        value={{ resourceState: resourceData, dispatch: () => ({}), reactTable }}
-      >
-        <DataTable />
-      </ResourceDispatch.Provider>
-    );
+    return ( <DataTable /> );
   });

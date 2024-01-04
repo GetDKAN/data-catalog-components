@@ -26,7 +26,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@tanstack/react-table": "^8.10.7",
-    "axios": "^1.6.2",
     "bootstrap": "^4.2.1",
     "excerpts": "0.0.3",
     "html-to-react": "^1.7.0",

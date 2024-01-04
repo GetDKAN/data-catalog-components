@@ -39,7 +39,6 @@ export {
   defaultSearchState,
 } from './services/search/search_defaults';
 export {
-  ResourceDispatch,
   defaultResourceState,
 } from './services/resource/resource_defaults';
 

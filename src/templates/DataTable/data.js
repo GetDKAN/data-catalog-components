@@ -8,7 +8,6 @@ import {
   useResizeColumns,
   useColumnOrder,
 } from 'react-table';
-import { ResourceDispatch } from '../../services/resource/resource_defaults';
 
 const columns = [{"Header":"record_number","accessor":"record_number"},{"Header":"date","accessor":"date"},{"Header":"price","accessor":"price"}];
 const data = [
@@ -132,14 +131,7 @@ const MockResource = ({ children }) => {
 
 
   return (
-    <ResourceDispatch.Provider value={{
-      resourceState,
-      dispatch: () => ({}),
-      reactTable,
-    }}
-    >
-      {children}
-    </ResourceDispatch.Provider>
+    <>{children}</>
   );
 };
 
