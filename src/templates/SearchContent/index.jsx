@@ -14,6 +14,7 @@ const SearchContent = ({loading, data}) => {
   const { fulltext, selectedFacets } = searchState;
   const facetTypes = Object.keys(defaultFacets);
   const items = normalizeItems(data.results);
+  const Loading = () => <List />
   return (
     <div className="dc-results-list col-md-8 col-sm-12">
       {items && (
@@ -38,9 +39,9 @@ const SearchContent = ({loading, data}) => {
             facetSeparator=" &amp; "
           />
 
-          {loading && !items ?
+          {loading || !items || !items.length ?
            <div>
-             <List/>
+             <Loading />
            </div>  :
            <ol>
              {items.map((item) => (

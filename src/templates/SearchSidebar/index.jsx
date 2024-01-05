@@ -14,6 +14,8 @@ const SearchSidebar = ({ sortOptions, facetsResults }) => {
   const label = sortOptions.filter((s) => {
     return s.field == sort;
   })[0].label
+
+  const Loading = () => <BulletList />
   
   return (
     <div className="dc-search-sidebar col-md-4 col-sm-12">
@@ -42,16 +44,14 @@ const SearchSidebar = ({ sortOptions, facetsResults }) => {
         </Dropdown>
       </div>
       <div className="dc-search-sidebar-options">
-        {loading ? <BulletList / > :
-        facetsResults && facetsResults.length
-          && (
-            <SearchFacets
-              facetsConfig={defaultFacets}
-              facetsResults={facetsResults}
-              selectedFacets={searchState.selectedFacets}
-              dispatch={dispatch}
-            />
-          )
+        {loading || !facetsResults || !facetsResults.length ?
+          <Loading /> :
+          <SearchFacets
+            facetsConfig={defaultFacets}
+            facetsResults={facetsResults}
+            selectedFacets={searchState.selectedFacets}
+            dispatch={dispatch}
+          />
         }
       </div>
     </div>

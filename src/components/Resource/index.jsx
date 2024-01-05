@@ -19,7 +19,7 @@ const Resource = ({
 }) => {
 
   const {loading, data} = useQuery({
-    queryKey: ['metastore', id],
+    queryKey: ['datastore', id],
     queryFn: () => {
       return fetch(`${apiURL}/datastore/query/${id}`).then(
         (res) => res.json(),
