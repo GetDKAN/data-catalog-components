@@ -20,10 +20,11 @@ const SearchSidebar = ({ sortOptions, facetsResults }) => {
   return (
     <div className="dc-search-sidebar col-md-4 col-sm-12">
       <div className="dc-search-sidebar-options">
-        <Label for="dc-search-list-sort">Sort by:</Label>
+        <Label id="search-list-sort-label">Sort by:</Label>
         <Dropdown
           name="dc-search-list-sort"
           id="dc-search-list-sort"
+          aria-labelledby='search-list-sort-label'
           toggle={toggle}
           isOpen={dropdownOpen}
         >
