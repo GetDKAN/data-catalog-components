@@ -10,15 +10,12 @@ import { prepareColumns } from '../../services/resource/resource_functions';
 const Resource = ({
   apiURL,
   id,
-  resource,
-  showDBColumnNames,
-  transformQueryData: handleTransformQueryData,
   format,
   downloadURL,
   accessURL
 }) => {
 
-  const {loading, data} = useQuery({
+  const {data} = useQuery({
     queryKey: ['datastore', id],
     queryFn: () => {
       return fetch(`${apiURL}/datastore/query/${id}`).then(
@@ -49,13 +46,11 @@ const Resource = ({
 
 Resource.defaultProps = {
   showDBColumnNames: false,
-  transformQueryData: null,
 };
 
 Resource.propTypes = {
   apiURL: PropTypes.string.isRequired,
   showDBColumnNames: PropTypes.bool,
-  transformQueryData: PropTypes.func,
 };
 
 export default Resource;

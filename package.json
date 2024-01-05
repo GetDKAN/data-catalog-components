@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/data-catalog-components",
-  "version": "1.17.1",
+  "version": "1.18.0",
   "description": "React Components for Open Data Catalogs.",
   "main": "dist/index.js",
   "source": "src/index.ts",

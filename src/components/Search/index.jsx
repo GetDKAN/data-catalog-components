@@ -7,7 +7,7 @@ import { SearchDispatch, defaultSearchState } from '../../services/search/search
 import { useQuery } from '@tanstack/react-query';
 import SearchContent from "../../templates/SearchContent";
 import SearchSidebar from '../../templates/SearchSidebar';
-import { getApiSearchParams, normalizeItems } from './functions';
+import { getApiSearchParams } from './functions';
 
 const getSearchData = (apiParams, searchEndpoint) => {
   const { isPending, error, data } = useQuery({
@@ -140,7 +140,7 @@ const Search = ({
   // facets
   let facets = []
   Object.keys(defaultFacets).forEach((facet) => {
-    const { isPending, error, data } = useQuery({
+    const { data } = useQuery({
       queryKey: ['getFacets', facet + apiParams],
       queryFn: () => {
         return fetch(`${searchEndpoint}?${apiParams}&facets=${facet}`).then(
