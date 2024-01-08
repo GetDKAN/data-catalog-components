@@ -140,16 +140,16 @@ const Search = ({
   // facets
   let facets = []
   Object.keys(defaultFacets).forEach((facet) => {
-    const { data } = useQuery({
+    const facetResponse = useQuery({
       queryKey: ['getFacets', facet + apiParams],
       queryFn: () => {
         return fetch(`${searchEndpoint}?${apiParams}&facets=${facet}`).then(
           (res) => res.json(),
         )
       }
-    });
-    if(data) {
-      data.facets.map((facet) => {
+    }).data;
+    if(facetResponse && facetResponse.facets) {
+      facetResponse.facets.map((facet) => {
         facets.push(facet)
       })
     }

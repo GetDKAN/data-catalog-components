@@ -1,18 +1,24 @@
-  import React from "react";
+  import React, {useState, useEffect} from "react";
 
   function ColumnFilter({
     column,
-    reactTable,
     count
   }) {
+    const [inputValue, setInputValue] = useState(column.getFilterValue() || '')
+
+    useEffect(() => {
+      const delayedInputTimeout = setTimeout(() => {
+        column.setFilterValue(inputValue || '');
+      }, 500)
+      return () => clearTimeout(delayedInputTimeout);
+    }, [inputValue, 500]);
+
     return (
       <input
         aria-label={column.columnDef.header}
-        value={column.getFilterValue() || ''}
+        value={inputValue}
         onChange={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          column.setFilterValue(e.target.value || undefined); // Set undefined to remove the filter entirely
+          setInputValue(e.target.value || '')
         }}
         placeholder={`Search ${count} records...`}
       />

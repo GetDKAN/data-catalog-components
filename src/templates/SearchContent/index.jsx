@@ -13,7 +13,7 @@ const SearchContent = ({loading, data}) => {
   const { searchState, dispatch, defaultFacets } = useContext(SearchDispatch);
   const { fulltext, selectedFacets } = searchState;
   const facetTypes = Object.keys(defaultFacets);
-  const items = normalizeItems(data.results);
+  const items = data.results ? normalizeItems(data.results) : [];
   const Loading = () => <List />
   return (
     <div className="dc-results-list col-md-8 col-sm-12">

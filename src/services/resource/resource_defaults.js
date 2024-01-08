@@ -1,3 +1,7 @@
+import { createContext } from 'react';
+
+export const ResourceDispatch = createContext(null);
+
 export const defaultResourceState = {
   columnOrder: [],
   columns: [],

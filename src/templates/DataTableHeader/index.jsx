@@ -15,16 +15,9 @@ const DataTableHeader = ({reactTable, total, setDensity}) => {
         <>
           <DataTablePageResults
             total={total}
-            pageSize={reactTable.getState().pagination.pageSize}
-            currentPage={reactTable.getState().pagination.pageIndex}
           />
           <DataTablePageSizer
-            pageSizeChange={(value) => {
-              reactTable.setPageSize(value);
-              reactTable.resetPageIndex();
-            }}
             id={""} //todo
-            initSize={reactTable.getS}
           />
           <DataTableDensity
             densityChange={(density) => setDensity(density)}

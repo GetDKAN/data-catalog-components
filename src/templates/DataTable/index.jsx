@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { defaultResourceState } from '../../services/resource/resource_defaults';
+import React, { useState, useContext, useEffect } from 'react';
+import { ResourceDispatch } from '../../services/resource/resource_defaults';
 import ColumnFilter from '../../components/ColumnFilter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -15,11 +15,37 @@ import {
 import DataTableHeader from '../../templates/DataTableHeader';
 
 const DataTable = ({data, columns}) => {
+  const {dispatch, resourceState} = useContext(ResourceDispatch);
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
   const [columnResizing, setColumnResizing] = useState('');
-  const [columnFilters, setColumnFilters] = useState([])
   const [columnOrder, setColumnOrder] = useState([]);
-  const [density, setDensity] = useState(defaultResourceState.density)
+  
+  const [sorting, setSorting] = useState(resourceState.sort);
+  useEffect(() => {
+    if(JSON.stringify(sorting) != JSON.stringify(resourceState.sort)) {
+      dispatch({
+        type: 'UPDATE_COLUMN_SORT',
+        data: {
+          sort: sorting
+        }
+      });
+    }
+  }, [sorting]);
+
+
+  const [columnFilters, setColumnFilters] = useState(resourceState.filters);
+  useEffect(() => {
+    if(JSON.stringify(columnFilters) != JSON.stringify(resourceState.filters)) {
+      dispatch({
+        type: 'UPDATE_FILTERS',
+        data: {
+          columnFilters: columnFilters
+        }
+      });
+    }
+  }, [columnFilters]);
+
+  const [density, setDensity] = useState(resourceState.density)
   const densityClassName = density ? `${density} -striped -highlight` : '-striped -highlight';
 
   const columnHelper = createColumnHelper();
@@ -46,31 +72,31 @@ const DataTable = ({data, columns}) => {
       data: data.results,
       columns: table_columns,
       columnResizeMode: 'onChange',
+      manualSorting: true,
+      onSortingChange: setSorting,
       onColumnOrderChange: setColumnOrder,
       onColumnFiltersChange: setColumnFilters,
       initialState: {
         pagination: {
-          pageSize: defaultResourceState.pageSize,
-          pageCount: Number(Math.ceil(data.count / defaultResourceState.pageSize)),
+          pageSize: resourceState.pageSize,
+          pageCount: Number(Math.ceil(data.count / resourceState.pageSize)),
         },
       },
       state: {
         columnOrder: columnOrder,
-        columnFilters: columnFilters
+        columnFilters: columnFilters,
+        sorting: sorting
       },
       getCoreRowModel: getCoreRowModel(),
       getSortedRowModel: getSortedRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
       debugTable: false,
       autoResetPageIndex: false,
     }
   );
-
-  const { pagination, sorting} = reactTable.getState();
   const headerGroups = reactTable.getHeaderGroups();
 
-  const sortIcon = (isSorted, onClickFn) => {
+  const sortIcon = (isSorted) => {
     if(isSorted === 'asc') {
       return 'sort-up'
     }
@@ -79,6 +105,8 @@ const DataTable = ({data, columns}) => {
     }
     return 'sort'
   }
+
+  const pageCount = Number(Math.ceil(data.count / resourceState.pageSize));
 
   return (
     <>
@@ -127,7 +155,7 @@ const DataTable = ({data, columns}) => {
                     </div>
                     {header.column.getCanFilter() ? (
                       <div className="dc-filter">
-                        <ColumnFilter column={header.column} reactTable={reactTable} count={data.results.length} />
+                        <ColumnFilter column={header.column} count={data.results.length} />
                       </div>
                     ) : null}
                     <button
@@ -225,8 +253,13 @@ const DataTable = ({data, columns}) => {
             <div className="-previous">
               <button
                 type="button"
-                onClick={() => reactTable.previousPage()}
-                disabled={!reactTable.getCanPreviousPage()}
+                onClick={() => dispatch({
+                  type: 'UPDATE_PAGE',
+                  data: {
+                    page: Number(resourceState.currentPage) - 1
+                  }
+                })}
+                disabled={resourceState.currentPage === 0}
                 className="-btn"
               >
                 {'<'}
@@ -237,19 +270,24 @@ const DataTable = ({data, columns}) => {
                 Page
                 {' '}
                 <strong>
-                  {pagination.pageIndex + 1}
+                  {resourceState.currentPage + 1}
                   {' '}
                   of
                   {' '}
-                  {reactTable.getPageCount()}
+                  {pageCount}
                 </strong>
               </span>
             </div>
             <div className="-next">
               <button
                 type="button"
-                onClick={() => reactTable.nextPage()}
-                disabled={!reactTable.getCanNextPage()}
+                onClick={() => dispatch({
+                  type: 'UPDATE_PAGE',
+                  data: {
+                    page: Number(resourceState.currentPage) + 1
+                  }
+                })}
+                disabled={resourceState.currentPage >= (pageCount-1) }
                 className="-btn"
               >
                 {'>'}
