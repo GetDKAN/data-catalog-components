@@ -9,7 +9,6 @@ import {
   getCoreRowModel,
   createColumnHelper,
   getSortedRowModel,
-  getPaginationRowModel,
   getFilteredRowModel
 } from '@tanstack/react-table';
 import DataTableHeader from '../../templates/DataTableHeader';
@@ -18,7 +17,30 @@ const DataTable = ({data, columns}) => {
   const {dispatch, resourceState} = useContext(ResourceDispatch);
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
   const [columnResizing, setColumnResizing] = useState('');
-  const [columnOrder, setColumnOrder] = useState([]);
+
+  const [columnOrder, setColumnOrder] = useState(resourceState.columnOrder);
+  useEffect(() => {
+    if(JSON.stringify(columnOrder) != JSON.stringify(resourceState.columnOrder)) {
+      dispatch({
+        type: 'REORDER_COLUMNS',
+        data: {
+          columnOrder: columnOrder
+        }
+      });
+    }
+  }, [columnOrder]);
+
+  const [columnVisibility, setColumnVisibility] = useState(resourceState.columnVisibility);
+  useEffect(() => {
+    if(JSON.stringify(columnVisibility) != JSON.stringify(resourceState.columnVisibility)) {
+      dispatch({
+        type: 'COLUMN_VISIBILITY',
+        data: {
+          columnVisibility: columnVisibility
+        }
+      });
+    }
+  }, [columnVisibility]);
   
   const [sorting, setSorting] = useState(resourceState.sort);
   useEffect(() => {
@@ -66,6 +88,11 @@ const DataTable = ({data, columns}) => {
       })
     )
   });
+  // reorder based on state
+  if (resourceState.columnOrder.length)
+    table_columns.sort((a,b) => {
+      return resourceState.columnOrder.indexOf(a.header) - resourceState.columnOrder.indexOf(b.header)
+    });
 
   const reactTable = useReactTable(
     {
@@ -76,7 +103,9 @@ const DataTable = ({data, columns}) => {
       onSortingChange: setSorting,
       onColumnOrderChange: setColumnOrder,
       onColumnFiltersChange: setColumnFilters,
+      onColumnVisibilityChange: setColumnVisibility,
       initialState: {
+        columnOrder: columnOrder,
         pagination: {
           pageSize: resourceState.pageSize,
           pageCount: Number(Math.ceil(data.count / resourceState.pageSize)),
@@ -84,6 +113,7 @@ const DataTable = ({data, columns}) => {
       },
       state: {
         columnOrder: columnOrder,
+        columnVisibility: columnVisibility,
         columnFilters: columnFilters,
         sorting: sorting
       },

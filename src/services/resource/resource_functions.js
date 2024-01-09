@@ -5,7 +5,7 @@ export function prepareColumns(columns) {
     id: column,
     accessor: column,
   }));
-}
+};
 
 // Built query params for filters
 export function prepareFilterParams(filters) {
@@ -15,4 +15,4 @@ export function prepareFilterParams(filters) {
     params += param;
   });
   return params;
-}
+};

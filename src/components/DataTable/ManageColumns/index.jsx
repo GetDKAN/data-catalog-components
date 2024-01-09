@@ -39,7 +39,6 @@ const ManageColumns = ({
   const moveCard = React.useCallback(
     (dragIndex, hoverIndex) => {
       const newCards = cards.toSpliced(hoverIndex, 0, cards.splice(dragIndex,1)[0]);
-
       setCards(newCards);
     },
     [cards, reactTable.getAllColumns()],

@@ -1,4 +1,5 @@
 export default function resourceReducer(state, action) {
+  console.log(action)
   switch(action.type) {
     case 'UPDATE_PAGE':
       return {
@@ -24,6 +25,18 @@ export default function resourceReducer(state, action) {
       return {
         ...state,
         sort: action.data.sort,
+        updateQuery: true,
+      };
+    case 'REORDER_COLUMNS':
+      return {
+        ...state,
+        columnOrder: action.data.columnOrder,
+        updateQuery: true,
+      };
+    case 'COLUMN_VISIBILITY':
+      return {
+        ...state,
+        columnVisibility: action.data.columnVisibility,
         updateQuery: true,
       };
     default:

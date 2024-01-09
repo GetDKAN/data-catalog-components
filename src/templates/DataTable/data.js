@@ -48,11 +48,11 @@ const MockResource = ({ children }) => {
 
   const resourceState = {
     columnOrder: [],
+    columnVisibility: {},
     columns,
     count: 20,
     currentPage: 0,
     density: 'density-3',
-    excludedColumns: {},
     filters: [],
     loading: false,
     pageSize: 20,
