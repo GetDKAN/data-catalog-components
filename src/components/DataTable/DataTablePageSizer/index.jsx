@@ -1,26 +1,28 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
+import { ResourceDispatch } from '../../../services/resource/resource_defaults';
 
 const DataTablePageSizer = ({
   label,
-  pageSizeChange,
-  initSize,
   options,
   className,
   selectClassName,
   id,
 }) => {
-  const [selValue, setSelValue] = React.useState(initSize);
-  React.useEffect(() => {
-    pageSizeChange(Number(selValue));
-  }, [selValue]);
+  const {dispatch, resourceState} = useContext(ResourceDispatch);
+  
   return (
     <div className={className}>
       <label htmlFor={`dc-${id}-pagesize`}>{label}</label>
       <select
-        value={selValue}
+        value={resourceState.pageSize}
         className={selectClassName}
-        onChange={(e) => setSelValue(e.target.value)}
+        onChange={(e) => dispatch({
+          type: 'UPDATE_PAGE_SIZE',
+          data: {
+            pageSize: e.target.value
+          }
+        })}
         type="select"
         name={`dc-${id}-pagesize`}
         id={`dc-${id}-pagesize`}
@@ -49,14 +51,12 @@ DataTablePageSizer.propTypes = {
   label: PropTypes.string,
   className: PropTypes.string,
   selectClassName: PropTypes.string,
-  pageSizeChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
     defaultChecked: PropTypes.bool,
     label: PropTypes.string,
     value: PropTypes.string,
   })),
   id: PropTypes.string.isRequired,
-  initSize: PropTypes.number,
 };
 
 export default DataTablePageSizer;

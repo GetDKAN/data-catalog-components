@@ -5,11 +5,9 @@ import SearchResultsMessage2 from './revisions/SearchResultsMessage2';
 const SearchResultsMessage = ({
   searchTerm,
   selectedFacets,
-  facetTypes,
   total,
   showQuery,
   showFacets,
-  facetLimit,
   className,
   facetTitleClass,
   facetListClass,
@@ -75,12 +73,12 @@ SearchResultsMessage.propTypes = {
   facetListClass: PropTypes.string,
   searchQueryClass: PropTypes.string,
   selectedFacets: PropTypes.arrayOf(PropTypes.array).isRequired,
-  facetTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
   total: PropTypes.number.isRequired,
   searchTerm: PropTypes.string.isRequired,
   facetDelimiter: PropTypes.string,
   facetSeparator: PropTypes.string,
   defaultFacets: PropTypes.objectOf(PropTypes.object).isRequired,
 };
+
 
 export default SearchResultsMessage;

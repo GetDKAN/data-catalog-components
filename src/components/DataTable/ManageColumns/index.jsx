@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Card from './Card';
-
-import { ResourceDispatch } from '../../../services/resource/resource_defaults';
 import Modal from '../../Modal';
 
 const defaultCard = (card, index, moveCard) => (
@@ -30,8 +28,8 @@ const defaultCard = (card, index, moveCard) => (
 
 const ManageColumns = ({
   renderCard,
+  reactTable
 }) => {
-  const { reactTable } = useContext(ResourceDispatch);
   const [cards, setCards] = useState(null);
   React.useEffect(() => {
     if (reactTable.getAllColumns().length && cards === null) {
@@ -41,7 +39,6 @@ const ManageColumns = ({
   const moveCard = React.useCallback(
     (dragIndex, hoverIndex) => {
       const newCards = cards.toSpliced(hoverIndex, 0, cards.splice(dragIndex,1)[0]);
-
       setCards(newCards);
     },
     [cards, reactTable.getAllColumns()],

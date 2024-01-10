@@ -21,7 +21,7 @@ const NavBar = ({
           <div className="dc-toggle">
             <NavbarToggler onClick={() => toggleOpen(!isOpen)}>
               <FontAwesomeIcon
-                icon="fa-bars"
+                icon={['fas', 'bars' ]}
                 aria-hidden="true"
                 role="presentation"
               />

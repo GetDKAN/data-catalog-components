@@ -8,7 +8,6 @@ import {
   useResizeColumns,
   useColumnOrder,
 } from 'react-table';
-import { ResourceDispatch } from '../../services/resource/resource_defaults';
 
 const columns = [{"Header":"record_number","accessor":"record_number"},{"Header":"date","accessor":"date"},{"Header":"price","accessor":"price"}];
 const data = [
@@ -49,11 +48,11 @@ const MockResource = ({ children }) => {
 
   const resourceState = {
     columnOrder: [],
+    columnVisibility: {},
     columns,
     count: 20,
     currentPage: 0,
     density: 'density-3',
-    excludedColumns: {},
     filters: [],
     loading: false,
     pageSize: 20,
@@ -132,14 +131,7 @@ const MockResource = ({ children }) => {
 
 
   return (
-    <ResourceDispatch.Provider value={{
-      resourceState,
-      dispatch: () => ({}),
-      reactTable,
-    }}
-    >
-      {children}
-    </ResourceDispatch.Provider>
+    <>{children}</>
   );
 };
 
