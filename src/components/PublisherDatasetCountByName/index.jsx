@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from "@reach/router";
-import '../../i18n';
-import { useTranslation } from 'react-i18next';
-import SearchPaginationResults from '../SearchPaginationResults';
+import React from "react";
+import PropTypes from "prop-types";
+import "../../i18n";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const PublisherDatasetCountByName = (props) => {
   const { t, i18n } = useTranslation();
@@ -11,12 +10,19 @@ const PublisherDatasetCountByName = (props) => {
   const link = searchUrl || `/search/?publisher__name=${name}`;
   let str;
   if (datasetCount) {
-    str = (datasetCount === 1) ? `1 ${t('dataset')}` : `${datasetCount} ${t('datasets')}`;
+    str =
+      datasetCount === 1
+        ? `1 ${t("dataset")}`
+        : `${datasetCount} ${t("datasets")}`;
   } else {
-    str = `${t('datasets')}`;
+    str = t("datasets");
   }
   return (
-    <Link to={link} className="publisher-datasets-link" alt="Publisher datasets">
+    <Link
+      to={link}
+      className="publisher-datasets-link"
+      alt="Publisher datasets"
+    >
       {str}
     </Link>
   );

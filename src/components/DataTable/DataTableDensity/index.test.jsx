@@ -1,35 +1,37 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import DataTableDensity from '.';
 
 describe('<DataTableDensity />', () => {
-  const defaultWrapper = shallow(
-    <DataTableDensity
-      densityChange={() => () => true}
-    />,
-  );
-
-  const customWrapper = shallow(
-    <DataTableDensity
-      densityChange={() => () => true}
-      title="Foobar"
-      items={[
-        { icon: <span>Icon </span>, text: 'first' },
-        { icon: <span>Icon </span>, text: 'second' },
-        { icon: <span>Icon </span>, text: 'third' },
-      ]}
-    />,
-  );
+  beforeEach(() => {
+    render(
+      <DataTableDensity
+        densityChange={() => () => true}
+      />,
+    );
+  
+    render(
+      <DataTableDensity
+        densityChange={() => () => true}
+        title="Foobar"
+        items={[
+          { icon: <span>Icon </span>, text: 'first' },
+          { icon: <span>Icon </span>, text: 'second' },
+          { icon: <span>Icon </span>, text: 'third' },
+        ]}
+      />,
+    );
+  });
 
   it('renders correct initial results', () => {
-    expect(defaultWrapper.find('.density-buttons-title').text()).toBe('Display Density');
-    expect(defaultWrapper.find('.density-buttons button:first-child span').text()).toBe('expanded');
-    expect(defaultWrapper.find('.density-buttons button:last-child span').text()).toBe('tight');
+    expect(screen.getByText('Display Density')).toBeInTheDocument();
+    expect(screen.getByText('expanded')).toBeInTheDocument();
+    expect(screen.getByText('tight')).toBeInTheDocument();
   });
 
   it('renders correct custom results', () => {
-    expect(customWrapper.find('.density-buttons-title').text()).toBe('Foobar');
-    expect(customWrapper.find('.density-buttons button:first-child').text()).toBe('Icon first');
-    expect(customWrapper.find('.density-buttons button:last-child').text()).toBe('Icon third');
+    expect(screen.getByText('Foobar')).toBeInTheDocument();
+    expect(screen.getByTitle('first')).toBeInTheDocument();
+    expect(screen.getByTitle('third')).toBeInTheDocument();
   });
 });

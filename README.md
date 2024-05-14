@@ -4,18 +4,12 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/c790605d9099259ebda4/maintainability)](https://codeclimate.com/github/GetDKAN/data-catalog-components/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c790605d9099259ebda4/test_coverage)](https://codeclimate.com/github/GetDKAN/data-catalog-components/test_coverage)
 
-A set of React components to facilitate the creation of Open Data Catalogs with React.
+A set of React components to facilitate the creation of Open Data Catalogs with React. This library is powered by [Parcel](https://parceljs.org/).
 
-## Working locally
-To develop locally against a working version of the data-catalog-frontend, you will need to do the following steps.
+## Local Development
+For local development, we recommend using npm workspaces. Once you have a workspace directory, install this library inside your workspace along any Open Data downstream sites you wish to work on.
 
-1. Run `rm -rf node_modules && npm install` in the data-catalog-frontend repo.
-1. Run `rm -rf node_modules && npm install` in the data-catalog-components repo.
-1. Run `npm link` in this repo (data-catalog-components), this will create a symlink to your global npm registry.
-1. Run `npm link <relative path to dkan frontend>/node_modules/react` in this repo to connect the component library to the frontend's react folder.
-1. Run `npm link @civicactions/data-catalog-components` in the data-catalog-frontend repo. This will make it so when you run npm install it will symlink the node_modules folder to the global symlink instead of downloading the library from npm.
-1. Run `gatsby develop` in the data-catalog-frontend repo.
-1. In this repo, run `npm run lib:watch` to work on components or `npm run css:watch` to work on just CSS changes. Babel will now watch any commands you make to React components in this folder and rebuild the library. When a rebuild happens it will cause the frontend Gatsby development server to rebuild and show your changes.
+In the root folder for this project, run npm run watch to build local code. Ensure the upstream is using the same version number located in package.json of this repo. Start the upstream site locally as well, and it should load local code from this repo as the dependency. Parcel also provides hot rebuilding while watch is running.
 
 
 ## Viewing the Components
@@ -50,8 +44,7 @@ To see the available components:
 To test or use the components from a github branch:
 
 1) Create new branch locallly
-1) Remove `lib` from .gitignore
-1) Run `npm run lib`
-1) Push lib folder and .gitignore to your branch
+1) Remove `dist` from .gitignore
+1) Run `npm run build`
+1) Push dist folder and .gitignore to your branch
 1) Add branch to package.json by running `npm install --save getdkan/data-catalog-components#MY-BRANCH`
-1) Profit

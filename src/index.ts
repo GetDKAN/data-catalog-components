@@ -39,13 +39,11 @@ export {
   defaultSearchState,
 } from './services/search/search_defaults';
 export {
-  ResourceDispatch,
   defaultResourceState,
 } from './services/resource/resource_defaults';
 
 // SERVICES > REDUCERS
 export { default as searchReducer } from './services/search/search_reducer';
-export { default as resourceReducer } from './services/resource/resource_reducer';
 
 // SERVICES > FUNCTIONS
 export {
@@ -56,10 +54,6 @@ export {
 
 export {
   prepareColumns,
-  queryResourceData,
-  queryAllResourceData,
-  getDKANDatastore,
-  advancedColumns,
 } from './services/resource/resource_functions';
 
 // TEMPLATES
@@ -76,3 +70,6 @@ export { default as SearchSidebar } from './templates/SearchSidebar';
 export { default as SearchContent } from './templates/SearchContent';
 export { default as TopicIcon } from './templates/TopicIcon';
 export { default as DataTableHeader } from './templates/DataTableHeader';
+
+import "./theme/styles/index.scss";
+import 'bootstrap/dist/css/bootstrap.css';

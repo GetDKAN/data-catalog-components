@@ -1,4 +1,4 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "../variables/variables.scss";
 
 // Component styles.
 @import "../../components/DataTable/ManageColumns/card.scss";
@@ -7,4 +7,5 @@
 
 // Template styles.
 @import "../../templates/DataTableHeader/datatableheader.scss";
+@import "../../templates/DataTable/datatable.scss";
 @import "../../templates/Hero/hero.scss";

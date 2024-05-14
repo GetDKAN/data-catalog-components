@@ -1,4 +1,3 @@
-import axios from 'axios';
 import queryString from 'query-string';
 
 function getSortParams(searchState, sortOptions) {
@@ -12,7 +11,7 @@ function getSortParams(searchState, sortOptions) {
   return returnedSort;
 }
 
-function getApiSearchParams(searchState, defaultFacets, sortOptions) {
+export function getApiSearchParams(searchState, defaultFacets, sortOptions) {
   let state = {};
   state = Object.assign(state, searchState);
 
@@ -47,41 +46,30 @@ function getApiSearchParams(searchState, defaultFacets, sortOptions) {
   return queryString.stringify(apiSearchParams, { arrayFormat: 'comma' });
 }
 
-export default async function getData(
-  searchEndpoint,
-  normalize,
-  searchState,
-  defaultFacets,
-  sortOptions,
-  dispatch,
-  facet,
-) {
-  // Transition to loading state.
-  dispatch({ type: 'FETCH_DATA' });
-
-  const apiParams = getApiSearchParams(searchState, defaultFacets, sortOptions);
-
-  let type = '';
-  let data = {};
-  // make the search api request
-  if (facet) {
-    const results = await axios.get(`${searchEndpoint}/facets?${apiParams}&facets=${facet}`);
-    type = 'SET_FACETS_DATA';
-    data = {
-      facetsResults: results.data.facets,
-    };
-  } else {
-    const results = await axios.get(`${searchEndpoint}?${apiParams}&facets=0`);
-    type = 'SET_SEARCH_DATA';
-    data = {
-      totalItems: results.data.total,
-      items: normalize ? normalize(results.data.results) : results.data.results,
-    };
+export function normalizeItems(resultItems) {
+  let nItems = resultItems;
+  if (!Array.isArray(nItems)) {
+    nItems = Object.values(nItems);
   }
-
-  // dispatch results to reducer
-  dispatch({
-    type,
-    data,
+  return nItems.map((x) => {
+    let item = {};
+    item = {
+      identifier: x.identifier,
+      modified: x.modified,
+      description: x.description,
+      theme: x.theme,
+      format: x.distribution,
+      title: x.title,
+      ref: `/dataset/${x.identifier}`
+    };
+    if (
+      Object.prototype.hasOwnProperty.call(x, "publisher") &&
+      Object.prototype.hasOwnProperty.call(x.publisher, "name")
+    ) {
+      item.publisher = x.publisher.name;
+    } else {
+      item.publisher = "";
+    }
+    return item;
   });
 }

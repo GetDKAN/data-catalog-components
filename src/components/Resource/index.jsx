@@ -1,180 +1,69 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useState , useReducer} from 'react';
 import PropTypes from 'prop-types';
+import { useQuery } from '@tanstack/react-query';
 
-import {
-  useTable,
-  usePagination,
-  useFilters,
-  useSortBy,
-  useFlexLayout,
-  useResizeColumns,
-  useColumnOrder,
-} from 'react-table';
+import FileDownload from "../FileDownload";
+import DataTable from '../../templates/DataTable';
 
+import { prepareColumns, prepareFilterParams } from '../../services/resource/resource_functions';
+
+import resourceReducer from '../../services/resource/resource_reducer';
 import {
   ResourceDispatch,
   defaultResourceState,
 } from '../../services/resource/resource_defaults';
 
-import resourceReducer from '../../services/resource/resource_reducer';
-
-import {
-  queryResourceData,
-  getDKANDatastore,
-} from '../../services/resource/resource_functions';
-
 const Resource = ({
   apiURL,
-  children,
-  resource,
-  showDBColumnNames,
-  transformQueryData: handleTransformQueryData,
+  id,
+  format,
+  downloadURL,
+  accessURL
 }) => {
+
   const [resourceState, dispatch] = useReducer(
     resourceReducer,
     defaultResourceState,
   );
+  const filterParams = prepareFilterParams(resourceState.filters);
+  const sort = resourceState.sort.length ? `&sorts[0][property]=${resourceState.sort[0].id}&sorts[0][order]=${resourceState.sort[0].desc ? 'desc' : 'asc'}` : '';
 
-  useEffect(() => {
-    dispatch({ type: 'GET_STORE' });
-    async function getStore() {
-      if (resourceState.store === null) {
-        dispatch(await getDKANDatastore(apiURL, resource, resourceState.pageSize, showDBColumnNames));
-      }
+  const {data} = useQuery({
+    queryKey: ['datastore', id + filterParams + resourceState.currentPage + resourceState.pageSize + sort],
+    queryFn: () => {
+      return fetch(`${apiURL}/datastore/query/${id}?limit=${resourceState.pageSize}&offset=${resourceState.currentPage * resourceState.pageSize}${filterParams}${sort}`).then(
+        (res) => res.json(),
+      )
     }
-    getStore();
-  }, []);
+  });
 
-
-  useEffect(() => {
-    dispatch({ type: 'GET_STORE' });
-
-    // async function getStore() {
-    //   if (resourceState.store === null) {
-    //     dispatch(await getDKANDatastore(apiURL, resource, resourceState.pageSize, true));
-    //   }
-    // }
-    async function queryStore() {
-      let resourceData;
-
-      if (handleTransformQueryData) {
-        resourceData = handleTransformQueryData({
-          ...resourceState,
-        });
-      } else {
-        resourceData = resourceState;
-      }
-
-      dispatch(await queryResourceData(resourceData, showDBColumnNames));
-    }
-    if (resourceState.updateQuery) {
-      queryStore();
-    }
-   
-    // if (resourceState.store !== null) {
-      
-    // } else {
-      // getStore();
-    // }
-  }, [
-    resourceState.updateQuery,
-    resourceState.currentPage,
-    resourceState.filters,
-    resourceState.pageSize,
-    resourceState.sort,
-  ]);
-
-  const { columns, currentPage } = resourceState;
-  const data = resourceState.values;
-
-  // Define a default UI for filtering
-  function DefaultColumnFilter({
-    column: { filterValue, preFilteredRows, setFilter, Header },
-  }) {
-    const count = preFilteredRows ? preFilteredRows.length : 0;
-
-    return (
-      <input
-        aria-label={Header}
-        value={filterValue || ''}
-        onChange={(e) => {
-          setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-        }}
-        placeholder={`Search ${count} records...`}
-      />
-    );
-  }
-
-
-  const filterTypes = React.useMemo(
-    () => ({
-      // Add a new fuzzyTextFilterFn filter type.
-      // fuzzyText: fuzzyTextFilterFn,
-      // Or, override the default text filter to use
-      // "startWith"
-      text: (rows, id, filterValue) => (
-        rows.filter((row) => {
-          const rowValue = row.values[id];
-          return rowValue !== undefined
-            ? String(rowValue)
-              .toLowerCase()
-              .startsWith(String(filterValue).toLowerCase())
-            : true;
-        })
-      ),
-    }),
-    [],
-  );
-
-
-  const defaultColumn = React.useMemo(
-    () => ({
-      // Let's set up our default Filter UI
-      Filter: DefaultColumnFilter,
-      minWidth: 30,
-      // width: 150,
-      maxWidth: 400,
-    }),
-    [],
-  );
-
-
-  const reactTable = useTable(
-    {
-      columns,
-      data,
-      initialState: { pageIndex: currentPage },
-      manualPagination: true,
-      manualSortBy: true,
-      manualFilters: true,
-      pageCount: Number(Math.ceil(resourceState.rowsTotal / resourceState.pageSize)),
-      defaultColumn,
-      filterTypes,
-    },
-    useFilters,
-    useFlexLayout,
-    useResizeColumns,
-    useColumnOrder,
-    useSortBy,
-    usePagination,
-  );
+  const columns = data && data.schema ? Object.keys(data.schema[id].fields) : [];
 
   return (
-    <ResourceDispatch.Provider value={{ resourceState, dispatch, reactTable }}>
-      { children }
-    </ResourceDispatch.Provider>
+    <div id="resource">
+      {data && data.results ? (
+        <ResourceDispatch.Provider value={{dispatch, resourceState}}>
+          <FileDownload
+            title={"test"}
+            label={downloadURL}
+            format={format}
+            downloadURL={downloadURL ? downloadURL : accessURL}
+          />
+          <DataTable data={data} columns={prepareColumns(columns)} />
+        </ ResourceDispatch.Provider>
+      ) : ('')
+    }
+    </div>
   );
 };
 
 Resource.defaultProps = {
   showDBColumnNames: false,
-  transformQueryData: null,
 };
 
 Resource.propTypes = {
   apiURL: PropTypes.string.isRequired,
   showDBColumnNames: PropTypes.bool,
-  transformQueryData: PropTypes.func,
 };
 
 export default Resource;

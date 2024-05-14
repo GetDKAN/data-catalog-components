@@ -17,11 +17,11 @@ const NavBar = ({
   return (
     <div className={` ${defaultStyling ? ' dc-main-navigation base-styles' : ''}`}>
       {expand && (
-        <Navbar expand="md" className={customClasses}>
+        <Navbar expand="md" className={customClasses} container={false}>
           <div className="dc-toggle">
             <NavbarToggler onClick={() => toggleOpen(!isOpen)}>
               <FontAwesomeIcon
-                icon={['fas', 'bars']}
+                icon={['fas', 'bars' ]}
                 aria-hidden="true"
                 role="presentation"
               />
@@ -65,10 +65,7 @@ NavBar.propTypes = {
   customClasses: PropTypes.string,
   defaultStyling: PropTypes.bool,
   expand: PropTypes.bool,
-  navItems: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
-    url: PropTypes.string,
-  })).isRequired,
+  navItems: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default NavBar;

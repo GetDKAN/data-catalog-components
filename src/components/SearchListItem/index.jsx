@@ -5,7 +5,7 @@ import excerpts from 'excerpts';
 import TopicIcon from '../../templates/TopicIcon';
 import DataIcon from '../DataIcon';
 import Text from '../Text';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 import {countBy} from 'lodash';
 
 

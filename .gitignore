@@ -7,3 +7,7 @@ dist
 docs
 lib
 dist
+
+.parcel-cache/*
+.DS_Store
+.vscode

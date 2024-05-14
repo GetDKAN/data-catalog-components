@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 import PublisherDatasetCountByName from "../PublisherDatasetCountByName";
-import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
-function Organization(props) {
-  const { name,
-          description,
-          imageUrl,
-          searchUrl,
-          alignment,
-          organizationEndpoint} = props;
-
+const Organization = ({
+  name,
+  description,
+  imageUrl,
+  searchUrl,
+  alignment,
+  organizationEndpoint
+}) => {
   const image = <img alt={name || 'Organization Image'} src={imageUrl} />;
   const link = searchUrl ? searchUrl : `/search/?publisher__name=${name}`;
-  const [dataObj, setDataObj] = useState();
+  const endpoint = organizationEndpoint ? organizationEndpoint.replace("api/1", "data.json") : null;
 
-  const fetchData = async () => {
-    const endpoint = organizationEndpoint ? organizationEndpoint.replace("api/1", "data.json") : null;
-    if (endpoint) {
-      axios.get(endpoint)
-        .then(res => (setDataObj(res.data)))
-        .catch(err => (console.log("Error, check URL/Cors.", err)));
-    } else {
-      console.log("No search endpoint defined for Organization/s, so no dataset info available.");
+  const {data} = (endpoint) ? useQuery({
+    queryKey: ['organization'],
+    queryFn: () => {
+      return fetch(endpoint).then(
+        (res) => res.json(),
+      )
     }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+  }) : {data: undefined};
+  if (!endpoint) console.log("No search endpoint defined for Organization/s, so no dataset info available.");
+  
   return (
     <div className="dc-org-block" style={{ textAlign: alignment }}>
       <Link to={link} className="dc-org-image" alt="Organization Logo">
@@ -45,11 +40,11 @@ function Organization(props) {
         </div>
       )}
 
-      {dataObj && dataObj.dataset !== 'undefined' ?
+      {data && data.dataset !== 'undefined' ?
        <PublisherDatasetCountByName
          name={name}
          datasetCount={
-           countDatasetsByName(name, dataObj.dataset)
+           countDatasetsByName(name, data.dataset)
          } /> :
        <PublisherDatasetCountByName name={name} />
       }

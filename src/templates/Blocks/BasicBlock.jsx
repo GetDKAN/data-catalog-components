@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 import Text from '../../components/Text';
 
 class BasicBlock extends React.PureComponent {
@@ -55,12 +55,12 @@ BasicBlock.defaultProps = {
 };
 
 BasicBlock.propTypes = {
-  content: PropTypes.arrayOf(PropTypes.shape({
+  content: PropTypes.shape({
     title: PropTypes.string,
     teaser: PropTypes.string,
     image: PropTypes.string,
     ref: PropTypes.string,
-  })),
+  }),
 };
 
 export default BasicBlock;

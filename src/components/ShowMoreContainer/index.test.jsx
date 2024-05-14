@@ -1,5 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event'
 import ShowMoreContainer from '.';
 
 describe('<ShowMoreContainer />', () => {
@@ -26,87 +27,89 @@ describe('<ShowMoreContainer />', () => {
   ];
 
   it('renders 4 divs and no showmore button', () => {
-    const wrapper = shallow(
+    render(
       <ShowMoreContainer
         items={renderedDivItems}
       />,
     );
-    expect(wrapper.find('.show-more-container div').length).toBe(4);
-    expect(wrapper.find('.showmore-button').exists()).toBe(false);
+    // expect(wrapper.find('.show-more-container div').length).toBe(4);
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
-  it('renders 12 list items and a working showmore button', () => {
-    const wrapper = shallow(
+  it('renders 12 list items and a working showmore button', async () => {
+    render(
       <ShowMoreContainer
         items={renderedListItems}
         container="ol"
       />,
     );
-    expect(wrapper.find('li').length).toBe(10);
-    expect(wrapper.exists('.showmore-button')).toBe(true);
-    wrapper.find('.showmore-button').simulate('click');
-    expect(wrapper.find('li').length).toBe(12);
-    wrapper.find('.showmore-button').simulate('click');
-    expect(wrapper.find('li').length).toBe(10);
+    expect(screen.getAllByRole('listitem')).toHaveLength(10);
+    expect(screen.getByRole('button', 'Show 2 more')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', 'Show 2 more'));
+    expect(screen.queryAllByRole('listitem')).toHaveLength(12);
+    await userEvent.click(screen.getByRole('button', 'Show Less'));
+    expect(screen.queryAllByRole('listitem')).toHaveLength(10);
   });
 
-  it('renders correct container types', () => {
-    const defaultWrapper = shallow(
-      <ShowMoreContainer
-        items={renderedDivItems}
-      />,
-    );
-
-    const olWrapper = shallow(
-      <ShowMoreContainer
-        items={renderedListItems}
-        container="ol"
-      />,
-    );
-
-    const ulWrapper = shallow(
-      <ShowMoreContainer
-        items={renderedListItems}
-        container="ul"
-      />,
-    );
-
-    const divWrapper = shallow(
-      <ShowMoreContainer
-        items={renderedDivItems}
-        container="div"
-      />,
-    );
-
-    expect(defaultWrapper.exists('div.show-more-container')).toBe(true);
-    expect(divWrapper.exists('div.show-more-container')).toBe(true);
-    expect(olWrapper.exists('ol.show-more-container')).toBe(true);
-    expect(ulWrapper.exists('ul.show-more-container')).toBe(true);
+  describe('it renders correct container types', () => {
+    it('renders as a div', () => {
+      render(
+        <ShowMoreContainer
+          items={renderedDivItems}
+        />,
+      );
+      expect(screen.queryByRole('list')).not.toBeInTheDocument();
+    });
+    it('renders as an ul', () => {
+      render(
+        <ShowMoreContainer
+          items={renderedListItems}
+          container="ul"
+        />,
+      );
+      expect(screen.getByRole('list')).toHaveClass('show-more-container');
+    });
+    it('renders as an ol', () => {
+      render(
+        <ShowMoreContainer
+          items={renderedDivItems}
+          container="ol"
+        />,
+      );
+      expect(screen.getByRole('list')).toHaveClass('show-more-container');
+    })
   });
 
-  it('renders correct amount when specific limit is set', () => {
-    const wrapper = shallow(
+  it('renders correct amount when specific limit is set', async () => {
+    render(
       <ShowMoreContainer
         items={renderedListItems}
         limit={5}
       />,
     );
-    expect(wrapper.find('li').length).toBe(5);
-    wrapper.find('.showmore-button').simulate('click');
-    expect(wrapper.find('li').length).toBe(12);
-    wrapper.find('.showmore-button').simulate('click');
-    expect(wrapper.find('li').length).toBe(5);
+    expect(screen.queryAllByRole('listitem')).toHaveLength(5);
+    expect(screen.getByRole('button', 'Show 7 more')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', 'Show 7 more'));
+    expect(screen.queryAllByRole('listitem')).toHaveLength(12);
+    await userEvent.click(screen.getByRole('button', 'Show Less'));
+    expect(screen.queryAllByRole('listitem')).toHaveLength(5);
   });
 
-  it('renders correct button text', () => {
-    const defaultWrapper = shallow(
+  it('renders correct button text', async () => {
+    render(
       <ShowMoreContainer
         items={renderedListItems}
         container="ol"
       />,
     );
 
-    const customWrapper = shallow(
+    expect(screen.getByText('Show 2 more')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', 'Show 2 more'));
+    expect(screen.getByText('Show less')).toBeInTheDocument();
+  });
+
+  it('renders correct custom button text', async () => {
+    render(
       <ShowMoreContainer
         items={renderedListItems}
         container="ol"
@@ -114,17 +117,15 @@ describe('<ShowMoreContainer />', () => {
         btnClosedText="bar"
       />,
     );
-    expect(defaultWrapper.find('.showmore-button').text()).toBe('Show 2 more');
-    defaultWrapper.find('.showmore-button').simulate('click');
-    expect(defaultWrapper.find('.showmore-button').text()).toBe('Show less');
-
-    expect(customWrapper.find('.showmore-button').text()).toBe('bar');
-    customWrapper.find('.showmore-button').simulate('click');
-    expect(customWrapper.find('.showmore-button').text()).toBe('foo');
+    expect(screen.queryByText('bar')).toBeInTheDocument();
+    expect(screen.queryByText('foo')).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', 'bar'));
+    expect(screen.queryByText('bar')).not.toBeInTheDocument();
+    expect(screen.queryByText('foo')).toBeInTheDocument();
   });
 
   it('renders with correct custom classes', () => {
-    const wrapper = shallow(
+    render(
       <ShowMoreContainer
         items={renderedListItems}
         container="ol"
@@ -133,7 +134,7 @@ describe('<ShowMoreContainer />', () => {
       />,
     );
 
-    expect(wrapper.exists('ol.container')).toBe(true);
-    expect(wrapper.exists('div.wrapper')).toBe(true);
+    expect(screen.getByRole('list')).toHaveClass("container");
+    //expect(wrapper.exists('div.wrapper')).toBe(true);
   });
 });

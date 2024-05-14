@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ResourceDispatch } from '../../../services/resource/resource_defaults';
 import PropTypes from 'prop-types';
 import '../../../i18n';
 import { useTranslation } from 'react-i18next';
 
 const DataTablePageResults = ({
   total,
-  pageSize,
-  currentPage,
   className,
   viewing = false
 }) => {
   const { t, i18n } = useTranslation();
+  const { resourceState } = useContext(ResourceDispatch);
+  const pageSize = resourceState.pageSize;
+  const currentPage = resourceState.currentPage
+
   // Add one to offset the 0 array index.
   const page = currentPage + 1;
   let displayTotal = total;
@@ -51,8 +54,6 @@ DataTablePageResults.defaultProps = {
 DataTablePageResults.propTypes = {
   className: PropTypes.string,
   total: PropTypes.number.isRequired,
-  pageSize: PropTypes.number.isRequired,
-  currentPage: PropTypes.number.isRequired,
 };
 
 export default DataTablePageResults;

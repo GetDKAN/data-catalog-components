@@ -39,8 +39,8 @@ Blocks.defaultProps = {
 };
 
 Blocks.propTypes = {
-  items: PropTypes.isRequired,
-  component: PropTypes.string,
+  items: PropTypes.array.isRequired,
+  component: PropTypes.func,
   containerClass: PropTypes.string,
   blockClass: PropTypes.string,
   paneTitle: PropTypes.string,
