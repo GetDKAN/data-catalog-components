@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../i18n';
+import { useTranslation } from 'react-i18next';
 
 const SearchPaginationResults = ({
   className,
@@ -7,6 +9,7 @@ const SearchPaginationResults = ({
   pageSize,
   total,
 }) => {
+  const { t, i18n } = useTranslation();
   const startingNumber = total > 0 ? 1 : 0;
   const currentLowestResult = startingNumber + ((pageSize * currentPage) - pageSize);
   let currentHighestResult = (pageSize * currentPage);
@@ -19,11 +22,11 @@ const SearchPaginationResults = ({
       -
       {currentHighestResult}
       {' '}
-      of
+      {t('of')}
       {' '}
       {total}
       {' '}
-      datasets
+      {t('datasets')}
     </div>
   );
 };

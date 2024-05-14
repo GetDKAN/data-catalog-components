@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
 import { ResourceDispatch } from '../../../services/resource/resource_defaults';
 import PropTypes from 'prop-types';
+import '../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 const DataTablePageResults = ({
   total,
   className,
   viewing = false
 }) => {
+  const { t, i18n } = useTranslation();
   const { resourceState } = useContext(ResourceDispatch);
   const pageSize = resourceState.pageSize;
   const currentPage = resourceState.currentPage
@@ -34,11 +37,11 @@ const DataTablePageResults = ({
         {' '}
         <span className="high-result">{currentHighestResult}</span>
         {' '}
-        of
+        {t('of')}
         {' '}
         <span className="total">{displayTotal}</span>
         {' '}
-        rows
+        {t('rows')}
       </p>
     </div>
   );
