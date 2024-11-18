@@ -1,146 +1,174 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { ResourceDispatch } from '../../services/resource/resource_defaults';
-import ColumnFilter from '../../components/ColumnFilter';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import MetadataContext from '../MetadataPage/MetadataContext';
+// import DatastoreContext from './DatastoreContext';
+// import { ResourceDispatch } from '../../services/resource/resource_defaults';
+// import ColumnFilter from '../../components/ColumnFilter';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import {
-  useReactTable,
-  flexRender,
-  getCoreRowModel,
-  createColumnHelper,
-  getSortedRowModel,
-  getFilteredRowModel
-} from '@tanstack/react-table';
-import DataTableHeader from '../../templates/DataTableHeader';
+// import {
+//   useReactTable,
+//   flexRender,
+//   getCoreRowModel,
+//   createColumnHelper,
+//   getSortedRowModel,
+//   getFilteredRowModel
+// } from '@tanstack/react-table';
+// import DataTableHeader from '../../templates/DataTableHeader';
 
 const DataTable = ({data, columns}) => {
-  const {dispatch, resourceState} = useContext(ResourceDispatch);
-  const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
-  const [columnResizing, setColumnResizing] = useState('');
+  // const {dispatch, resourceState} = useContext(ResourceDispatch);
+  // const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
+  // const [columnResizing, setColumnResizing] = useState('');
 
-  const [columnOrder, setColumnOrder] = useState(resourceState.columnOrder);
-  useEffect(() => {
-    if(JSON.stringify(columnOrder) != JSON.stringify(resourceState.columnOrder)) {
-      dispatch({
-        type: 'REORDER_COLUMNS',
-        data: {
-          columnOrder: columnOrder
-        }
-      });
-    }
-  }, [columnOrder]);
+  // const [columnOrder, setColumnOrder] = useState(resourceState.columnOrder);
+  // useEffect(() => {
+  //   if(JSON.stringify(columnOrder) != JSON.stringify(resourceState.columnOrder)) {
+  //     dispatch({
+  //       type: 'REORDER_COLUMNS',
+  //       data: {
+  //         columnOrder: columnOrder
+  //       }
+  //     });
+  //   }
+  // }, [columnOrder]);
 
-  const [columnVisibility, setColumnVisibility] = useState(resourceState.columnVisibility);
-  useEffect(() => {
-    if(JSON.stringify(columnVisibility) != JSON.stringify(resourceState.columnVisibility)) {
-      dispatch({
-        type: 'COLUMN_VISIBILITY',
-        data: {
-          columnVisibility: columnVisibility
-        }
-      });
-    }
-  }, [columnVisibility]);
+  // const [columnVisibility, setColumnVisibility] = useState(resourceState.columnVisibility);
+  // useEffect(() => {
+  //   if(JSON.stringify(columnVisibility) != JSON.stringify(resourceState.columnVisibility)) {
+  //     dispatch({
+  //       type: 'COLUMN_VISIBILITY',
+  //       data: {
+  //         columnVisibility: columnVisibility
+  //       }
+  //     });
+  //   }
+  // }, [columnVisibility]);
   
-  const [sorting, setSorting] = useState(resourceState.sort);
-  useEffect(() => {
-    if(JSON.stringify(sorting) != JSON.stringify(resourceState.sort)) {
-      dispatch({
-        type: 'UPDATE_COLUMN_SORT',
-        data: {
-          sort: sorting
-        }
-      });
-    }
-  }, [sorting]);
+  // const [sorting, setSorting] = useState(resourceState.sort);
+  // useEffect(() => {
+  //   if(JSON.stringify(sorting) != JSON.stringify(resourceState.sort)) {
+  //     dispatch({
+  //       type: 'UPDATE_COLUMN_SORT',
+  //       data: {
+  //         sort: sorting
+  //       }
+  //     });
+  //   }
+  // }, [sorting]);
 
 
-  const [columnFilters, setColumnFilters] = useState(resourceState.filters);
-  useEffect(() => {
-    if(JSON.stringify(columnFilters) != JSON.stringify(resourceState.filters)) {
-      dispatch({
-        type: 'UPDATE_FILTERS',
-        data: {
-          columnFilters: columnFilters
-        }
-      });
-    }
-  }, [columnFilters]);
+  // const [columnFilters, setColumnFilters] = useState(resourceState.filters);
+  // useEffect(() => {
+  //   if(JSON.stringify(columnFilters) != JSON.stringify(resourceState.filters)) {
+  //     dispatch({
+  //       type: 'UPDATE_FILTERS',
+  //       data: {
+  //         columnFilters: columnFilters
+  //       }
+  //     });
+  //   }
+  // }, [columnFilters]);
 
-  const [density, setDensity] = useState(resourceState.density)
-  const densityClassName = density ? `${density} -striped -highlight` : '-striped -highlight';
+  // const [density, setDensity] = useState(resourceState.density)
+  // const densityClassName = density ? `${density} -striped -highlight` : '-striped -highlight';
 
-  const columnHelper = createColumnHelper();
-  const table_columns = columns.map((col) => {
-    if (col.cell) {
-      return (
-        columnHelper.accessor(col.accessor, {
-          header: col.header,
-          cell: col.cell,
-          minSize: 215
-        })
-      )
-    }
-    return (
-      columnHelper.accessor(col.accessor, {
-        header: col.header,
-        minSize: 215
-      })
-    )
-  });
-  // reorder based on state
-  if (resourceState.columnOrder.length)
-    table_columns.sort((a,b) => {
-      return resourceState.columnOrder.indexOf(a.header) - resourceState.columnOrder.indexOf(b.header)
-    });
+  // const columnHelper = createColumnHelper();
+  // const table_columns = columns.map((col) => {
+  //   if (col.cell) {
+  //     return (
+  //       columnHelper.accessor(col.accessor, {
+  //         header: col.header,
+  //         cell: col.cell,
+  //         minSize: 215
+  //       })
+  //     )
+  //   }
+  //   return (
+  //     columnHelper.accessor(col.accessor, {
+  //       header: col.header,
+  //       minSize: 215
+  //     })
+  //   )
+  // });
+  // // reorder based on state
+  // if (resourceState.columnOrder.length)
+  //   table_columns.sort((a,b) => {
+  //     return resourceState.columnOrder.indexOf(a.header) - resourceState.columnOrder.indexOf(b.header)
+  //   });
 
-  const reactTable = useReactTable(
-    {
-      data: data.results,
-      columns: table_columns,
-      columnResizeMode: 'onChange',
-      manualSorting: true,
-      onSortingChange: setSorting,
-      onColumnOrderChange: setColumnOrder,
-      onColumnFiltersChange: setColumnFilters,
-      onColumnVisibilityChange: setColumnVisibility,
-      initialState: {
-        columnOrder: columnOrder,
-        pagination: {
-          pageSize: resourceState.pageSize,
-          pageCount: Number(Math.ceil(data.count / resourceState.pageSize)),
-        },
-      },
-      state: {
-        columnOrder: columnOrder,
-        columnVisibility: columnVisibility,
-        columnFilters: columnFilters,
-        sorting: sorting
-      },
-      getCoreRowModel: getCoreRowModel(),
-      getSortedRowModel: getSortedRowModel(),
-      getFilteredRowModel: getFilteredRowModel(),
-      debugTable: false,
-      autoResetPageIndex: false,
-    }
-  );
-  const headerGroups = reactTable.getHeaderGroups();
+  // const reactTable = useReactTable(
+  //   {
+  //     data: data.results,
+  //     columns: table_columns,
+  //     columnResizeMode: 'onChange',
+  //     manualSorting: true,
+  //     onSortingChange: setSorting,
+  //     onColumnOrderChange: setColumnOrder,
+  //     onColumnFiltersChange: setColumnFilters,
+  //     onColumnVisibilityChange: setColumnVisibility,
+  //     initialState: {
+  //       columnOrder: columnOrder,
+  //       pagination: {
+  //         pageSize: resourceState.pageSize,
+  //         pageCount: Number(Math.ceil(data.count / resourceState.pageSize)),
+  //       },
+  //     },
+  //     state: {
+  //       columnOrder: columnOrder,
+  //       columnVisibility: columnVisibility,
+  //       columnFilters: columnFilters,
+  //       sorting: sorting
+  //     },
+  //     getCoreRowModel: getCoreRowModel(),
+  //     getSortedRowModel: getSortedRowModel(),
+  //     getFilteredRowModel: getFilteredRowModel(),
+  //     debugTable: false,
+  //     autoResetPageIndex: false,
+  //   }
+  // );
+  // const headerGroups = reactTable.getHeaderGroups();
 
-  const sortIcon = (isSorted) => {
-    if(isSorted === 'asc') {
-      return 'sort-up'
-    }
-    if(isSorted === 'desc') {
-      return 'sort-down'
-    }
-    return 'sort'
-  }
+  // const sortIcon = (isSorted) => {
+  //   if(isSorted === 'asc') {
+  //     return 'sort-up'
+  //   }
+  //   if(isSorted === 'desc') {
+  //     return 'sort-down'
+  //   }
+  //   return 'sort'
+  // }
 
-  const pageCount = Number(Math.ceil(data.count / resourceState.pageSize));
-
+  // const pageCount = Number(Math.ceil(data.count / resourceState.pageSize));
+  const metadataContext = useContext(MetadataContext);
+  // console.log(metadataContext)
   return (
-    <>
-      <DataTableHeader reactTable={reactTable} total={data.count} setDensity={setDensity} />
+    <div></div>
+    // <DatastoreContext.Provider value={{
+    //   distributions: metadataContext.metadata?.distribution
+    // }}>
+    //   {metadataContext.metadata?.distribution?.map((dist) => {
+    //     console.log(dist)
+    //     return <ResourceTable />
+    //   })}
+    // </DatastoreContext.Provider>
+      
+  );
+};
+
+export default DataTable;
+
+const ResourceTable = () => {
+  const datastoreContext = useContext(DatastoreContext);
+  console.log(datastoreContext)
+  console.log('ijfgigj')
+  return (
+    <p>resource</p>
+  );
+}
+
+
+
+{/* <DataTableHeader reactTable={reactTable} total={data.count} setDensity={setDensity} />
       <div className="dc-overflow">
         <table
           className={`dc-datatable -striped -highlight ${densityClassName}`}
@@ -325,8 +353,4 @@ const DataTable = ({data, columns}) => {
             </div>
           </div>
         </div>
-    </>
-  );
-};
-
-export default DataTable;
+    </> */}
