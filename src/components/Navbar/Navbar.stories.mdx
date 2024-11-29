@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import Navbar from './index';
+
+<Meta title="USWDS/Navbar" component={Navbar} />
+
+# Navbar
+
+<Canvas>
+  <Story name="Basic">
+    <Navbar
+      items={[
+      {
+      "label": "Home",
+      "url": "/",
+      "target": "_top"
+      },
+      {
+      "label": "Datasets",
+      "url": "/search",
+      "target": "_top"
+      },
+      {
+      "label": "Publishers",
+      "url": "/publishers",
+      "target": "_top"
+      },
+      {
+      "label": "About",
+      "url": "/about",
+      "target": "_top"
+      },
+      {
+      "label": "API",
+      "url": "/api",
+      "target": "_top"
+      }
+      ]}
+      />
+  </Story>
+</Canvas>
