@@ -9,9 +9,9 @@ import SearchContent from "../../templates/SearchContent";
 import SearchSidebar from '../../templates/SearchSidebar';
 import { getApiSearchParams } from './functions';
 
-const getSearchData = (apiParams, searchEndpoint) => {
+const getSearchData = (apiParams, searchEndpoint, locationKey) => {
   const { isPending, error, data } = useQuery({
-    queryKey: ['searchData', apiParams],
+    queryKey: ['searchData', apiParams, locationKey],
     queryFn: () => {
       return fetch(`${searchEndpoint}?${apiParams}&facets=0`).then(
         (res) => res.json(),
@@ -27,13 +27,13 @@ const Search = ({
   defaultFacets,
   sortOptions,
   setSearchUrl,
-  path
+  path,
+  location
 }) => {
   const defaultState = {
     ...defaultSearchState,
     ...initialSearchState,
   };
-
   const [searchState, dispatch] = useReducer(searchReducer, defaultState);
 
   // On Mount: Synchronize url params with search state.
@@ -126,6 +126,7 @@ const Search = ({
       }
     }
   }, [
+    window.location.search,
     searchState.sort,
     searchState['sort-order'],
     searchState.fulltext,
@@ -135,7 +136,7 @@ const Search = ({
   ]);
 
   const apiParams = getApiSearchParams(searchState, defaultFacets, sortOptions);
-  const {loading, data} = getSearchData(apiParams, searchEndpoint);
+  const {loading, data} = getSearchData(apiParams, searchEndpoint, location.key);
 
   // facets
   let facets = []
