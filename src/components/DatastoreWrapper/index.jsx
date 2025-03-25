@@ -35,7 +35,6 @@ const DatastoreWrapper = ({
   const [offset, setOffset] = useState(joinedOptions.offset ? joinedOptions.offset : 0)
   const [fetchParams, setFetchParams] = useState("");
   const [enabled, setEnabled] = useState(false);
-  const [schema, setSchema] = useState({})
   const [conditions, setConditions] = useState([])
 
   if (dist_index >= 0) {
@@ -69,13 +68,6 @@ const DatastoreWrapper = ({
         
       };
 
-      console.log(conditions)
-      // filters.forEach((filter) => {
-      //   newParams.property.push(filter.property)
-      //   newParams.conditions.push(filter.condition)
-      //   newParams.operator.push(filter.operator)
-      // })
-
       if (JSON.stringify(newParams) === JSON.stringify(paramsRef.current) && enabled) {
         return;
       }
@@ -86,12 +78,20 @@ const DatastoreWrapper = ({
         setEnabled(true);
       }
     }
+
+    useEffect(() => {
+      if (offset !== 0) {
+        setOffset(0)
+      } else {
+        search();
+      }
+    }, [conditions, limit])
   
     useEffect(() => {
-      search()
-    }, [limit, offset, conditions])
-    // console.log(data?.schema)
-  return(
+      search();
+    }, [offset])
+
+    return(
     <DatastoreContext.Provider value={{
       id: id,
       count: data?.count,
