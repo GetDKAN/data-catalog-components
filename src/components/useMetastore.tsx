@@ -1,32 +1,26 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { MetastoreSchemaTheme } from '../types/theme';
 import { MetastoreSchemaKeyword } from '../types/keyword';
 
-type UseThemeArray = {
-  status: any;
-  data: Array<MetastoreSchemaTheme> | undefined;
-  error: any;
-}
-type UseKeyWordArray = {
-  status: any;
-  data: Array<MetastoreSchemaKeyword> | undefined;
-  error: any;
-}
-
-function useMetastore(rootUrl: string, queryKey: string, schema: "theme"): UseThemeArray
-function useMetastore(rootUrl: string, queryKey: string, schema: "keyword"): UseKeyWordArray
-function useMetastore(rootUrl: string, queryKey: string, schema: "theme" | "keyword") {
-  const fetchUrl: string = `${rootUrl}/metastore/schemas/${schema}/items`;
-  const {status, data, error} = useQuery({
+function useMetastore(rootUrl: string, queryKey: string, schema: "theme"): UseQueryResult<Array<MetastoreSchemaTheme>>
+function useMetastore(rootUrl: string, queryKey: string, schema: "keyword"): UseQueryResult<Array<MetastoreSchemaKeyword>>
+function useMetastore(rootUrl: string, queryKey: string, schema: "theme", id: string): UseQueryResult<MetastoreSchemaTheme>
+function useMetastore(rootUrl: string, queryKey: string, schema: "keyword", id: string): UseQueryResult<MetastoreSchemaKeyword>
+function useMetastore(rootUrl: string, queryKey: string, schema: "theme" | "keyword", id?: string) {
+  const fetchUrl: string = `${rootUrl}/metastore/schemas/${schema}/items/${id ? id : ""}`;
+  const result = useQuery({
     queryKey: [queryKey],
-    queryFn: (): Promise<
-      Array<MetastoreSchemaTheme> | Array<MetastoreSchemaKeyword>
+    queryFn: async (): Promise<
+      Array<MetastoreSchemaTheme> | Array<MetastoreSchemaKeyword> | MetastoreSchemaTheme | MetastoreSchemaKeyword
     > => {
-      return fetch(fetchUrl).then(res => res.json());
-    }
+      const response = await fetch(fetchUrl);
+      if(!response.ok) {
+        throw new Error(response.status + " Failed Fetch");
+      }
+      return response.json();
+    },
   });
-  return {status, data, error}
+  return {...result}
 }
 
 export default useMetastore;
-
