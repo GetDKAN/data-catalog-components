@@ -5,6 +5,7 @@ import {
   invalidSchemaId,
   baseDataset,
   showRefIdDataset,
+  searchResults
 } from './responseObjects'
 
 
@@ -51,6 +52,10 @@ export const handlers = [
     } else {
       return HttpResponse.json(baseDataset[0])
     }
-    
+  }),
+  http.get('/api/1/search', ({ request, params }) => {
+    const url = new URL(request.url);
+    console.log("url: ", url)
+    return HttpResponse.json(searchResults)
   }),
 ]
