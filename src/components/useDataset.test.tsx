@@ -3,9 +3,9 @@ import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import { expect, test} from '@jest/globals';
 import { setupServer } from 'msw/node';
-import useMetastore from './useMetastore';
+import useDataset from './useDataset';
 import { handlers } from '../testHelpers/handlers';
-import { themeList, keywordList } from '../testHelpers/responseObjects';
+import { baseDataset, showRefIdDataset } from '../testHelpers/responseObjects';
 
 const server = setupServer(...handlers)
 
@@ -29,53 +29,42 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-test('Fetch list of themes', async () => {
-  const { result } = renderHook(() => useMetastore("/api/1", "themeAPIArray", "theme"), {
+test('Fetch list of datasets', async () => {
+  const { result } = renderHook(() => useDataset("/api/1", "basicDataset"), {
     wrapper: createWrapper()
   });
   await waitFor(() => expect(result.current.isSuccess).toBe(false))
   expect(result.current.data).toEqual(undefined)
   await waitFor(() => expect(result.current.isSuccess).toBe(true))
-  expect(result.current.data).toEqual(themeList)
+  expect(result.current.data).toEqual(baseDataset)
 });
 
-test('Fetch single theme by id', async () => {
-  const { result } = renderHook(() => useMetastore("/api/1", "themeAPISingle", "theme", "1234"), {
+test('Fetch single dataset by id', async () => {
+  const { result } = renderHook(() => useDataset("/api/1", "singleDataset", "12345"), {
     wrapper: createWrapper()
   });
   await waitFor(() => expect(result.current.isSuccess).toBe(false))
   expect(result.current.data).toEqual(undefined)
   await waitFor(() => expect(result.current.isSuccess).toBe(true))
-  expect(result.current.data).toEqual(themeList[0])
+  expect(result.current.data).toEqual(baseDataset[0])
 });
 
-test('Fetch single theme by incorrect id', async () => {
-  const { result } = renderHook(() => useMetastore("/api/1", "themeAPISingle", "theme", "qwerty"), {
-    wrapper: createWrapper()
-  });
-  await waitFor(() => expect(result.current.isSuccess).toBe(false))
-  expect(result.current.data).toEqual(undefined)
-  await waitFor(() => expect(result.current.isError).toBe(true))
-  expect(result.current.data).toEqual(undefined)
-  expect(result.current.error).toEqual(new Error("404 Failed Fetch"))
-});
-
-test('Fetch list of keywords', async () => {
-  const { result } = renderHook(() => useMetastore("/api/1", "keywordAPIArray", "keyword"), {
+test('Fetch list of datasets with reference ids', async () => {
+  const { result } = renderHook(() => useDataset("/api/1", "datasetsWithRefIds", true), {
     wrapper: createWrapper()
   });
   await waitFor(() => expect(result.current.isSuccess).toBe(false))
   expect(result.current.data).toEqual(undefined)
   await waitFor(() => expect(result.current.isSuccess).toBe(true))
-  expect(result.current.data).toEqual(keywordList)
+  expect(result.current.data).toEqual(showRefIdDataset)
 });
 
-test('Fetch single keyword by id', async () => {
-  const { result } = renderHook(() => useMetastore("/api/1", "keywordAPISingle", "keyword", "0987"), {
+test('Fetch single dataset by id with reference id', async () => {
+  const { result } = renderHook(() => useDataset("/api/1", "themeAPISingleWithRef", "12345", true), {
     wrapper: createWrapper()
   });
   await waitFor(() => expect(result.current.isSuccess).toBe(false))
   expect(result.current.data).toEqual(undefined)
   await waitFor(() => expect(result.current.isSuccess).toBe(true))
-  expect(result.current.data).toEqual(keywordList[0])
+  expect(result.current.data).toEqual(showRefIdDataset[0])
 });
