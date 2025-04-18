@@ -28,7 +28,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-test.skip('Fetch datastore results with distribution id', async () => {
+test('Fetch datastore results with distribution id', async () => {
   const { result } = renderHook(() => useDatastore("/api/1", "basicTest", "abcd", {}), {
     wrapper: createWrapper()
   });
@@ -38,7 +38,7 @@ test.skip('Fetch datastore results with distribution id', async () => {
   expect(result.current.urlString).toBe("/api/1/datastore/query/abcd")
 });
 
-test.skip('Fetch datastore results with limit', async () => {
+test('Fetch datastore results with limit', async () => {
   const { result } = renderHook(() => useDatastore("/api/1", "basicTest", "abcd", {params: {limit: 25}}), {
     wrapper: createWrapper()
   });
@@ -74,7 +74,7 @@ test('Fetch datastore results with offset', async () => {
   expect(result.current.urlString).toBe("/api/1/datastore/query/abcd?limit=25")
 });
 
-test.skip('Fetch datastore results with distribution index', async () => {
+test('Fetch datastore results with distribution index', async () => {
   const { result } = renderHook(() => useDatastore("/api/1", "basicTest", "1234", 1, {}), {
     wrapper: createWrapper()
   });
