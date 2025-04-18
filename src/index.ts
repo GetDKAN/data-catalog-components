@@ -9,7 +9,6 @@ export { default as SearchAPIContext } from './components/SearchAPIWrapper/Searc
 export { default as MetastoreContext } from './components/MetastoreWrapper/MetastoreContext';
 
 export { fetchThemes } from './components/metastore_fetch';
-export { default as useTheme } from './components/useTheme';
 export { default as useMetastore } from './components/useMetastore';
 export { default as useDataset } from './components/useDataset';
 export { default as useSearchAPI } from './components/useSearchAPI';
