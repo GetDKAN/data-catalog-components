@@ -5,7 +5,8 @@ import {
   invalidSchemaId,
   baseDataset,
   showRefIdDataset,
-  searchResults
+  searchResults,
+  generateDatastoreResults
 } from './responseObjects'
 
 
@@ -49,13 +50,24 @@ export const handlers = [
     }
     if(showRef) {
       return HttpResponse.json(showRefIdDataset[0])
-    } else {
+    } else {generateDatastoreResults
       return HttpResponse.json(baseDataset[0])
     }
   }),
   http.get('/api/1/search', ({ request, params }) => {
     const url = new URL(request.url);
-    console.log("url: ", url)
     return HttpResponse.json(searchResults)
   }),
+  http.get('/api/1/datastore/query/:id', ({ request, params }) => {
+    const url = new URL(request.url);
+    const limit: number = Number(url.searchParams.get("limit")) ? Number(url.searchParams.get("limit")) : 5;
+    const { id } = params;
+    return HttpResponse.json(generateDatastoreResults(limit, 50, id))
+    
+  }),
+  http.get('/api/1/datastore/query/:id/:index', ({ request, params }) => {
+    const url = new URL(request.url);
+    const { id, index} = params;
+    return HttpResponse.json(generateDatastoreResults(5, 10, id))
+  })
 ]

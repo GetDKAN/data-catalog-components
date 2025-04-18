@@ -1,3 +1,5 @@
+import { DatastoreSchema } from "../types/datastore";
+
 export const themeList: Array<{
   identifier: string;
   data: string;
@@ -1480,3 +1482,24 @@ export const searchResults = {
   },
   "facets": []
   }
+
+export function generateDatastoreResults(limit: number, total: number, id: string | readonly string[] | undefined): DatastoreSchema {
+  let datastoreResults: DatastoreSchema = {
+    results: [],
+    count: total,
+    schema: {},
+    query: {},
+  };
+  let currentResult: number = 0
+  while (currentResult < limit) {
+    datastoreResults.results.push({
+      user_name: `User_${Math.floor(Math.random() * 100)}`,
+      age: Math.floor(Math.random() * 50),
+      is_active: Math.random() > 0.5
+    });
+    currentResult ++;
+  }
+  return datastoreResults;
+}
+
+
