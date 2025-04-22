@@ -5,16 +5,17 @@ import { DatastoreSchema, DatastoreCondition } from '../types/datastore';
 
 type UseDatastoreResult = UseQueryResult<DatastoreSchema> & {
   urlString: string;
-  setLimit: Function,
-  setOffset: Function,
-  setConditions: Function
+  params: {
+    set: Function;
+    previous: DatastoreParams | undefined;
+  };
 }
 
 type UseDatastoreOptions = {
   results?: boolean;
   count?: boolean;
   schema?: boolean;
-  params?: DatastoreParams
+  params?: DatastoreParams;
 }
 
 type DatastoreParams = {
@@ -29,10 +30,8 @@ function useDatastore(rootUrl: string, queryKey: string, id: string, optionsOrDi
   const [datastoreOptions,]  = useState<UseDatastoreOptions | undefined>(typeof optionsOrDistIndex === "object" ? optionsOrDistIndex : options);
   const [fetchUrl, setFetchUrl] = useState<string>("");
   const [enabled, setEnabled] = useState<boolean>(false);
-  const [limit, setLimit] = useState<number | undefined>(datastoreOptions?.params?.limit ? datastoreOptions.params.limit : undefined);
-  const [offset, setOffset] = useState<number | undefined>(datastoreOptions?.params?.offset ? datastoreOptions.params.offset : undefined);
-  const [conditions, setConditions] = useState<DatastoreCondition[]>([]);
-  const [previousParams, setPreviousParams] = useState<DatastoreParams>({});
+  const [params, setParams] = useState<DatastoreParams | undefined>(datastoreOptions?.params ? datastoreOptions.params : undefined)
+  const prevParams = useRef<DatastoreParams | undefined>(undefined);
   const result = useQuery({
     queryKey: [queryKey, fetchUrl],
     queryFn: (): Promise<DatastoreSchema> => {
@@ -43,14 +42,7 @@ function useDatastore(rootUrl: string, queryKey: string, id: string, optionsOrDi
 
   function search() {
     function buildNewParams(): string {
-      // Set unneeded params to undefined so they are omittd by qs.
-      const newParams: DatastoreParams = {
-        limit: limit ? limit : undefined,
-        offset: offset ? offset : undefined,
-        conditions: conditions
-      }
-      setPreviousParams(newParams)
-      return qs.stringify(newParams, { addQueryPrefix: true, encode: true })
+      return qs.stringify(params, { addQueryPrefix: true, encode: true })
     }
     let url: string = `${rootUrl}/datastore/query/`;
     if(id && typeof optionsOrDistIndex === "object") {
@@ -68,20 +60,19 @@ function useDatastore(rootUrl: string, queryKey: string, id: string, optionsOrDi
 
   useEffect(() => {
     // If offset doesn't match, search.
-    if(!previousParams?.offset || previousParams?.offset !== offset) {
+    if(!prevParams?.current || (JSON.stringify(prevParams.current) !== JSON.stringify(params))) {
       search();
-    } else {
-      // Offset needs to be reset on most searches to keep pagination correct.
-      setOffset(undefined)
+      prevParams.current = params;
     }
-  }, [conditions, limit, offset])
+  }, [params]);
 
   return {
     ...result,
     urlString: fetchUrl,
-    setLimit: setLimit,
-    setOffset: setOffset,
-    setConditions: setConditions
+    params: {
+      set:setParams,
+      previous: prevParams.current,
+    }
   }
 }
 

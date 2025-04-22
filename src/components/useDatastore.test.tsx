@@ -48,7 +48,11 @@ test('Fetch datastore results with limit', async () => {
   expect(result.current.urlString).toBe("/api/1/datastore/query/abcd?limit=25")
   expect(result.current?.data?.results).toHaveLength(25);
   act(() => {
-    result.current.setLimit(10)
+    const params = result.current.params;
+    params.set({
+      ...params.previous,
+      limit: 10,
+    })
   });
   await waitFor(() => expect(result.current.isSuccess).toBe(true));
   expect(result.current.urlString).toBe("/api/1/datastore/query/abcd?limit=10")
@@ -64,12 +68,29 @@ test('Fetch datastore results with offset', async () => {
   await waitFor(() => expect(result.current.isSuccess).toBe(true))
   expect(result.current.urlString).toBe("/api/1/datastore/query/abcd?offset=25")
   act(() => {
-    result.current.setOffset(10)
+    const params = result.current.params;
+    params.set({
+      ...params.previous,
+      offset: 10,
+    })
   });
   await waitFor(() => expect(result.current.isSuccess).toBe(true));
   expect(result.current.urlString).toBe("/api/1/datastore/query/abcd?offset=10")
   act(() => {
-    result.current.setLimit(25);
+    const params = result.current.params;
+    params.set({
+      ...params.previous,
+      limit: 25,
+    })
+  });
+  expect(result.current.urlString).toBe("/api/1/datastore/query/abcd?offset=10&limit=25");
+  act(() => {
+    const params = result.current.params;
+    params.set({
+      ...params.previous,
+      limit: 25,
+      offset: undefined,
+    })
   });
   expect(result.current.urlString).toBe("/api/1/datastore/query/abcd?limit=25")
 });
