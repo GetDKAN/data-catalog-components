@@ -59,7 +59,6 @@ const SearchAPIWrapper = ({CustomContext, customQueryKey, rootUrl, children, opt
 
   // Fetch data using state that has been set.
   function fetchData() {
-    console.log("param: ", fetchParams)
     return fetch(`${rootUrl}/search?${fetchParams}`).then(
       (res) => res.json(),
     )

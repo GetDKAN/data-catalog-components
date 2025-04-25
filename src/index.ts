@@ -7,3 +7,9 @@ export { default as MetadataContext } from './components/MetadataWrapper/Metadat
 export { default as DatastoreContext } from './components/DatastoreWrapper/DatastoreContext';
 export { default as SearchAPIContext } from './components/SearchAPIWrapper/SearchAPIContext';
 export { default as MetastoreContext } from './components/MetastoreWrapper/MetastoreContext';
+
+export { fetchThemes } from './components/metastore_fetch';
+export { default as useMetastore } from './components/useMetastore';
+export { default as useDataset } from './components/useDataset';
+export { default as useSearchAPI } from './components/useSearchAPI';
+export { default as useDatastore } from './components/useDatastore';
